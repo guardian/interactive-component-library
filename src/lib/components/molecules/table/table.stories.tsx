@@ -51,5 +51,8 @@ const data: User[] = [
 ]
 
 export const Default: Story = {
-  render: () => Table({ columns, data }),
+  args: {
+    columns,
+    data,
+  },
 }

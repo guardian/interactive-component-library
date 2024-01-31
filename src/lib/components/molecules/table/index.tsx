@@ -10,12 +10,12 @@ export function Table<CellData>({ columns, data }: TableProps<CellData>) {
   const table = useReactTable({ columns, data, getCoreRowModel: getCoreRowModel() })
 
   return (
-    <table>
+    <table class="w-full">
       <thead>
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
-              <th key={header.id}>
+              <th key={header.id} colSpan={header.colSpan}>
                 {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
               </th>
             ))}
