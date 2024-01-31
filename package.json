@@ -33,8 +33,7 @@
     "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\""
   },
   "dependencies": {
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "preact": "^10.12.1"
   },
   "devDependencies": {
     "@babel/core": "7.22.10",
