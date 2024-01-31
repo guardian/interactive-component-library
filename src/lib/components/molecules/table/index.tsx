@@ -1,21 +1,36 @@
-export const Table = () => {
+import { useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table'
+import type { ColumnDef } from '@tanstack/react-table'
+
+interface TableProps<CellData> {
+  columns: ColumnDef<CellData, any>[]
+  data: CellData[]
+}
+
+export function Table<CellData>({ columns, data }: TableProps<CellData>) {
+  const table = useReactTable({ columns, data, getCoreRowModel: getCoreRowModel() })
+
   return (
     <table>
-      <tr>
-        <th>Company</th>
-        <th>Contact</th>
-        <th>Country</th>
-      </tr>
-      <tr>
-        <td>Alfreds Futterkiste</td>
-        <td>Maria Anders</td>
-        <td>Germany</td>
-      </tr>
-      <tr>
-        <td>Centro comercial Moctezuma</td>
-        <td>Francisco Chang</td>
-        <td>Mexico</td>
-      </tr>
+      <thead>
+        {table.getHeaderGroups().map((headerGroup) => (
+          <tr key={headerGroup.id}>
+            {headerGroup.headers.map((header) => (
+              <th key={header.id}>
+                {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+              </th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody>
+        {table.getRowModel().rows.map((row) => (
+          <tr key={row.id}>
+            {row.getVisibleCells().map((cell) => (
+              <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
     </table>
   )
 }
