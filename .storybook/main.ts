@@ -1,4 +1,4 @@
-import type { StorybookConfig } from '@storybook/react-vite'
+import type { StorybookConfig } from '@storybook/preact-vite'
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
@@ -8,7 +8,7 @@ const config: StorybookConfig = {
     '@storybook/addon-styling',
   ],
   framework: {
-    name: '@storybook/react-vite',
+    name: '@storybook/preact-vite',
     options: {
       builder: {
         viteConfigPath: '.storybook/vite.config.ts',
