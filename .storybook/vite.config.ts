@@ -1,11 +1,11 @@
-import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
 import tailwindcss from 'tailwindcss'
 import { UserConfigExport } from 'vite'
+import preact from '@preact/preset-vite'
 
 const app = async (): Promise<UserConfigExport> => {
   return defineConfig({
-    plugins: [react()],
+    plugins: [preact()],
     css: {
       postcss: {
         plugins: [tailwindcss],
