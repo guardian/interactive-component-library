@@ -1,8 +1,9 @@
 import { JSX } from 'preact'
 
-export enum CellStyle {
-  DefaultLeft = 'text-left px-1',
-  DefaultRight = 'text-right px-1',
+interface CellStyle {
+  width?: string
+  textAlign?: string
+  padding?: string
 }
 
 export interface ColumnDefinition<TableRow> {
@@ -39,25 +40,38 @@ export function useTable<TableRow>({ columns, data }: TableProps<TableRow>) {
   }
 }
 
+class DefaultCellStyle implements CellStyle {
+  textAlign = 'text-left'
+  padding = 'px-1'
+}
+
 class ColumnModel<TableRow> {
   _id?: string
   header: string
   cell: (d: TableRow) => JSX.Element | string
-  _cellStyle: CellStyle | string
+  cellStyle: CellStyle | string = new DefaultCellStyle()
 
   constructor(definition: ColumnDefinition<TableRow>) {
     this._id = definition.id
     this.header = definition.header()
     this.cell = definition.cell
-    this._cellStyle = definition.cellStyle || CellStyle.DefaultLeft
+
+    if (definition.cellStyle) {
+      if (typeof definition.cellStyle === 'object') {
+        Object.assign(this.cellStyle, definition.cellStyle)
+      } else {
+        this.cellStyle = definition.cellStyle
+      }
+    }
   }
 
   get id() {
     return this._id || this.header
   }
 
-  get cellStyle() {
-    return this._cellStyle.valueOf()
+  getCellClass(): string {
+    if (typeof this.cellStyle === 'string') return this.cellStyle
+    return Object.values(this.cellStyle).join(' ')
   }
 }
 

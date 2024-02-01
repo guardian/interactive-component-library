@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/preact'
 import type { ColumnDefinition } from '.'
-import { Table, CellStyle } from '.'
+import { Table } from '.'
 
 const meta: Meta<typeof Table> = {
   title: 'Molecules/Table',
@@ -22,22 +22,28 @@ const columns: ColumnDefinition<PartyResult>[] = [
   {
     header: () => 'Party',
     cell: (d) => d.partyName,
-    cellStyle: 'text-left px-2 w-min',
+    cellStyle: 'text-left px-2',
   },
   {
     header: () => 'Seats',
     cell: (d) => d.totalSeats.toString(),
-    cellStyle: CellStyle.DefaultRight,
+    cellStyle: {
+      width: 'w-1/6',
+      textAlign: 'text-right',
+    },
   },
   {
     header: () => 'Gains',
     cell: (d) => d.gains.toString(),
-    cellStyle: CellStyle.DefaultRight,
+    cellStyle: {
+      width: 'w-1/6',
+      textAlign: 'text-right',
+    },
   },
   {
     header: () => 'Losses',
     cell: (d) => d.losses.toString(),
-    cellStyle: 'text-right px-2 w-min',
+    cellStyle: 'text-right px-2 w-1/6',
   },
 ]
 
