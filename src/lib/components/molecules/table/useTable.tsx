@@ -1,15 +1,15 @@
 import { JSX } from 'preact'
 
-export enum CellAlignment {
-  Left = 'text-left',
-  Right = 'text-right',
+export enum CellStyle {
+  DefaultLeft = 'text-left px-1',
+  DefaultRight = 'text-right px-1',
 }
 
 export interface ColumnDefinition<TableRow> {
   id?: string
   header: () => string
   cell: (data: TableRow) => JSX.Element | string
-  alignment?: CellAlignment
+  cellStyle?: CellStyle | string
 }
 
 export interface TableProps<TableRow> {
@@ -43,23 +43,21 @@ class ColumnModel<TableRow> {
   _id?: string
   header: string
   cell: (d: TableRow) => JSX.Element | string
-  _alignment = CellAlignment.Left
+  _cellStyle: CellStyle | string
 
   constructor(definition: ColumnDefinition<TableRow>) {
     this._id = definition.id
     this.header = definition.header()
     this.cell = definition.cell
-    if (definition.alignment) {
-      this._alignment = definition.alignment
-    }
+    this._cellStyle = definition.cellStyle || CellStyle.DefaultLeft
   }
 
   get id() {
     return this._id || this.header
   }
 
-  get alignment() {
-    return this._alignment.valueOf()
+  get cellStyle() {
+    return this._cellStyle.valueOf()
   }
 }
 
