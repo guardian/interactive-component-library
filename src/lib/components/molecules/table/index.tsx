@@ -11,7 +11,7 @@ export function Table<TableRow>({ columns, data }: TableProps<TableRow>) {
       <thead>
         <tr>
           {table.getColumns().map((column) => (
-            <th key={column.id} className={column.cellStyle}>
+            <th key={column.id} className={column.getCellClass()}>
               {column.header}
             </th>
           ))}
@@ -21,7 +21,7 @@ export function Table<TableRow>({ columns, data }: TableProps<TableRow>) {
         {table.getRows().map((row) => (
           <tr key={row.id} className="border-t border-slate-200">
             {row.cells.map((cell) => (
-              <td key={cell.id} className={cell.column.cellStyle}>
+              <td key={cell.id} className={cell.column.getCellClass()}>
                 {cell.value}
               </td>
             ))}
