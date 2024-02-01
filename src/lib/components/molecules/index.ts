@@ -1,1 +1,1 @@
-export * from './ml-banner'
+export * from './table'

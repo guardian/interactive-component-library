@@ -1,6 +1,8 @@
 import type { TableProps } from './useTable'
 import { useTable } from './useTable'
 
+export * from './useTable'
+
 export function Table<TableRow>({ columns, data }: TableProps<TableRow>) {
   const table = useTable({ columns, data })
 
@@ -9,7 +11,9 @@ export function Table<TableRow>({ columns, data }: TableProps<TableRow>) {
       <thead>
         <tr>
           {table.getColumns().map((column) => (
-            <th key={column.id}>{column.header}</th>
+            <th key={column.id} className={column.alignment}>
+              {column.header}
+            </th>
           ))}
         </tr>
       </thead>
@@ -17,7 +21,9 @@ export function Table<TableRow>({ columns, data }: TableProps<TableRow>) {
         {table.getRows().map((row) => (
           <tr key={row.id}>
             {row.cells.map((cell) => (
-              <td key={cell.id}>{cell.value}</td>
+              <td key={cell.id} className={cell.column.alignment}>
+                {cell.value}
+              </td>
             ))}
           </tr>
         ))}

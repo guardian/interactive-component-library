@@ -1,9 +1,15 @@
 import { JSX } from 'preact'
 
-interface ColumnDefinition<TableRow> {
+export enum CellAlignment {
+  Left = 'text-left',
+  Right = 'text-right',
+}
+
+export interface ColumnDefinition<TableRow> {
   id?: string
   header: () => string
   cell: (data: TableRow) => JSX.Element | string
+  alignment?: CellAlignment
 }
 
 export interface TableProps<TableRow> {
@@ -20,8 +26,8 @@ export function useTable<TableRow>({ columns, data }: TableProps<TableRow>) {
 
   function getRows() {
     return data.map((d, rowIndex) => {
-      const cells = columns.map((column, columnIndex) => {
-        return new CellModel(columnIndex, column.cell(d))
+      const cells = getColumns().map((column, columnIndex) => {
+        return new CellModel(columnIndex, column.cell(d), column)
       })
       return new RowModel(rowIndex, cells)
     })
@@ -36,22 +42,32 @@ export function useTable<TableRow>({ columns, data }: TableProps<TableRow>) {
 class ColumnModel<TableRow> {
   _id?: string
   header: string
+  cell: (d: TableRow) => JSX.Element | string
+  _alignment = CellAlignment.Left
 
   constructor(definition: ColumnDefinition<TableRow>) {
     this._id = definition.id
     this.header = definition.header()
+    this.cell = definition.cell
+    if (definition.alignment) {
+      this._alignment = definition.alignment
+    }
   }
 
   get id() {
     return this._id || this.header
   }
+
+  get alignment() {
+    return this._alignment.valueOf()
+  }
 }
 
-class RowModel {
+class RowModel<TableRow> {
   index: number
-  cells: CellModel[]
+  cells: CellModel<TableRow>[]
 
-  constructor(index: number, cells: CellModel[]) {
+  constructor(index: number, cells: CellModel<TableRow>[]) {
     this.index = index
     this.cells = cells
   }
@@ -61,13 +77,15 @@ class RowModel {
   }
 }
 
-class CellModel {
+class CellModel<TableRow> {
   index: number
   value: JSX.Element | string
+  column: ColumnModel<TableRow>
 
-  constructor(index: number, value: JSX.Element | string) {
+  constructor(index: number, value: JSX.Element | string, column: ColumnModel<TableRow>) {
     this.index = index
     this.value = value
+    this.column = column
   }
 
   get id() {
