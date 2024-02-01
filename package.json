@@ -33,7 +33,6 @@
     "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\""
   },
   "dependencies": {
-    "@tanstack/react-table": "^8.11.7",
     "preact": "^10.12.1"
   },
   "devDependencies": {
