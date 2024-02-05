@@ -43,6 +43,8 @@ export function useTable<TableRow>({ columns, data }: TableProps<TableRow>) {
 class DefaultCellStyle implements CellStyle {
   textAlign = 'text-left'
   padding = 'px-1'
+  fontFamily = 'font-sans'
+  fontSize = 'text-sm'
 }
 
 class ColumnModel<TableRow> {
