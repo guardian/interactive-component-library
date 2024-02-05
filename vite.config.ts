@@ -15,6 +15,13 @@ const app = async (): Promise<UserConfigExport> => {
   const formattedName = name.match(/[^/]+$/)?.[0] ?? name
 
   return defineConfig({
+    resolve: {
+      alias: {
+        '$atoms': path.resolve(__dirname, 'src/lib/components/atoms'),
+        '$molecules': path.resolve(__dirname, 'src/lib/components/molecules'),
+        '$headless': path.resolve(__dirname, 'src/lib/components/headless'),
+      },
+    },
     plugins: [
       react(),
       dts({
