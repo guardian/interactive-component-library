@@ -53,6 +53,11 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
       white: '#ffffff',
+      neutral: {
+        7: '#121212',
+        60: '#999999',
+        86: '#DCDCDC',
+      },
       party: {
         // Conservative
         con: '#0077B6',

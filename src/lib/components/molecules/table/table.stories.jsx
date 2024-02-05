@@ -1,6 +1,6 @@
 import { Table } from '.'
 import { CellWithCircle } from '../../atoms/cell-with-circle'
-import { PartyBackgroundColors } from '../../../headless/colors'
+import { PartyBackgroundColors } from '../../headless/colors'
 
 const meta = {
   title: 'Molecules/Table',
