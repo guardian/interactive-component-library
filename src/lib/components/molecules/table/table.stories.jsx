@@ -1,27 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/preact'
-import type { ColumnDefinition } from '.'
 import { Table } from '.'
 import { CellWithCircle } from '../../atoms/cell-with-circle'
 import { PartyBackgroundColors } from '../../../headless/colors'
 
-const meta: Meta<typeof Table> = {
+const meta = {
   title: 'Molecules/Table',
   component: Table,
 }
 
 export default meta
 
-type Story = StoryObj<typeof Table>
-
-type PartyResult = {
-  partyName: string
-  abbreviation: string
-  totalSeats: number
-  gains: number
-  losses: number
-}
-
-const columns: ColumnDefinition<PartyResult>[] = [
+const columns = [
   {
     header: () => 'Party',
     cell: (d) => <CellWithCircle circleClass={PartyBackgroundColors[d.abbreviation]} text={d.partyName} />,
@@ -55,7 +43,7 @@ const columns: ColumnDefinition<PartyResult>[] = [
   },
 ]
 
-const data: PartyResult[] = [
+const data = [
   {
     partyName: 'Conservatives',
     abbreviation: 'con',
@@ -86,14 +74,14 @@ const data: PartyResult[] = [
   },
 ]
 
-export const Default: Story = {
+export const Default = {
   args: {
     columns,
     data,
   },
 }
 
-export const Sortable: Story = {
+export const Sortable = {
   args: {
     columns,
     data,
