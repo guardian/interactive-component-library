@@ -45,7 +45,10 @@ const columns: ColumnDefinition<PartyResult>[] = [
   {
     header: () => 'Losses',
     cell: (d) => d.losses.toString(),
-    cellStyle: 'text-right px-2 w-1/6',
+    cellStyle: {
+      width: 'w-1/6',
+      textAlign: 'text-right',
+    },
   },
 ]
 
