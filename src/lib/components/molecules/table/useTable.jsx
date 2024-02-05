@@ -1,24 +1,22 @@
-import { JSX } from 'preact'
+// interface CellStyle {
+//   width?: string
+//   textAlign?: string
+//   padding?: string
+// }
 
-interface CellStyle {
-  width?: string
-  textAlign?: string
-  padding?: string
-}
+// export interface ColumnDefinition<TableRow> {
+//   id?: string
+//   header: () => string
+//   cell: (data: TableRow) => JSX.Element | string
+//   cellStyle?: CellStyle | string
+// }
 
-export interface ColumnDefinition<TableRow> {
-  id?: string
-  header: () => string
-  cell: (data: TableRow) => JSX.Element | string
-  cellStyle?: CellStyle | string
-}
+// export interface TableProps<TableRow> {
+//   columns: ColumnDefinition<TableRow>[]
+//   data: TableRow[]
+// }
 
-export interface TableProps<TableRow> {
-  columns: ColumnDefinition<TableRow>[]
-  data: TableRow[]
-}
-
-export function useTable<TableRow>({ columns, data }: TableProps<TableRow>) {
+export function useTable({ columns, data }) {
   function getColumns() {
     return columns.map((column) => {
       return new ColumnModel(column)
@@ -40,20 +38,17 @@ export function useTable<TableRow>({ columns, data }: TableProps<TableRow>) {
   }
 }
 
-class DefaultCellStyle implements CellStyle {
+class DefaultCellStyle {
   textAlign = 'text-left'
   padding = 'px-1'
   fontFamily = 'font-sans'
   fontSize = 'text-sm'
 }
 
-class ColumnModel<TableRow> {
-  _id?: string
-  header: string
-  cell: (d: TableRow) => JSX.Element | string
-  cellStyle: CellStyle | string = new DefaultCellStyle()
+class ColumnModel {
+  cellStyle = new DefaultCellStyle()
 
-  constructor(definition: ColumnDefinition<TableRow>) {
+  constructor(definition) {
     this._id = definition.id
     this.header = definition.header()
     this.cell = definition.cell
@@ -71,17 +66,14 @@ class ColumnModel<TableRow> {
     return this._id || this.header
   }
 
-  getCellClass(): string {
+  getCellClass() {
     if (typeof this.cellStyle === 'string') return this.cellStyle
     return Object.values(this.cellStyle).join(' ')
   }
 }
 
-class RowModel<TableRow> {
-  index: number
-  cells: CellModel<TableRow>[]
-
-  constructor(index: number, cells: CellModel<TableRow>[]) {
+class RowModel {
+  constructor(index, cells) {
     this.index = index
     this.cells = cells
   }
@@ -91,12 +83,8 @@ class RowModel<TableRow> {
   }
 }
 
-class CellModel<TableRow> {
-  index: number
-  value: JSX.Element | string
-  column: ColumnModel<TableRow>
-
-  constructor(index: number, value: JSX.Element | string, column: ColumnModel<TableRow>) {
+class CellModel {
+  constructor(index, value, column) {
     this.index = index
     this.value = value
     this.column = column

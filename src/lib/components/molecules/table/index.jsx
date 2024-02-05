@@ -1,9 +1,6 @@
-import type { TableProps } from './useTable'
 import { useTable } from './useTable'
 
-export * from './useTable'
-
-export function Table<TableRow>({ columns, data }: TableProps<TableRow>) {
+export function Table({ columns, data }) {
   const table = useTable({ columns, data })
 
   return (
