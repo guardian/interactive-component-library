@@ -1,10 +1,10 @@
-import react from '@vitejs/plugin-react'
 import path from 'node:path'
 import { defineConfig } from 'vitest/config'
 import dts from 'vite-plugin-dts'
 import tailwindcss from 'tailwindcss'
 import { UserConfigExport } from 'vite'
 import { name } from './package.json'
+import preact from '@preact/preset-vite'
 
 const app = async (): Promise<UserConfigExport> => {
   /**
@@ -17,13 +17,13 @@ const app = async (): Promise<UserConfigExport> => {
   return defineConfig({
     resolve: {
       alias: {
-        '$atoms': path.resolve(__dirname, 'src/lib/components/atoms'),
-        '$molecules': path.resolve(__dirname, 'src/lib/components/molecules'),
-        '$headless': path.resolve(__dirname, 'src/lib/components/headless'),
+        $atoms: path.resolve(__dirname, 'src/lib/components/atoms'),
+        $molecules: path.resolve(__dirname, 'src/lib/components/molecules'),
+        $headless: path.resolve(__dirname, 'src/lib/components/headless'),
       },
     },
     plugins: [
-      react(),
+      preact(),
       dts({
         insertTypesEntry: true,
       }),
@@ -41,12 +41,10 @@ const app = async (): Promise<UserConfigExport> => {
         fileName: (format) => `${formattedName}.${format}.js`,
       },
       rollupOptions: {
-        external: ['react', 'react/jsx-runtime', 'react-dom', 'tailwindcss'],
+        external: ['preact', 'tailwindcss'],
         output: {
           globals: {
-            react: 'React',
-            'react/jsx-runtime': 'react/jsx-runtime',
-            'react-dom': 'ReactDOM',
+            preact: 'preact',
             tailwindcss: 'tailwindcss',
           },
         },

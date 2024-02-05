@@ -1,14 +1,13 @@
-import type { Preview } from '@storybook/react'
 import '../src/lib/tailwind/theme.css'
 
-const preview: Preview = {
+const preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/,
-      },
+    backgrounds: {
+      values: [
+        { name: 'light', value: '#fff' },
+        { name: 'dark', value: '#1a1a1a' },
+      ],
     },
   },
 }
