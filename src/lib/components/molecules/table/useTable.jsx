@@ -40,9 +40,10 @@ export function useTable({ columns, data }) {
 
 class DefaultCellStyle {
   textAlign = 'text-left'
-  padding = 'px-1'
+  padding = 'py-2'
   fontFamily = 'font-sans'
   fontSize = 'text-sm'
+  textColor = 'text-neutral-7'
 }
 
 class ColumnModel {

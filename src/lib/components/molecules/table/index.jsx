@@ -16,7 +16,7 @@ export function Table({ columns, data }) {
       </thead>
       <tbody>
         {table.getRows().map((row) => (
-          <tr key={row.id} className="border-t border-slate-200">
+          <tr key={row.id} className="border-t border-neutral-86">
             {row.cells.map((cell) => (
               <td key={cell.id} className={cell.column.getCellClass()}>
                 {cell.value}

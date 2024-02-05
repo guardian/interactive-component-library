@@ -1,5 +1,5 @@
 import { CellWithCircle } from '.'
-import { PartyBackgroundColors } from '../../../headless/colors'
+import { PartyBackgroundColors } from '../../headless/colors'
 
 export default {
   title: 'Atoms/Party cell',
