@@ -49,7 +49,47 @@ module.exports = {
       // 34px (H1)
       '2xl': ['2.125rem', { lineHeight: '2.44375rem' }],
     },
-    extend: {},
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      white: '#ffffff',
+      party: {
+        // Conservative
+        con: '#0077B6',
+        // Labour
+        lab: '#C70000',
+        // Liberal Democrats
+        ld: '#E05E00',
+        // UKIP
+        ukip: '#BB3B80',
+        // Independent
+        ind: '#333333',
+        // SNP
+        snp: '#F5DC00',
+        // SDLP
+        sdlp: '#23B4A9',
+        // Plaid Cymru
+        pc: '#135E58',
+        // Sinn Féin
+        sf: '#22874D',
+        // DUP
+        dup: '#8B0000',
+        // Green Party
+        green: '#39A566',
+        // Alliance
+        alliance: '#C9BB19',
+        // UUP
+        uup: '#004975',
+        // Reform UK
+        reform: '#3DBBE2',
+        // Other
+        other: '#848484',
+      },
+      elex: {
+        nocontrol: '#C8C8C8',
+        undeclared: '#E7E7E7',
+      },
+    },
   },
   plugins: [],
 }
