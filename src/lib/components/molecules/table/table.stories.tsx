@@ -22,7 +22,9 @@ const columns: ColumnDefinition<PartyResult>[] = [
   {
     header: () => 'Party',
     cell: (d) => d.partyName,
-    cellStyle: 'text-left px-2',
+    cellStyle: {
+      textAlign: 'text-left',
+    },
   },
   {
     header: () => 'Seats',
