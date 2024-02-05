@@ -85,3 +85,10 @@ export const Default: Story = {
     data,
   },
 }
+
+export const Sortable: Story = {
+  args: {
+    columns,
+    data,
+  },
+}
