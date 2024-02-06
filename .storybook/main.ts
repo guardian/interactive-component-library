@@ -3,9 +3,8 @@ const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
     '@storybook/addon-styling',
+    '@storybook/addon-viewport',
     {
       name: '@storybook/addon-storysource',
       options: {
