@@ -32,7 +32,7 @@ export function useTable({ columns, data }) {
   function getRows() {
     return rows.map((d, rowIndex) => {
       const cells = getColumns().map((column, columnIndex) => {
-        return new CellModel(columnIndex, column.cell(d), column)
+        return new CellModel(column, columnIndex, d, column.cell)
       })
       return new RowModel(rowIndex, cells)
     })
@@ -53,58 +53,73 @@ class DefaultCellStyle {
   whitespace = 'whitespace-nowrap'
 }
 
-class HeaderCellStyle extends DefaultCellStyle {
+class DefaultHeaderCellStyle extends DefaultCellStyle {
   fontWeight = 'font-bold'
 }
 
 class ColumnModel {
-  headerCellStyle = new HeaderCellStyle()
-  cellStyle = new DefaultCellStyle()
-  sortable = false
-
   constructor(definition, onSort) {
-    this._id = definition.id
-    this.header = definition.header
-    this.cell = definition.cell
-    this.sortable = definition.sortable || false
+    this.definition = definition
     this.onSort = onSort
-
-    if (definition.headerCellStyle) {
-      if (typeof definition.headerCellStyle === 'object') {
-        Object.assign(this.headerCellStyle, definition.headerCellStyle)
-      } else {
-        this.headerCellStyle = definition.headerCellStyle
-      }
-    }
-
-    if (definition.cellStyle) {
-      if (typeof definition.cellStyle === 'object') {
-        Object.assign(this.cellStyle, definition.cellStyle)
-      } else {
-        this.cellStyle = definition.cellStyle
-      }
-    }
   }
 
   get id() {
-    return this._id || this.header
+    return this.definition.id || this.header
+  }
+
+  get accessor() {
+    return this.definition.accessor
+  }
+
+  get header() {
+    return this.definition.header()
   }
 
   get headerProps() {
     return {
-      text: this.header(),
-      sortable: this.sortable,
+      text: this.header,
+      sortable: this.definition.sortable,
       onClick: this.onSort,
     }
   }
 
-  getHeaderCellClass() {
+  get headerCellStyle() {
+    const definition = this.definition
+    const defaultStyle = new DefaultHeaderCellStyle()
+
+    if (typeof definition.headerCellStyle === 'object') {
+      return Object.assign(defaultStyle, definition.headerCellStyle)
+    } else if (typeof definition.headerCellStyle === 'string') {
+      return definition.headerCellStyle
+    }
+
+    return defaultStyle
+  }
+
+  get headerCellClass() {
     if (typeof this.headerCellStyle === 'string') return this.headerCellStyle
     const styles = Object.values(this.headerCellStyle)
     return styles.join(' ')
   }
 
-  getCellClass() {
+  get cell() {
+    return this.definition.cell
+  }
+
+  get cellStyle() {
+    const definition = this.definition
+    const defaultStyle = new DefaultCellStyle()
+
+    if (typeof definition.cellStyle === 'object') {
+      return Object.assign(defaultStyle, definition.cellStyle)
+    } else if (typeof definition.cellStyle === 'string') {
+      return definition.cellStyle
+    }
+
+    return defaultStyle
+  }
+
+  get cellClass() {
     if (typeof this.cellStyle === 'string') return this.cellStyle
     const styles = Object.values(this.cellStyle)
     if (this.sortable) {
@@ -126,13 +141,22 @@ class RowModel {
 }
 
 class CellModel {
-  constructor(index, value, column) {
-    this.index = index
-    this.value = value
+  constructor(column, columnIndex, row, cell) {
     this.column = column
+    this.columnIndex = columnIndex
+    this.row = row
+    this.cell = cell
   }
 
   get id() {
-    return this.index
+    return this.columnIndex
+  }
+
+  get displayValue() {
+    if (this.cell) {
+      return this.cell(this.row)
+    }
+
+    return this.row[this.column.accessor].toString()
   }
 }

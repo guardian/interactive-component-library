@@ -20,7 +20,6 @@ const columns = [
   {
     header: () => 'Seats',
     accessor: 'totalSeats',
-    cell: (d) => d.totalSeats.toString(),
     cellStyle: {
       width: 'w-1/6',
       textAlign: 'text-right',
@@ -30,7 +29,6 @@ const columns = [
   {
     header: () => 'Gains',
     accessor: 'gains',
-    cell: (d) => d.gains.toString(),
     cellStyle: {
       width: 'w-1/6',
       textAlign: 'text-right',
