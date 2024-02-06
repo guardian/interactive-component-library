@@ -1,5 +1,5 @@
 import { Table } from '.'
-import { CellWithCircle } from '$atoms/cell-with-circle'
+import { LegendItem } from '$atoms/legend-item'
 import { PartyBackgroundColors } from '$headless/colors'
 
 const meta = {
@@ -12,7 +12,7 @@ export default meta
 const columns = [
   {
     header: () => 'Party',
-    cell: (d) => <CellWithCircle circleClass={PartyBackgroundColors[d.abbreviation]} text={d.partyName} />,
+    cell: (d) => <LegendItem circleClass={PartyBackgroundColors[d.abbreviation]} text={d.partyName} />,
     cellStyle: {
       textAlign: 'text-left',
     },
