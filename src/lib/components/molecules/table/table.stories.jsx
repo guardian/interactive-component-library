@@ -19,11 +19,13 @@ const columns = [
   },
   {
     header: () => 'Seats',
+    value: (d) => d.totalSeats,
     cell: (d) => d.totalSeats.toString(),
     cellStyle: {
       width: 'w-1/6',
       textAlign: 'text-right',
     },
+    sortable: true,
   },
   {
     header: () => 'Gains',

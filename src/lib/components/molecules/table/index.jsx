@@ -9,7 +9,7 @@ export function Table({ columns, data }) {
         <tr>
           {table.getColumns().map((column) => (
             <th key={column.id} className={column.getCellClass()}>
-              {column.header}
+              <HeaderCell {...column.headerProps} />
             </th>
           ))}
         </tr>
@@ -26,5 +26,32 @@ export function Table({ columns, data }) {
         ))}
       </tbody>
     </table>
+  )
+}
+
+function HeaderCell({ text, sortable }) {
+  if (!sortable) {
+    return text
+  }
+  return (
+    <button className="w-full flex justify-end translate-x-4">
+      {text}
+      <span aria-hidden="true">
+        <Chevron />
+      </span>
+    </button>
+  )
+}
+
+function Chevron({ fill = '#052962' }) {
+  return (
+    <svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M7.80569 10.7123L11.6344 15H12.365L16.1938 10.7123L15.4997 10L11.9997 13L8.49976 10L7.80569 10.7123Z"
+        fill={fill}
+      />
+    </svg>
   )
 }
