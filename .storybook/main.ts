@@ -4,6 +4,7 @@ const config: StorybookConfig = {
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-styling',
+    '@storybook/addon-backgrounds',
     '@storybook/addon-viewport',
     {
       name: '@storybook/addon-storysource',
