@@ -19,7 +19,7 @@ const columns = [
   },
   {
     header: () => 'Seats',
-    value: (d) => d.totalSeats,
+    accessor: 'totalSeats',
     cell: (d) => d.totalSeats.toString(),
     cellStyle: {
       width: 'w-1/6',
@@ -29,19 +29,23 @@ const columns = [
   },
   {
     header: () => 'Gains',
+    accessor: 'gains',
     cell: (d) => d.gains.toString(),
     cellStyle: {
       width: 'w-1/6',
       textAlign: 'text-right',
     },
+    sortable: true,
   },
   {
     header: () => 'Losses',
+    accessor: 'losses',
     cell: (d) => d.losses.toString(),
     cellStyle: {
       width: 'w-1/6',
       textAlign: 'text-right',
     },
+    sortable: true,
   },
 ]
 
