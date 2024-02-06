@@ -5,10 +5,10 @@ export function Table({ columns, data }) {
   const table = useTable({ columns, data })
 
   return (
-    <table class="w-full mr-4">
+    <table class="w-full table-fixed">
       <thead>
         <tr>
-          {table.getColumns().map((column) => (
+          {table.columns.map((column) => (
             <th key={column.id} className={column.headerCellClass}>
               <HeaderCell {...column.headerProps} />
             </th>
@@ -16,7 +16,7 @@ export function Table({ columns, data }) {
         </tr>
       </thead>
       <tbody>
-        {table.getRows().map((row) => (
+        {table.rows.map((row) => (
           <tr key={row.id} className="border-t border-neutral-86">
             {row.cells.map((cell) => (
               <td key={cell.id} className={cell.column.cellClass}>
@@ -30,16 +30,21 @@ export function Table({ columns, data }) {
   )
 }
 
-function HeaderCell({ text, sortable, onClick, justify }) {
+function HeaderCell({ text, sortable, onClick, isSorted, justify }) {
   if (!sortable) {
     return text
+  }
+
+  let direction = 'down'
+  if (isSorted?.ascending === false) {
+    direction = 'up'
   }
 
   return (
     <button onClick={onClick} className={`w-full flex ${justify}`}>
       {text}
       <span aria-hidden="true">
-        <Chevron />
+        <Chevron active={!!isSorted} direction={direction} />
       </span>
     </button>
   )

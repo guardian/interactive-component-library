@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks'
+import { useState, useMemo } from 'preact/hooks'
 
 const sortAscending = (accessor) => {
   return (a, b) => {
@@ -24,6 +24,9 @@ export function useTable({ columns, data }) {
   const [rows, setRows] = useState(data)
   const [sortState, setSortState] = useState({ columnIndex: -1, ascending: false })
 
+  const rowModels = useMemo(getRows, [rows])
+  const columnModels = useMemo(getColumns, [sortState])
+
   function sortRows(column, columnIndex) {
     return () => {
       let ascending = false
@@ -42,7 +45,8 @@ export function useTable({ columns, data }) {
 
   function getColumns() {
     return columns.map((column, columnIndex) => {
-      return new ColumnModel(column, sortRows(column, columnIndex))
+      const isSorted = sortState.columnIndex === columnIndex && sortState
+      return new ColumnModel(column, sortRows(column, columnIndex), isSorted)
     })
   }
 
@@ -56,8 +60,8 @@ export function useTable({ columns, data }) {
   }
 
   return {
-    getColumns,
-    getRows,
+    columns: columnModels,
+    rows: rowModels,
   }
 }
 
@@ -67,18 +71,19 @@ class DefaultCellStyle {
   fontFamily = 'font-sans'
   fontSize = 'text-sm'
   textColor = 'text-neutral-7'
-  whitespace = 'whitespace-nowrap'
 }
 
 class DefaultHeaderCellStyle extends DefaultCellStyle {
   fontWeight = 'font-bold'
   justify = 'justify-start'
+  whitespace = 'whitespace-nowrap'
 }
 
 class ColumnModel {
-  constructor(definition, onSort) {
+  constructor(definition, onSort, isSorted) {
     this.definition = definition
     this.onSort = onSort
+    this.isSorted = isSorted
   }
 
   get id() {
@@ -98,6 +103,7 @@ class ColumnModel {
       text: this.header,
       sortable: this.definition.sortable,
       onClick: this.onSort,
+      isSorted: this.isSorted,
       ...this.headerCellStyle,
     }
   }

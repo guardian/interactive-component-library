@@ -22,7 +22,7 @@ const columns = [
     header: 'Seats',
     accessor: 'totalSeats',
     cellStyle: {
-      width: 'w-1/6',
+      width: 'w-1/5 mobile-xl:w-1/6',
       textAlign: 'text-right',
     },
   },
@@ -30,7 +30,7 @@ const columns = [
     header: 'Gains',
     accessor: 'gains',
     cellStyle: {
-      width: 'w-1/6',
+      width: 'w-1/5 mobile-xl:w-1/6',
       textAlign: 'text-right',
     },
   },
@@ -38,7 +38,7 @@ const columns = [
     header: 'Losses',
     accessor: 'losses',
     cellStyle: {
-      width: 'w-1/6',
+      width: 'w-1/5 mobile-xl:w-1/6',
       textAlign: 'text-right',
     },
   },

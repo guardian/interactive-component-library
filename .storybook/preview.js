@@ -11,11 +11,18 @@ const preview = {
     },
     viewport: {
       viewports: {
-        mobile: {
-          name: 'Mobile',
+        mobilesmall: {
+          name: 'Mobile small',
           styles: {
             width: '320px',
             height: '568px',
+          },
+        },
+        mobile: {
+          name: 'Mobile',
+          styles: {
+            width: '390px',
+            height: '844px',
           },
         },
         mobileLandscape: {
