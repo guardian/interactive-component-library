@@ -30,12 +30,13 @@ export function Table({ columns, data }) {
   )
 }
 
-function HeaderCell({ text, sortable, onClick }) {
+function HeaderCell({ text, sortable, onClick, justify }) {
   if (!sortable) {
     return text
   }
+
   return (
-    <button onClick={onClick} className="w-full flex justify-end">
+    <button onClick={onClick} className={`w-full flex ${justify}`}>
       {text}
       <span aria-hidden="true">
         <Chevron />

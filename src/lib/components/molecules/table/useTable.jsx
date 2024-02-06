@@ -1,5 +1,25 @@
 import { useState } from 'preact/hooks'
 
+const sortAscending = (accessor) => {
+  return (a, b) => {
+    const valueA = a[accessor]
+    const valueB = b[accessor]
+    if (valueA < valueB) return -1
+    if (valueA > valueB) return 1
+    return 0
+  }
+}
+
+const sortDescending = (accessor) => {
+  return (a, b) => {
+    const valueA = a[accessor]
+    const valueB = b[accessor]
+    if (valueA > valueB) return -1
+    if (valueA < valueB) return 1
+    return 0
+  }
+}
+
 export function useTable({ columns, data }) {
   const [rows, setRows] = useState(data)
   const [sortState, setSortState] = useState({ columnIndex: -1, ascending: false })
@@ -11,11 +31,8 @@ export function useTable({ columns, data }) {
         ascending = !sortState.ascending
       }
 
-      if (ascending) {
-        setRows(rows.toSorted((a, b) => a[column.accessor] - b[column.accessor]))
-      } else {
-        setRows(rows.toSorted((a, b) => b[column.accessor] - a[column.accessor]))
-      }
+      const sortFunction = ascending ? sortAscending(column.accessor) : sortDescending(column.accessor)
+      setRows(rows.toSorted(sortFunction))
       setSortState({
         columnIndex,
         ascending,
@@ -55,6 +72,7 @@ class DefaultCellStyle {
 
 class DefaultHeaderCellStyle extends DefaultCellStyle {
   fontWeight = 'font-bold'
+  justify = 'justify-start'
 }
 
 class ColumnModel {
@@ -72,7 +90,7 @@ class ColumnModel {
   }
 
   get header() {
-    return this.definition.header()
+    return this.definition.header
   }
 
   get headerProps() {
@@ -80,17 +98,23 @@ class ColumnModel {
       text: this.header,
       sortable: this.definition.sortable,
       onClick: this.onSort,
+      ...this.headerCellStyle,
     }
   }
 
   get headerCellStyle() {
     const definition = this.definition
     const defaultStyle = new DefaultHeaderCellStyle()
+    const userStyle = definition.headerCellStyle || definition.cellStyle
 
-    if (typeof definition.headerCellStyle === 'object') {
-      return Object.assign(defaultStyle, definition.headerCellStyle)
-    } else if (typeof definition.headerCellStyle === 'string') {
-      return definition.headerCellStyle
+    if (userStyle?.textAlign && !userStyle?.button) {
+      userStyle.justify = userStyle.textAlign === 'text-left' ? 'justify-start' : 'justify-end'
+    }
+
+    if (typeof userStyle === 'object') {
+      return Object.assign(defaultStyle, userStyle)
+    } else if (typeof userStyle === 'string') {
+      return userStyle
     }
 
     return defaultStyle

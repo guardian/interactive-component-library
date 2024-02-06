@@ -11,39 +11,36 @@ export default meta
 
 const columns = [
   {
-    header: () => 'Party',
+    header: 'Party',
+    accessor: 'partyName',
     cell: (d) => <LegendItem circleClass={PartyBackgroundColors[d.abbreviation]} text={d.partyName} />,
     cellStyle: {
       textAlign: 'text-left',
     },
   },
   {
-    header: () => 'Seats',
+    header: 'Seats',
     accessor: 'totalSeats',
     cellStyle: {
       width: 'w-1/6',
       textAlign: 'text-right',
     },
-    sortable: true,
   },
   {
-    header: () => 'Gains',
+    header: 'Gains',
     accessor: 'gains',
     cellStyle: {
       width: 'w-1/6',
       textAlign: 'text-right',
     },
-    sortable: true,
   },
   {
-    header: () => 'Losses',
+    header: 'Losses',
     accessor: 'losses',
-    cell: (d) => d.losses.toString(),
     cellStyle: {
       width: 'w-1/6',
       textAlign: 'text-right',
     },
-    sortable: true,
   },
 ]
 
@@ -87,7 +84,7 @@ export const Default = {
 
 export const Sortable = {
   args: {
-    columns,
+    columns: columns.map((d) => ({ ...d, sortable: true })),
     data,
   },
 }
