@@ -1,4 +1,5 @@
 import { useTable } from './useTable'
+import { Chevron } from '$atoms/chevron'
 
 export function Table({ columns, data }) {
   const table = useTable({ columns, data })
@@ -40,18 +41,5 @@ function HeaderCell({ text, sortable, onClick }) {
         <Chevron />
       </span>
     </button>
-  )
-}
-
-function Chevron({ fill = '#052962' }) {
-  return (
-    <svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M7.80569 10.7123L11.6344 15H12.365L16.1938 10.7123L15.4997 10L11.9997 13L8.49976 10L7.80569 10.7123Z"
-        fill={fill}
-      />
-    </svg>
   )
 }
