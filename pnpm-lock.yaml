@@ -12,6 +12,9 @@ devDependencies:
   '@preact/preset-vite':
     specifier: ^2.8.0
     version: 2.8.0(@babel/core@7.22.10)(preact@10.12.1)(vite@4.5.2)
+  '@storybook/addon-backgrounds':
+    specifier: ^7.6.12
+    version: 7.6.12
   '@storybook/addon-essentials':
     specifier: 7.2.2
     version: 7.2.2(react-dom@18.2.0)(react@18.2.0)
@@ -2631,6 +2634,14 @@ packages:
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
+    dev: true
+
+  /@storybook/addon-backgrounds@7.6.12:
+    resolution: {integrity: sha512-G14uN5lDXUtXw+dmEPaB6lpDpR9K25ssYuWWn8yYR44B1WMuD4kDgw0QGb0g+xYQj9R1TsalKEJHA4AuSYkVGQ==}
+    dependencies:
+      '@storybook/global': 5.0.0
+      memoizerific: 1.11.3
+      ts-dedent: 2.2.0
     dev: true
 
   /@storybook/addon-controls@7.2.2(react-dom@18.2.0)(react@18.2.0):
