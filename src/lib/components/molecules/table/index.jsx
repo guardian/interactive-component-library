@@ -4,11 +4,11 @@ export function Table({ columns, data }) {
   const table = useTable({ columns, data })
 
   return (
-    <table class="w-full">
+    <table class="w-full mr-4">
       <thead>
         <tr>
           {table.getColumns().map((column) => (
-            <th key={column.id} className={column.getCellClass()}>
+            <th key={column.id} className={column.getHeaderCellClass()}>
               <HeaderCell {...column.headerProps} />
             </th>
           ))}
@@ -29,12 +29,12 @@ export function Table({ columns, data }) {
   )
 }
 
-function HeaderCell({ text, sortable }) {
+function HeaderCell({ text, sortable, onClick }) {
   if (!sortable) {
     return text
   }
   return (
-    <button className="w-full flex justify-end translate-x-4">
+    <button onClick={onClick} className="w-full flex justify-end">
       {text}
       <span aria-hidden="true">
         <Chevron />
