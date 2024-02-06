@@ -24,6 +24,9 @@ devDependencies:
   '@storybook/addon-links':
     specifier: 7.2.2
     version: 7.2.2(react-dom@18.2.0)(react@18.2.0)
+  '@storybook/addon-measure':
+    specifier: ^7.6.12
+    version: 7.6.12
   '@storybook/addon-storysource':
     specifier: ^7.6.12
     version: 7.6.12
@@ -2829,6 +2832,13 @@ packages:
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
+    dev: true
+
+  /@storybook/addon-measure@7.6.12:
+    resolution: {integrity: sha512-K3aKErr84V0eVK7t+wco5cSYDdeotwoXi4e7VLSa2cdUz0wanOb4R7v3kf6vxucUyp05Lv+yHkz9zsbwuezepA==}
+    dependencies:
+      '@storybook/global': 5.0.0
+      tiny-invariant: 1.3.1
     dev: true
 
   /@storybook/addon-outline@7.2.2(react-dom@18.2.0)(react@18.2.0):
