@@ -1,4 +1,8 @@
+import { useState } from 'preact/hooks'
+
 export function useTable({ columns, data }) {
+  const [rows, setRows] = useState(data)
+
   function getColumns() {
     return columns.map((column) => {
       return new ColumnModel(column)
@@ -26,15 +30,18 @@ class DefaultCellStyle {
   fontFamily = 'font-sans'
   fontSize = 'text-sm'
   textColor = 'text-neutral-7'
+  whitespace = 'whitespace-nowrap'
 }
 
 class ColumnModel {
   cellStyle = new DefaultCellStyle()
+  sortable = false
 
   constructor(definition) {
     this._id = definition.id
-    this.header = definition.header()
+    this.header = definition.header
     this.cell = definition.cell
+    this.sortable = definition.sortable || false
 
     if (definition.cellStyle) {
       if (typeof definition.cellStyle === 'object') {
@@ -47,6 +54,13 @@ class ColumnModel {
 
   get id() {
     return this._id || this.header
+  }
+
+  get headerProps() {
+    return {
+      text: this.header(),
+      sortable: this.sortable,
+    }
   }
 
   getCellClass() {
