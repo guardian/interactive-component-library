@@ -1,21 +1,3 @@
-// interface CellStyle {
-//   width?: string
-//   textAlign?: string
-//   padding?: string
-// }
-
-// export interface ColumnDefinition<TableRow> {
-//   id?: string
-//   header: () => string
-//   cell: (data: TableRow) => JSX.Element | string
-//   cellStyle?: CellStyle | string
-// }
-
-// export interface TableProps<TableRow> {
-//   columns: ColumnDefinition<TableRow>[]
-//   data: TableRow[]
-// }
-
 export function useTable({ columns, data }) {
   function getColumns() {
     return columns.map((column) => {
