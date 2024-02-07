@@ -9,6 +9,7 @@
   },
   "main": "./dist/interactive-component-library.umd.js",
   "module": "./dist/interactive-component-library.es.js",
+  "type": "module",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
