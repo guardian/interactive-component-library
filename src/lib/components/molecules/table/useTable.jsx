@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'preact/hooks'
+import { useState, useCallback } from 'preact/hooks'
 
 const sortAscending = (accessor) => {
   return (a, b) => {
@@ -21,47 +21,48 @@ const sortDescending = (accessor) => {
 }
 
 export function useTable({ columns, data }) {
-  const [rows, setRows] = useState(data)
   const [sortState, setSortState] = useState({ columnIndex: -1, ascending: false })
 
-  const rowModels = useMemo(getRows, [rows])
-  const columnModels = useMemo(getColumns, [sortState])
-
-  function sortRows(column, columnIndex) {
-    return () => {
-      let ascending = false
-      if (sortState.columnIndex === columnIndex) {
-        ascending = !sortState.ascending
-      }
-
-      const sortFunction = ascending ? sortAscending(column.accessor) : sortDescending(column.accessor)
-      setRows(rows.toSorted(sortFunction))
-      setSortState({
-        columnIndex,
-        ascending,
-      })
+  const onHeaderClick = (columnIndex) => {
+    let ascending = false
+    if (sortState.columnIndex === columnIndex) {
+      ascending = !sortState.ascending
     }
-  }
 
-  function getColumns() {
-    return columns.map((column, columnIndex) => {
-      const isSorted = sortState.columnIndex === columnIndex && sortState
-      return new ColumnModel(column, sortRows(column, columnIndex), isSorted)
+    setSortState({
+      columnIndex,
+      ascending,
     })
   }
 
-  function getRows() {
-    return rows.map((d, rowIndex) => {
+  const getSortedRows = useCallback(() => {
+    if (sortState.columnIndex === -1) {
+      return data
+    }
+    const column = columns[sortState.columnIndex]
+    const sortFunction = sortState.ascending ? sortAscending(column.accessor) : sortDescending(column.accessor)
+    return data.toSorted(sortFunction)
+  }, [sortState])
+
+  const getColumns = useCallback(() => {
+    return columns.map((column, columnIndex) => {
+      const isSorted = sortState.columnIndex === columnIndex && sortState
+      return new ColumnModel(columnIndex, column, onHeaderClick, isSorted)
+    })
+  }, [sortState])
+
+  const getRows = useCallback(() => {
+    return getSortedRows().map((d, rowIndex) => {
       const cells = getColumns().map((column, columnIndex) => {
         return new CellModel(column, columnIndex, d, column.cell)
       })
       return new RowModel(rowIndex, cells)
     })
-  }
+  }, [getSortedRows])
 
   return {
-    columns: columnModels,
-    rows: rowModels,
+    getColumns,
+    getRows,
   }
 }
 
@@ -80,9 +81,10 @@ class DefaultHeaderCellStyle extends DefaultCellStyle {
 }
 
 class ColumnModel {
-  constructor(definition, onSort, isSorted) {
+  constructor(index, definition, onHeaderClick, isSorted) {
+    this.index = index
     this.definition = definition
-    this.onSort = onSort
+    this.onHeaderClick = onHeaderClick
     this.isSorted = isSorted
   }
 
@@ -102,7 +104,9 @@ class ColumnModel {
     return {
       text: this.header,
       sortable: this.definition.sortable,
-      onClick: this.onSort,
+      onClick: () => {
+        this.onHeaderClick(this.index)
+      },
       isSorted: this.isSorted,
       ...this.headerCellStyle,
     }

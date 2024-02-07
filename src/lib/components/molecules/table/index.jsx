@@ -8,7 +8,7 @@ export function Table({ columns, data }) {
     <table class="w-full table-fixed">
       <thead>
         <tr>
-          {table.columns.map((column) => (
+          {table.getColumns().map((column) => (
             <th key={column.id} className={column.headerCellClass}>
               <HeaderCell {...column.headerProps} />
             </th>
@@ -16,7 +16,7 @@ export function Table({ columns, data }) {
         </tr>
       </thead>
       <tbody>
-        {table.rows.map((row) => (
+        {table.getRows().map((row) => (
           <tr key={row.id} className="border-t border-neutral-86">
             {row.cells.map((cell) => (
               <td key={cell.id} className={cell.column.cellClass}>
