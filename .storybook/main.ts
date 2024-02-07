@@ -4,7 +4,6 @@ const config: StorybookConfig = {
   addons: [
     '@storybook/addon-controls',
     '@storybook/addon-links',
-    '@storybook/addon-styling',
     '@storybook/addon-backgrounds',
     '@storybook/addon-measure',
     '@storybook/addon-viewport',
