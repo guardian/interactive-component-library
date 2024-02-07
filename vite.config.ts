@@ -34,6 +34,7 @@ const app = async (): Promise<UserConfigExport> => {
       },
     },
     build: {
+      sourcemap: true,
       lib: {
         entry: path.resolve(__dirname, 'src/lib/index.js'),
         name: formattedName,
