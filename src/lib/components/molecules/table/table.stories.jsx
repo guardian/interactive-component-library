@@ -25,6 +25,9 @@ const columns = [
       width: 'w-1/5 mobile-xl:w-1/6',
       textAlign: 'text-right',
     },
+    sort: {
+      ascending: false,
+    },
   },
   {
     header: 'Gains',

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'preact/hooks'
+import { useMemo } from 'preact/hooks'
 
 const sortAscending = (accessor) => {
   return (a, b) => {
@@ -20,49 +20,35 @@ const sortDescending = (accessor) => {
   }
 }
 
-export function useTable({ columns, data }) {
-  const [sortState, setSortState] = useState({ columnIndex: -1, ascending: false })
-
-  const onHeaderClick = (columnIndex) => {
-    let ascending = false
-    if (sortState.columnIndex === columnIndex) {
-      ascending = !sortState.ascending
-    }
-
-    setSortState({
-      columnIndex,
-      ascending,
-    })
-  }
-
-  const getSortedRows = useCallback(() => {
-    if (sortState.columnIndex === -1) {
+export function useTable({ columns, data, sortState }) {
+  const sortedData = useMemo(() => {
+    if (sortState.columnIndex === undefined) {
       return data
     }
     const column = columns[sortState.columnIndex]
     const sortFunction = sortState.ascending ? sortAscending(column.accessor) : sortDescending(column.accessor)
     return data.toSorted(sortFunction)
-  }, [sortState])
+  }, [columns, data, sortState])
 
-  const getColumns = useCallback(() => {
+  const columnModels = useMemo(() => {
     return columns.map((column, columnIndex) => {
       const isSorted = sortState.columnIndex === columnIndex && sortState
-      return new ColumnModel(columnIndex, column, onHeaderClick, isSorted)
+      return new ColumnModel(columnIndex, column, isSorted)
     })
-  }, [sortState])
+  }, [columns, sortState])
 
-  const getRows = useCallback(() => {
-    return getSortedRows().map((d, rowIndex) => {
-      const cells = getColumns().map((column, columnIndex) => {
+  const rowModels = useMemo(() => {
+    return sortedData.map((d, rowIndex) => {
+      const cells = columnModels.map((column, columnIndex) => {
         return new CellModel(column, columnIndex, d, column.cell)
       })
       return new RowModel(rowIndex, cells)
     })
-  }, [getSortedRows])
+  }, [columnModels, sortedData])
 
   return {
-    getColumns,
-    getRows,
+    columns: columnModels,
+    rows: rowModels,
   }
 }
 
@@ -81,10 +67,9 @@ class DefaultHeaderCellStyle extends DefaultCellStyle {
 }
 
 class ColumnModel {
-  constructor(index, definition, onHeaderClick, isSorted) {
+  constructor(index, definition, isSorted) {
     this.index = index
     this.definition = definition
-    this.onHeaderClick = onHeaderClick
     this.isSorted = isSorted
   }
 
@@ -104,9 +89,6 @@ class ColumnModel {
     return {
       text: this.header,
       sortable: this.definition.sortable,
-      onClick: () => {
-        this.onHeaderClick(this.index)
-      },
       isSorted: this.isSorted,
       ...this.headerCellStyle,
     }
