@@ -1,4 +1,6 @@
-import { useMemo } from 'preact/hooks'
+import * as preactHooks from 'preact/hooks'
+
+const { useMemo } = preactHooks
 
 const sortAscending = (accessor) => {
   return (a, b) => {
@@ -22,7 +24,7 @@ const sortDescending = (accessor) => {
 
 export function useTable({ columns, data, sortState }) {
   const sortedData = useMemo(() => {
-    if (sortState.columnIndex === undefined) {
+    if (sortState.columnIndex < 0) {
       return data
     }
     const column = columns[sortState.columnIndex]

@@ -1,12 +1,10 @@
 import path from 'node:path'
 import { defineConfig } from 'vitest/config'
-import dts from 'vite-plugin-dts'
 import tailwindcss from 'tailwindcss'
-import { UserConfigExport } from 'vite'
 import { name } from './package.json'
 import preact from '@preact/preset-vite'
 
-const app = async (): Promise<UserConfigExport> => {
+const app = async () => {
   /**
    * Removes everything before the last
    * @octocat/library-repo -> library-repo
@@ -22,16 +20,16 @@ const app = async (): Promise<UserConfigExport> => {
         $headless: path.resolve(__dirname, 'src/lib/components/headless'),
       },
     },
-    plugins: [
-      preact(),
-      dts({
-        insertTypesEntry: true,
-      }),
-    ],
+    plugins: [preact()],
     css: {
       postcss: {
         plugins: [tailwindcss],
       },
+    },
+    esbuild: {
+      jsx: 'automatic',
+      jsxFactory: 'h',
+      jsxFragment: 'Fragment',
     },
     build: {
       sourcemap: true,
@@ -42,10 +40,11 @@ const app = async (): Promise<UserConfigExport> => {
         fileName: (format) => `${formattedName}.${format}.js`,
       },
       rollupOptions: {
-        external: ['preact', 'tailwindcss'],
+        external: ['preact', 'preact/hooks', 'tailwindcss'],
         output: {
           globals: {
             preact: 'preact',
+            'preact/hooks': 'preactHooks',
             tailwindcss: 'tailwindcss',
           },
         },

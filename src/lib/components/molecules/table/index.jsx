@@ -1,37 +1,34 @@
+import * as preactHooks from 'preact/hooks'
 import { useTable } from './useTable'
-import { useState, useCallback, useMemo } from 'preact/hooks'
 import { Chevron } from '$atoms/chevron'
 
+const { useState } = preactHooks
+
 export function Table({ columns, data }) {
-  const initialSortState = useMemo(() => {
+  const [sortState, setSortState] = useState(() => {
     const columnIndex = columns.findIndex((column) => {
       if ('sort' in column) {
         return true
       }
       return false
     })
-    if (columnIndex === -1) return
 
+    const ascending = columnIndex >= 0 ? columns[columnIndex].sort.ascending : false
     return {
       columnIndex,
-      ascending: columns[columnIndex].sort.ascending,
+      ascending,
     }
-  }, [columns])
+  })
+  const table = useTable({ columns, data, sortState })
 
-  const [sortedColumnIndex, setSortedColumnIndex] = useState(initialSortState.columnIndex)
-  const [sortAscending, setSortAscending] = useState(initialSortState.ascending || false)
-  const table = useTable({ columns, data, sortState: { columnIndex: sortedColumnIndex, ascending: sortAscending } })
-
-  const sortByColumn = useCallback(
-    (index) => {
-      if (sortedColumnIndex === index) {
-        setSortAscending(!sortAscending)
+  const sortByColumn = (index) => {
+    setSortState((currentState) => {
+      return {
+        columnIndex: index,
+        ascending: index === currentState.columnIndex ? !currentState.ascending : false,
       }
-
-      setSortedColumnIndex(index)
-    },
-    [sortedColumnIndex, sortAscending],
-  )
+    })
+  }
 
   return (
     <table class="w-full table-fixed">
@@ -39,7 +36,7 @@ export function Table({ columns, data }) {
         <tr>
           {table.columns.map((column, index) => (
             <th key={column.id} className={column.headerCellClass}>
-              <HeaderCell onClick={() => sortByColumn(index)} {...column.headerProps} />
+              <HeaderCell key={index} onClick={() => sortByColumn(index)} {...column.headerProps} />
             </th>
           ))}
         </tr>

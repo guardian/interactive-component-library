@@ -1,0 +1,17 @@
+{
+  "include": ["./src/**/*.js", "./src/**/*.jsx"],
+  "exclude": ["./src/**/*.stories.*"],
+  "compilerOptions": {
+    "module": "es2020",
+    "paths": {
+      "react": ["./node_modules/preact/compat/"],
+      "react-dom": ["./node_modules/preact/compat/"]
+    },
+    "esModuleInterop": true,
+    "target": "ES2015",
+    /* Preact Config */
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "skipLibCheck": true
+  }
+}

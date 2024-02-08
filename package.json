@@ -9,7 +9,6 @@
   },
   "main": "./dist/interactive-component-library.umd.js",
   "module": "./dist/interactive-component-library.es.js",
-  "type": "module",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
@@ -25,8 +24,8 @@
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
-    "build:lib": "tsc && vite build",
-    "build:lib:watch": "tsc && vite build --watch",
+    "build:lib": "vite build",
+    "build:lib:watch": "vite build --watch",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --fix",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,js,mdx}\"",
     "test": "vitest",
