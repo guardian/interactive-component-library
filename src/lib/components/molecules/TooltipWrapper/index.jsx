@@ -5,6 +5,7 @@ export const TooltipWrapper = React.memo(
   ({ children, width, bboxTop, containerRef, containerBounds, innerWidth, innerHeight }) => {
     const ttRef = useRef(null)
     const [bbTop, setBbtop] = useState(containerBounds.top)
+
     // const prevSelected = usePrevious(selected)
 
     // if (innerWidth < 980) {
