@@ -1,32 +1,31 @@
 import { Tooltip } from '.'
+import { useRef } from 'react'
+
 export default {
   title: 'Molecules/Tooltip',
   component: Tooltip,
 }
 
-// some test props
-const width = 300
-const bboxTop = 0
-const containerRef = { current: document.body }
-const innerWidth = window.innerWidth
-const innerHeight = window.innerHeight
+function TooltipPreview() {
+  const tooltipped = useRef(null)
 
-const props = {
-  width,
-  bboxTop,
-  containerRef,
-  innerWidth,
-  innerHeight,
+  return (
+    <>
+      <div ref={tooltipped} style="width: 100%; height: 300px; background-color: #CCC" />
+      <Tooltip for={tooltipped} renderIn="#storybook-root">
+        {({ x, y }) => (
+          <div style="border: 1px solid #333; background-color: #FFF; padding: 10px;">
+            <p>Tooltip position</p>
+            <p>
+              x: {x}, y: {y}
+            </p>
+          </div>
+        )}
+      </Tooltip>
+    </>
+  )
 }
 
 export const Default = {
-  args: props, // the args key is required for the fields to show in storybook.
-  render: (args) => (
-    <>
-      <div style="width: 100%; height: 300px;" />
-      <Tooltip {...args} containerBounds={document.body.getBoundingClientRect()}>
-        <div>Child Content</div>
-      </Tooltip>
-    </>
-  ),
+  render: () => <TooltipPreview />,
 }
