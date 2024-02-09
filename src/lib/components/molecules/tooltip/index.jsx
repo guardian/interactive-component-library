@@ -1,18 +1,10 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
-// import { usePrevious } from 'shared/js/util'
 
-export const TooltipWrapper = React.memo(
+export const Tooltip = React.memo(
   ({ children, width, bboxTop, containerRef, containerBounds, innerWidth, innerHeight }) => {
     const ttRef = useRef(null)
-    const [bbTop, setBbtop] = useState(containerBounds.top)
+    const [bbTop] = useState(containerBounds.top)
 
-    // const prevSelected = usePrevious(selected)
-
-    // if (innerWidth < 980) {
-    //   if (!prevSelected || prevSelected.code !== selected.code) {
-    //     setBbtop(containerBounds.top)
-    //   }
-    // }
     const ttBox = ttRef.current && ttRef.current.getBoundingClientRect()
     const ttWidth = width || (ttRef.current && ttBox.width)
     const ttHeight = ttRef.current && ttBox.height
@@ -45,7 +37,7 @@ export const TooltipWrapper = React.memo(
 
     return (
       <div
-        class="gv-tt"
+        class="gv-tooltip"
         ref={ttRef}
         style={innerWidth < 740 ? null : { position: 'absolute', left, top, width: `${ttWidth}px` }}
       >
