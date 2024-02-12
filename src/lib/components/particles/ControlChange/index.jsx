@@ -1,14 +1,6 @@
 import React from 'react'
 
-function controlString(previous, current) {
-  if (previous.abbr === current.abbr) {
-    return `${current.name} hold`
-  } else {
-    return `${current.name} gain from ${previous.name}`
-  }
-}
-
-export const ControlChange = ({ previous, current }) => (
+export const ControlChange = ({ previous, current, string }) => (
   <div class="gv-control-change">
     <svg
       style={{ display: 'inline-block', marginRight: 4, transform: 'translateY(-1px)' }}
@@ -29,6 +21,6 @@ export const ControlChange = ({ previous, current }) => (
         </linearGradient>
       </defs>
     </svg>
-    <strong>{controlString(previous, current)}</strong>
+    <strong>{string}</strong>
   </div>
 )

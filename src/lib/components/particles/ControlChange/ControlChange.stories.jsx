@@ -8,6 +8,7 @@ export default {
 const args = {
   previous: { abbr: 'lab', name: 'Labour' },
   current: { abbr: 'con', name: 'Conservatives' },
+  string: 'Con gain from Lab',
 }
 
 export const Default = {
