@@ -1,7 +1,7 @@
 import { Chevron } from '.'
 
 export default {
-  title: 'Atoms/Chevron',
+  title: 'Particles/Chevron',
   component: Chevron,
   argTypes: {
     direction: {

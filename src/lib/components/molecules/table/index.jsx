@@ -1,6 +1,6 @@
 import * as preactHooks from 'preact/hooks'
 import { useTable } from './useTable'
-import { Chevron } from '$atoms/chevron'
+import { Chevron } from '$particles/chevron'
 
 const { useState } = preactHooks
 
