@@ -1,7 +1,7 @@
 import { StackedBar } from '.'
 
 const meta = {
-  title: 'Atoms/StackedBar',
+  title: 'Particles/StackedBar',
   component: StackedBar,
 }
 

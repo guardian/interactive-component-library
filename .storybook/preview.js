@@ -2,6 +2,11 @@ import '../src/lib/tailwind/theme.css'
 
 const preview = {
   parameters: {
+    options: {
+      storySort: {
+        order: ['Particles', 'Molecules', 'Organisms'],
+      },
+    },
     actions: { argTypesRegex: '^on[A-Z].*' },
     backgrounds: {
       values: [

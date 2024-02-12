@@ -1,5 +1,5 @@
 import { Table } from '.'
-import { LegendItem } from '$atoms/legend-item'
+import { LegendItem } from '$particles/legend-item'
 import { PartyBackgroundColors } from '$headless/colors'
 
 const meta = {

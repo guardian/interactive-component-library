@@ -1,7 +1,7 @@
 import { LegendItem } from '.'
 
 export default {
-  title: 'Atoms/Legend item',
+  title: 'Particles/Legend item',
   component: LegendItem,
 }
 

@@ -15,7 +15,7 @@ const app = async () => {
   return defineConfig({
     resolve: {
       alias: {
-        $atoms: path.resolve(__dirname, 'src/lib/components/atoms'),
+        $particles: path.resolve(__dirname, 'src/lib/components/particles'),
         $molecules: path.resolve(__dirname, 'src/lib/components/molecules'),
         $headless: path.resolve(__dirname, 'src/lib/components/headless'),
       },
