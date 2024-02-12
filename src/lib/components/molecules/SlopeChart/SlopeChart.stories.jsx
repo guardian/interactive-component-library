@@ -63,11 +63,13 @@ const totalSeats = 40
 const args = {
   id: 'slope-chart',
   slopeChartItems: data,
-  padding: { left: 24, right: 60, top: 20, bottom: 16 },
+  padding: { left: 24, right: 60, top: 20, bottom: 20 },
   domain: [0, totalSeats],
   prevValKey: 'prevSeats',
   nextValKey: 'overallSeats',
   abbrKey: 'party',
+  prevTime: '2019',
+  nextTime: '2024',
 }
 
 export const Default = {

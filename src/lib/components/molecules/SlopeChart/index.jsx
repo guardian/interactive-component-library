@@ -67,6 +67,8 @@ export const SlopeChart = ({
   prevValKey,
   nextValKey,
   abbrKey,
+  nextTime,
+  prevTime,
 }) => {
   const wrapperRef = useRef(null)
   const [width, setWidth] = useState(0)
@@ -146,6 +148,16 @@ export const SlopeChart = ({
               </g>
             )
           })}
+          {
+            <g>
+              <text x={padding.left} y={height}>
+                {prevTime}
+              </text>
+              <text x={width - padding.right} y={height} textAnchor="end">
+                {nextTime}
+              </text>
+            </g>
+          }
         </svg>
       )}
     </div>
