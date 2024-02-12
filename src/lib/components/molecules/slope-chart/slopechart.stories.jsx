@@ -68,8 +68,8 @@ const args = {
   prevValKey: 'prevSeats',
   nextValKey: 'overallSeats',
   abbrKey: 'party',
-  prevTime: '2019',
-  nextTime: '2024',
+  prevLabel: '2019',
+  nextLabel: '2024',
 }
 
 export const Default = {

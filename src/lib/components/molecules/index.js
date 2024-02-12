@@ -1,2 +1,2 @@
 export * from './table'
-export * from './SlopeChart'
+export * from './slopechart'

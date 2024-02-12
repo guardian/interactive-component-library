@@ -1,63 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-
-function scaleLinear(domain, range) {
-  const [domainMin, domainMax] = domain
-  const [rangeMin, rangeMax] = range
-
-  const slope = (rangeMax - rangeMin) / (domainMax - domainMin)
-  const intercept = rangeMin - slope * domainMin
-
-  return function (x) {
-    return slope * x + intercept
-  }
-}
-
-const labelHeight = 12
-const maxIterations = 10
-
-function preventOverlap(labelPositions, iteration = 0) {
-  let totalOverlap = 0
-
-  for (let index = 1; index < labelPositions.length; index++) {
-    const previousElement = labelPositions[index - 1]
-    const element = labelPositions[index]
-
-    const overlap = previousElement.y - (element.y - labelHeight)
-    if (overlap < 0) {
-      // no overlap, continue
-      continue
-    }
-
-    previousElement.y -= overlap / 2
-    element.y += overlap / 2
-
-    totalOverlap += overlap
-  }
-
-  if (totalOverlap > 0 && iteration < maxIterations) {
-    return preventOverlap(labelPositions, iteration + 1)
-  }
-
-  return labelPositions
-}
-
-function positionLabels(items, key, yScale, abbrKey, x, paddingTop) {
-  // deduplicate values
-  const deduplicated = [...items.reduce((map, obj) => map.set(obj[key], obj), new Map()).values()]
-
-  const initialPositions = deduplicated.map((item) => {
-    return {
-      x,
-      y: yScale(item[key]) + paddingTop + 4,
-      value: item[key],
-      key: item[abbrKey],
-    }
-  })
-  // sort by y-position
-  initialPositions.sort((a, b) => a.y - b.y)
-
-  return preventOverlap(initialPositions)
-}
+import React, { useMemo, useRef, useState, useLayoutEffect } from 'react'
+import { positionLabels, scaleLinear } from './slope-chart-util'
 
 export const SlopeChart = ({
   id,
@@ -67,8 +9,8 @@ export const SlopeChart = ({
   prevValKey,
   nextValKey,
   abbrKey,
-  nextTime,
-  prevTime,
+  nextLabel,
+  prevLabel,
 }) => {
   const wrapperRef = useRef(null)
   const [width, setWidth] = useState(0)
@@ -77,7 +19,7 @@ export const SlopeChart = ({
   const yScale = scaleLinear(domain, [contentSize, 0])
   const show = width > 0
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (width === 0) {
       setWidth(wrapperRef.current.getBoundingClientRect().width)
     }
@@ -88,9 +30,10 @@ export const SlopeChart = ({
         setWidth(newWidth)
       }
     }
+
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [width])
 
   const labeLeftPositions = useMemo(
     () => positionLabels(slopeChartItems, prevValKey, yScale, abbrKey, padding.left - 8, padding.top),
@@ -151,10 +94,10 @@ export const SlopeChart = ({
           {
             <g>
               <text x={padding.left} y={height}>
-                {prevTime}
+                {prevLabel}
               </text>
               <text x={width - padding.right} y={height} textAnchor="end">
-                {nextTime}
+                {nextLabel}
               </text>
             </g>
           }
