@@ -45,7 +45,7 @@ const app = async () => {
         output: {
           globals: {
             preact: 'preact',
-            'preact/hooks': 'preactHooks',
+            'preact/hooks': 'preact/hooks',
             tailwindcss: 'tailwindcss',
           },
         },
