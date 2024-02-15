@@ -44,6 +44,7 @@ const app = async () => {
           globals: {
             'preact/jsx-runtime': 'preact/jsx-runtime',
             'preact/hooks': 'preact/hooks',
+            'preact/compat': 'preact/compat',
             tailwindcss: 'tailwindcss',
           },
         },

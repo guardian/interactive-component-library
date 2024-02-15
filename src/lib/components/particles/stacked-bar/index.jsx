@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from 'react'
+import { useRef, useLayoutEffect } from 'preact/hooks'
 import { isDarkColor } from '$headless/colors/index'
 
 export function StackedBar({ stack, width, height, createSVG = true }) {

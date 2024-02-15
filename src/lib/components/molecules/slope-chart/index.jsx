@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState, useLayoutEffect } from 'react'
+import { useMemo, useRef, useState, useLayoutEffect } from 'preact/hooks'
 import { positionLabels, scaleLinear } from './slope-chart-util'
 import { useWindowSize } from './react-util'
 

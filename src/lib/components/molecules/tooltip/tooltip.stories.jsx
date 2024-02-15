@@ -1,5 +1,5 @@
 import { Tooltip } from '.'
-import { useRef } from 'react'
+import { useRef } from 'preact/hooks'
 
 export default {
   title: 'Molecules/Tooltip',

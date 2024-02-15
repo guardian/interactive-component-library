@@ -1,6 +1,6 @@
-import { useLayoutEffect, useEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useEffect, useRef, useState } from 'preact/hooks'
 import { useMousePosition } from './useMousePosition'
-import { createPortal } from 'react-dom'
+import { createPortal } from 'preact/compat'
 
 export function Tooltip({ for: elementRef, renderIn: refOrSelector, children }) {
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'preact/hooks'
 
 export const useMousePosition = (elementRef) => {
   const [position, setPosition] = useState(null)
