@@ -1,0 +1,51 @@
+.coalitionsContainer {
+  padding-top: 0px;
+}
+
+.coalitionsContainer {
+  padding-top: 60px;
+
+  @include mq($from: tablet) {
+    padding-top: 0px;
+  }
+}
+
+.coalition {
+  margin-bottom: var(--space-2);
+}
+
+.title,
+.description {
+  font-family: var(--text-sans);
+  font-size: var(--sans-small);
+  line-height: var(--sans-line-height);
+
+  max-width: calc(80% - 12px);
+
+  @include mq($from: tablet) {
+    max-width: 620px;
+  }
+}
+
+.title {
+  font-weight: 700;
+}
+
+.description {
+  margin-bottom: var(--space-1);
+}
+
+.thresholdText {
+  font-family: var(--text-sans);
+  font-size: var(--sans-xxsmall);
+  line-height: var(--sans-line-height);
+
+  span {
+    display: block;
+  }
+}
+
+.thresholdTextBold {
+  font-weight: 700;
+  margin-bottom: var(--space-1)
+}

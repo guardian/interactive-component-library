@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from 'preact/hooks'
+import { useRef, useLayoutEffect, useState } from 'preact/hooks'
 import { isDarkColor } from '$shared/colors'
 import defaultStyles from './style.module.css'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
@@ -6,6 +6,7 @@ import { mergeStyles } from '$styles/helpers/mergeStyles'
 export function StackedBar({ stack, width, height, createSVG = true, styles }) {
   const rectElements = useRef([])
   const textElements = useRef([])
+  const [hideLabels, setHideLabels] = useState(true)
 
   useLayoutEffect(() => {
     for (let index = 0; index < stack.length; index++) {
@@ -14,15 +15,23 @@ export function StackedBar({ stack, width, height, createSVG = true, styles }) {
 
       const paddingX = 8
       const hideText = textElement.getBBox().width + paddingX > rectElement.getBBox().width
-      textElement.setAttribute('display', hideText ? 'none' : '')
+
+      if (hideText) {
+        // if any is too big, hide all and break
+        setHideLabels(true)
+        return
+      }
     }
+
+    // if all fit, show all after loop ends
+    setHideLabels(false)
   }, [stack, width, height])
 
   styles = mergeStyles({ ...defaultStyles }, styles)
 
   let totalWidth = 0
   const content = stack.map((d, index) => {
-    const itemWidth = Math.round(d.fraction * width)
+    const itemWidth = d.fraction * width
     const textColor = isDarkColor(d.fill) ? '#FFF' : '#121212'
     const value = (
       <g key={index} transform={`translate(${totalWidth}, 0)`}>
@@ -36,14 +45,13 @@ export function StackedBar({ stack, width, height, createSVG = true, styles }) {
         />
         <text
           ref={(element) => (textElements.current[index] = element)}
-          className={styles.label}
-          fill={textColor}
-          x={itemWidth}
+          x={itemWidth - 4}
           y={height / 2}
-          dx={-4}
           text-anchor="end"
           alignment-baseline="central"
           text-rendering="optimizeLegibility"
+          className={styles.label}
+          style={{ fill: textColor, visibility: hideLabels ? 'hidden' : 'visible' }} //using visibility rather than display makes sure the text width is always calculated correctly
         >
           {d.label}
         </text>
@@ -55,7 +63,13 @@ export function StackedBar({ stack, width, height, createSVG = true, styles }) {
 
   if (createSVG) {
     return (
-      <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg">
+      <svg
+        overflow="hidden"
+        width={width}
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
+        xmlns="http://www.w3.org/2000/svg"
+      >
         {content}
       </svg>
     )
