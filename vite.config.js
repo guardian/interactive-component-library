@@ -37,8 +37,6 @@ const app = async () => {
       lib: {
         entry: path.resolve(__dirname, 'src/lib/index.js'),
         name: formattedName,
-        formats: ['es'],
-        fileName: (format) => `${formattedName}.${format}.js`,
       },
       rollupOptions: {
         external: ['preact', 'preact/hooks', 'tailwindcss'],

@@ -1,6 +1,4 @@
-import * as preactHooks from 'preact/hooks'
-
-const { useMemo } = preactHooks
+import { useMemo } from 'preact/hooks'
 
 const sortAscending = (accessor) => {
   return (a, b) => {
