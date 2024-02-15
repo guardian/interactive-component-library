@@ -3,6 +3,7 @@ import { defineConfig } from 'vitest/config'
 import tailwindcss from 'tailwindcss'
 import { name } from './package.json'
 import preact from '@preact/preset-vite'
+import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 
 const app = async () => {
   /**
@@ -20,7 +21,7 @@ const app = async () => {
         $headless: path.resolve(__dirname, 'src/lib/components/headless'),
       },
     },
-    plugins: [preact()],
+    plugins: [peerDepsExternal(), preact()],
     css: {
       postcss: {
         plugins: [tailwindcss],
@@ -39,10 +40,9 @@ const app = async () => {
         name: formattedName,
       },
       rollupOptions: {
-        external: ['preact', 'preact/hooks', 'tailwindcss'],
         output: {
           globals: {
-            preact: 'preact',
+            'preact/jsx-runtime': 'preact/jsx-runtime',
             'preact/hooks': 'preact/hooks',
             tailwindcss: 'tailwindcss',
           },
