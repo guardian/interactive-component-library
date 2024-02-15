@@ -1,3 +1,3 @@
 export * from './table'
-export * from './slopechart'
+export * from './slope-chart'
 export * from './tooltip'
