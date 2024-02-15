@@ -6,7 +6,7 @@ import preact from '@preact/preset-vite'
 
 const app = async () => {
   /**
-   * Removes everything before the last
+   * Removes everything before the last path segment
    * @octocat/library-repo -> library-repo
    * vite-component-library-template -> vite-component-library-template
    */
@@ -33,18 +33,17 @@ const app = async () => {
     },
     build: {
       sourcemap: true,
+      minify: false,
       lib: {
         entry: path.resolve(__dirname, 'src/lib/index.js'),
         name: formattedName,
-        formats: ['es', 'umd'],
-        fileName: (format) => `${formattedName}.${format}.js`,
       },
       rollupOptions: {
         external: ['preact', 'preact/hooks', 'tailwindcss'],
         output: {
           globals: {
             preact: 'preact',
-            'preact/hooks': 'preactHooks',
+            'preact/hooks': 'preact/hooks',
             tailwindcss: 'tailwindcss',
           },
         },

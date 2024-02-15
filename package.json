@@ -7,14 +7,16 @@
     "type": "git",
     "url": "https://github.com/guardian/interactive-component-library"
   },
-  "main": "./dist/interactive-component-library.umd.js",
-  "module": "./dist/interactive-component-library.es.js",
-  "types": "./dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/interactive-component-library.umd.cjs",
+  "module": "./dist/interactive-component-library.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/interactive-component-library.es.js",
-      "require": "./dist/interactive-component-library.umd.js"
+      "import": "./dist/interactive-component-library.js",
+      "require": "./dist/interactive-component-library.umd.cjs"
     },
     "./dist/style.css": "./dist/style.css"
   },
@@ -85,9 +87,6 @@
   "peerDependencies": {
     "preact": "^10.12.1"
   },
-  "files": [
-    "dist"
-  ],
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,css,md}": [
       "prettier -w"
