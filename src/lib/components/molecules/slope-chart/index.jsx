@@ -1,79 +1,81 @@
 import React, { useMemo, useRef, useState, useLayoutEffect } from 'react'
 import { positionLabels, scaleLinear } from './slope-chart-util'
+import { useWindowSize } from './react-util'
 
 export const SlopeChart = ({
   id,
   slopeChartItems,
   padding = { left: 20, right: 24, top: 20, bottom: 16 },
   domain,
-  prevValKey,
-  nextValKey,
-  abbrKey,
+  previousValueKey,
+  nextValueKey,
+  abbreviationKey,
   nextLabel,
-  prevLabel,
+  previousLabel,
 }) => {
   const wrapperRef = useRef(null)
   const [width, setWidth] = useState(0)
+  const windowSize = useWindowSize()
   const contentSize = Math.floor(width - padding.left - padding.right)
   const height = contentSize + padding.top + padding.bottom
   const yScale = scaleLinear(domain, [contentSize, 0])
   const show = width > 0
 
   useLayoutEffect(() => {
-    if (width === 0) {
-      setWidth(wrapperRef.current.getBoundingClientRect().width)
+    const newWidth = wrapperRef.current.getBoundingClientRect().width
+
+    if (newWidth !== width) {
+      setWidth(newWidth)
     }
+  }, [windowSize])
 
-    const handleResize = () => {
-      const newWidth = wrapperRef.current.getBoundingClientRect().width
-      if (newWidth !== width) {
-        setWidth(newWidth)
-      }
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [width])
-
-  const labeLeftPositions = useMemo(
-    () => positionLabels(slopeChartItems, prevValKey, yScale, abbrKey, padding.left - 8, padding.top),
+  const labelLeftPositions = useMemo(
+    () => positionLabels(slopeChartItems, previousValueKey, yScale, abbreviationKey, padding.left - 8, padding.top),
     [width, slopeChartItems],
   )
   const labelRightPositions = useMemo(
-    () => positionLabels(slopeChartItems, nextValKey, yScale, abbrKey, padding.left + contentSize + 8, padding.top),
+    () =>
+      positionLabels(
+        slopeChartItems,
+        nextValueKey,
+        yScale,
+        abbreviationKey,
+        padding.left + contentSize + 8,
+        padding.top,
+      ),
     [width, slopeChartItems],
   )
 
   return (
-    <div class="gv-slope-chart" ref={wrapperRef}>
+    <div ref={wrapperRef}>
       {show && (
         <svg id={id} width={width} height={height}>
           {slopeChartItems.map((item) => {
             return (
-              <g key={item[abbrKey]}>
+              <g key={item[abbreviationKey]}>
                 <line
                   x1={padding.left}
-                  y1={yScale(item[prevValKey]) + padding.top}
+                  y1={yScale(item[previousValueKey]) + padding.top}
                   x2={padding.left + contentSize}
-                  y2={yScale(item[nextValKey]) + padding.top}
-                  class={`gv-slope-chart-line stroke-color--${item[abbrKey]}`}
+                  y2={yScale(item[nextValueKey]) + padding.top}
+                  class={`gv-slope-chart-line stroke-color--${item[abbreviationKey]}`}
                 />
                 <circle
                   cx={padding.left}
-                  cy={yScale(item[prevValKey]) + padding.top}
+                  cy={yScale(item[previousValueKey]) + padding.top}
                   r={4}
-                  class={`gv-slope-chart-circle fill-color--${item[abbrKey]}`}
+                  class={`gv-slope-chart-circle fill-color--${item[abbreviationKey]}`}
                 />
                 <circle
                   cx={padding.left + contentSize}
-                  cy={yScale(item[nextValKey]) + padding.top}
+                  cy={yScale(item[nextValueKey]) + padding.top}
                   r={4}
-                  class={`gv-slope-chart-circle fill-color--${item[abbrKey]}`}
+                  class={`gv-slope-chart-circle fill-color--${item[abbreviationKey]}`}
                 />
               </g>
             )
           })}
-          {labeLeftPositions.map((item) => {
+          {labelLeftPositions.map((item) => {
             return (
               <g key={item.key + '-left'}>
                 <text x={item.x} y={item.y} textAnchor="end" class="gv-slope-chart-text">
@@ -94,7 +96,7 @@ export const SlopeChart = ({
           {
             <g>
               <text x={padding.left} y={height}>
-                {prevLabel}
+                {previousLabel}
               </text>
               <text x={width - padding.right} y={height} textAnchor="end">
                 {nextLabel}

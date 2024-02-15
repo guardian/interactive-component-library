@@ -65,10 +65,10 @@ const args = {
   slopeChartItems: data,
   padding: { left: 24, right: 60, top: 20, bottom: 20 },
   domain: [0, totalSeats],
-  prevValKey: 'prevSeats',
-  nextValKey: 'overallSeats',
-  abbrKey: 'party',
-  prevLabel: '2019',
+  previousValueKey: 'prevSeats',
+  nextValueKey: 'overallSeats',
+  abbreviationKey: 'party',
+  previousLabel: '2019',
   nextLabel: '2024',
 }
 

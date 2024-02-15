@@ -43,6 +43,7 @@ function positionLabels(items, key, yScale, abbrKey, x, paddingTop) {
   return preventOverlap(initialPositions)
 }
 
+//same as this one https://gist.github.com/vectorsize/7031902
 function scaleLinear(domain, range) {
   const [domainMin, domainMax] = domain
   const [rangeMin, rangeMax] = range
