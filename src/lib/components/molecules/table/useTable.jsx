@@ -71,6 +71,7 @@ class ColumnModel {
     this.index = index
     this.definition = definition
     this.isSorted = isSorted
+    this.defaultValue = definition.defaultValue
   }
 
   get id() {
@@ -171,6 +172,15 @@ class CellModel {
   get displayValue() {
     if (this.cell) {
       return this.cell(this.row)
+    }
+
+    if (!Object.prototype.hasOwnProperty.call(this.row, this.column.accessor)) {
+      if (this.column.defaultValue) {
+        return this.column.defaultValue.toString()
+      }
+
+      const rowData = JSON.stringify(this.row, null, 2)
+      throw new Error(`Missing value for key ${this.column.accessor} in ${rowData}`)
     }
 
     return this.row[this.column.accessor].toString()
