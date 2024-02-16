@@ -1,3 +1,5 @@
+import remarkGfm from 'remark-gfm'
+
 const config = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
@@ -6,7 +8,16 @@ const config = {
     '@storybook/addon-backgrounds',
     '@storybook/addon-measure',
     '@storybook/addon-viewport',
-    '@storybook/addon-docs',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
     {
       name: '@storybook/addon-storysource',
       options: {
@@ -15,7 +26,6 @@ const config = {
         },
       },
     },
-    '@storybook/addon-mdx-gfm',
   ],
   framework: {
     name: '@storybook/preact-vite',
