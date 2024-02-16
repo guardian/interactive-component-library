@@ -1,10 +1,9 @@
 import { defineConfig } from 'vitest/config'
 import tailwindcss from 'tailwindcss'
-import { UserConfigExport } from 'vite'
-import preact from '@preact/preset-vite'
 import path from 'node:path'
+import preact from '@preact/preset-vite'
 
-const app = async (): Promise<UserConfigExport> => {
+const app = async () => {
   return defineConfig({
     resolve: {
       alias: {

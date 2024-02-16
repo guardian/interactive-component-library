@@ -1,12 +1,12 @@
-import type { StorybookConfig } from '@storybook/preact-vite'
-const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
+const config = {
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-controls',
     '@storybook/addon-links',
     '@storybook/addon-backgrounds',
     '@storybook/addon-measure',
     '@storybook/addon-viewport',
+    '@storybook/addon-docs',
     {
       name: '@storybook/addon-storysource',
       options: {
@@ -15,17 +15,19 @@ const config: StorybookConfig = {
         },
       },
     },
+    '@storybook/addon-mdx-gfm',
   ],
   framework: {
     name: '@storybook/preact-vite',
     options: {
       builder: {
-        viteConfigPath: '.storybook/vite.config.ts',
+        viteConfigPath: '.storybook/vite.config.js',
       },
     },
   },
   docs: {
     autodocs: 'tag',
+    defaultName: 'Documentation',
   },
 }
 export default config
