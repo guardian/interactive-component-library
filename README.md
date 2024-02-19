@@ -29,7 +29,7 @@ npm i @guardian/interactive-component-library
 3. Install dependencies with `pnpm i`
 4. Run `pnpm dev` to start the local Storybook server
 
-### Atom design
+### Atomic design
 
 The component library is structured according to [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) principles, using the bottom three levels.
 
