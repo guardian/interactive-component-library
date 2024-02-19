@@ -70,6 +70,12 @@ To revert back to the version specified in your project‘s `package.json`:
 npm uninstall --no-save @guardian/interactive-component-library && npm install
 ```
 
+### Publishing a new version
+
+To publish a new version of the component library, [create a new release](https://github.com/guardian/interactive-component-library/releases/new) on GitHub. Don't forget to write some release notes.
+
+Publishing the release [triggers a workflow](https://github.com/guardian/interactive-component-library/actions) to package the library and publish it to Github Packages. The workflow can also be triggered manually.
+
 ## Scripts
 
 Always prepending `pnpm`:
