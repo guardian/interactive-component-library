@@ -36,8 +36,10 @@
     "generate:styles": "node scripts/generateStyles.js"
   },
   "dependencies": {
+    "d3-geo": "^3.1.0",
     "preact": "^10.12.1",
-    "proj4d3": "^1.0.1"
+    "proj4d3": "^1.0.1",
+    "topojson-client": "^3.1.0"
   },
   "devDependencies": {
     "@babel/core": "7.22.10",

@@ -1,35 +1,28 @@
-import proj4d3 from 'proj4d3'
-import { geoPath } from 'd3-geo'
+import { MapLocator } from '.'
+import ukmap from './ukmap.json'
+import { feature } from 'topojson-client'
 
-export const MapLocator = ({ proj4String, featureCollection, markerCoordinates, width, height, markerColor }) => {
-  const proj = proj4d3(proj4String).fitSize([width, height], featureCollection)
-  const path = geoPath().projection(proj)
+const meta = {
+  title: 'Particles/MapLocator',
+  component: MapLocator,
+}
 
-  return (
-    <svg
-      viewBox={`0 0 ${width} ${height}`}
-      preserveAspectRatio={"xMinYMin"}>
-      <g>
-        {
-          featureCollection.features.map((f, i) => {
-            return (
-              <path
-                key={i}
-                d={path(f)}
-                id={f.id}
-              />
-            )
-          })
-        }
-      </g>
-      <g>
-        <circle
-          cx={proj(markerCoordinates)[0]}
-          cy={proj(markerCoordinates)[1]}
-          r={5}
-          fill={markerColor}
-        />
-      </g>
-    </svg>
-  )
+const featureCollection = {
+  type: 'FeatureCollection',
+  features: feature(ukmap, ukmap.objects.ukmap).features
+}
+
+export default meta
+
+export const Default = {
+  args: {
+    proj4String: '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +units=m +no_defs',
+    featureCollection,
+    markerCoordinates: [0.1276, 51.5072],
+    width: 200,
+    height: 300,
+    markerColor: '#c70000',
+    backgroundColor: '#707070'
+  },
+  render: (args) => <MapLocator {...args} />
 }
