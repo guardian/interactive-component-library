@@ -32,7 +32,6 @@
     "prettier": "prettier --write \"src/**/*.{ts,tsx,js,mdx}\"",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
-    "prepare": "husky install",
     "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\""
   },
   "dependencies": {
@@ -73,7 +72,6 @@
     "eslint-plugin-n": "16.0.1",
     "eslint-plugin-promise": "6.1.1",
     "eslint-plugin-storybook": "0.8.0",
-    "husky": "8.0.3",
     "jsdom": "22.1.0",
     "json": "11.0.0",
     "lint-staged": "13.2.3",
