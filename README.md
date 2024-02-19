@@ -60,9 +60,11 @@ Here's how to set that up:
 ```
 cd ~/projects/interactive-component-library       # go into the package directory
 npm link                                          # creates global link
-cd ~/projects/node-bloggy                         # go into your project directory
+cd ~/projects/interactive-project                 # go into your project directory
 npm link @guardian/interactive-component-library  # link-install the package
 ```
+
+After you've done that, run `pnpm build:lib:watch` to package the library and rebuild on file changes.
 
 To revert back to the version specified in your project‘s `package.json`:
 
