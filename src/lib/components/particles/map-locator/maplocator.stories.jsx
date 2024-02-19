@@ -26,6 +26,8 @@ export const Default = {
   args: {
     projection: proj,
     path,
+    width,
+    height,
     features: featureCollection.features,
     markerCoordinates: [0.1276, 51.5072],
     markerColor: '#c70000',
