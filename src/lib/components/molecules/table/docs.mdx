@@ -1,0 +1,74 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks'
+import * as TableStories from './table.stories'
+
+<Meta of={TableStories} name="Documentation" />
+
+# Table
+
+> Render data in tabular format
+
+<Canvas of={TableStories.Default} />
+
+# Basic example
+
+The table component takes two props:
+
+- `data` an array of objects, where every object represents one table row
+- `columns` an array of column definitions
+
+To create the table you see above, we first define an array of names:
+
+```
+const names = [
+  {
+    firstName: 'Margaret',
+    lastName: 'Jones',
+  },
+  {
+    firstName: 'Jake',
+    lastName: 'Smith',
+  },
+]
+```
+
+And then we define what the columns should be:
+
+```
+const columns = [
+  {
+    header: 'First name',
+    accessor: 'firstName',
+  },
+  {
+    header: 'Last name',
+    accessor: 'lastName',
+  },
+],
+```
+
+To render the table, we pass these two variables to the Table components:
+
+```
+<Table data={names} columns={columns} />
+```
+
+# Sorting
+
+To make a column sortable, we define `sortable: true` in the column definition:
+
+```
+const columns = [
+  {
+    header: 'First name',
+    accessor: 'firstName',
+    sortable: true,
+  },
+  {
+    header: 'Last name',
+    accessor: 'lastName',
+    sortable: true,
+  },
+],
+```
+
+<Canvas of={TableStories.Sortable} />

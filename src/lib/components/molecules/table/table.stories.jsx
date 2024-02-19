@@ -9,6 +9,58 @@ const meta = {
 
 export default meta
 
+export const Default = {
+  args: {
+    columns: [
+      {
+        header: 'First name',
+        accessor: 'firstName',
+      },
+      {
+        header: 'Last name',
+        accessor: 'lastName',
+      },
+    ],
+    data: [
+      {
+        firstName: 'Margaret',
+        lastName: 'Jones',
+      },
+      {
+        firstName: 'Jake',
+        lastName: 'Smith',
+      },
+    ],
+  },
+}
+
+export const Sortable = {
+  args: {
+    columns: [
+      {
+        header: 'First name',
+        accessor: 'firstName',
+        sortable: true,
+      },
+      {
+        header: 'Last name',
+        accessor: 'lastName',
+        sortable: true,
+      },
+    ],
+    data: [
+      {
+        firstName: 'Margaret',
+        lastName: 'Jones',
+      },
+      {
+        firstName: 'Jake',
+        lastName: 'Smith',
+      },
+    ],
+  },
+}
+
 const columns = [
   {
     header: 'Party',
@@ -78,16 +130,16 @@ const data = [
   },
 ]
 
-export const Default = {
+export const PartyResults = {
   args: {
     columns,
     data,
   },
 }
 
-export const Sortable = {
-  args: {
-    columns: columns.map((d) => ({ ...d, sortable: true })),
-    data,
-  },
-}
+// export const Sortable = {
+//   args: {
+//     columns: columns.map((d) => ({ ...d, sortable: true })),
+//     data,
+//   },
+// }
