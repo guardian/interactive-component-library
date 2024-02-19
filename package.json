@@ -36,7 +36,8 @@
     "generate:styles": "node scripts/generateStyles.js"
   },
   "dependencies": {
-    "preact": "^10.12.1"
+    "preact": "^10.12.1",
+    "proj4d3": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "7.22.10",
