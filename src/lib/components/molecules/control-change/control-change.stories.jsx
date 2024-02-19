@@ -1,6 +1,7 @@
 import { ControlChange } from '.'
+
 export default {
-  title: 'Molecules/control-change',
+  title: 'Molecules/ControlChange',
   component: ControlChange,
 }
 

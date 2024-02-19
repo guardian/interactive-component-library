@@ -1,4 +1,4 @@
-import { GradientIcon } from '$particles/gradientIcon'
+import { GradientIcon } from '$particles'
 
 export const ControlChange = ({ previous, next, text }) => (
   <div class="gv-control-change">
