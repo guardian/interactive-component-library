@@ -1,8 +1,19 @@
-export const LegendItem = ({ circleClass, text }) => {
+import defaultStyles from './legenditem.module.css'
+
+export const LegendItem = ({ text, styles }) => {
+  const merged = Object.keys(defaultStyles).reduce((result, key) => {
+    let className = defaultStyles[key]
+    if (styles && key in styles) {
+      className = className.concat(' ', styles[key])
+    }
+    result[key] = className
+    return result
+  }, {})
+
   return (
-    <div className="flex items-center">
-      <span className={`w-[11px] h-[11px] rounded-full mr-1 shrink-0 ${circleClass}`} />
-      <p className="text-neutral-7 shrink">{text}</p>
+    <div className={merged.container}>
+      <span className={merged.circle} />
+      <p className={merged.text}>{text}</p>
     </div>
   )
 }
