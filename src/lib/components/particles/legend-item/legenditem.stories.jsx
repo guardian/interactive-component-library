@@ -1,4 +1,5 @@
 import { LegendItem } from '.'
+import overrides from './overrides.module.css'
 
 export default {
   title: 'Particles/Legend item',
@@ -7,7 +8,7 @@ export default {
 
 export const Default = {
   args: {
-    circleClass: 'bg-neutral-60',
     text: 'Legend item',
+    styles: overrides,
   },
 }
