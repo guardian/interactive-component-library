@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks'
 import { useTable } from './useTable'
-import { Chevron } from '$particles/chevron'
+import { Chevron } from '$particles'
 
 export function Table({ columns, data }) {
   const [sortState, setSortState] = useState(() => {
