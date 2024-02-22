@@ -1,7 +1,16 @@
-import defaultStyles from './legenditem.module.css'
-import { mergeStyles } from '$shared/styles/mergeStyles'
+import defaultStyles from './style.module.css'
+import { mergeStyles } from '$styles/helpers/mergeStyles'
 
-export const LegendItem = ({ text, styles }) => {
+const DOT_TYPE = {
+  ROUND: 'ROUND',
+  SQUARE: 'SQUARE',
+}
+
+export const LegendItem = ({ dotType = DOT_TYPE.ROUND, text, styles }) => {
+  if (dotType === DOT_TYPE.ROUND) {
+    defaultStyles.dot = mergeStyles(defaultStyles.dot, defaultStyles.circle)
+  }
+
   styles = mergeStyles(defaultStyles, styles)
   return (
     <div className={styles.container}>
