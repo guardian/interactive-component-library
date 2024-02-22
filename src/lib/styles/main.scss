@@ -15,3 +15,7 @@ body {
     @include dark-mode-party-colors-uk;
   }
 }
+
+:root {
+  --font-sans: "GuardianTextSans", "Guardian Text Sans Web", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", "sans-serif";
+}

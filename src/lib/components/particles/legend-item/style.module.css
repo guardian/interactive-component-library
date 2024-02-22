@@ -15,4 +15,5 @@
 
 .text {
   flex-shrink: 1;
+  font-family: var(--font-sans);
 }
