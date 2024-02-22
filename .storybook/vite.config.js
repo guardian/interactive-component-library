@@ -10,6 +10,7 @@ const app = async () => {
         $particles: path.resolve(__dirname, '../src/lib/components/particles'),
         $molecules: path.resolve(__dirname, '../src/lib/components/molecules'),
         $headless: path.resolve(__dirname, '../src/lib/components/headless'),
+        $shared: path.resolve(__dirname, '../src/lib/shared'),
       },
     },
     plugins: [preact()],

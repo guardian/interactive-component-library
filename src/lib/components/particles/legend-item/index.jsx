@@ -1,19 +1,12 @@
 import defaultStyles from './legenditem.module.css'
+import { mergeStyles } from '$shared/styles/mergeStyles'
 
 export const LegendItem = ({ text, styles }) => {
-  const merged = Object.keys(defaultStyles).reduce((result, key) => {
-    let className = defaultStyles[key]
-    if (styles && key in styles) {
-      className = className.concat(' ', styles[key])
-    }
-    result[key] = className
-    return result
-  }, {})
-
+  styles = mergeStyles(defaultStyles, styles)
   return (
-    <div className={merged.container}>
-      <span className={merged.circle} />
-      <p className={merged.text}>{text}</p>
+    <div className={styles.container}>
+      <span className={styles.dot} />
+      <p className={styles.text}>{text}</p>
     </div>
   )
 }
