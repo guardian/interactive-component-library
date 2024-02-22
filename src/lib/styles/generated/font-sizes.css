@@ -1,0 +1,35 @@
+:root {
+--headline-xxxsmall: 17px;
+--headline-xxsmall: 20px;
+--headline-xsmall: 24px;
+--headline-small: 28px;
+--headline-medium: 34px;
+--headline-large: 42px;
+--headline-xlarge: 50px;
+
+--sans-xxsmall: 12px;
+--sans-xsmall: 14px;
+--sans-small: 15px;
+--sans-medium: 17px;
+--sans-large: 20px;
+--sans-xlarge: 24px;
+--sans-xxlarge: 28px;
+--sans-xxxlarge: 34px;
+
+--titlepiece-small: 42px;
+--titlepiece-medium: 50px;
+--titlepiece-large: 70px;
+
+--body-xsmall: 14px;
+--body-small: 15px;
+--body-medium: 17px;
+
+--line-height-tight: 1.15px;
+--line-height-regular: 1.3px;
+--line-height-loose: 1.4px;
+
+--headline-line-height: 1.15px;
+--sans-line-height: 1.3px;
+--titlepiece-line-height: 1.15px;
+--body-line-height: 1.4px;
+}

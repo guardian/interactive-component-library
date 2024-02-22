@@ -1,6 +1,8 @@
 @import "./foundation/fonts.scss";
 @import "./foundation/colors.scss";
 @import "./foundation/partyColors.scss";
+@import "./generated/spacing.css";
+@import "./generated/font-families.css";
 
 body {
   @include default-colors;
