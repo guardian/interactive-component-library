@@ -6,7 +6,7 @@
 .dot {
   width: 11px;
   height: 11px;
-  margin-right: 4px;
+  margin-right: var(--space-1);
 }
 
 .circle {
@@ -15,5 +15,7 @@
 
 .text {
   flex-shrink: 1;
-  font-family: var(--font-sans);
+  font-family: var(--text-sans);
+  font-size: var(--text-sans-xsmall);
+  line-height: var(--line-height-regular);
 }

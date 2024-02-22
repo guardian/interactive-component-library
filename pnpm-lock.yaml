@@ -18,6 +18,9 @@ devDependencies:
   '@babel/plugin-syntax-jsx':
     specifier: ^7.23.3
     version: 7.23.3(@babel/core@7.22.10)
+  '@guardian/source-foundations':
+    specifier: ^14.1.4
+    version: 14.1.4(tslib@2.6.2)(typescript@5.1.6)
   '@preact/preset-vite':
     specifier: ^2.8.0
     version: 2.8.0(@babel/core@7.22.10)(preact@10.12.1)(vite@4.5.2)
@@ -1856,6 +1859,20 @@ packages:
 
   /@floating-ui/utils@0.1.1:
     resolution: {integrity: sha512-m0G6wlnhm/AX0H12IOWtK8gASEMffnX08RtKkCgTdHb9JpHKGloI7icFfLg9ZmQeavcvR0PKmzxClyuFPSjKWw==}
+    dev: true
+
+  /@guardian/source-foundations@14.1.4(tslib@2.6.2)(typescript@5.1.6):
+    resolution: {integrity: sha512-SHkFVBxsE2dSNTKfzmGY1hD9BA7qJ2+bGY1plrUJlYJBCRQdno/YuNummO+wm0Q+kMgxRT0iz5md2DjKYERzQw==}
+    peerDependencies:
+      tslib: ^2.6.2
+      typescript: ~5.3.3
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      mini-svg-data-uri: 1.4.4
+      tslib: 2.6.2
+      typescript: 5.1.6
     dev: true
 
   /@humanwhocodes/config-array@0.11.14:
@@ -8417,6 +8434,11 @@ packages:
   /mimic-fn@4.0.0:
     resolution: {integrity: sha512-vqiC06CuhBTUdZH+RYl8sFrL096vA45Ok5ISO6sE/Mr1jRbGH4Csnhi8f3wKVl7x8mO4Au7Ir9D3Oyv1VYMFJw==}
     engines: {node: '>=12'}
+    dev: true
+
+  /mini-svg-data-uri@1.4.4:
+    resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
+    hasBin: true
     dev: true
 
   /minimatch@3.1.2:
