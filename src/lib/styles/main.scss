@@ -1,0 +1,17 @@
+@import "./foundation/fonts.scss";
+@import "./foundation/colors.scss";
+@import "./foundation/partyColors.scss";
+
+body {
+  @include default-colors;
+  @include default-party-colors-uk;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  body.ios,
+  body.android {
+    @include dark-mode-colors;
+    @include dark-mode-party-colors-uk;
+  }
+}

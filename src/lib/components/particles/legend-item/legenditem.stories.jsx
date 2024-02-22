@@ -1,5 +1,4 @@
 import { LegendItem } from '.'
-import styles from './style-override.module.css'
 
 export default {
   title: 'Particles/Legend item',
@@ -9,12 +8,18 @@ export default {
 export const Default = {
   args: {
     text: 'Legend item',
+    styles: {
+      dot: 'bg-color--con',
+    },
   },
 }
 
-export const CustomStyle = {
+export const SquareStyle = {
   args: {
+    dotType: 'SQUARE',
     text: 'Legend item',
-    styles,
+    styles: {
+      dot: 'bg-color--lab',
+    },
   },
 }
