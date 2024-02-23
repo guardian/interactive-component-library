@@ -23,8 +23,9 @@ const args = {
   rows: 5,
   total: 650, 
   abbreviationAccessor:'party',
-  paddingTop: 30,
-  onMouseOver: (a, b) => console.log(a, b)
+  paddingTop: 16,
+  onMouseOver: (a, b) => console.log(a, b),
+  showHalfLine: true
 }
 
 export const Default = {
