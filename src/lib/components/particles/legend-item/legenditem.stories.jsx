@@ -16,7 +16,7 @@ export const Default = {
 
 export const SquareStyle = {
   args: {
-    dotType: 'SQUARE',
+    dotType: 'square',
     text: 'Legend item',
     styles: {
       dot: 'bg-color--lab',

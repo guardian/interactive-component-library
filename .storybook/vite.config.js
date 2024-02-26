@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitest/config'
 import path from 'node:path'
 import preact from '@preact/preset-vite'
+import postcssGlobalData from '@csstools/postcss-global-data'
 
 const app = async () => {
   return defineConfig({
@@ -8,12 +9,17 @@ const app = async () => {
       alias: {
         $particles: path.resolve(__dirname, '../src/lib/components/particles'),
         $molecules: path.resolve(__dirname, '../src/lib/components/molecules'),
-        $headless: path.resolve(__dirname, '../src/lib/components/headless'),
+        $shared: path.resolve(__dirname, '../src/lib/shared'),
         $styles: path.resolve(__dirname, '../src/lib/styles'),
       },
     },
     plugins: [preact()],
     css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@import "./src/lib/styles/generated/mq.scss";',
+        },
+      },
       postcss: {
         plugins: [],
       },

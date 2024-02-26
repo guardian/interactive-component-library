@@ -1,7 +1,9 @@
 import { useRef, useLayoutEffect } from 'preact/hooks'
-import { isDarkColor } from '$headless/colors/index'
+import { isDarkColor } from '$shared/colors'
+import defaultStyles from './style.module.css'
+import { mergeStyles } from '$styles/helpers/mergeStyles'
 
-export function StackedBar({ stack, width, height, createSVG = true }) {
+export function StackedBar({ stack, width, height, createSVG = true, styles }) {
   const rectElements = useRef([])
   const textElements = useRef([])
 
@@ -16,22 +18,26 @@ export function StackedBar({ stack, width, height, createSVG = true }) {
     }
   }, [stack, width, height])
 
+  styles = mergeStyles({ ...defaultStyles }, styles)
+
   let totalWidth = 0
   const content = stack.map((d, index) => {
     const itemWidth = Math.round(d.fraction * width)
-    const textColor = isDarkColor(d.fill) ? 'fill-white' : 'fill-neutral-7'
+    const textColor = isDarkColor(d.fill) ? '#FFF' : '#121212'
     const value = (
       <g key={index} transform={`translate(${totalWidth}, 0)`}>
         <rect
           ref={(element) => (rectElements.current[index] = element)}
           width={itemWidth}
           height={height}
-          fill={d.fill}
+          className={styles.bar}
+          style={{ fill: d.fill }}
           shape-rendering="crispEdges"
         />
         <text
           ref={(element) => (textElements.current[index] = element)}
-          class={`font-sans text-xs ${textColor}`}
+          className={styles.label}
+          fill={textColor}
           x={itemWidth}
           y={height / 2}
           dx={-4}

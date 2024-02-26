@@ -18,6 +18,9 @@ devDependencies:
   '@babel/plugin-syntax-jsx':
     specifier: ^7.23.3
     version: 7.23.3(@babel/core@7.22.10)
+  '@csstools/postcss-global-data':
+    specifier: ^2.1.1
+    version: 2.1.1(postcss@8.4.33)
   '@guardian/source-foundations':
     specifier: ^14.1.4
     version: 14.1.4(tslib@2.6.2)(typescript@5.1.6)
@@ -1583,6 +1586,15 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@csstools/postcss-global-data@2.1.1(postcss@8.4.33):
+    resolution: {integrity: sha512-tihdBLogY2G5jgUSu2jKSEVeOcnWqsz6k7UmPM7+ezhuV9FP5MIyX35Hc/YvqipQLRNsfBj9wRkBvsE7k1GM8A==}
+    engines: {node: ^14 || ^16 || >=18}
+    peerDependencies:
+      postcss: ^8.4
+    dependencies:
+      postcss: 8.4.33
+    dev: true
 
   /@discoveryjs/json-ext@0.5.7:
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}

@@ -1,6 +1,5 @@
 import path from 'node:path'
 import { defineConfig } from 'vitest/config'
-import tailwindcss from 'tailwindcss'
 import { name } from './package.json'
 import preact from '@preact/preset-vite'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
@@ -18,12 +17,17 @@ const app = async () => {
       alias: {
         $particles: path.resolve(__dirname, 'src/lib/components/particles'),
         $molecules: path.resolve(__dirname, 'src/lib/components/molecules'),
-        $headless: path.resolve(__dirname, 'src/lib/components/headless'),
+        $shared: path.resolve(__dirname, 'src/lib/shared'),
         $styles: path.resolve(__dirname, 'src/lib/styles'),
       },
     },
     plugins: [peerDepsExternal(), preact()],
     css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@import "./src/lib/styles/generated/mq.scss";',
+        },
+      },
       postcss: {
         plugins: [],
       },
@@ -46,7 +50,6 @@ const app = async () => {
             'preact/jsx-runtime': 'preact/jsx-runtime',
             'preact/hooks': 'preact/hooks',
             'preact/compat': 'preact/compat',
-            tailwindcss: 'tailwindcss',
           },
         },
       },

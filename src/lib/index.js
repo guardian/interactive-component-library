@@ -1,2 +1,2 @@
-import './styles/main.css'
+import './styles/main.scss'
 export * from './components'

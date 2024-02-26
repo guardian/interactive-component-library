@@ -52,20 +52,6 @@ export function useTable({ columns, data, sortState }) {
   }
 }
 
-class DefaultCellStyle {
-  textAlign = 'text-left'
-  padding = 'py-2'
-  fontFamily = 'font-sans'
-  fontSize = 'text-sm'
-  textColor = 'text-neutral-7'
-}
-
-class DefaultHeaderCellStyle extends DefaultCellStyle {
-  fontWeight = 'font-bold'
-  justify = 'justify-start'
-  whitespace = 'whitespace-nowrap'
-}
-
 class ColumnModel {
   constructor(index, definition, isSorted) {
     this.index = index
@@ -95,54 +81,8 @@ class ColumnModel {
     }
   }
 
-  get headerCellStyle() {
-    const definition = this.definition
-    const defaultStyle = new DefaultHeaderCellStyle()
-    const userStyle = definition.headerCellStyle || definition.cellStyle
-
-    if (userStyle?.textAlign && !userStyle?.button) {
-      userStyle.justify = userStyle.textAlign === 'text-left' ? 'justify-start' : 'justify-end'
-    }
-
-    if (typeof userStyle === 'object') {
-      return Object.assign(defaultStyle, userStyle)
-    } else if (typeof userStyle === 'string') {
-      return userStyle
-    }
-
-    return defaultStyle
-  }
-
-  get headerCellClass() {
-    if (typeof this.headerCellStyle === 'string') return this.headerCellStyle
-    const styles = Object.values(this.headerCellStyle)
-    return styles.join(' ')
-  }
-
   get cell() {
     return this.definition.cell
-  }
-
-  get cellStyle() {
-    const definition = this.definition
-    const defaultStyle = new DefaultCellStyle()
-
-    if (typeof definition.cellStyle === 'object') {
-      return Object.assign(defaultStyle, definition.cellStyle)
-    } else if (typeof definition.cellStyle === 'string') {
-      return definition.cellStyle
-    }
-
-    return defaultStyle
-  }
-
-  get cellClass() {
-    if (typeof this.cellStyle === 'string') return this.cellStyle
-    const styles = Object.values(this.cellStyle)
-    if (this.sortable) {
-      styles.push('pr-4')
-    }
-    return styles.join(' ')
   }
 }
 
