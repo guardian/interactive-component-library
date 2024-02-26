@@ -141,6 +141,9 @@ devDependencies:
   sass:
     specifier: ^1.71.1
     version: 1.71.1
+  sass-mq:
+    specifier: ^6.0.0
+    version: 6.0.0
   storybook:
     specifier: 7.6.16
     version: 7.6.16
@@ -9794,6 +9797,10 @@ packages:
       neo-async: 2.6.2
       sass: 1.71.1
       webpack: 5.90.0(esbuild@0.18.20)
+    dev: true
+
+  /sass-mq@6.0.0:
+    resolution: {integrity: sha512-h4VicIy8lszFlqqggqLIFGt/9wS5fHLPoTXHRjC8Vw6UsA4s4JtDvEeypXbbECfgY336mXyc/cdpbRacH0UzGA==}
     dev: true
 
   /sass@1.71.1:

@@ -1,8 +1,12 @@
 @import "./foundation/fonts.scss";
+@import "./generated/font-families.css";
+@import "./generated/font-sizes.css";
+
 @import "./foundation/colors.scss";
 @import "./foundation/partyColors.scss";
 @import "./generated/spacing.css";
-@import "./generated/font-families.css";
+
+@import "./generated/mq.scss";
 
 body {
   @include default-colors;
@@ -16,8 +20,4 @@ body {
     @include dark-mode-colors;
     @include dark-mode-party-colors-uk;
   }
-}
-
-:root {
-  --font-sans: "GuardianTextSans", "Guardian Text Sans Web", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", "sans-serif";
 }

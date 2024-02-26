@@ -1,6 +1,6 @@
 import * as source from '@guardian/source-foundations'
 
-console.log('src', source)
+console.log('src', source.until)
 
 //  breakpoints: {
 //       mobile: 320,
@@ -14,14 +14,7 @@ console.log('src', source)
 //     },
 
 export default {
-  screens: {
-    mobile: '320px',
-    'mobile-xl': '480px',
-    tablet: '740px',
-    desktop: '980px',
-    leftCol: '1140px',
-    wide: '1300px',
-  },
+  breakpoints: source.breakpoints,
   space: source.space,
   fontFamily: {
     sans: [
