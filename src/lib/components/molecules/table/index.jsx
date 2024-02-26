@@ -50,6 +50,8 @@ export function Table({ columns, data }) {
           </tr>
         ))}
       </tbody>
+      <div>Footnote</div>
+
     </table>
   )
 }
