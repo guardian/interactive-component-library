@@ -1,0 +1,16 @@
+.group {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+.path {
+  fill: #dcdcdc;
+}
+
+.active {
+  fill: #333;
+}

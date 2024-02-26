@@ -1,6 +1,8 @@
 import { useMemo, useRef, useState, useLayoutEffect } from 'preact/hooks'
 import { positionLabels, scaleLinear } from './slope-chart-util'
 import { useWindowSize } from './react-util'
+import defaultStyles from './style.module.css'
+import { mergeStyles } from '$styles/helpers/mergeStyles'
 
 export const SlopeChart = ({
   id,
@@ -12,6 +14,7 @@ export const SlopeChart = ({
   abbreviationKey,
   nextLabel,
   previousLabel,
+  styles,
 }) => {
   const wrapperRef = useRef(null)
   const [width, setWidth] = useState(0)
@@ -23,15 +26,12 @@ export const SlopeChart = ({
 
   useLayoutEffect(() => {
     const newWidth = wrapperRef.current.getBoundingClientRect().width
-
-    if (newWidth !== width) {
-      setWidth(newWidth)
-    }
+    setWidth(newWidth)
   }, [windowSize])
 
   const labelLeftPositions = useMemo(
     () => positionLabels(slopeChartItems, previousValueKey, yScale, abbreviationKey, padding.left - 8, padding.top),
-    [width, slopeChartItems],
+    [slopeChartItems, previousValueKey, padding, abbreviationKey, yScale],
   )
   const labelRightPositions = useMemo(
     () =>
@@ -43,14 +43,17 @@ export const SlopeChart = ({
         padding.left + contentSize + 8,
         padding.top,
       ),
-    [width, slopeChartItems],
+    [slopeChartItems, abbreviationKey, padding, yScale, nextValueKey, contentSize],
   )
+
+  styles = mergeStyles(defaultStyles, styles)
 
   return (
     <div ref={wrapperRef}>
       {show && (
         <svg id={id} width={width} height={height}>
           {slopeChartItems.map((item) => {
+            const itemStyles = mergeStyles({ ...styles }, item.styles)
             return (
               <g key={item[abbreviationKey]}>
                 <line
@@ -58,26 +61,26 @@ export const SlopeChart = ({
                   y1={yScale(item[previousValueKey]) + padding.top}
                   x2={padding.left + contentSize}
                   y2={yScale(item[nextValueKey]) + padding.top}
-                  class={`gv-slope-chart-line stroke-color--${item[abbreviationKey]}`}
+                  className={itemStyles.line}
                 />
                 <circle
                   cx={padding.left}
                   cy={yScale(item[previousValueKey]) + padding.top}
                   r={4}
-                  class={`gv-slope-chart-circle fill-color--${item[abbreviationKey]}`}
+                  className={itemStyles.circle}
                 />
                 <circle
                   cx={padding.left + contentSize}
                   cy={yScale(item[nextValueKey]) + padding.top}
                   r={4}
-                  class={`gv-slope-chart-circle fill-color--${item[abbreviationKey]}`}
+                  className={itemStyles.circle}
                 />
               </g>
             )
           })}
           {labelLeftPositions.map((item) => {
             return (
-              <g key={item.key + '-left'}>
+              <g key={`${item.key}-left`}>
                 <text x={item.x} y={item.y} textAnchor="end" class="gv-slope-chart-text">
                   {item.value}
                 </text>
@@ -86,7 +89,7 @@ export const SlopeChart = ({
           })}
           {labelRightPositions.map((item) => {
             return (
-              <g key={item.key + '-right'}>
+              <g key={`${item.key}-right`}>
                 <text x={item.x} y={item.y} class="gv-slope-chart-text">
                   {item.value} {item.key}
                 </text>

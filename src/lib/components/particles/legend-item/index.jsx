@@ -1,17 +1,19 @@
-import defaultStyles from './style.module.scss'
+import defaultStyles from './style.module.css'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
 
 const DOT_TYPE = {
-  ROUND: 'ROUND',
-  SQUARE: 'SQUARE',
+  round: 'round',
+  square: 'square',
 }
 
-export const LegendItem = ({ dotType = DOT_TYPE.ROUND, text, styles }) => {
-  if (dotType === DOT_TYPE.ROUND) {
-    defaultStyles.dot = mergeStyles(defaultStyles.dot, defaultStyles.circle)
+export const LegendItem = ({ dotType = DOT_TYPE.round, text, styles }) => {
+  const defaultStylesCopy = { ...defaultStyles }
+
+  if (dotType === DOT_TYPE.round) {
+    defaultStylesCopy.dot = mergeStyles(defaultStyles.dot, defaultStyles.circle)
   }
 
-  styles = mergeStyles(defaultStyles, styles)
+  styles = mergeStyles(defaultStylesCopy, styles)
   return (
     <div className={styles.container}>
       <span className={styles.dot} />

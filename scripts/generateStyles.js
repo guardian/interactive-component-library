@@ -1,6 +1,9 @@
 import theme from '../src/lib/styles/theme.config.js'
 import fs from 'fs'
 
+// RESETS
+fs.writeFileSync('src/lib/styles/generated/reset.css', theme.resets)
+
 // SPACING
 let spacingCSS = ':root {'
 for (const [key, value] of Object.entries(theme.space)) {
@@ -35,7 +38,7 @@ for (const [key, height] of Object.entries(theme.lineHeights)) {
 fontSizeCSS = fontSizeCSS.concat('\n')
 
 for (const [font, lineHeight] of Object.entries(theme.defaultLineHeights)) {
-  fontSizeCSS = fontSizeCSS.concat('\n', `--${font}-line-height: ${theme.lineHeights[lineHeight]}px;`)
+  fontSizeCSS = fontSizeCSS.concat('\n', `--${font}-line-height: ${theme.lineHeights[lineHeight]};`)
 }
 
 fontSizeCSS = fontSizeCSS.concat('\n', '}')

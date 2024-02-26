@@ -19,6 +19,10 @@ const data = [
     prevSeats: 14,
     marginLeft: 50,
     width: 11.1,
+    styles: {
+      line: 'stroke-color--con',
+      circle: 'fill-color--con',
+    },
   },
   {
     party: 'Lab',
@@ -31,6 +35,10 @@ const data = [
     prevSeats: 2,
     marginLeft: 50,
     width: 3.7,
+    styles: {
+      line: 'stroke-color--lab',
+      circle: 'fill-color--lab',
+    },
   },
   {
     party: 'LibDem',
@@ -43,6 +51,10 @@ const data = [
     prevSeats: 3,
     marginLeft: 48.1,
     width: 1.9,
+    styles: {
+      line: 'stroke-color--libdem',
+      circle: 'fill-color--libdem',
+    },
   },
   {
     party: 'Green',
@@ -55,6 +67,10 @@ const data = [
     prevSeats: 1,
     marginLeft: 50,
     width: 0,
+    styles: {
+      line: 'stroke-color--green',
+      circle: 'fill-color--green',
+    },
   },
 ]
 

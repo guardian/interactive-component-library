@@ -1,10 +1,14 @@
 import { Table } from '.'
 import { LegendItem } from '$particles/legend-item'
-import { PartyBackgroundColors } from '$headless/colors'
 
 const meta = {
   title: 'Molecules/Table',
   component: Table,
+  parameters: {
+    viewport: {
+      defaultViewport: 'desktop',
+    },
+  },
 }
 
 export default meta
@@ -61,11 +65,18 @@ export const Sortable = {
   },
 }
 
+const partyToColorMap = {
+  lab: 'lab',
+  con: 'con',
+  ld: 'libdem',
+  green: 'green',
+}
+
 const columns = [
   {
     header: 'Party',
     accessor: 'partyName',
-    cell: (d) => <LegendItem circleClass={PartyBackgroundColors[d.abbreviation]} text={d.partyName} />,
+    cell: (d) => <LegendItem text={d.partyName} styles={{ dot: `bg-color--${partyToColorMap[d.abbreviation]}` }} />,
     cellStyle: {
       textAlign: 'text-left',
     },
@@ -135,11 +146,5 @@ export const PartyResults = {
     columns,
     data,
   },
+  defaultViewport: 'desktop',
 }
-
-// export const Sortable = {
-//   args: {
-//     columns: columns.map((d) => ({ ...d, sortable: true })),
-//     data,
-//   },
-// }
