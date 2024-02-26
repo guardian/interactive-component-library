@@ -1,4 +1,4 @@
-import defaultStyles from './style.module.css'
+import defaultStyles from './style.module.scss'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
 
 const DOT_TYPE = {

@@ -16,6 +16,10 @@
 .text {
   flex-shrink: 1;
   font-family: var(--text-sans);
-  font-size: var(--text-sans-xsmall);
-  line-height: var(--line-height-regular);
+  font-size: var(--sans-xsmall);
+  line-height: var(--sans-line-height);
+
+  @include mq($from: desktop) {
+    font-size: var(--sans-large);
+  }
 }
