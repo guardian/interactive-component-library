@@ -1,7 +1,22 @@
 .line {
   stroke: #121212;
+  stroke-width: 2;
 }
 
 .circle {
   fill: #ccc;
+}
+
+.label {
+  font-family: var(--text-sans);
+  font-size: var(--sans-xxsmall);
+}
+
+.category {
+  font-weight: 700;
+}
+
+.axis {
+  stroke: #121212;
+  stroke-width: 1;
 }

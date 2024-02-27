@@ -79,7 +79,7 @@ const totalSeats = 40
 const args = {
   id: 'slope-chart',
   slopeChartItems: data,
-  padding: { left: 24, right: 60, top: 20, bottom: 20 },
+  padding: { left: 20, right: 60, top: 20, bottom: 20 },
   domain: [0, totalSeats],
   previousValueKey: 'prevSeats',
   nextValueKey: 'overallSeats',
