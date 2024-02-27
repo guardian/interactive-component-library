@@ -84,6 +84,10 @@ class ColumnModel {
   get cell() {
     return this.definition.cell
   }
+
+  get styles() {
+    return this.definition.styles
+  }
 }
 
 class RowModel {
