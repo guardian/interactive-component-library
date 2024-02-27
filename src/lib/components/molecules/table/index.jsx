@@ -37,22 +37,29 @@ export function Table({ columns, data, styles }) {
       <thead>
         <tr>
           {table.columns.map((column, index) => (
-            <th key={column.id} className={styles.headerCell}>
-              <HeaderCell key={index} styles={styles} onClick={() => sortByColumn(index)} {...column.headerProps} />
+            <th key={column.id} className={mergeStyles(styles.headerCell, column.styles?.headerCell)}>
+              <HeaderCell
+                key={index}
+                styles={mergeStyles(styles, column.styles)}
+                onClick={() => sortByColumn(index)}
+                {...column.headerProps}
+              />
             </th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {table.rows.map((row) => (
-          <tr key={row.id} className={styles.bodyRow}>
-            {row.cells.map((cell) => (
-              <td key={cell.id} className={styles.bodyCell}>
-                {cell.displayValue}
-              </td>
-            ))}
-          </tr>
-        ))}
+        {table.rows.map((row) => {
+          return (
+            <tr key={row.id} className={styles.bodyRow}>
+              {row.cells.map((cell) => (
+                <td key={cell.id} className={mergeStyles(styles.bodyCell, cell.column.styles?.bodyCell)}>
+                  {cell.displayValue}
+                </td>
+              ))}
+            </tr>
+          )
+        })}
       </tbody>
     </table>
   )
@@ -67,6 +74,8 @@ function HeaderCell({ text, sortable, isSorted, styles, onClick }) {
   if (isSorted?.ascending === false) {
     direction = 'up'
   }
+
+  console.log('header cell styles', styles)
 
   return (
     <button onClick={onClick} className={styles.headerCellButton}>

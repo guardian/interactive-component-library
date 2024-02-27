@@ -1,7 +1,6 @@
 import { defineConfig } from 'vitest/config'
 import path from 'node:path'
 import preact from '@preact/preset-vite'
-import postcssGlobalData from '@csstools/postcss-global-data'
 
 const app = async () => {
   return defineConfig({

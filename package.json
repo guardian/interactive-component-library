@@ -43,7 +43,6 @@
     "@babel/plugin-syntax-class-properties": "^7.12.13",
     "@babel/plugin-syntax-decorators": "^7.23.3",
     "@babel/plugin-syntax-jsx": "^7.23.3",
-    "@csstools/postcss-global-data": "^2.1.1",
     "@guardian/source-foundations": "^14.1.4",
     "@preact/preset-vite": "^2.8.0",
     "@storybook/addon-backgrounds": "^7.6.16",

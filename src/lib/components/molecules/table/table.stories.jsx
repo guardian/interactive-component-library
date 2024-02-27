@@ -1,5 +1,6 @@
 import { Table } from '.'
 import { LegendItem } from '$particles/legend-item'
+import styles from './table.stories.module.css'
 
 const meta = {
   title: 'Molecules/Table',
@@ -77,16 +78,16 @@ const columns = [
     header: 'Party',
     accessor: 'partyName',
     cell: (d) => <LegendItem text={d.partyName} styles={{ dot: `bg-color--${partyToColorMap[d.abbreviation]}` }} />,
-    cellStyle: {
-      textAlign: 'text-left',
+    styles: {
+      headerCell: styles['w-2/5'],
     },
   },
   {
     header: 'Seats',
     accessor: 'totalSeats',
-    cellStyle: {
-      width: 'w-1/5 mobile-xl:w-1/6',
-      textAlign: 'text-right',
+    styles: {
+      headerCell: [styles['w-1/5'], styles.rightAlign].join(' '),
+      bodyCell: styles.rightAlign,
     },
     sort: {
       ascending: false,
@@ -95,17 +96,17 @@ const columns = [
   {
     header: 'Gains',
     accessor: 'gains',
-    cellStyle: {
-      width: 'w-1/5 mobile-xl:w-1/6',
-      textAlign: 'text-right',
+    styles: {
+      headerCell: [styles['w-1/5'], styles.rightAlign].join(' '),
+      bodyCell: styles.rightAlign,
     },
   },
   {
     header: 'Losses',
     accessor: 'losses',
-    cellStyle: {
-      width: 'w-1/5 mobile-xl:w-1/6',
-      textAlign: 'text-right',
+    styles: {
+      headerCell: [styles['w-1/5'], styles.rightAlign].join(' '),
+      bodyCell: styles.rightAlign,
     },
   },
 ]
