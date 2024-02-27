@@ -66,18 +66,11 @@ export const Sortable = {
   },
 }
 
-const partyToColorMap = {
-  lab: 'lab',
-  con: 'con',
-  ld: 'libdem',
-  green: 'green',
-}
-
 const columns = [
   {
     header: 'Party',
     accessor: 'partyName',
-    cell: (d) => <LegendItem text={d.partyName} styles={{ dot: `bg-color--${partyToColorMap[d.abbreviation]}` }} />,
+    cell: (d) => <LegendItem text={d.partyName} styles={{ dot: `bg-color--${d.abbreviation}` }} />,
     styles: {
       headerCell: styles['w-2/5'],
     },
@@ -128,7 +121,7 @@ const data = [
   },
   {
     partyName: 'Liberal Democrats',
-    abbreviation: 'ld',
+    abbreviation: 'libdem',
     totalSeats: 19,
     gains: 12,
     losses: 4,
