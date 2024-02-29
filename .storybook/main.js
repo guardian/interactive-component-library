@@ -1,6 +1,9 @@
 import remarkGfm from 'remark-gfm'
 
 const config = {
+  core: {
+    builder: '@storybook/builder-vite',
+  },
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-controls',
@@ -29,11 +32,6 @@ const config = {
   ],
   framework: {
     name: '@storybook/preact-vite',
-    options: {
-      builder: {
-        viteConfigPath: '.storybook/vite.config.js',
-      },
-    },
   },
   docs: {
     autodocs: 'tag',
