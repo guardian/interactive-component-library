@@ -21,7 +21,7 @@ const app = async () => {
         $styles: path.resolve(__dirname, 'src/lib/styles'),
       },
     },
-    plugins: [peerDepsExternal(), preact()],
+    plugins: [peerDepsExternal(), preact({ prefreshEnabled: false })],
     css: {
       preprocessorOptions: {
         scss: {
