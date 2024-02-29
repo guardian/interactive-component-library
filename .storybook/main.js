@@ -1,8 +1,5 @@
-
 const config = {
-  core: {
-    builder: '@storybook/builder-vite',
-  },
+  core: {},
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-controls',
@@ -22,6 +19,7 @@ const config = {
   ],
   framework: {
     name: '@storybook/preact-vite',
+    options: {},
   },
   docs: {
     autodocs: 'tag',
