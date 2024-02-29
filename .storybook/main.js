@@ -1,4 +1,3 @@
-import remarkGfm from 'remark-gfm'
 
 const config = {
   core: {
@@ -11,16 +10,7 @@ const config = {
     '@storybook/addon-backgrounds',
     '@storybook/addon-measure',
     '@storybook/addon-viewport',
-    {
-      name: '@storybook/addon-docs',
-      options: {
-        mdxPluginOptions: {
-          mdxCompileOptions: {
-            remarkPlugins: [remarkGfm],
-          },
-        },
-      },
-    },
+    '@storybook/addon-docs',
     {
       name: '@storybook/addon-storysource',
       options: {
