@@ -1,7 +1,7 @@
 import defaultStyles from './style.module.css'
 import { mergeStyles } from '$styles/helpers/mergeStyles.js'
 import dayjs from 'dayjs'
-import {relativeTime} from "./day-js-relative-time-plugin.js"
+import relativeTime from 'dayjs/plugin/relativeTime'
 dayjs.extend(relativeTime)
 
 export const RelativeTimeSentence = ({timeStamp, styles}) => {
