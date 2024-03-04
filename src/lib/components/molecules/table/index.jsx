@@ -75,8 +75,6 @@ function HeaderCell({ text, sortable, isSorted, styles, onClick }) {
     direction = 'up'
   }
 
-  console.log('header cell styles', styles)
-
   return (
     <button onClick={onClick} className={styles.headerCellButton}>
       <span>{text}</span>
