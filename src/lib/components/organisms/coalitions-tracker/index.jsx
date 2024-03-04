@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState, useRef } from 'react'
+import { useLayoutEffect, useState, useRef } from 'preact/hooks'
 import { useWindowSize } from '$shared/hooks/useWindowSize'
 import { StackedBar } from '$particles/stacked-bar'
 import styles from './style.module.scss'
