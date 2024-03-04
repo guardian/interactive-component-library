@@ -1,0 +1,6 @@
+.timestamptext {
+    font-family: var(--text-sans);
+    font-size: var(--sans-small);
+    line-height: var(--sans-line-height);
+    color: var(--secondary-text-color);
+}
