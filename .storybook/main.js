@@ -8,6 +8,7 @@ const config = {
     '@storybook/addon-measure',
     '@storybook/addon-viewport',
     '@storybook/addon-docs',
+    '@storybook/addon-actions',
     {
       name: '@storybook/addon-storysource',
       options: {
