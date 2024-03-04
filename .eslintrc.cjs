@@ -13,8 +13,14 @@ module.exports = {
       jsx: true,
     },
   },
-  extends: ['eslint:recommended'],
-  plugins: ['compat', 'react', 'react-hooks'],
+  extends: [
+    'eslint:recommended',
+    'plugin:import/recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+  ],
+  plugins: ['react', 'compat'],
   globals: {
     expect: true,
     browser: true,
@@ -22,17 +28,19 @@ module.exports = {
   },
   settings: {
     react: {
-      // eslint-plugin-preact interprets this as "h.createElement",
-      // however we only care about marking h() as being a used variable.
-      pragma: 'h',
       version: 'detect',
     },
   },
   rules: {
+    'import/export': 0,
+    'import/no-unresolved': 0,
+
     /**
      * Preact / JSX rules
      */
+    'react/prop-types': 0,
     'react/no-deprecated': 2,
+    'react/no-unknown-property': 0,
     'react/react-in-jsx-scope': 0, // handled this automatically
     'react/display-name': [1, { ignoreTranspilerName: false }],
     'react/jsx-no-bind': [
@@ -111,32 +119,5 @@ module.exports = {
     'no-useless-rename': 1,
     'no-var': 1,
     'no-with': 2,
-
-    /**
-     * General JavaScript stylistic rules (disabled)
-     */
-    semi: 0,
-    strict: [2, 'never'], // assume type=module output (cli default)
-    'object-curly-spacing': [0, 'always'],
-    'rest-spread-spacing': 0,
-    'space-before-function-paren': [0, 'always'],
-    'space-in-parens': [0, 'never'],
-    'object-shorthand': 1,
-    'prefer-arrow-callback': 1,
-    'prefer-rest-params': 1,
-    'prefer-spread': 1,
-    'prefer-template': 1,
-    quotes: [
-      0,
-      'single',
-      {
-        avoidEscape: true,
-        allowTemplateLiterals: true,
-      },
-    ],
-    'quote-props': [2, 'as-needed'],
-    radix: 1, // parseInt(x, 10)
-    'unicode-bom': 2,
-    'valid-jsdoc': 0,
   },
 }
