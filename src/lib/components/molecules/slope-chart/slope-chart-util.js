@@ -1,4 +1,4 @@
-function preventOverlap(labelPositions, iteration = 0, labelHeight = 12) {
+export function preventOverlap(labelPositions, iteration = 0, labelHeight = 12) {
   const maxIterations = 10
   let totalOverlap = 0
 
@@ -25,26 +25,20 @@ function preventOverlap(labelPositions, iteration = 0, labelHeight = 12) {
   return labelPositions
 }
 
-function positionLabels(items, key, yScale, abbrKey, x, paddingTop) {
-  // deduplicate values
-  const deduplicated = [...items.reduce((map, obj) => map.set(obj[key], obj), new Map()).values()]
-
-  const initialPositions = deduplicated.map((item) => {
-    return {
-      x,
-      y: yScale(item[key]) + paddingTop + 4,
-      value: item[key],
-      key: item[abbrKey],
-    }
-  })
-  // sort by y-position
-  initialPositions.sort((a, b) => a.y - b.y)
-
-  return preventOverlap(initialPositions)
+export function uniqueBy(array, key) {
+  return [...array.reduce((map, d) => map.set(d[key], d), new Map()).values()]
 }
 
-//same as this one https://gist.github.com/vectorsize/7031902
-function scaleLinear(domain, range) {
+export function positionLabels(labels) {
+  labels = uniqueBy(labels, 'value')
+  // sort by y-position
+  labels.sort((a, b) => a.y - b.y)
+
+  return preventOverlap(labels)
+}
+
+// same as this one https://gist.github.com/vectorsize/7031902
+export function scaleLinear(domain, range) {
   const [domainMin, domainMax] = domain
   const [rangeMin, rangeMax] = range
 
@@ -55,5 +49,3 @@ function scaleLinear(domain, range) {
     return slope * x + intercept
   }
 }
-
-export { positionLabels, scaleLinear }
