@@ -9,7 +9,7 @@ export const ControlChange = ({ previous, next, text, styles }) => {
   let hasChanged = next.abbreviation !== previous.abbreviation;
 
   return(
-    <div class="gv-control-change" style="font-weight:700;">
+    <div class={styles.container}>
           <>
             { 
               hasChanged 
@@ -17,8 +17,6 @@ export const ControlChange = ({ previous, next, text, styles }) => {
               <GradientIcon
                 previousStopColor={previous.color}
                 nextStopColor={next.color}
-                previousAbbreviation={previous.abbreviation}
-                nextAbbreviation={next.abbreviation}
                 />
               :
               <CircleIcon color={next.color} />

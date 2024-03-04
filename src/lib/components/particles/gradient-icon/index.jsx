@@ -1,8 +1,6 @@
 export const GradientIcon = ({
   previousStopColor = null,
   nextStopColor = null,
-  previousAbbreviation,
-  nextAbbreviation,
 }) => (
   <svg
     style={{ display: 'inline-block', marginRight: 4, transform: 'translateY(-1px)' }}
@@ -18,8 +16,8 @@ export const GradientIcon = ({
     />
     <defs>
       <linearGradient id="gv-gradient" x1="5.5" y1="5.5" x2="12" y2="5.5" gradientUnits="userSpaceOnUse">
-        <stop class={`stop-color--${previousAbbreviation}`} stop-color={previousStopColor} />
-        <stop class={`stop-color--${nextAbbreviation}`} stop-color={nextStopColor} offset="1" />
+        <stop stop-color={previousStopColor} />
+        <stop stop-color={nextStopColor} offset="1" />
       </linearGradient>
     </defs>
   </svg>

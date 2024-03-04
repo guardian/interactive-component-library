@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import {relativeTime} from "./day-js-relative-time-plugin.js"
 dayjs.extend(relativeTime)
 
-export const RelativeTimeStamp = ({timeStamp, styles}) => {
+export const RelativeTimeSentence = ({timeStamp, styles}) => {
 
     styles = mergeStyles({...defaultStyles}, styles)
 
@@ -12,8 +12,8 @@ export const RelativeTimeStamp = ({timeStamp, styles}) => {
     let timeSince = dayjs(timeStamp).fromNow()
 
     return (
-        <span className={styles.timestamptext}>
-            &nbsp;{timeSince}
+        <span className={styles.timesentencetext}>
+            {timeSince}
         </span>
     )
 }

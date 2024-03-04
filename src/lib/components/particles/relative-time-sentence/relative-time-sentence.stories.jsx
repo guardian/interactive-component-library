@@ -1,8 +1,8 @@
-import {RelativeTimeStamp} from "."
+import {RelativeTimeSentence} from "."
 
 export default {
-    title: 'Particles/RelativeTimeStamp',
-    component: RelativeTimeStamp
+    title: 'Particles/RelativeTimeSentence',
+    component: RelativeTimeSentence
 }
 
 

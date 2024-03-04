@@ -1,8 +1,13 @@
-export const CircleIcon = ({color}) => {
+import defaultStyles from "./style.module.css"
+import { mergeStyles } from "$styles/helpers/mergeStyles"
+
+export const CircleIcon = ({color, styles}) => {
+
+    styles = mergeStyles({...defaultStyles}, styles)
 
     return (
         <svg
-            style={{ display: 'inline-block', marginRight: 4, transform: 'translateY(-1px)' }}
+            style={styles.circleicon}
             fill="none" 
             height="11" 
             viewBox="0 0 11 11" 
