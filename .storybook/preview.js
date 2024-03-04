@@ -1,4 +1,4 @@
-import '../src/lib/tailwind/theme.css'
+import '../src/lib/styles/main.scss'
 
 const preview = {
   parameters: {

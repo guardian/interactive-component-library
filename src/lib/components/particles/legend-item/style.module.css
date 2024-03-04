@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.dot {
+  width: 11px;
+  height: 11px;
+  margin-right: var(--space-1);
+  flex-shrink: 0;
+}
+
+.circle {
+  border-radius: 11px;
+}
+
+.text {
+  flex-shrink: 1;
+  font-family: var(--text-sans);
+  font-size: var(--sans-small);
+  line-height: var(--sans-line-height);
+}

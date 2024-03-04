@@ -7,7 +7,19 @@ export default {
 
 export const Default = {
   args: {
-    circleClass: 'bg-neutral-60',
     text: 'Legend item',
+    styles: {
+      dot: 'bg-color--con',
+    },
+  },
+}
+
+export const SquareStyle = {
+  args: {
+    dotType: 'square',
+    text: 'Legend item',
+    styles: {
+      dot: 'bg-color--lab',
+    },
   },
 }

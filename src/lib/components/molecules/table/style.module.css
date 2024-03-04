@@ -1,0 +1,32 @@
+.table {
+  table-layout: fixed;
+  width: 100%;
+  font-family: var(--text-sans);
+  font-size: var(--sans-small);
+  line-height: var(--sans-line-height);
+  text-align: left;
+}
+
+.headerCell {
+  font-weight: 700;
+  white-space: nowrap;
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+}
+
+.headerCellButton {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.bodyRow {
+  border-top: 1px solid #dcdcdc;
+}
+
+.bodyCell {
+  font-weight: normal;
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+}

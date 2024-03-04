@@ -1,0 +1,9 @@
+.bar {
+  fill: #ccc;
+}
+
+.label {
+  font-family: var(--text-sans);
+  font-size: var(--sans-xsmall);
+  line-height: var(--sans-line-height);
+}
