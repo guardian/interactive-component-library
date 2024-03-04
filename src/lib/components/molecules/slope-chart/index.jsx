@@ -38,7 +38,6 @@ export const SlopeChart = ({
 
   const y2Labels = useMemo(() => {
     let labels = lines.map((d) => ({ y: yScale(d.y2), value: y2Label(d) }))
-    console.log('y2 labels', labels)
     return positionLabels(labels)
   }, [lines, y2Label, yScale])
 
