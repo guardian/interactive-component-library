@@ -36,6 +36,7 @@
     "generate:styles": "node scripts/generateStyles.js"
   },
   "dependencies": {
+    "dayjs": "^1.11.10",
     "preact": "^10.12.1"
   },
   "devDependencies": {
