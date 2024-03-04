@@ -25,7 +25,7 @@ export const MapLocator = ({ path, projection, features, markerCoordinates, widt
           cx={projection(markerCoordinates)[0]}
           cy={projection(markerCoordinates)[1]}
           r={markerRadius}
-          class={styles.marker}
+          class={styles.circle}
         />
       </g>
     </svg>

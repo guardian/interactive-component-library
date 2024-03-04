@@ -32,7 +32,7 @@ export const Default = {
     markerCoordinates: [0.1276, 51.5072],
     markerRadius: 15, // by default r should be an attribute rather than a style
     styles: {
-      marker: 'fill-color--con'
+      circle: 'fill-color--con'
     }
   },
   render: (args) => <MapLocator {...args} />
