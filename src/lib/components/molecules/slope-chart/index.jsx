@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState, useLayoutEffect } from 'preact/hooks'
 import { positionLabels, scaleLinear } from './slope-chart-util'
-import { useWindowSize } from './react-util'
+import { useWindowSize } from '$shared/hooks/useWindowSize'
 import defaultStyles from './style.module.css'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
 
