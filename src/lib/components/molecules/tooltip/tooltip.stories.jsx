@@ -39,7 +39,7 @@ function TooltipOverflow() {
         <p style={{ marginBottom: 10 }}>Tooltip is rendered in this element</p>
         <div ref={tooltipped} style="width: 100%; height: 300px; padding: 20px; background-color: #2980B9;">
           <p>
-            Tooltip will show outside of tooltipped element, but never outside the bounds of the element it's rendered
+            Tooltip will show outside of tooltipped element, but never outside the bounds of the element it is rendered
             in.
           </p>
         </div>
