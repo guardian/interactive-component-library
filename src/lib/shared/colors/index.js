@@ -1,21 +1,3 @@
-export const PartyBackgroundColors = {
-  con: 'bg-party-con',
-  lab: 'bg-party-lab',
-  ld: 'bg-party-ld',
-  ukip: 'bg-party-ukip',
-  ind: 'bg-party-ind',
-  snp: 'bg-party-snp',
-  sdlp: 'bg-party-sdlp',
-  pc: 'bg-party-pc',
-  sf: 'bg-party-sf',
-  dup: 'bg-party-dup',
-  green: 'bg-party-green',
-  alliance: 'bg-party-alliance',
-  uup: 'bg-party-uup',
-  reform: 'bg-party-reform',
-  other: 'bg-party-other',
-}
-
 // Source: https://gist.github.com/krabs-github/ec56e4f1c12cddf86ae9c551aa9d9e04
 export function isDarkColor(color) {
   let r, g, b

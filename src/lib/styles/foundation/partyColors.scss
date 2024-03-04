@@ -1,0 +1,447 @@
+
+@mixin default-party-colors-uk {
+    
+    --con: #0079B7;
+    --lab: #C70000;
+    --libdem: #E05E00;
+    --green: #33A22B;
+    --ukip: #BB3B80;
+    --snp: #F5DC00;
+    --dup: #8B0000;
+    --alliance: #C9BB19;
+    --uup: #004975;
+    --sdlp: #23B4A9;
+    --tig: #333333;
+    --plaid: #135E58;
+    --sinnfein: #22874D;
+    --reform: #13bece;
+    --ind: #333333;
+    --other: #848484;
+    --speaker: #767676;
+    --change: #333;
+
+    --undeclared: #848484;
+  }
+  
+@mixin dark-mode-party-colors-uk {
+
+    --con: #009ae1;
+    --lab: #dc2e1c;
+    --libdem: #FF7F0F;
+    --green: #39A566;
+    --ukip: #DC559D;
+    --snp: #F5DC00;
+    --dup: #B23C2D;
+    --alliance: #ab9f00;
+    --uup: #346896;
+    --sdlp: #28b8ad;
+    --tig: #333333;
+    --plaid: #37716b;
+    --sinnfein: #22874D;
+    --reform: #3DBBE2;
+    --ind: #A1A1A1;
+    --other: #707070;
+    --speaker: #707070;
+    --change: #494949;
+
+    --undeclared: #848484;
+  
+  }
+  
+/* BACKGROUND-COLOR -------------------------------------------- */ 
+
+.bg-color--con {
+    background-color: var(--con) !important;
+}
+
+.bg-color--lab {
+    background-color: var(--lab) !important;
+}
+
+.bg-color--libdem {
+    background-color: var(--libdem) !important;
+}
+
+.bg-color--green {
+    background-color: var(--green) !important;
+}
+
+.bg-color--ukip {
+    background-color: var(--ukip) !important;
+}
+
+.bg-color--snp {
+    background-color: var(--snp) !important;
+}
+
+.bg-color--dup {
+    background-color: var(--dup) !important;
+}
+
+.bg-color--alliance {
+    background-color: var(--alliance) !important;
+}
+
+.bg-color--uup {
+    background-color: var(--uup) !important;
+}
+
+.bg-color--sdlp {
+    background-color: var(--sdlp) !important;
+}
+
+.bg-color--tig {
+    background-color: var(--tig) !important;
+}
+
+.bg-color--plaid {
+    background-color: var(--plaid) !important;
+}
+
+.bg-color--sinnfein {
+    background-color: var(--sinnfein) !important;
+}
+
+.bg-color--reform {
+    background-color: var(--reform) !important;
+}
+
+.bg-color--ind {
+    background-color: var(--ind) !important;
+}
+
+.bg-color--other {
+    background-color: var(--other) !important;
+}
+
+.bg-color--speaker {
+    background-color: var(--speaker) !important;
+}
+
+.bg-color--change {
+    background-color: var(--change) !important;
+}
+
+.bg-color--undeclared {
+    background-color: var(--undeclared) !important;
+}
+
+
+
+  
+/* FILL ----------------------------------------------------------- */ 
+
+.fill-color--con {
+    fill: var(--con) !important;
+}
+
+.fill-color--lab {
+    fill: var(--lab) !important;
+}
+
+.fill-color--libdem {
+    fill: var(--libdem) !important;
+}
+
+.fill-color--green {
+    fill: var(--green) !important;
+}
+
+.fill-color--ukip {
+    fill: var(--ukip) !important;
+}
+
+.fill-color--snp {
+    fill: var(--snp) !important;
+}
+
+.fill-color--dup {
+    fill: var(--dup) !important;
+}
+
+.fill-color--alliance {
+    fill: var(--alliance) !important;
+}
+
+.fill-color--uup {
+    fill: var(--uup) !important;
+}
+
+.fill-color--sdlp {
+    fill: var(--sdlp) !important;
+}
+
+.fill-color--tig {
+    fill: var(--tig) !important;
+}
+
+.fill-color--plaid {
+    fill: var(--plaid) !important;
+}
+
+.fill-color--sinnfein {
+    fill: var(--sinnfein) !important;
+}
+
+.fill-color--reform {
+    fill: var(--reform) !important;
+}
+
+.fill-color--ind {
+    fill: var(--ind) !important;
+}
+
+.fill-color--other {
+    fill: var(--other) !important;
+}
+
+.fill-color--speaker {
+    fill: var(--speaker) !important;
+}
+
+.fill-color--change {
+    fill: var(--change) !important;
+}
+
+.fill-color--undeclared {
+    fill: var(--undeclared) !important;
+}
+
+
+
+/* STROKE-COLOR --------------------------------------------------- */ 
+
+.stroke-color--con {
+    stroke: var(--con) !important;
+}
+
+.stroke-color--lab {
+    stroke: var(--lab) !important;
+}
+
+.stroke-color--libdem {
+    stroke: var(--libdem) !important;
+}
+
+.stroke-color--green {
+    stroke: var(--green) !important;
+}
+
+.stroke-color--ukip {
+    stroke: var(--ukip) !important;
+}
+
+.stroke-color--snp {
+    stroke: var(--snp) !important;
+}
+
+.stroke-color--dup {
+    stroke: var(--dup) !important;
+}
+
+.stroke-color--alliance {
+    stroke: var(--alliance) !important;
+}
+
+.stroke-color--uup {
+    stroke: var(--uup) !important;
+}
+
+.stroke-color--sdlp {
+    stroke: var(--sdlp) !important;
+}
+
+.stroke-color--tig {
+    stroke: var(--tig) !important;
+}
+
+.stroke-color--plaid {
+    stroke: var(--plaid) !important;
+}
+
+.stroke-color--sinnfein {
+    stroke: var(--sinnfein) !important;
+}
+
+.stroke-color--reform {
+    stroke: var(--reform) !important;
+}
+
+.stroke-color--ind {
+    stroke: var(--ind) !important;
+}
+
+.stroke-color--other {
+    stroke: var(--other) !important;
+}
+
+.stroke-color--speaker {
+    stroke: var(--speaker) !important;
+}
+
+.stroke-color--change {
+    stroke: var(--change) !important;
+}
+
+.stroke-color--undeclared {
+    stroke: var(--undeclared) !important;
+}
+
+/* COLOR ----------------------------------------------------------- */ 
+
+.color--con {
+    color: var(--con) !important; 
+}
+
+.color--lab {
+    color: var(--lab) !important; 
+}
+
+.color--libdem {
+    color: var(--libdem) !important; 
+}
+
+.color--green {
+    color: var(--green) !important; 
+}
+
+.color--ukip {
+    color: var(--ukip) !important; 
+}
+
+.color--snp {
+    color: var(--snp) !important; 
+}
+
+.color--dup {
+    color: var(--dup) !important; 
+}
+
+.color--alliance {
+    color: var(--alliance) !important; 
+}
+
+.color--uup {
+    color: var(--uup) !important; 
+}
+
+.color--sdlp {
+    color: var(--sdlp) !important; 
+}
+
+.color--tig {
+    color: var(--tig) !important; 
+}
+
+.color--plaid {
+    color: var(--plaid) !important; 
+}
+
+.color--sinnfein {
+    color: var(--sinnfein) !important; 
+}
+
+.color--reform {
+    color: var(--reform) !important; 
+}
+
+.color--ind {
+    color: var(--ind) !important; 
+}
+
+.color--other {
+    color: var(--other) !important; 
+}
+
+.color--speaker {
+    color: var(--speaker) !important; 
+}
+
+.color--change {
+    color: var(--change) !important; 
+}
+
+.color--undeclared {
+    color: var(--undeclared) !important; 
+}
+
+
+
+/* BORDER-COLOR ----------------------------------------------------- */ 
+
+.border-color--con {
+    border-color: var(--con) !important;
+}
+
+.border-color--lab {
+    border-color: var(--lab) !important;
+}
+
+.border-color--libdem {
+    border-color: var(--libdem) !important;
+}
+
+.border-color--green {
+    border-color: var(--green) !important;
+}
+
+.border-color--ukip {
+    border-color: var(--ukip) !important;
+}
+
+.border-color--snp {
+    border-color: var(--snp) !important;
+}
+
+.border-color--dup {
+    border-color: var(--dup) !important;
+}
+
+.border-color--alliance {
+    border-color: var(--alliance) !important;
+}
+
+.border-color--uup {
+    border-color: var(--uup) !important;
+}
+
+.border-color--sdlp {
+    border-color: var(--sdlp) !important;
+}
+
+.border-color--tig {
+    border-color: var(--tig) !important;
+}
+
+.border-color--plaid {
+    border-color: var(--plaid) !important;
+}
+
+.border-color--sinnfein {
+    border-color: var(--sinnfein) !important;
+}
+
+.border-color--reform {
+    border-color: var(--reform) !important;
+}
+
+.border-color--ind {
+    border-color: var(--ind) !important;
+}
+
+.border-color--other {
+    border-color: var(--other) !important;
+}
+
+.border-color--speaker {
+    border-color: var(--speaker) !important;
+}
+
+.border-color--change {
+    border-color: var(--change) !important;
+}
+
+
+.border-color--undeclared {
+    border-color: var(--undeclared) !important;
+}
