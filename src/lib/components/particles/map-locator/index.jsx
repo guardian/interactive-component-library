@@ -1,26 +1,33 @@
-export const MapLocator = ({ path, projection, features, markerCoordinates, width, height, markerColor, backgroundColor='#707070', markerRadius=15 }) =>
-  <svg
-    viewBox={`0 0 ${width} ${height}`}
-    preserveAspectRatio={"xMinYMin"}>
-    <g>
-      {
-        features.map((f, i) => {
-          return (
+import defaultStyles from "./style.module.css"
+import { mergeStyles } from "$styles/helpers/mergeStyles"
+
+export const MapLocator = ({ path, projection, features, markerCoordinates, width, height, markerRadius=15, styles }) => {
+  styles = mergeStyles({ ...defaultStyles }, styles)
+
+  return (
+    <svg
+      class={styles.svg}
+      viewBox={`0 0 ${width} ${height}`}
+      preserveAspectRatio={"xMinYMin"}>
+      <g>
+        {
+          features.map((f, i) =>
             <path
-              fill={backgroundColor}
+              class={styles.path}
               key={i}
               d={path(f)}
             />
           )
-        })
-      }
-    </g>
-    <g>
-      <circle
-        cx={projection(markerCoordinates)[0]}
-        cy={projection(markerCoordinates)[1]}
-        r={markerRadius}
-        fill={markerColor}
-      />
-    </g>
-  </svg>
+        }
+      </g>
+      <g>
+        <circle
+          cx={projection(markerCoordinates)[0]}
+          cy={projection(markerCoordinates)[1]}
+          r={markerRadius}
+          class={styles.marker}
+        />
+      </g>
+    </svg>
+  )
+}

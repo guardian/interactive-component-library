@@ -30,9 +30,10 @@ export const Default = {
     height,
     features: featureCollection.features,
     markerCoordinates: [0.1276, 51.5072],
-    markerColor: '#c70000',
-    markerRadius: 15,
-    backgroundColor: '#707070'
+    markerRadius: 15, // by default r should be an attribute rather than a style
+    styles: {
+      marker: 'fill-color--con'
+    }
   },
   render: (args) => <MapLocator {...args} />
 }
