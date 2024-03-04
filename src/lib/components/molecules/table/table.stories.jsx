@@ -1,10 +1,15 @@
 import { Table } from '.'
 import { LegendItem } from '$particles/legend-item'
-import { PartyBackgroundColors } from '$headless/colors'
+import styles from './table.stories.module.css'
 
 const meta = {
   title: 'Molecules/Table',
   component: Table,
+  parameters: {
+    viewport: {
+      defaultViewport: 'desktop',
+    },
+  },
 }
 
 export default meta
@@ -65,17 +70,17 @@ const columns = [
   {
     header: 'Party',
     accessor: 'partyName',
-    cell: (d) => <LegendItem circleClass={PartyBackgroundColors[d.abbreviation]} text={d.partyName} />,
-    cellStyle: {
-      textAlign: 'text-left',
+    cell: (d) => <LegendItem text={d.partyName} styles={{ dot: `bg-color--${d.abbreviation}` }} />,
+    styles: {
+      headerCell: styles['w-2/5'],
     },
   },
   {
     header: 'Seats',
     accessor: 'totalSeats',
-    cellStyle: {
-      width: 'w-1/5 mobile-xl:w-1/6',
-      textAlign: 'text-right',
+    styles: {
+      headerCell: [styles['w-1/5'], styles.rightAlign].join(' '),
+      bodyCell: styles.rightAlign,
     },
     sort: {
       ascending: false,
@@ -84,17 +89,17 @@ const columns = [
   {
     header: 'Gains',
     accessor: 'gains',
-    cellStyle: {
-      width: 'w-1/5 mobile-xl:w-1/6',
-      textAlign: 'text-right',
+    styles: {
+      headerCell: [styles['w-1/5'], styles.rightAlign].join(' '),
+      bodyCell: styles.rightAlign,
     },
   },
   {
     header: 'Losses',
     accessor: 'losses',
-    cellStyle: {
-      width: 'w-1/5 mobile-xl:w-1/6',
-      textAlign: 'text-right',
+    styles: {
+      headerCell: [styles['w-1/5'], styles.rightAlign].join(' '),
+      bodyCell: styles.rightAlign,
     },
   },
 ]
@@ -116,7 +121,7 @@ const data = [
   },
   {
     partyName: 'Liberal Democrats',
-    abbreviation: 'ld',
+    abbreviation: 'libdem',
     totalSeats: 19,
     gains: 12,
     losses: 4,
@@ -135,11 +140,5 @@ export const PartyResults = {
     columns,
     data,
   },
+  defaultViewport: 'desktop',
 }
-
-// export const Sortable = {
-//   args: {
-//     columns: columns.map((d) => ({ ...d, sortable: true })),
-//     data,
-//   },
-// }

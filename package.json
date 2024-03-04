@@ -1,7 +1,7 @@
 {
   "name": "@guardian/interactive-component-library",
   "private": false,
-  "version": "v0.1.0-alpha",
+  "version": "v0.1.0-alpha.2",
   "packageManager": "pnpm@8.4.0",
   "repository": {
     "type": "git",
@@ -32,7 +32,8 @@
     "prettier": "prettier --write \"src/**/*.{ts,tsx,js,mdx}\"",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
-    "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\""
+    "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\"",
+    "generate:styles": "node scripts/generateStyles.js"
   },
   "dependencies": {
     "preact": "^10.12.1"
@@ -42,6 +43,7 @@
     "@babel/plugin-syntax-class-properties": "^7.12.13",
     "@babel/plugin-syntax-decorators": "^7.23.3",
     "@babel/plugin-syntax-jsx": "^7.23.3",
+    "@guardian/source-foundations": "^14.1.4",
     "@preact/preset-vite": "^2.8.0",
     "@storybook/addon-backgrounds": "^7.6.16",
     "@storybook/addon-controls": "^7.6.16",
@@ -81,8 +83,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "sass": "^1.71.1",
+    "sass-mq": "^6.0.0",
     "storybook": "7.6.16",
-    "tailwindcss": "3.3.3",
     "typescript": "5.1.6",
     "vite": "^4.0.0",
     "vite-plugin-dts": "3.5.1",
