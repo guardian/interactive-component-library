@@ -1,0 +1,4 @@
+.unit {
+  stroke: var(--primary-bg-color);
+  stroke-width: 1px;
+}

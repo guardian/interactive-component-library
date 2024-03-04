@@ -28,6 +28,9 @@ const args = {
   showHalfLine: true
 }
 
+console.log(partySeats)
+
+
 export const Default = {
   args,
   render: (args) => <Waffle {...args} squares={false} />,
