@@ -4,3 +4,7 @@
   line-height: var(--sans-line-height);
   font-weight: 700;
 }
+
+.container {
+  font-weight: 700;
+}

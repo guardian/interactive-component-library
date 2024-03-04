@@ -3,8 +3,11 @@ import { useEffect, useState } from 'preact/hooks'
 export const useMousePosition = (elementRef) => {
   const [position, setPosition] = useState(null)
 
-  const onMouseMove = ({ offsetX, offsetY }) => {
-    requestAnimationFrame(() => setPosition({ x: offsetX, y: offsetY }))
+  const onMouseMove = ({ clientX, clientY, currentTarget }) => {
+    const rect = currentTarget.getBoundingClientRect()
+    const x = clientX - rect.left
+    const y = clientY - rect.top
+    requestAnimationFrame(() => setPosition({ x, y }))
   }
 
   const onMouseOut = () => {
