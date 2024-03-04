@@ -45,6 +45,7 @@
     "@babel/plugin-syntax-jsx": "^7.23.3",
     "@guardian/source-foundations": "^14.1.4",
     "@preact/preset-vite": "^2.8.0",
+    "@storybook/addon-actions": "^7.6.17",
     "@storybook/addon-backgrounds": "^7.6.17",
     "@storybook/addon-controls": "^7.6.17",
     "@storybook/addon-docs": "^7.6.17",
