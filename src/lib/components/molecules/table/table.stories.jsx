@@ -140,5 +140,4 @@ export const PartyResults = {
     columns,
     data,
   },
-  defaultViewport: 'desktop',
 }
