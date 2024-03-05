@@ -1,0 +1,53 @@
+.container {
+	margin: 0 auto;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0 var(--space-3);
+	// FIXME: this should be a CSS variable
+	border-color: #dcdcdc;
+
+	@include mq($from: mobileLandscape) {
+		padding: 0 var(--space-5);
+	}
+
+	@include mq($from: tablet) {
+		width: map.get($mq-breakpoints, "tablet");
+	}
+
+	@include mq($from: desktop) {
+		width: map.get($mq-breakpoints, "desktop");
+	}
+
+	@include mq($from: leftCol) {
+		width: map.get($mq-breakpoints, "leftCol");
+	}
+
+	@include mq($from: wide) {
+		width: map.get($mq-breakpoints, "wide");
+	}
+}
+
+.sideBorders {
+	border-left-style: solid;
+	border-right-style: solid;
+	border-left-width: 0;
+	border-right-width: 0;
+
+	@include mq($from: tablet) {
+		width: calc(map.get($mq-breakpoints, "tablet") + 2px);
+		border-left-width: 1px;
+		border-right-width: 1px;
+	}
+
+	@include mq($from: desktop) {
+		width: calc(map.get($mq-breakpoints, "desktop") + 2px);
+	}
+
+	@include mq($from: leftCol) {
+		width: calc(map.get($mq-breakpoints, "leftCol") + 2px);
+	}
+
+	@include mq($from: wide) {
+		width: calc(map.get($mq-breakpoints, "wide") + 2px);
+	}
+}
