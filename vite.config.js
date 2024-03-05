@@ -25,7 +25,7 @@ const app = async () => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "./src/lib/styles/generated/mq.scss";',
+          additionalData: '@use "sass:map"; @import "./src/lib/styles/generated/mq.scss";',
         },
       },
       postcss: {
