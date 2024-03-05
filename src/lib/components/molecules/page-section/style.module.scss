@@ -5,7 +5,7 @@
 .borderTop::before {
     display: block;
     content: "";
-    border-top: 1px solid #dcdcdc;
+    border-top: 1px solid var(--primary-line-color);
     transform: translate(-12px);
     width: calc(100% + 24px);
 

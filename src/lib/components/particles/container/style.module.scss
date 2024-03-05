@@ -3,8 +3,7 @@
 	width: 100%;
 	box-sizing: border-box;
 	padding: 0 var(--space-3);
-	// FIXME: this should be a CSS variable
-	border-color: #dcdcdc;
+	border-color: var(--primary-line-color);
 
 	@include mq($from: mobileLandscape) {
 		padding: 0 var(--space-5);
