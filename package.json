@@ -36,11 +36,7 @@
     "generate:styles": "node scripts/generateStyles.js"
   },
   "dependencies": {
-    "d3-geo": "^3.1.0",
-    "dayjs": "^1.11.10",
-    "proj4d3": "^1.0.1",
-    "topojson-client": "^3.1.0",
-    "vite-plugin-svgr": "^4.2.0"
+    "dayjs": "^1.11.10"
   },
   "devDependencies": {
     "@babel/core": "7.22.10",
@@ -87,7 +83,9 @@
     "storybook": "^7.6.17",
     "typescript": "5.1.6",
     "vite": "^4.0.0",
-    "vitest": "0.34.1"
+    "vitest": "0.34.1",
+    "proj4d3": "^1.0.1",
+    "topojson-client": "^3.1.0"
   },
   "peerDependencies": {
     "preact": "^10.12.1"
