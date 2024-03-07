@@ -11,6 +11,7 @@ export const Default = {
     name: 'Labour',
     total: 300,
     change: 120,
+    styles: { name: `before-color--con` },
     icon: <InfoIcon onMouseOver = {() => console.log('hello')} />
   },
   render: (args) => <ToplineResult {...args} />,

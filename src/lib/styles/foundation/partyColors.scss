@@ -1,26 +1,25 @@
 
 @mixin default-party-colors-uk {
     
-    --con: #0079B7;
+    --con: #0077B6;
     --lab: #C70000;
     --libdem: #E05E00;
-    --green: #33A22B;
+    --green: #39A566;
     --ukip: #BB3B80;
     --snp: #F5DC00;
     --dup: #8B0000;
     --alliance: #C9BB19;
     --uup: #004975;
     --sdlp: #23B4A9;
-    --tig: #333333;
     --plaid: #135E58;
     --sinnfein: #22874D;
-    --reform: #13bece;
+    --reform: #3DBBE2;
     --ind: #333333;
     --other: #848484;
     --speaker: #767676;
     --change: #333;
 
-    --undeclared: #848484;
+    --undeclared: #E7E7E7;
   }
   
 @mixin dark-mode-party-colors-uk {
@@ -35,7 +34,6 @@
     --alliance: #ab9f00;
     --uup: #346896;
     --sdlp: #28b8ad;
-    --tig: #333333;
     --plaid: #37716b;
     --sinnfein: #22874D;
     --reform: #3DBBE2;
@@ -44,7 +42,7 @@
     --speaker: #707070;
     --change: #494949;
 
-    --undeclared: #848484;
+    --undeclared: #494949;
   
   }
   
@@ -88,10 +86,6 @@
 
 .bg-color--sdlp {
     background-color: var(--sdlp) !important;
-}
-
-.bg-color--tig {
-    background-color: var(--tig) !important;
 }
 
 .bg-color--plaid {
@@ -171,10 +165,6 @@
     fill: var(--sdlp) !important;
 }
 
-.fill-color--tig {
-    fill: var(--tig) !important;
-}
-
 .fill-color--plaid {
     fill: var(--plaid) !important;
 }
@@ -251,9 +241,6 @@
     stroke: var(--sdlp) !important;
 }
 
-.stroke-color--tig {
-    stroke: var(--tig) !important;
-}
 
 .stroke-color--plaid {
     stroke: var(--plaid) !important;
@@ -327,10 +314,6 @@
 
 .color--sdlp {
     color: var(--sdlp) !important; 
-}
-
-.color--tig {
-    color: var(--tig) !important; 
 }
 
 .color--plaid {
@@ -409,10 +392,6 @@
     border-color: var(--sdlp) !important;
 }
 
-.border-color--tig {
-    border-color: var(--tig) !important;
-}
-
 .border-color--plaid {
     border-color: var(--plaid) !important;
 }
@@ -444,4 +423,114 @@
 
 .border-color--undeclared {
     border-color: var(--undeclared) !important;
+}
+
+/* BEFORE-ELEMENT-COLOR ----------------------------------------------------- */
+
+.before-color--con {
+    &:before {
+        background-color: var(--con) !important;
+    }
+}
+
+.before-color--lab {
+    &:before {
+        background-color: var(--lab) !important;
+    }
+}
+
+.before-color--libdem {
+    &:before {
+        background-color: var(--libdem) !important;
+    }
+}
+
+.before-color--green {
+    &:before {
+        background-color: var(--green) !important;
+    }
+}
+
+.before-color--ukip {
+    &:before {
+        background-color: var(--ukip) !important;
+    }
+}
+
+.before-color--snp {
+    &:before {
+        background-color: var(--snp) !important;
+    }
+}
+
+.before-color--dup {
+    &:before {
+        background-color: var(--dup) !important;
+    }
+}
+
+.before-color--alliance {
+    &:before {
+        background-color: var(--alliance) !important;
+    }
+}
+
+.before-color--uup {
+    &:before {
+        background-color: var(--uup) !important;
+    }
+}
+
+.before-color--sdlp {
+    &:before {
+        background-color: var(--sdlp) !important;
+    }
+}
+
+.before-color--plaid {
+    &:before {
+        background-color: var(--plaid) !important;
+    }
+}
+
+.before-color--sinnfein {
+    &:before {
+        background-color: var(--sinnfein) !important;
+    }
+}
+
+.before-color--reform {
+    &:before {
+        background-color: var(--reform) !important;
+    }
+}
+
+.before-color--ind {
+    &:before {
+        background-color: var(--ind) !important;
+    }
+}
+
+.before-color--other {
+    &:before {
+        background-color: var(--other) !important;
+    }
+}
+
+.before-color--speaker {
+    &:before {
+        background-color: var(--speaker) !important;
+    }
+}
+
+.before-color--change {
+    &:before {
+        background-color: var(--change) !important;
+    }
+}
+
+.before-color--undeclared {
+    &:before {
+        background-color: var(--undeclared) !important;
+    }
 }
