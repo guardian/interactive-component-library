@@ -1,5 +1,5 @@
 import { MapLocator } from '.'
-import ukmap from './ukmap.json'
+import exampleTopojson from './example_topo.json'
 import { feature } from 'topojson-client'
 import proj4d3 from 'proj4d3'
 
@@ -10,7 +10,7 @@ const meta = {
 
 const featureCollection = {
   type: 'FeatureCollection',
-  features: feature(ukmap, ukmap.objects.ukmap).features
+  features: feature(exampleTopojson, exampleTopojson.objects.ukmap).features
 }
 
 const width = 200
