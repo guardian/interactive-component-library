@@ -19,6 +19,7 @@ const app = async () => {
         $molecules: path.resolve(__dirname, 'src/lib/components/molecules'),
         $shared: path.resolve(__dirname, 'src/lib/shared'),
         $styles: path.resolve(__dirname, 'src/lib/styles'),
+        $storybook: path.resolve(__dirname, '.storybook'),
       },
     },
     plugins: [peerDepsExternal(), preact({ prefreshEnabled: false })],

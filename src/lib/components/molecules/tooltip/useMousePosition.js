@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'preact/hooks'
 
-export const useMousePosition = (elementRef) => {
+export const useMousePosition = (element) => {
   const [position, setPosition] = useState(null)
 
   const onMouseMove = ({ clientX, clientY, currentTarget }) => {
@@ -15,15 +15,18 @@ export const useMousePosition = (elementRef) => {
   }
 
   useEffect(() => {
-    const currentRef = elementRef.current
-    currentRef.addEventListener('mousemove', onMouseMove)
-    currentRef.addEventListener('mouseout', onMouseOut)
+    if (element) {
+      element.addEventListener('mousemove', onMouseMove)
+      element.addEventListener('mouseout', onMouseOut)
+    }
 
     return () => {
-      currentRef.removeEventListener('mousemove', onMouseMove)
-      currentRef.removeEventListener('mouseout', onMouseOut)
+      if (element) {
+        element.removeEventListener('mousemove', onMouseMove)
+        element.removeEventListener('mouseout', onMouseOut)
+      }
     }
-  }, [elementRef])
+  }, [element])
 
   return position
 }
