@@ -1,0 +1,15 @@
+.path {
+    fill: #707070;
+}
+
+.circle {
+    fill: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(body.ios), :global(body.android) {
+    :local(.path) {
+        fill: #999999;
+    }
+  }
+}
