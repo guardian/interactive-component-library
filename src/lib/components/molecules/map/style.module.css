@@ -1,0 +1,10 @@
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.svg {
+  fill: none;
+  stroke: #121212;
+  stroke-width: 1;
+}

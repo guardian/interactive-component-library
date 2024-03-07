@@ -2,6 +2,8 @@
 @import "../src/lib/styles/foundation/partyColors.scss";
 @import "../src/lib/styles/foundation/euPartyColors.scss";
 
+/// DARK MODE ///
+
 .sb-show-main.dark-mode {
   background-color: #1a1a1a;
 
@@ -26,4 +28,23 @@
   .sb-show-main.dark-mode::-webkit-scrollbar-thumb {
     background: #dcdcdc;
   }
+}
+
+/// DOCS STYLING ///
+
+ol {
+  list-style-type: decimal;
+}
+
+pre {
+  font-family: ui-monospace, Menlo, Monaco, 'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+    'Droid Sans Mono', 'Courier New', monospace;
+}
+
+.token.function {
+  color: #f3c100 !important;
+}
+
+h2 {
+  margin-top: 40px !important;
 }

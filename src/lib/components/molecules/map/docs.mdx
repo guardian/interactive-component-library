@@ -1,0 +1,114 @@
+import { Meta, Canvas, Source, Controls } from '@storybook/blocks'
+import { Hint } from '$storybook/blocks/Hint.jsx'
+import * as MapStories from './map.stories.jsx'
+import * as PolygonStories from './layers/polygon.stories.jsx'
+import * as PointStories from './layers/point.stories.jsx'
+import * as LineStories from './layers/line.stories.jsx'
+import * as PrerenderedStories from './layers/prerendered.stories.jsx'
+import styles from './stories.module.css'
+import ukCountriesTopoJSON from './sample-data/UK-countries-topo.json?url'
+
+<Meta of={MapStories} name="Documentation" />
+
+# Map
+
+> Preact component for rendering SVG maps (support for HTML canvas will be added later)
+
+The Map component is an abstraction around d3-geo, for quickly and accurately rendering SVG maps.
+
+## Getting started
+
+1. Load some geography from a [TopoJSON](https://github.com/topojson/topojson) file. To follow along with this example you can download <a href={ukCountriesTopoJSON} download>UK-countries-topo.json</a>
+
+<Source dark={true} code={`
+// UKMap.jsx
+import { feature } from 'topojson-client'
+import ukCountriesTopo from './path-to-topo.json'
+
+const ukCountries = feature(ukCountriesTopo, ukCountriesTopo.objects['countries'])
+
+`} />
+
+<Hint text="TopoJSON Client is a lightweight library for working with TopoJSON files. If you haven't already, install it using npm:" />
+
+<Source dark={true} code={`npm install topojson-client`} />
+
+2. Import Map, MapConfiguration and MapLayers from the component library
+
+<Source dark={true} code={`
+// UKMap.jsx
+// ...
+import { Map, MapConfiguration, MapLayers } from '@guardian/interactive-component-library'
+// ...
+`} />
+
+3. Create the Map component and pass a predefined configuration. In this case we want `UKComposite`.
+
+<Source dark={true} code={`
+// UKMap.jsx
+// ...
+<Map config={MapConfiguration.UKComposite}></Map>
+// ...
+`} />
+
+4. Add a Polygon layer to draw the geography
+
+<Source dark={true} code={`
+// UKMap.jsx
+// ...
+<Map config={MapConfiguration.UKComposite}>
+  <MapLayers.Polygon features={[ukCountries]} fill="#707070" />
+</Map>
+// ...
+`} />
+
+5. That's it! You should now have created this map. 
+
+<Canvas of={MapStories.UKMap} layout="centered" source={{code: `
+// UKMap.jsx
+import { feature } from 'topojson-client'
+import ukCountriesTopo from './path-to-topo.json'
+import { Map, MapConfiguration, MapLayers } from '@guardian/interactive-component-library'
+
+const ukCountries = feature(ukCountriesTopo, ukCountriesTopo.objects['countries'])
+
+export function UKMap() {
+  return (
+    <Map config={MapConfiguration.UKComposite}>
+      <MapLayers.Polygon features={[ukCountries]} fill="#707070" />
+    </Map>
+  )
+}
+`}} />
+
+<Hint text="Click ‘Show code’ on the map above to see the entire code sample" />
+
+## API
+
+### Map
+
+<Controls of={MapStories.UKMap} />
+
+### MapLayers.Polygon
+
+<Canvas of={PolygonStories.Polygon} />
+
+<Controls of={PolygonStories.Polygon} />
+
+### MapLayers.Point
+
+<Canvas of={PointStories.Point} />
+
+<Controls of={PointStories.Point} />
+
+### MapLayers.Line
+
+<Canvas of={LineStories.Line} />
+
+<Controls of={LineStories.Line} />
+
+### MapLayers.Prerendered
+
+<Canvas of={PrerenderedStories.Prerendered} />
+
+<Controls of={PrerenderedStories.Prerendered} />
