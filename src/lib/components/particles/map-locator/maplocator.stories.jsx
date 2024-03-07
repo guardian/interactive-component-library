@@ -15,7 +15,11 @@ const featureCollection = {
 }
 const width = 200
 const height = 300
+const size = { width, height }
 const proj4String = '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +units=m +no_defs'
+const coordinates = [0.1276, 51.5072]
+const radius = 15
+const marker = { coordinates, radius }
 
 const proj = proj4d3(proj4String).fitSize([width, height], featureCollection)
 const path = geoPath().projection(proj)
@@ -26,11 +30,9 @@ export const Default = {
   args: {
     projection: proj,
     path,
-    width,
-    height,
+    size,
     features: featureCollection.features,
-    markerCoordinates: [0.1276, 51.5072],
-    markerRadius: 15, // by default r should be an attribute rather than a style
+    marker,
     styles: {
       circle: 'fill-color--con'
     }
