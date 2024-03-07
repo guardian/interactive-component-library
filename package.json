@@ -37,9 +37,10 @@
   },
   "dependencies": {
     "d3-geo": "^3.1.0",
+    "dayjs": "^1.11.10",
     "proj4d3": "^1.0.1",
     "topojson-client": "^3.1.0",
-    "dayjs": "^1.11.10"
+    "vite-plugin-svgr": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "7.22.10",

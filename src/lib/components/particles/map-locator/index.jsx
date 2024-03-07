@@ -1,7 +1,7 @@
 import defaultStyles from "./style.module.css"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 
-export const MapLocator = ({ path, projection, features, size, marker, styles }) => {
+export const MapLocator = ({ svgPath, size, marker, styles }) => {
   styles = mergeStyles({ ...defaultStyles }, styles)
 
   return (
@@ -9,21 +9,11 @@ export const MapLocator = ({ path, projection, features, size, marker, styles })
       class={styles.svg}
       viewBox={`0 0 ${size.width} ${size.height}`}
       preserveAspectRatio={"xMinYMin"}>
-      <g>
-        {
-          features.map((f, i) =>
-            <path
-              class={styles.path}
-              key={i}
-              d={path(f)}
-            />
-          )
-        }
-      </g>
+      <image width={size.width} height={size.height} href={svgPath} />
       <g>
         <circle
-          cx={projection(marker.coordinates)[0]}
-          cy={projection(marker.coordinates)[1]}
+          cx={marker.cx}
+          cy={marker.cy}
           r={marker.radius}
           class={styles.circle}
         />
