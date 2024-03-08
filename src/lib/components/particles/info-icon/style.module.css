@@ -1,3 +1,9 @@
+.wrapper {
+  display: inline-block;
+  margin-left: 4px;
+  transform: translateY(1px);
+}
+
 .svg {
   cursor: pointer;
   border: 1px solid #dcdcdc;
