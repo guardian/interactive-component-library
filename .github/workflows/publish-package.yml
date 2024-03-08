@@ -25,22 +25,19 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@guardian'
+          # registry-url: 'https://npm.pkg.github.com'
+          # scope: '@guardian'
           cache: 'pnpm'
-
-      - name: Print contents of .npmrc
-        run: echo "NPMRC=$(cat .npmrc)" >> $GITHUB_OUTPUT
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build
-        run: pnpm build:lib
+      # - name: Build
+      #   run: pnpm build:lib
 
-      - name: Publish
-        run: pnpm publish --report-summary
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Publish
+      #   run: pnpm publish --report-summary
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
