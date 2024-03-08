@@ -17,11 +17,13 @@ jobs:
     permissions:
       contents: read
       packages: write
+    env:
+      TAG_NAME: ${{ inputs.tag || github.ref_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: refs/tags/${{ inputs.tag || github.ref }}
+          ref: refs/tags/${{ env.TAG_NAME }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
