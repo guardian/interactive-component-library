@@ -31,13 +31,14 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build:lib
+
+      - name: Configure access to Github Packages
+        run: pnpm config set @guardian:registry https://npm.pkg.github.com
+
+      - name: Publish
+        run: pnpm publish --report-summary
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Build
-      #   run: pnpm build:lib
-
-      # - name: Publish
-      #   run: pnpm publish --report-summary
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
