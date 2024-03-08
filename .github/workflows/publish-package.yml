@@ -44,6 +44,7 @@ jobs:
           title: 'Bump version to ${{ env.TAG_NAME }}'
           body: 'Automated pull requested created because a tag with the name ${{ env.TAG_NAME }} was pushed to the repo.'
   build:
+    needs: bump-version
     runs-on: ubuntu-latest
     permissions:
       contents: read
