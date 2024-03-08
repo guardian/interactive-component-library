@@ -43,7 +43,7 @@ jobs:
       - name: Create .npmrc file with access to Github Packages
         uses: ferluisxd/create-npmrc@3
         with:
-          org_name: '@guardian'
+          org_name: guardian
         env:
           AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
