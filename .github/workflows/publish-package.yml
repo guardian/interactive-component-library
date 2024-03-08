@@ -7,8 +7,8 @@ on:
       - main
   workflow_dispatch:
     inputs:
-      tags:
-        description: 'Version to publish'
+      tag:
+        description: 'Tag name'
         required: true
         type: string
 jobs:
@@ -21,7 +21,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref }}
+          ref: ref/tags/${{ inputs.tag || github.ref }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
