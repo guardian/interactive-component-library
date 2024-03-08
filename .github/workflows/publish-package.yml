@@ -40,8 +40,12 @@ jobs:
       - name: Build
         run: pnpm build:lib
 
-      - name: Configure access to Github Packages
-        run: pnpm config set @guardian:registry https://npm.pkg.github.com
+      - name: Create .npmrc file with access to Github Packages
+        uses: ferluisxd/create-npmrc@3
+        with:
+          org_name: '@guardian'
+        env:
+          AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish
         run: pnpm publish --no-git-checks --report-summary
