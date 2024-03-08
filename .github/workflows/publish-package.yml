@@ -1,8 +1,16 @@
 name: Publish package to GitHub Packages
 on:
-  release:
-    types: [published, edited]
+  workflow_run:
+    workflows: ['Bump version']
+    types: [completed]
+    branches:
+      - main
   workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Version to publish'
+        required: true
+        type: string
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,13 +28,10 @@ jobs:
         with:
           version: 8
 
-      # Set up .npmrc file to publish to GitHub Packages
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-          # registry-url: 'https://npm.pkg.github.com'
-          # scope: '@guardian'
           cache: 'pnpm'
 
       - name: Install dependencies
