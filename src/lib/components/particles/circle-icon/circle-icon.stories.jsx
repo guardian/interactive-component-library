@@ -7,6 +7,6 @@ export default {
 
 export const Default = {
     args: {
-        color: '#c70000'
+        abbreviation: 'lab'
     }
 }

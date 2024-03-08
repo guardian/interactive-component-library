@@ -67,9 +67,9 @@ export const SlopeChart = ({
           const itemStyles = mergeStyles({ ...styles }, line.styles)
           return (
             <g key={index}>
-              <line x1={0} y1={yScale(line.y1)} x2={contentWidth} y2={yScale(line.y2)} className={itemStyles.line} />
-              <circle cx={0} cy={yScale(line.y1)} r={4} className={itemStyles.circle} />
-              <circle cx={contentWidth} cy={yScale(line.y2)} r={4} className={itemStyles.circle} />
+              <line x1={0} y1={yScale(line.y1)} x2={contentWidth} y2={yScale(line.y2)} className={`${itemStyles.line} stroke-color--${line.abbreviation}`} />
+              <circle cx={0} cy={yScale(line.y1)} r={4} className={`${itemStyles.circle} fill-color--${line.abbreviation}`} />
+              <circle cx={contentWidth} cy={yScale(line.y2)} r={4} className={`${itemStyles.circle} fill-color--${line.abbreviation}`} />
             </g>
           )
         })}

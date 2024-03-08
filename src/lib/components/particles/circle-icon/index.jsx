@@ -1,7 +1,7 @@
 import defaultStyles from "./style.module.css"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 
-export const CircleIcon = ({color, styles}) => {
+export const CircleIcon = ({ abbreviation, styles}) => {
 
     styles = mergeStyles({...defaultStyles}, styles)
 
@@ -13,7 +13,7 @@ export const CircleIcon = ({color, styles}) => {
             viewBox="0 0 11 11" 
             width="11" 
             xmlns="http://www.w3.org/2000/svg">
-            <rect fill={color} height="11" rx="5.5" width="11" />
+            <rect class={`${styles.rect}  fill-color--${abbreviation}`} height="11" rx="5.5" width="11" />
         </svg>
     )
 }

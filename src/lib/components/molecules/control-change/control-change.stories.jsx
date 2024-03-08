@@ -5,13 +5,25 @@ export default {
   component: ControlChange,
 }
 
-const args = {
-  previous: { abbreviation: 'lab', color: '#c70000' },
-  next: { abbreviation: 'con', color: '#0096FF' },
-  text: 'Con gain from Lab',
+const hasChangedArgs = {
+  previous: 'lab',
+  next: 'con',
+  text: 'Con gain from Lab'
 }
 
-export const Default = {
-  args,
+const hasNotChangedArgs = {
+  previous: 'con',
+  next: 'con',
+  text: 'Con hold'
+}
+
+export const HasChanged = {
+  args: hasChangedArgs,
   render: (args) => <ControlChange {...args} />,
 }
+
+export const HasNotChanged = {
+  args: hasNotChangedArgs,
+  render: (args) => <ControlChange {...args} />,
+}
+

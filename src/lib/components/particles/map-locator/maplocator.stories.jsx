@@ -25,9 +25,9 @@ export const Default = {
   args: {
     projection,
     size: { width, height },
+    abbreviation: 'con',
     marker: { radius: 15, coordinates: [0.1276, 51.5072] },
     basemapImage: 'src/lib/components/particles/map-locator/example.svg',
-    styles: { circle: 'fill-color--con' }
   },
   render: (args) => <MapLocator {...args} />
 }

@@ -1,7 +1,7 @@
 import defaultStyles from "./style.module.css"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 
-export const MapLocator = ({ basemapImage, size, marker, styles, projection }) => {
+export const MapLocator = ({ basemapImage, size, marker, styles, projection, abbreviation }) => {
   styles = mergeStyles({ ...defaultStyles }, styles)
   const projectedCoords = projection(marker.coordinates)
   
@@ -16,7 +16,7 @@ export const MapLocator = ({ basemapImage, size, marker, styles, projection }) =
           cx={projectedCoords[0]}
           cy={projectedCoords[1]}
           r={marker.radius}
-          class={styles.circle}
+          class={`${styles.circle} fill-color--${abbreviation}`}
         />
       </g>
     </svg>

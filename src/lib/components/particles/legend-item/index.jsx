@@ -6,7 +6,7 @@ const DOT_TYPE = {
   square: 'square',
 }
 
-export const LegendItem = ({ dotType = DOT_TYPE.round, text, styles }) => {
+export const LegendItem = ({ dotType = DOT_TYPE.round, text, styles, abbreviation }) => {
   const defaultStylesCopy = { ...defaultStyles }
 
   if (dotType === DOT_TYPE.round) {
@@ -16,7 +16,7 @@ export const LegendItem = ({ dotType = DOT_TYPE.round, text, styles }) => {
   styles = mergeStyles(defaultStylesCopy, styles)
   return (
     <div className={styles.container}>
-      <span className={styles.dot} />
+      <span className={`${styles.dot} bg-color--${abbreviation}`} />
       <p className={styles.text}>{text}</p>
     </div>
   )

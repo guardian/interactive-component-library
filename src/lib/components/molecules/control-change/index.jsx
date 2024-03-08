@@ -6,22 +6,26 @@ import { mergeStyles } from '$styles/helpers/mergeStyles'
 export const ControlChange = ({ previous, next, text, styles }) => {
   styles = mergeStyles({ ...defaultStyles }, styles)
 
-  let hasChanged = next.abbreviation !== previous.abbreviation;
+  let hasChanged = next !== previous;
 
   return(
     <div class={styles.container}>
-          <>
-            { 
-              hasChanged 
-              ?
-              <GradientIcon
-                previousStopColor={previous.color}
-                nextStopColor={next.color}
-                />
-              :
-              <CircleIcon color={next.color} />
-            }
-            <strong className={styles.text}>{text}</strong>
-          </>
+        <>
+          { 
+            hasChanged 
+            ?
+            <GradientIcon
+              previous={previous}
+              next={next}
+              styles={{
+                previous: styles.previous,
+                next: styles.next,
+              }}
+              />
+            :
+            <CircleIcon abbreviation={next} styles={{ rect: styles.next }} />
+          }
+          <strong className={styles.text}>{text}</strong>
+        </>
     </div>)
 }

@@ -1,4 +1,5 @@
 import { GradientIcon } from '.'
+import myStoryStyle from './mystorystyle.module.css'
 
 export default {
   title: 'Particles/GradientIcon',
@@ -7,8 +8,25 @@ export default {
 
 export const Default = {
   args: {
-    previousStopColor: '#c70000',
-    nextStopColor: '#0096FF',
+    previous: 'lab',
+    next: 'con',
+  },
+  render: (args) => <GradientIcon {...args} />,
+}
+
+export const UsingCustomStyles = {
+  args: {
+    styles: myStoryStyle
+  },
+  render: (args) => <GradientIcon {...args} />,
+}
+
+export const UsingCustomPartyClasses = {
+  args: {
+    styles: {
+      previous: 'stop-color--lab',
+      next: 'stop-color--con',
+    }
   },
   render: (args) => <GradientIcon {...args} />,
 }

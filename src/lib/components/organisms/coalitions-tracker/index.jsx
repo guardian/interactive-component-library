@@ -10,6 +10,7 @@ export function CoalitionsTracker({
   listMembersAccessor = 'parties',
   listMemberTotalAccessor = 'totalSeats',
   listDescriptionAccessor = 'description',
+  abbreviationAccessor = 'abbreviation',
   thresholdTextBold,
   thresholdText,
 }) {
@@ -40,7 +41,7 @@ export function CoalitionsTracker({
           return {
             label: m[listMemberTotalAccessor],
             fraction: m[listMemberTotalAccessor] / listTotal,
-            fill: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+            abbreviation: m[abbreviationAccessor],
           }
         })
         .sort((a, b) => b.fraction - a.fraction),
