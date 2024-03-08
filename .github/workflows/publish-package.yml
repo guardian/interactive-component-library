@@ -29,6 +29,9 @@ jobs:
           scope: '@guardian'
           cache: 'pnpm'
 
+      - name: Print contents of .npmrc
+        run: echo "NPMRC=$(cat .npmrc)" >> $GITHUB_OUTPUT
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
         env:
