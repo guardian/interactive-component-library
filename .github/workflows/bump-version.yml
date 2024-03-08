@@ -37,5 +37,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'Bump version to ${{ env.TAG_NAME }}'
           branch: ${{ env.TAG_NAME }}
+          base: main
           title: 'Bump version to ${{ env.TAG_NAME }}'
           body: 'Automated pull requested created because a tag with the name ${{ env.TAG_NAME }} was pushed to the repo.'
