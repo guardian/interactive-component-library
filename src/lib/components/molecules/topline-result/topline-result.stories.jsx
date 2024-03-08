@@ -11,8 +11,26 @@ export const Default = {
     name: 'Labour',
     total: 300,
     change: 120,
-    styles: { name: `before-color--con` },
-    icon: <InfoIcon onMouseOver = {() => console.log('hello')} />
+    styles: { name: `before-color--lab` }
   },
-  render: (args) => <ToplineResult {...args} />,
+  render: (args) => (
+    <ToplineResult {...args}>
+      <InfoIcon onMouseOver={() => console.log('hello')} />
+    </ToplineResult>
+  )
+}
+
+export const Row = {
+  args: {
+    name: 'Labour',
+    total: 300,
+    change: 120,
+    displayRow: true,
+    styles: { name: `before-color--lab`}
+  },
+  render: (args) => (
+    <ToplineResult {...args}>
+      <InfoIcon onMouseOver={() => console.log('hello')} />
+    </ToplineResult>
+  ),
 }
