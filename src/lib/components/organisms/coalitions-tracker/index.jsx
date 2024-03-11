@@ -60,7 +60,7 @@ export function CoalitionsTracker({
     return (
       <div key={index} className={styles.coalition} style={{ position: 'relative', zIndex: 2 }}>
         <h4 className={styles.title}>{list.title}</h4>
-        <p className={styles.description}>{list.description}</p>
+        <p className={styles.description} style={{ maxWidth: thresholdLeft <= 620 ? thresholdLeft - 8 : 620 }}>{list.description}</p>
         <StackedBar stack={list.stack} width={list.width} height={barChartHeight} createSVG={true} />
       </div>
     )

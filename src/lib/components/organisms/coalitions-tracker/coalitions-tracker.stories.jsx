@@ -38,7 +38,7 @@ const results = [
 const data = [
   { name: 'Lab-Lib', parties: ['libdem', 'lab'], description: 'lorem ipsum dolor sit' },
   { name: 'Lab-Lib-Green', parties: ['snp', 'lab', 'libdem', 'green'], description: 'Sed ut perspiciatis unde omnis ist' },
-  { name: 'Lab-SNP', parties: ['lab', 'snp'], description: 'Ut enim ad minima veniam, quis nostrum exercitationem' },
+  { name: 'Lab-SNP', parties: ['lab', 'snp'], description: 'Ut enim ad minima veniam, quis nostrum exercitationem, Ut enim ad minima veniam, quis nostrum exercitationem Ut enim ad minima veniam, quis nostrum exercitationem' },
 ].map((a) => ({
   name: a.name,
   description: a.description,
