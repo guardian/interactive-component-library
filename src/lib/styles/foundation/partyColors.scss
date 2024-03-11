@@ -445,6 +445,12 @@
     }
 }
 
+.before-color--lib-dem {
+    &:before {
+        background-color: var(--libdem) !important;
+    }
+}
+
 .before-color--green {
     &:before {
         background-color: var(--green) !important;
