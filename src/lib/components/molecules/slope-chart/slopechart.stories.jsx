@@ -15,19 +15,12 @@ export const Default = {
       {
         y1: 30,
         y2: 10,
-        styles: {
-          line: 'stroke-color--snp',
-          circle: 'fill-color--snp',
-        },
+        abbreviation: 'snp',
       },
       {
         y1: 20,
         y2: 70,
-        color: 'LD',
-        styles: {
-          line: 'stroke-color--libdem',
-          circle: 'fill-color--libdem',
-        },
+        abbreviation: 'libdem',
       },
     ],
     y2Label: (d) => `${d.y2}%`,

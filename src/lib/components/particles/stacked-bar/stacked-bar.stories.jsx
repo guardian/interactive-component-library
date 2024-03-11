@@ -7,7 +7,7 @@ const meta = {
 
 export default meta
 
-export const Default = {
+export const UsingHexColours = {
   args: {
     stack: [
       {
@@ -24,6 +24,31 @@ export const Default = {
         label: '40',
         fraction: 0.2,
         fill: '#CCC',
+      },
+    ],
+    width: 358,
+    height: 32,
+  },
+  render: (args) => <StackedBar {...args} />,
+}
+
+export const UsingAbbreviations = {
+  args: {
+    stack: [
+      {
+        label: '120',
+        fraction: 0.6,
+        abbreviation: 'lab',
+      },
+      {
+        label: '40',
+        fraction: 0.2,
+        abbreviation: 'con',
+      },
+      {
+        label: '40',
+        fraction: 0.2,
+        abbreviation: 'undeclared'
       },
     ],
     width: 358,

@@ -9,9 +9,9 @@ export default {
 export const Default = {
   args: {
     name: 'Labour',
-    total: 300,
-    change: 120,
-    styles: { name: `before-color--lab` }
+    abbreviation: 'lab',
+    mainNumber: 300,
+    secondaryNumber: 120,
   },
   render: (args) => (
     <ToplineResult {...args}>
@@ -23,10 +23,10 @@ export const Default = {
 export const Row = {
   args: {
     name: 'Labour',
-    total: 300,
-    change: 120,
+    abbreviation: 'lab',
+    mainNumber: 300,
+    secondaryNumber: 120,
     displayRow: true,
-    styles: { name: `before-color--lab`}
   },
   render: (args) => (
     <ToplineResult {...args}>

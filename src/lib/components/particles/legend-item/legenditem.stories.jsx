@@ -8,9 +8,7 @@ export default {
 export const Default = {
   args: {
     text: 'Legend item',
-    styles: {
-      dot: 'bg-color--con',
-    },
+    abbreviation: 'con'
   },
 }
 
@@ -18,8 +16,6 @@ export const SquareStyle = {
   args: {
     dotType: 'square',
     text: 'Legend item',
-    styles: {
-      dot: 'bg-color--lab',
-    },
+    abbreviation: 'lab'
   },
 }

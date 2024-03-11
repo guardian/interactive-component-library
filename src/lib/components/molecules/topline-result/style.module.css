@@ -21,12 +21,12 @@
     -webkit-font-feature-settings: "lnum";
     font-feature-settings: "lnum";
 
-    .total {
+    .mainNumber {
         color: var(--primary-text-color);
         font-size: var(--titlepiece-xsmall);
     }
 
-    .change {
+    .secondaryNumber {
         color: var(--secondary-text-color);
         font-size: var(--titlepiece-xxsmall);
     }
@@ -38,8 +38,8 @@
 
   .displayRow {
     flex-direction: row;
-    .total {
-      margin-right: 2px;
+    .mainNumber {
+      margin-right: var(--space-0);
     }
   }
 

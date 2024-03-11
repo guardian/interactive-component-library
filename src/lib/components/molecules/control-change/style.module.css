@@ -3,8 +3,15 @@
   font-size: var(--sans-small);
   line-height: var(--sans-line-height);
   font-weight: 700;
+  margin-left: var(--space-1);
 }
 
 .container {
   font-weight: 700;
+}
+
+.previous {
+}
+
+.next {
 }

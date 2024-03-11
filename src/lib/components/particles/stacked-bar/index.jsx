@@ -16,8 +16,14 @@ export function StackedBar({ stack, width, height, createSVG = true, styles }) {
       const paddingX = 8
       const hideText = textElement.getBBox().width + paddingX > rectElement.getBBox().width
 
+      const rectStyle = window.getComputedStyle(rectElement)
+      const rectColor = rectStyle.getPropertyValue('fill')
+      const textColor = isDarkColor(rectColor) ? '#FFF' : '#121212'
+      textElement.style.fill = textColor
+
+
       if (hideText) {
-        // if any is too big, hide all and break
+        // if any are too big, hide all and break
         setHideLabels(true)
         return
       }
@@ -32,14 +38,14 @@ export function StackedBar({ stack, width, height, createSVG = true, styles }) {
   let totalWidth = 0
   const content = stack.map((d, index) => {
     const itemWidth = d.fraction * width
-    const textColor = isDarkColor(d.fill) ? '#FFF' : '#121212'
+
     const value = (
       <g key={index} transform={`translate(${totalWidth}, 0)`}>
         <rect
           ref={(element) => (rectElements.current[index] = element)}
           width={itemWidth}
           height={height}
-          className={styles.bar}
+          className={`${styles.bar} fill-color--${d.abbreviation}`}
           style={{ fill: d.fill }}
           shape-rendering="crispEdges"
         />
@@ -51,7 +57,7 @@ export function StackedBar({ stack, width, height, createSVG = true, styles }) {
           alignment-baseline="central"
           text-rendering="optimizeLegibility"
           className={styles.label}
-          style={{ fill: textColor, visibility: hideLabels ? 'hidden' : 'visible' }} //using visibility rather than display makes sure the text width is always calculated correctly
+          style={{  visibility: hideLabels ? 'hidden' : 'visible' }} //using visibility rather than display makes sure the text width is always calculated correctly
         >
           {d.label}
         </text>
