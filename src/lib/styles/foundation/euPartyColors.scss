@@ -2,7 +2,7 @@
 @mixin default-party-colors-eu {
     --left: #8B0000;
     --sd: #C70000;
-    --green-efa: #39A566;
+    --greenefa: #39A566;
     --renew: #F5DC00;
     --epp: #13bece;
     --ecr: #0079B7;
@@ -17,7 +17,7 @@
 
     --left: #8B0000;
     --sd: #dc2e1c;
-    --green-efa: #39A566;
+    --greenefa: #39A566;
     --renew: #F5DC00;
     --epp: #3DBBE2;
     --ecr: #009ae1;
@@ -38,8 +38,8 @@
     background-color: var(--sd) !important;
 }
 
-.bg-color--green-efa {
-    background-color: var(--green-efa) !important;
+.bg-color--greenefa {
+    background-color: var(--greenefa) !important;
 }
 
 .bg-color--renew {
@@ -75,8 +75,8 @@
     fill: var(--sd) !important;
 }
 
-.fill-color--green-efa {
-    fill: var(--green-efa) !important;
+.fill-color--greenefa {
+    fill: var(--greenefa) !important;
 }
 
 .fill-color--renew {
@@ -110,8 +110,8 @@
     stroke: var(--sd) !important;
 }
 
-.stroke-color--green-efa {
-    stroke: var(--green-efa) !important;
+.stroke-color--greenefa {
+    stroke: var(--greenefa) !important;
 }
 
 .stroke-color--renew {
@@ -145,8 +145,8 @@
     color: var(--sd) !important; 
 }
 
-.color--green-efa {
-    color: var(--green-efa) !important; 
+.color--greenefa {
+    color: var(--greenefa) !important; 
 }
 
 .color--renew {
@@ -180,8 +180,8 @@
     border-color: var(--sd) !important;
 }
 
-.border-color--green-efa {
-    border-color: var(--green-efa) !important;
+.border-color--greenefa {
+    border-color: var(--greenefa) !important;
 }
 
 .border-color--renew {
@@ -219,9 +219,9 @@
     }
 }
 
-.before-color--green-efa {
+.before-color--greenefa {
     &:before {
-        background-color: var(--green-efa) !important;
+        background-color: var(--greenefa) !important;
     }
 }
 
