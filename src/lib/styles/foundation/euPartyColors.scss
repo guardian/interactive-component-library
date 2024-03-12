@@ -1,0 +1,258 @@
+
+@mixin default-party-colors-eu {
+    --left: #8B0000;
+    --sd: #C70000;
+    --green-efa: #39A566;
+    --renew: #F5DC00;
+    --epp: #13bece;
+    --ecr: #0079B7;
+    --id:#BB3B80;
+    --ni: #333333;
+
+    --undeclared: #848484;
+
+  }
+  
+@mixin dark-mode-party-colors-eu {
+
+    --left: #8B0000;
+    --sd: #dc2e1c;
+    --green-efa: #39A566;
+    --renew: #F5DC00;
+    --epp: #3DBBE2;
+    --ecr: #009ae1;
+    --id: #DC559D;
+    --ni: #A1A1A1;
+
+    --undeclared: #848484;
+
+  }
+  
+/* BACKGROUND-COLOR -------------------------------------------- */ 
+
+.bg-color--left {
+    background-color: var(--left) !important;
+}
+
+.bg-color--sd {
+    background-color: var(--sd) !important;
+}
+
+.bg-color--green-efa {
+    background-color: var(--green-efa) !important;
+}
+
+.bg-color--renew {
+    background-color: var(--renew) !important;
+}
+
+.bg-color--epp {
+    background-color: var(--epp) !important;
+}
+
+.bg-color--ecr {
+    background-color: var(--ecr) !important;
+}
+
+.bg-color--id {
+    background-color: var(--id) !important;
+}
+
+.bg-color--ni {
+    background-color: var(--ni) !important;
+}
+
+
+
+  
+/* FILL ----------------------------------------------------------- */ 
+
+.fill-color--left {
+    fill: var(--left) !important;
+}
+
+.fill-color--sd {
+    fill: var(--sd) !important;
+}
+
+.fill-color--green-efa {
+    fill: var(--green-efa) !important;
+}
+
+.fill-color--renew {
+    fill: var(--renew) !important;
+}
+
+.fill-color--epp {
+    fill: var(--epp) !important;
+}
+
+.fill-color--ecr {
+    fill: var(--ecr) !important;
+}
+
+.fill-color--id {
+    fill: var(--id) !important;
+}
+
+.fill-color--ni {
+    fill: var(--ni) !important;
+}
+
+
+/* STROKE-COLOR --------------------------------------------------- */ 
+
+.stroke-color--left {
+    stroke: var(--left) !important;
+}
+
+.stroke-color--sd {
+    stroke: var(--sd) !important;
+}
+
+.stroke-color--green-efa {
+    stroke: var(--green-efa) !important;
+}
+
+.stroke-color--renew {
+    stroke: var(--renew) !important;
+}
+
+.stroke-color--epp {
+    stroke: var(--epp) !important;
+}
+
+.stroke-color--ecr {
+    stroke: var(--ecr) !important;
+}
+
+.stroke-color--id {
+    stroke: var(--id) !important;
+}
+
+.stroke-color--ni {
+    stroke: var(--ni) !important;
+}
+
+
+/* COLOR ----------------------------------------------------------- */ 
+
+.color--left {
+    color: var(--left) !important; 
+}
+
+.color--sd {
+    color: var(--sd) !important; 
+}
+
+.color--green-efa {
+    color: var(--green-efa) !important; 
+}
+
+.color--renew {
+    color: var(--renew) !important; 
+}
+
+.color--epp {
+    color: var(--epp) !important; 
+}
+
+.color--ecr {
+    color: var(--ecr) !important; 
+}
+
+.color--id {
+    color: var(--id) !important; 
+}
+
+.color--ni {
+    color: var(--ni) !important; 
+}
+
+
+/* BORDER-COLOR ----------------------------------------------------- */ 
+
+.border-color--left {
+    border-color: var(--left) !important;
+}
+
+.border-color--sd {
+    border-color: var(--sd) !important;
+}
+
+.border-color--green-efa {
+    border-color: var(--green-efa) !important;
+}
+
+.border-color--renew {
+    border-color: var(--renew) !important;
+}
+
+.border-color--epp {
+    border-color: var(--epp) !important;
+}
+
+.border-color--ecr {
+    border-color: var(--ecr) !important;
+}
+
+.border-color--id {
+    border-color: var(--id) !important;
+}
+
+.border-color--ni {
+    border-color: var(--ni) !important;
+}
+
+
+/* BEFORE-ELEMENT-COLOR ----------------------------------------------------- */
+
+.before-color--left {
+    &:before {
+        background-color: var(--left) !important;
+    }
+}
+
+.before-color--sd {
+    &:before {
+        background-color: var(--sd) !important;
+    }
+}
+
+.before-color--green-efa {
+    &:before {
+        background-color: var(--green-efa) !important;
+    }
+}
+
+.before-color--renew {
+    &:before {
+        background-color: var(--renew) !important;
+    }
+}
+
+.before-color--epp {
+    &:before {
+        background-color: var(--epp) !important;
+    }
+}
+
+.before-color--ecr {
+    &:before {
+        background-color: var(--ecr) !important;
+    }
+}
+
+.before-color--id {
+    &:before {
+        background-color: var(--id) !important;
+    }
+}
+
+.before-color--ni {
+    &:before {
+        background-color: var(--ni) !important;
+    }
+}
+
+

@@ -7,6 +7,7 @@
 
 @import "./foundation/colors.scss";
 @import "./foundation/partyColors.scss";
+@import "./foundation/euPartyColors.scss";
 @import "./generated/spacing.css";
 
 @import "./generated/mq.scss";
@@ -14,6 +15,7 @@
 body {
   @include default-colors;
   @include default-party-colors-uk;
+  @include default-party-colors-eu;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +24,6 @@ body {
   body.android {
     @include dark-mode-colors;
     @include dark-mode-party-colors-uk;
+    @include dark-mode-party-colors-eu;
   }
 }
