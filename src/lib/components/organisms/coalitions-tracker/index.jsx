@@ -71,7 +71,7 @@ export function CoalitionsTracker({
   }
 
   return (
-    <div ref={wrapperRef} style={{ width: '100%', position: 'relative' }}>
+    <div ref={wrapperRef} className={styles.coalitionsWrapper}>
       <div className={styles.coalitionsContainer}>{parsedLists.map(renderCoalition)}</div>
       <div
         style={{
