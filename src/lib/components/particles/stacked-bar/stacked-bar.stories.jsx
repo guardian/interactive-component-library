@@ -11,8 +11,8 @@ export const UsingHexColours = {
   args: {
     stack: [
       {
-        label: '120',
-        fraction: 0.6,
+        label: '40',
+        fraction: 0.2,
         fill: '#FF0000',
       },
       {
@@ -23,11 +23,12 @@ export const UsingHexColours = {
       {
         label: '40',
         fraction: 0.2,
-        fill: '#CCC',
+        fill: '#E05E00',
       },
     ],
     width: 358,
     height: 32,
+    showBgRect: true,
   },
   render: (args) => <StackedBar {...args} />,
 }
@@ -53,6 +54,7 @@ export const UsingAbbreviations = {
     ],
     width: 358,
     height: 32,
+    showBgRect: false,
   },
   render: (args) => <StackedBar {...args} />,
 }
@@ -78,6 +80,7 @@ export const Compact = {
     ],
     width: 200,
     height: 20,
+    showBgRect: true,
   },
   render: (args) => <StackedBar {...args} />,
 }
