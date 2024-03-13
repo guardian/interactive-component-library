@@ -1,7 +1,8 @@
 import { useLayoutEffect, useState, useRef } from 'preact/hooks'
 import { useWindowSize } from '$shared/hooks/useWindowSize'
 import { StackedBar } from '$particles/stacked-bar'
-import styles from './style.module.scss'
+import defaultStyles from './style.module.scss'
+import { mergeStyles } from '$styles/helpers/mergeStyles'
 
 export function CoalitionsTracker({
   coalitions,
@@ -13,6 +14,7 @@ export function CoalitionsTracker({
   abbreviationAccessor = 'abbreviation',
   thresholdTextBold,
   thresholdText,
+  styles
 }) {
   const wrapperRef = useRef(null)
   const thresholdTextRef = useRef(null)
@@ -47,6 +49,8 @@ export function CoalitionsTracker({
         .sort((a, b) => b.fraction - a.fraction),
     }
   })
+
+  styles = mergeStyles(defaultStyles, styles)
 
   useLayoutEffect(() => {
     const newWidth = wrapperRef.current.getBoundingClientRect().width
