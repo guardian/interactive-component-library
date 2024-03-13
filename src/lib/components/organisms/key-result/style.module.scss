@@ -1,0 +1,33 @@
+.header {
+  max-width: 100%;
+  display: flex;
+  margin-bottom: var(--space-4);
+}
+
+.locatorContainer {
+  > * {
+    height: 90px;
+    max-width: 80px;
+  }
+    
+}
+
+.headerText {
+  font-family: var(--text-headline);
+  line-height: var(--headline-line-height);
+  font-size: var(--headline-font-size);
+  margin-bottom: var(--space-2);
+}
+
+.body {
+}
+
+.bodyText {
+  font-family: var(--text-serif);
+  font-size: var(--body-medium);
+  line-height: var(--line-height-loose);
+}
+
+strong {
+  font-weight: bold;
+}

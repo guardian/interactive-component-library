@@ -1,3 +1,7 @@
+.svg {
+  overflow: visible;
+}
+
 .line {
   stroke: #121212;
   stroke-width: 2;
@@ -28,3 +32,8 @@
 .axisLabel {
   transform: translateY(var(--space-1));
 }
+
+.slopeChartContainer {
+  max-width: 300px;
+}
+
