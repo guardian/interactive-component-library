@@ -8,6 +8,6 @@
   line-height: var(--sans-line-height);
 }
 
-.bgRectFill {
+.backgroundRect {
   fill: var(--news-grey-05);
 }

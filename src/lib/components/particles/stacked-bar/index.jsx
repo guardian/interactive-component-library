@@ -3,7 +3,7 @@ import { isDarkColor } from '$shared/colors'
 import defaultStyles from './style.module.css'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
 
-export function StackedBar({ stack, width, height, showBgRect, createSVG = true, styles }) {
+export function StackedBar({ stack, width, height, showBackgroundRect = false, createSVG = true, styles }) {
   const rectElements = useRef([])
   const textElements = useRef([])
   const [hideLabels, setHideLabels] = useState(true)
@@ -68,9 +68,8 @@ export function StackedBar({ stack, width, height, showBgRect, createSVG = true,
     return value
   })
 
-  const bgRect = (<g className="background-fill"><rect x="0" y="0" height={height} width={width} className={styles.bgRectFill} /></g>)
+  const backgroundRect = <g><rect x="0" y="0" height={height} width={width} className={styles.backgroundRect} /></g>
   
-
   if (createSVG) {
     return (
       <svg
@@ -80,7 +79,7 @@ export function StackedBar({ stack, width, height, showBgRect, createSVG = true,
         viewBox={`0 0 ${width} ${height}`}
         xmlns="http://www.w3.org/2000/svg"
       >
-        {showBgRect && bgRect}
+        {showBackgroundRect && backgroundRect}
         {content}
       </svg>
     )
