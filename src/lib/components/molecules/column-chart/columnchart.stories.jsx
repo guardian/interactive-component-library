@@ -14,12 +14,12 @@ export const Default = {
     columnWidth: 20,
     columns: [
       {
-        value : 10,
+        value : 100,
         id: "con",
         color: "blue"
       },
       {
-        value : -10,
+        value : -100,
         id: "lab",
         color: "red"
       },
