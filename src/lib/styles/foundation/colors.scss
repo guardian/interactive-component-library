@@ -2,6 +2,8 @@
 // from visuals colour guide: https://www.figma.com/file/RZHnmwc2tmB6j1k4bNtyND/Style-Guide?type=design&node-id=1124%3A325&mode=design&t=bRPBxmJ7FZ5Wlk0R-1
 
 @mixin default-colors {
+  --border-divider-color: #DCDCDC;
+
   --primary-text-color: #121212;
   --secondary-text-color: #707070;
 
@@ -34,6 +36,8 @@
 }
 
 @mixin dark-mode-colors {
+  --border-divider-color: #606060;
+
   --primary-text-color: #DCDCDC;
   --secondary-text-color: #C8C8C8;
 

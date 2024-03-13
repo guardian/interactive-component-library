@@ -3,7 +3,7 @@
 	width: 100%;
 	box-sizing: border-box;
 	padding: 0 var(--space-3);
-	border-color: var(--primary-line-color);
+	border-color: var(--border-divider-color);
 
 	@include mq($from: mobileLandscape) {
 		padding: 0 var(--space-5);
