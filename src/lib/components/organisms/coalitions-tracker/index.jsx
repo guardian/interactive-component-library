@@ -1,7 +1,8 @@
 import { useLayoutEffect, useState, useRef } from 'preact/hooks'
 import { useWindowSize } from '$shared/hooks/useWindowSize'
 import { StackedBar } from '$particles/stacked-bar'
-import styles from './style.module.scss'
+import defaultStyles from './style.module.scss'
+import { mergeStyles } from '$styles/helpers/mergeStyles'
 
 export function CoalitionsTracker({
   coalitions,
@@ -13,6 +14,7 @@ export function CoalitionsTracker({
   abbreviationAccessor = 'abbreviation',
   thresholdTextBold,
   thresholdText,
+  styles
 }) {
   const wrapperRef = useRef(null)
   const thresholdTextRef = useRef(null)
@@ -48,6 +50,8 @@ export function CoalitionsTracker({
     }
   })
 
+  styles = mergeStyles(defaultStyles, styles)
+
   useLayoutEffect(() => {
     const newWidth = wrapperRef.current.getBoundingClientRect().width
     setWidth(newWidth)
@@ -60,14 +64,14 @@ export function CoalitionsTracker({
     return (
       <div key={index} className={styles.coalition} style={{ position: 'relative', zIndex: 2 }}>
         <h4 className={styles.title}>{list.title}</h4>
-        <p className={styles.description}>{list.description}</p>
+        <p className={styles.description} style={{ maxWidth: thresholdLeft <= 620 ? thresholdLeft - 8 : 620 }}>{list.description}</p>
         <StackedBar stack={list.stack} width={list.width} height={barChartHeight} createSVG={true} />
       </div>
     )
   }
 
   return (
-    <div ref={wrapperRef} style={{ width: '100%', position: 'relative' }}>
+    <div ref={wrapperRef} className={styles.coalitionsWrapper}>
       <div className={styles.coalitionsContainer}>{parsedLists.map(renderCoalition)}</div>
       <div
         style={{
