@@ -1,6 +1,6 @@
-import { useMemo, useRef, useState, useLayoutEffect } from 'preact/hooks'
+// import { useMemo, useRef, useState, useLayoutEffect } from 'preact/hooks'
 import defaultStyles from './style.module.css'
-import { mergeStyles } from '$styles/helpers/mergeStyles'
+// import { mergeStyles } from '$styles/helpers/mergeStyles'
 import { scaleLinear } from 'd3-scale'
 // import { scaleLinear } from './column-chart-util'
 
@@ -16,7 +16,7 @@ export const ColumnChart = ({
 
   return (
     <>
-  <svg width={chartHeight} height={chartHeight} style="background-color:lightgrey; overlow: visible">
+  <svg width={chartHeight} height={chartHeight} style="">
     {columns.map((column, index) => {
 
       const getHeight = (input) => {

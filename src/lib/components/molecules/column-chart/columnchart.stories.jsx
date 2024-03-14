@@ -27,3 +27,24 @@ export const Default = {
   },
   render: (args) => <ColumnChart {...args} />,
 }
+
+export const Councillors = {
+  args: {
+    domain: [300, -100],
+    chartHeight: 400,
+    columnWidth: 20,
+    columns: [
+      {
+        value : 100,
+        id: "con",
+        color: "blue"
+      },
+      {
+        value : -100,
+        id: "lab",
+        color: "red"
+      },
+    ]
+  },
+  render: (args) => <ColumnChart {...args} />,
+}
