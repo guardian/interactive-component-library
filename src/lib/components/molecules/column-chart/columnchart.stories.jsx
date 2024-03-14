@@ -9,7 +9,8 @@ export default meta
 
 export const Default = {
   args: {
-    domain: [300, -100],
+    minValue: -100,
+    maxValue: 300,
     chartHeight: 400,
     columnWidth: 20,
     columns: [
@@ -30,7 +31,8 @@ export const Default = {
 
 export const Councillors = {
   args: {
-    domain: [300, -100],
+    minValue: -100,
+    maxValue: 300,
     chartHeight: 400,
     columnWidth: 20,
     columns: [

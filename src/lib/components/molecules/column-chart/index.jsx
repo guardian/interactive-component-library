@@ -6,13 +6,14 @@ import { scaleLinear } from 'd3-scale'
 
 export const ColumnChart = ({
   columns,
-  domain,
+  maxValue,
+  minValue,
   chartHeight,
   columnWidth,
   // styles = {},
 }) => {
  
-  const yScale = scaleLinear(domain, [0, chartHeight])
+  const yScale = scaleLinear([maxValue,minValue], [0, chartHeight])
 
   return (
     <>
