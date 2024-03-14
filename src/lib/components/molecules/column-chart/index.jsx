@@ -33,6 +33,7 @@ export const ColumnChart = ({
           width={columnWidth}
           y={column.value > 0 ? (yScale(column.value)): yScale(0)}
           fill={column.color}
+          className={`fill-color--${column.id}`}
           id={column.id}
         />
         {/* <text x={index * 2 * columnWidth} y="20">V: {column.value}</text>
