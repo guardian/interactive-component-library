@@ -12,6 +12,7 @@ export const Default = {
     minValue: -100,
     maxValue: 300,
     chartHeight: 400,
+    chartWidth: 400,
     columnWidth: 20,
     columns: [
       {

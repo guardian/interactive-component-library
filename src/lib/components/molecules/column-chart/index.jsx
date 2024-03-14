@@ -9,6 +9,7 @@ export const ColumnChart = ({
   maxValue,
   minValue,
   chartHeight,
+  chartWidth,
   columnWidth,
   // styles = {},
 }) => {
@@ -17,7 +18,7 @@ export const ColumnChart = ({
 
   return (
     <>
-  <svg width={chartHeight} height={chartHeight} style="">
+  <svg width={chartWidth} height={chartHeight} style="">
     {columns.map((column, index) => {
 
       const getHeight = (input) => {
