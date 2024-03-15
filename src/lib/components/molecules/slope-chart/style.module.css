@@ -1,3 +1,11 @@
+.slopeChartContainer {
+  max-width: 300px;
+}
+
+.svg {
+  overflow: visible;
+}
+
 .line {
   stroke: #121212;
   stroke-width: 2;

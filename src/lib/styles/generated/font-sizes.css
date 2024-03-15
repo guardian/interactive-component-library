@@ -26,9 +26,9 @@
 --body-small: 15px;
 --body-medium: 17px;
 
---line-height-tight: 1.15px;
---line-height-regular: 1.3px;
---line-height-loose: 1.4px;
+--line-height-tight: 1.15;
+--line-height-regular: 1.3;
+--line-height-loose: 1.4;
 
 --headline-line-height: 1.15;
 --sans-line-height: 1.3;
