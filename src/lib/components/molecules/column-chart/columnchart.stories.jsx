@@ -13,17 +13,23 @@ export const Default = {
     maxValue: 300,
     chartHeight: 400,
     chartWidth: 400,
-    columnWidth: 20,
+    columnWidth: 50,
+    columnPadding: {
+      left: 0,
+      right: 6
+    },
     columns: [
       {
         value : 100,
         id: "con",
-        color: "blue"
+        color: "blue",
+        label: "Con"
       },
       {
         value : -100,
         id: "lab",
-        color: "red"
+        color: "red",
+        label : "Lab"
       },
     ]
   },
@@ -35,7 +41,7 @@ export const Councillors = {
     minValue: -100,
     maxValue: 300,
     chartHeight: 400,
-    columnWidth: 20,
+    columnWidth: 50,
     columns: [
       {
         value : 100,

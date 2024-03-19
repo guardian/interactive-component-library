@@ -26,4 +26,13 @@ body {
     @include dark-mode-party-colors-uk;
     @include dark-mode-party-colors-eu;
   }
+
+  body {
+    @include dark-mode-colors;
+    @include dark-mode-party-colors-uk;
+    @include dark-mode-party-colors-eu;  
+  }
+
+
+
 }

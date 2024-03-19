@@ -614,3 +614,9 @@
         background-color: var(--undeclared) !important;
     }
 }
+
+img {
+    &.before-color--lab {
+        background-color: var(--lab)        
+    }
+    } 
