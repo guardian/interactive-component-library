@@ -2,7 +2,7 @@ import defaultStyles from './style.module.scss'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
 
 export function PageSection({ children, styles, borderTop = false }) {
-  styles = mergeStyles(defaultStyles, styles)
+  styles = mergeStyles({...defaultStyles}, styles)
 
   return (
     <section className={[styles.section, borderTop && styles.borderTop].join(' ')}>

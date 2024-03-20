@@ -5,7 +5,6 @@ import defaultStyles from './style.module.css'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
 
 export const SlopeChart = ({
-  id,
   domain,
   lines,
   y1Label = (d) => d.y1,
@@ -41,10 +40,10 @@ export const SlopeChart = ({
     return positionLabels(labels)
   }, [lines, y2Label, yScale])
 
-  styles = mergeStyles(defaultStyles, styles)
+  styles = mergeStyles({...defaultStyles}, styles)
 
   const chart = (
-    <svg id={id} width={width} height={height}>
+    <svg class={styles.svg} width={width} height={height}>
       <g transform={`translate(${padding.left} ${padding.top})`}>
         {/* draw axis */}
         <g transform={`translate(0 ${contentHeight})`}>
@@ -109,7 +108,7 @@ export const SlopeChart = ({
     </svg>
   )
 
-  return <div ref={wrapperRef}>{show && chart}</div>
+  return <div class={styles.slopeChartContainer} ref={wrapperRef}>{show && chart}</div>
 }
 
 export default SlopeChart
