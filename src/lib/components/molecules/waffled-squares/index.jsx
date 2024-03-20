@@ -8,7 +8,8 @@ export const WaffledSquare = ({
   rowLong = 10,
   squareWidth = waffleWidth / rowLong,
   labelPosX = 0,
-  labelPosY = 0
+  labelPosY = 0,
+  groups = []
 
 }) => {
 
@@ -19,6 +20,16 @@ export const WaffledSquare = ({
 
   const [hidden, setHidden] = useState(true);
 
+  const colours = [];
+
+  groups.map(group => {
+
+    for (let j = 0; j < group.squares; j++) {
+      colours.push(group.fill)
+    }
+
+  })
+
   for (let i = 0; i < squaresTotal; i++) {
 
     if (i % rowLong == 0) {
@@ -28,8 +39,8 @@ export const WaffledSquare = ({
 
     xPos = cont * squareWidth;
     cont++;
-
-    rows.push(<SvgSquare className={'name' + i} posX={xPos} posY={yPos} width={squareWidth} fill={"#dcdcdc"} pointerEvents={"none"} />);
+    
+    rows.push(<SvgSquare className={'name' + i} posX={xPos} posY={yPos} width={squareWidth} fill={colours[i] ? colours[i] : "#dcdcdc"} pointerEvents={"none"} />);
   }
 
   labelPosX = squaresTotal % rowLong == 0 ? 0 : xPos + squareWidth + 2;
