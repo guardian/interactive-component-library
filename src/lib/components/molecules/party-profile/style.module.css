@@ -8,6 +8,9 @@
 
 .container {
   font-weight: 700;
+  min-width: 290px;
+  max-width: 530px;
+  margin-right: 6px;
 }
 
 .title {
@@ -38,9 +41,10 @@
 }
 
 .blurb {
-  font-family: var(--body);
-  font-size: var(--body-medium);
+  font-family: var(--text-serif);
+  font-size: var(--body-small);
   font-weight: 300;
+  margin-right: 6px;
 }
 
 .leftCell,.rightCell {
@@ -55,7 +59,6 @@
 
 
 .rightCell {
-  float: right;
   vertical-align: top;
 }
 
