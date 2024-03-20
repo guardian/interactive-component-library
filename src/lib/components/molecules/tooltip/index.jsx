@@ -3,6 +3,7 @@ import { useMousePosition } from './useMousePosition'
 import { createPortal } from 'preact/compat'
 
 export function Tooltip({ for: elementRef, renderIn: refOrSelector, children }) {
+
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
   const [displayElement, setDisplayElement] = useState(null)
   const mousePosition = useMousePosition(elementRef)
