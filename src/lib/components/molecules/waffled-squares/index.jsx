@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState } from "preact/hooks";
 import { SvgSquare } from '$particles/svg-square'
+import defaultStyles from './style.module.css'
 
 export const WaffledSquare = ({
   name = 'Germany',
@@ -53,13 +54,9 @@ export const WaffledSquare = ({
 
   return (
     <div>
-      <h2 style={{
-        color: "var(--Neutral-neutral-neutral-0, #000)",
-        fontFamily: "GuardianTextSans",
-        fontSize: "14px",
-        fontStyle: "normal",
-        fontWeight: "700",
-        lineHeight: "normal",
+      <h2 
+      className={[defaultStyles.header]}
+      style={{
         marginBottom: headerMarginBottom,
         width: waffleWidth
       }}
