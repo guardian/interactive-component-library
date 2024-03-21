@@ -37,12 +37,15 @@
   font-style: italic;
   font-weight: 500;
   line-height: 1.3;
+  margin-bottom: 6px;
 
 }
 
 .blurb {
   font-family: var(--text-serif);
   font-size: var(--body-small);
+  color: var(--primary-text-color);
+
   font-weight: 300;
   margin-right: 6px;
 }
