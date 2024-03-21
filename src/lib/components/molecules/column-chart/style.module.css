@@ -1,0 +1,9 @@
+text {
+    font-family: var(--text-sans);
+    color: var(--primary-text-color);
+}
+
+:export {
+    linecolor : var(--primary-line-color);
+} 
+

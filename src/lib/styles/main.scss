@@ -20,10 +20,12 @@ body {
 
 @media (prefers-color-scheme: dark) {
 
-  body.ios,
-  body.android {
+  body {
     @include dark-mode-colors;
     @include dark-mode-party-colors-uk;
-    @include dark-mode-party-colors-eu;
+    @include dark-mode-party-colors-eu;  
   }
+
+
+
 }

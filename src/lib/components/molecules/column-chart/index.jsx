@@ -11,6 +11,7 @@ export const ColumnChart = ({
   chartHeight,
   chartWidth,
   columnWidth,
+  columnPadding
   // styles = {},
 }) => {
  
@@ -24,12 +25,13 @@ export const ColumnChart = ({
       const getHeight = (input) => {
        return yScale(0) - yScale(input)
       } 
+      let totalColumnWidth = Number(columnWidth) + Number(columnPadding.left) + Number(columnPadding.right)
 
       return (
         <g key={index}>
         <rect
           key={index}
-          x={index * columnWidth}
+          x={index * totalColumnWidth}
           height={getHeight(Math.abs(column.value))}
           width={columnWidth}
           y={column.value > 0 ? (yScale(column.value)): yScale(0)}
@@ -37,12 +39,13 @@ export const ColumnChart = ({
           className={`fill-color--${column.id}`}
           id={column.id}
         />
-        {/* <text x={index * 2 * columnWidth} y="20">V: {column.value}</text>
-        <text x={index * 2 * columnWidth} y="40">P: {getHeight(column.value)}</text> */}
+        <text x={index * totalColumnWidth + 2} y={
+          column.value < 0 ? yScale(0) - 6 : yScale(0) + 20
+        }>{column.label}</text>
         </g>
       )
     })}
-    <rect x={0} y={yScale(0)} width={chartHeight} height={1} fill="black" />
+    <rect x={0} y={yScale(0)} width={chartWidth} height={1} fill={defaultStyles.linecolor} />
   </svg>
   </>)
 }
