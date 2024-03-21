@@ -9,6 +9,7 @@ export default meta
 
 export const Default = {
   args: {
+    name:"Germany",
     squaresTotal:96,
     waffleWidth:100,
     waffleHeight:100,

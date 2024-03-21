@@ -2,9 +2,10 @@ import { useState } from "react";
 import { SvgSquare } from '$particles/svg-square'
 
 export const WaffledSquare = ({
+  name = 'Germany',
   squaresTotal = 96,
   waffleWidth = 100,
-  waffleHeight = 100,
+  waffleHeight = waffleWidth,
   rowLong = 10,
   squareWidth = waffleWidth / rowLong,
   labelPosX = 0,
@@ -43,8 +44,12 @@ export const WaffledSquare = ({
     rows.push(<SvgSquare className={'name' + i} posX={xPos} posY={yPos} width={squareWidth} fill={colours[i] ? colours[i] : "#dcdcdc"} pointerEvents={"none"} />);
   }
 
-  labelPosX = squaresTotal % rowLong == 0 ? 0 : xPos + squareWidth + 2;
-  labelPosY = squaresTotal % rowLong == 0 ? yPos - squareWidth * 2 : yPos - squareWidth + 1;
+  let rowEnds = squaresTotal % rowLong == 0;
+
+  labelPosX = rowEnds ? 0 : xPos + squareWidth + 2;
+  labelPosY = rowEnds ? yPos - 15 : yPos;
+
+  let headerMarginBottom = squaresTotal >= (rowLong * rowLong) && waffleWidth == waffleHeight ? 15 : 4;
 
   return (
     <div>
@@ -55,23 +60,25 @@ export const WaffledSquare = ({
         fontStyle: "normal",
         fontWeight: "700",
         lineHeight: "normal",
-        margin: "0 0 4px 0",
+        marginBottom: headerMarginBottom,
         width: waffleWidth
       }}
-      >Germany</h2>
+      >{name}</h2>
 
       <div style={{position:"relative"}}>
-
         <label
+        className="label"
           style={{
             position: "absolute",
             transform: `translate(${labelPosX}px,${labelPosY}px)`,
             fontSize: "14px",
+            fontFamily: "GuardianTextSans",
             color: "var(--neutral-neutral-46, var(--Neutral-neutral-neutral-46, #707070))",
             webkitTextStrokeWidth: "4px",
             webkitTextStrokeColor: '#fff',
             paintOrder: "stroke fill",
-            zIndex:1
+            zIndex:1,
+            lineHeight:'8px'
           }}
         >
           {squaresTotal}
@@ -83,7 +90,7 @@ export const WaffledSquare = ({
 
           style={{
             width: waffleWidth,
-            height: waffleWidth,
+            height: waffleHeight,
             backgroundColor: "var(--Neutral-neutral-neutral-93, #EDEDED)",
             outline: hidden ? 'none' : '2px solid #333'
           }}
@@ -103,8 +110,6 @@ export const WaffledSquare = ({
         >
           <g>{rows}</g>
         </svg>
-        
-
       </div>
     </div>
 
