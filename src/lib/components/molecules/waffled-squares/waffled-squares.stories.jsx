@@ -13,7 +13,7 @@ export const Default = {
     squaresTotal:96,
     waffleWidth:100,
     waffleHeight:100,
-    rowLong:10,
+    numberOfSquaresInRow:10,
     groups:[
     {
       name:'a',

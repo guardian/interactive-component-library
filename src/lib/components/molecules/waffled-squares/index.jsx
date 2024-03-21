@@ -1,19 +1,23 @@
-import { useState } from "preact/hooks";
+import { useRef, useState, useMemo } from 'preact/hooks'
+import { useContainerSize } from '$shared/hooks/useContainerSize'
 import { SvgSquare } from '$particles/svg-square'
 import defaultStyles from './style.module.css'
 
 export const WaffledSquare = ({
-  name = 'Germany',
-  squaresTotal = 96,
-  waffleWidth = 100,
-  waffleHeight = waffleWidth,
-  rowLong = 10,
-  squareWidth = waffleWidth / rowLong,
+  name,
+  squaresTotal,
+  waffleWidth,
+  waffleHeight,
+  numberOfSquaresInRow,
+  squareWidth = waffleWidth / numberOfSquaresInRow,
   labelPosX = 0,
   labelPosY = 0,
   groups = []
 
 }) => {
+
+  const containerRef = useRef(null);
+  const size = useContainerSize(containerRef);
 
   const rows = [];
   let xPos = 0;
@@ -26,7 +30,7 @@ export const WaffledSquare = ({
 
   groups.map(group => {
 
-    for (let j = 0; j < group.squares; j++) {
+    for (let i = 0; i < group.squares; i++) {
       colours.push(group.fill)
     }
 
@@ -34,7 +38,7 @@ export const WaffledSquare = ({
 
   for (let i = 0; i < squaresTotal; i++) {
 
-    if (i % rowLong == 0) {
+    if (i % numberOfSquaresInRow == 0) {
       yPos -= squareWidth;
       cont = 0;
     }
@@ -42,41 +46,52 @@ export const WaffledSquare = ({
     xPos = cont * squareWidth;
     cont++;
     
-    rows.push(<SvgSquare className={'name' + i} posX={xPos} posY={yPos} width={squareWidth} fill={colours[i] ? colours[i] : "#dcdcdc"} pointerEvents={"none"} />);
+    rows.push(<rect
+      class={'name' + i}
+      x={xPos}
+      y={yPos}
+      width={squareWidth}
+      height={squareWidth}
+      style={{
+        fill:colours[i] ? colours[i] : "#dcdcdc",
+        stroke:"#ffffff",
+        pointerEvents:"none"
+      }}
+    />);
   }
 
-  let rowEnds = squaresTotal % rowLong == 0;
+  let rowEnds = squaresTotal % numberOfSquaresInRow == 0;
 
   labelPosX = rowEnds ? 0 : xPos + squareWidth + 2;
   labelPosY = rowEnds ? yPos - 15 : yPos;
 
-  let headerMarginBottom = squaresTotal >= (rowLong * rowLong) && waffleWidth == waffleHeight ? 15 : 4;
+  let headerMarginBottom = squaresTotal >= (numberOfSquaresInRow * numberOfSquaresInRow) && waffleWidth == waffleHeight ? 15 : 4;
+
+  const containerStyle = useMemo(() => {
+    const style = {}
+    if (waffleWidth > 0) style['width'] = waffleWidth
+    if (waffleHeight > 0) style['height'] = waffleHeight
+    return style
+  }, [waffleWidth, waffleHeight])
 
   return (
-    <div>
-      <h2 
-      className={[defaultStyles.header]}
-      style={{
-        marginBottom: headerMarginBottom,
-        width: waffleWidth
-      }}
-      >{name}</h2>
-
-      <div style={{position:"relative"}}>
-        <label
-        className="label"
+    <div ref={containerRef} style={containerStyle}>
+      {size && (
+      <>
+        <h2
+          className={[defaultStyles.header]}
           style={{
-            position: "absolute",
-            transform: `translate(${labelPosX}px,${labelPosY}px)`,
-            fontSize: "14px",
-            fontFamily: "GuardianTextSans",
-            color: "var(--neutral-neutral-46, var(--Neutral-neutral-neutral-46, #707070))",
-            webkitTextStrokeWidth: "4px",
-            webkitTextStrokeColor: '#fff',
-            paintOrder: "stroke fill",
-            zIndex:1,
-            lineHeight:'8px'
+            marginBottom: headerMarginBottom,
+            width: waffleWidth
           }}
+        >{name}
+        </h2>
+        <div style={{position:"relative"}}>
+        <label
+        className={[defaultStyles.label]}
+        style={{
+          transform: `translate(${labelPosX}px,${labelPosY}px)`
+        }}
         >
           {squaresTotal}
         </label>
@@ -84,6 +99,7 @@ export const WaffledSquare = ({
         <div
           onMouseEnter={() => setHidden(false)}
           onMouseLeave={() => setHidden(true)}
+          onClick={() => console.log('set results table')}
 
           style={{
             width: waffleWidth,
@@ -91,7 +107,8 @@ export const WaffledSquare = ({
             backgroundColor: "var(--Neutral-neutral-neutral-93, #EDEDED)",
             outline: hidden ? 'none' : '2px solid #333'
           }}
-        ></div>
+        >
+        </div>
         <svg
           style={{
             display: 'inline-block',
@@ -108,6 +125,8 @@ export const WaffledSquare = ({
           <g>{rows}</g>
         </svg>
       </div>
+      </>
+      )}
     </div>
 
   )

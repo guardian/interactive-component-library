@@ -6,3 +6,17 @@
   font-weight: 700;
   line-height: normal;
 }
+
+.label{
+  position: absolute;
+  font-size: 14px;
+  font-family: var(--text-sans);
+  color: var(--primary-text-color);
+  z-Index:1;
+  line-height:8px;
+  text-shadow:
+    1px 1px 0 #fff,
+    -1px 1px 0 #fff,
+    -1px -1px 0 #fff,
+    1px -1px 0 #fff;
+}
