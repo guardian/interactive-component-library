@@ -1,7 +1,7 @@
 import defaultStyles from "./style.module.scss"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 
-export const SquareCutCornerIcon = ({cornerColor, squareColor, styles}) => {
+export const SquareCutCornerIcon = ({cornerColor, squareColor, cornerPartyAbbreviation, squarePartyAbbreviation, styles}) => {
 
   styles = mergeStyles({...defaultStyles}, styles)
 
@@ -10,7 +10,7 @@ export const SquareCutCornerIcon = ({cornerColor, squareColor, styles}) => {
 
             <g id="square-cutoff-corner-icon">
 
-                <path id="square" fill={squareColor} d="M1 1h23v23H1z" />
+              <path id="square" fill={squareColor} className={`fill-color--${squarePartyAbbreviation}`} d="M1 1h23v23H1z" />
 
                 <g id="corner">
 
@@ -20,7 +20,7 @@ export const SquareCutCornerIcon = ({cornerColor, squareColor, styles}) => {
                     <path d="M11.952 1H1v10.952L11.952 1Z" />
                   </mask>
                   
-                  <path id="cornerTriangle" fill={cornerColor} d="M11.952 1H1v10.952L11.952 1Z" />
+                  <path id="cornerTriangle" fill={cornerColor} className={`fill-color--${cornerPartyAbbreviation}`} d="M11.952 1H1v10.952L11.952 1Z" />
 
                   <path className={styles.strokePrimaryBgColor} id="cornerLine" stroke-width="2" mask="url(#cornerMask)" d="M11.952 1H1v10.952L11.952 1Z"   />
 

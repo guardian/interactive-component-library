@@ -14,7 +14,7 @@ export const Default = {
 
 export const UsingCustomClasses = {
     args: {
-        previousParty : 'sf',
-        nextParty: 'sdlp'
+        cornerPartyAbbreviation : 'dup',
+        squarePartyAbbreviation : 'sdlp'
     }
 }
