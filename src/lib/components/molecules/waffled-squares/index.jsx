@@ -1,32 +1,36 @@
-import { useRef, useState, useMemo } from 'preact/hooks'
-import { useContainerSize } from '$shared/hooks/useContainerSize'
-import { SvgSquare } from '$particles/svg-square'
+import { useRef, useState, useLayoutEffect, useMemo } from 'preact/hooks'
+import { useWindowSize } from '$shared/hooks/useWindowSize'
 import defaultStyles from './style.module.css'
 
 export const WaffledSquare = ({
   name,
   squaresTotal,
-  waffleWidth,
-  waffleHeight,
   numberOfSquaresInRow,
-  squareWidth = waffleWidth / numberOfSquaresInRow,
   labelPosX = 0,
   labelPosY = 0,
   groups = []
 
 }) => {
 
-  const containerRef = useRef(null);
-  const size = useContainerSize(containerRef);
+  const containerRef = useRef(null)
+  const size = useWindowSize()
+  const [width, setWidth] = useState(0)
+
+  useLayoutEffect(() => {
+    const newWidth = containerRef.current.getBoundingClientRect().width
+    setWidth(newWidth)
+  }, [size])
 
   const rows = [];
   let xPos = 0;
-  let yPos = waffleHeight;
+  let yPos = size.height;
   let cont = 0;
 
   const [hidden, setHidden] = useState(true);
 
   const colours = [];
+
+  const squareWidth = size.width / numberOfSquaresInRow;
 
   groups.map(group => {
 
@@ -46,18 +50,20 @@ export const WaffledSquare = ({
     xPos = cont * squareWidth;
     cont++;
     
-    rows.push(<rect
-      class={'name' + i}
-      x={xPos}
-      y={yPos}
-      width={squareWidth}
-      height={squareWidth}
-      style={{
-        fill:colours[i] ? colours[i] : "#dcdcdc",
-        stroke:"#ffffff",
-        pointerEvents:"none"
-      }}
-    />);
+    rows.push(
+      <rect
+        class={'name' + i}
+        x={xPos}
+        y={yPos}
+        width={squareWidth}
+        height={squareWidth}
+        style={{
+          fill:colours[i] ? colours[i] : "#dcdcdc",
+          stroke:"#ffffff",
+          pointerEvents:"none"
+        }}
+      />
+    );
   }
 
   let rowEnds = squaresTotal % numberOfSquaresInRow == 0;
@@ -65,24 +71,19 @@ export const WaffledSquare = ({
   labelPosX = rowEnds ? 0 : xPos + squareWidth + 2;
   labelPosY = rowEnds ? yPos - 15 : yPos;
 
-  let headerMarginBottom = squaresTotal >= (numberOfSquaresInRow * numberOfSquaresInRow) && waffleWidth == waffleHeight ? 15 : 4;
+  let headerMarginBottom = squaresTotal >= (numberOfSquaresInRow * numberOfSquaresInRow) && size.width == size.height ? 15 : 4;
 
-  const containerStyle = useMemo(() => {
-    const style = {}
-    if (waffleWidth > 0) style['width'] = waffleWidth
-    if (waffleHeight > 0) style['height'] = waffleHeight
-    return style
-  }, [waffleWidth, waffleHeight])
+
 
   return (
-    <div ref={containerRef} style={containerStyle}>
+    <div ref={containerRef} style={size} class={'waffledSquaresContainer'} >
       {size && (
       <>
         <h2
           className={[defaultStyles.header]}
           style={{
             marginBottom: headerMarginBottom,
-            width: waffleWidth
+            width: size.width
           }}
         >{name}
         </h2>
@@ -102,8 +103,8 @@ export const WaffledSquare = ({
           onClick={() => console.log('set results table')}
 
           style={{
-            width: waffleWidth,
-            height: waffleHeight,
+            width: size.width,
+            height: size.height,
             backgroundColor: "var(--Neutral-neutral-neutral-93, #EDEDED)",
             outline: hidden ? 'none' : '2px solid #333'
           }}
@@ -116,9 +117,9 @@ export const WaffledSquare = ({
             position: "absolute",
             top:0
           }}
-          width={waffleWidth}
-          height={waffleHeight}
-          viewBox={`0 0 ${waffleWidth} ${waffleHeight}`}
+          width={size.width}
+          height={size.height}
+          viewBox={`0 0 ${size.width} ${size.height}`}
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >

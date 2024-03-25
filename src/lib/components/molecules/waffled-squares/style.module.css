@@ -1,3 +1,7 @@
+.waffledSquaresContainer {
+  max-width: 300px;
+}
+
 .header{
   font-family: var(--text-sans);
   color: var(--primary-text-color);
