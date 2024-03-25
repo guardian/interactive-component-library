@@ -1,28 +1,26 @@
 import defaultStyles from "./style.module.scss"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 
-export const SquareCutCornerIcon = ({cornerColor, squareColor, cornerPartyAbbreviation, squarePartyAbbreviation, styles}) => {
+export const SquareCutCornerIcon = ({cornerColor, squareColor, squareSize, cornerPartyAbbreviation, squarePartyAbbreviation, styles}) => {
 
   styles = mergeStyles({...defaultStyles}, styles)
 
+  // expected size is 24px, with a corner size of 15px and a margin of 2px
+  let cornerSide = squareSize / 24 * 15;
+  let cornerMargin = squareSize < 100 ? squareSize / 12 : 10  // margin should increase with the size of square but cap at 10px
+
     return (
-        <svg width="24" height="24" viewBox="0 0 24 24" >
+        <svg width={squareSize} height={squareSize} viewBox={`0 0 ${squareSize} ${squareSize}`} >
 
             <g id="square-cutoff-corner-icon">
 
-              <path id="square" fill={squareColor} className={`fill-color--${squarePartyAbbreviation}`} d="M1 1h23v23H1z" />
+              <rect id="square" fill={squareColor} className={`fill-color--${squarePartyAbbreviation}`} width={squareSize} height={squareSize} />
 
                 <g id="corner">
 
-                  {/* black and white colours here are to do with mask and are not displayed */}
-                  <mask id="cornerMask" maskUnits="userSpaceOnUse" x="0" y="0" width="15" height="15" fill="black">
-                    <path fill="white" d="M0 0h15v15H0z" />
-                    <path d="M11.952 1H1v10.952L11.952 1Z" />
-                  </mask>
-                  
-                  <path id="cornerTriangle" fill={cornerColor} className={`fill-color--${cornerPartyAbbreviation}`} d="M11.952 1H1v10.952L11.952 1Z" />
+                  <polygon id="cornerTriangleBg" className={styles.strokePrimaryBgColor} points={`0,0 0,${cornerSide} ${cornerSide},0`} />
 
-                  <path className={styles.strokePrimaryBgColor} id="cornerLine" stroke-width="2" mask="url(#cornerMask)" d="M11.952 1H1v10.952L11.952 1Z"   />
+                  <polygon id="cornerTriangle" fill={cornerColor} className={`fill-color--${cornerPartyAbbreviation}`} points={`0,0 0,${cornerSide - cornerMargin} ${cornerSide - cornerMargin},0`} />
 
                 </g>
             </g>

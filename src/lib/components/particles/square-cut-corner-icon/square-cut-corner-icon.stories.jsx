@@ -8,13 +8,15 @@ export default {
 export const Default = {
     args: {
         cornerColor: 'green',
-        squareColor: 'gold'
+        squareColor: 'gold',
+        squareSize: 24
     }
 }
 
 export const UsingCustomClasses = {
     args: {
         cornerPartyAbbreviation : 'dup',
-        squarePartyAbbreviation : 'sdlp'
+        squarePartyAbbreviation : 'sdlp',
+        squareSize: 24
     }
 }
