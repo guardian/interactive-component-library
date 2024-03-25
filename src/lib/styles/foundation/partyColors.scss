@@ -16,6 +16,7 @@
     --reform: #3DBBE2;
     --ind: #333333;
     --other: #848484;
+    --noc: #c8c8c8;
     --speaker: #767676;
     --change: #333;
 
@@ -120,6 +121,10 @@
     background-color: var(--undeclared) !important;
 }
 
+.bg-color--noc {
+    background-color: var(--noc) !important;
+}
+
 
 
   
@@ -195,6 +200,10 @@
 
 .fill-color--undeclared {
     fill: var(--undeclared) !important;
+}
+
+.fill-color--noc {
+    fill: var(--noc) !important;
 }
 
 /* STOP ----------------------------------------------------------- */ 
@@ -346,6 +355,10 @@
 
 .stroke-color--undeclared {
     stroke: var(--undeclared) !important;
+}
+
+.stroke-color--noc {
+    stroke: var(--noc) !important;
 }
 
 /* COLOR ----------------------------------------------------------- */ 
