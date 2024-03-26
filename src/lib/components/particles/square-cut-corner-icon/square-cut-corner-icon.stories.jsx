@@ -15,8 +15,10 @@ export const Default = {
 
 export const UsingCustomClasses = {
     args: {
-        cornerPartyAbbreviation : 'dup',
-        squarePartyAbbreviation : 'sdlp',
-        squareSize: 24
+        squareSize: 24,
+        styles : {
+            corner: `fill-color--dup`,
+            square: `fill-color--sdlp`
+        }
     }
 }
