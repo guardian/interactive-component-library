@@ -1,6 +1,10 @@
-.text {
+:global(body) {
+  background-color: #dcdcdc;
+}
+
+.paragraph {
   font-family: var(--text-sans);
   font-size: var(--sans-xsmall);
   line-height: var(--sans-line-height);
-  color: var(--secondary-text-color);
+  color: var(--primary-text-color);
 }
