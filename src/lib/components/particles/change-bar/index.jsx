@@ -11,13 +11,13 @@ So the visual area of the chart
 is implicitly 40
 */
 
-export function ChangeBar({ fraction, positive, party, width, styles }) {
+export function ChangeBar({ fraction, positive, party, width, height, styles }) {
   let centre = parseFloat(width) / 2
   let barwidth = parseFloat(fraction) * (parseFloat(width) /2)
   let negleft = `${centre - barwidth}px`
   let posleft = `${centre}px`  
   let thisStyles = 
-  ` width: ${barwidth}px; ${positive ? `left: ${posleft}` : `left: ${negleft}`}`
+  ` height: ${height}; width: ${barwidth}px; ${positive ? `left: ${posleft}` : `left: ${negleft}`}`
   let thisColor = ` bg-color--${party}`
 
   styles = mergeStyles({ ...defaultStyles }, styles)

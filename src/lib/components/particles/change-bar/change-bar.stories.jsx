@@ -10,6 +10,7 @@ export const Default = {
       fraction: 0.4,
       party: "lab",
       positive: true,
-      width: 200
+      width: 200,
+      height: "1em"
     }
 }
