@@ -25,6 +25,8 @@ export const SlopeChart = ({
   const yScale = scaleLinear(domain, [contentHeight, 0])
   const show = width > 0
 
+  console.log(height)
+
   useLayoutEffect(() => {
     const newWidth = wrapperRef.current.getBoundingClientRect().width
     setWidth(newWidth)

@@ -1,134 +1,149 @@
-import { useRef, useState, useLayoutEffect, useMemo } from 'preact/hooks'
-import { useWindowSize } from '$shared/hooks/useWindowSize'
+
+import { useRef, useMemo, useLayoutEffect, useState } from 'preact/hooks'
+import { useContainerSize } from '$shared/hooks/useContainerSize'
 import defaultStyles from './style.module.css'
 
+
 export const WaffledSquare = ({
-  name,
-  squaresTotal,
-  numberOfSquaresInRow,
-  labelPosX = 0,
-  labelPosY = 0,
-  groups = []
+    name,
+    width,
+    height,
+    padding = { top: 20, right: 20, bottom: 20, left: 20 },
+    squaresTotal,
+    numberOfSquaresInRow,
+    labelPosX = 0,
+    labelPosY = 0,
+    groups = []
+  
+  }) => {
+    const rows = [];
+    let xPos = 0;
+    let yPos = 0;
+    let cont = 0;
+    let squareWidth = 0;
+    let colours = [];
+    let headerMarginBottom;
 
-}) => {
+    groups.map(group => {
 
-  const containerRef = useRef(null)
-  const size = useWindowSize()
-  const [width, setWidth] = useState(0)
+        for (let i = 0; i < group.squares; i++) {
+            colours.push(group.fill)
+        }
+      
+    })
 
-  useLayoutEffect(() => {
-    const newWidth = containerRef.current.getBoundingClientRect().width
-    setWidth(newWidth)
-  }, [size])
+    const [hidden, setHidden] = useState(true);
+    const containerRef = useRef()
+    const [isReady, setIsReady] = useState(false);
+    useLayoutEffect(() => {
+      if (!isReady) {
+        setIsReady(true)
+      }
+    }, [isReady])
 
-  const rows = [];
-  let xPos = 0;
-  let yPos = size.height;
-  let cont = 0;
+    const containerSize = useContainerSize(containerRef)
+    const containerStyle = useMemo(() => {
+      const style = {}
+      if (width > 0) style['width'] = width
+      if (height > 0) style['height'] = width
+      return style
+    }, [width, height])
 
-  const [hidden, setHidden] = useState(true);
+    if(isReady){
 
-  const colours = [];
+        yPos = containerSize.width;
+       
+        squareWidth = containerSize.width / numberOfSquaresInRow;
 
-  const squareWidth = size.width / numberOfSquaresInRow;
+        for (let i = 0; i < squaresTotal; i++) {
 
-  groups.map(group => {
+            if (i % numberOfSquaresInRow == 0) {
+                yPos -= squareWidth;
+                cont = 0;
+            }
 
-    for (let i = 0; i < group.squares; i++) {
-      colours.push(group.fill)
+            xPos = cont * squareWidth;
+            cont++;
+            
+            rows.push(
+                <rect
+                    class={'name' + i}
+                    x={xPos}
+                    y={yPos}
+                    width={squareWidth}
+                    height={squareWidth}
+                    style={{
+                    fill:colours[i] ? colours[i] : "#ff0000",
+                    stroke:"#ffffff",
+                    pointerEvents:"none"
+                    }}
+                />
+            );
+        }
+
+        let rowEnds = squaresTotal % numberOfSquaresInRow == 0;
+
+        labelPosX = rowEnds ? 0 : xPos + squareWidth + 2;
+        labelPosY = rowEnds ? yPos - 15 : yPos;
+
+        headerMarginBottom = squaresTotal >= (numberOfSquaresInRow * numberOfSquaresInRow) && width == height ? 15 : 4;
+
     }
 
-  })
-
-  for (let i = 0; i < squaresTotal; i++) {
-
-    if (i % numberOfSquaresInRow == 0) {
-      yPos -= squareWidth;
-      cont = 0;
-    }
-
-    xPos = cont * squareWidth;
-    cont++;
-    
-    rows.push(
-      <rect
-        class={'name' + i}
-        x={xPos}
-        y={yPos}
-        width={squareWidth}
-        height={squareWidth}
-        style={{
-          fill:colours[i] ? colours[i] : "#dcdcdc",
-          stroke:"#ffffff",
-          pointerEvents:"none"
-        }}
-      />
-    );
-  }
-
-  let rowEnds = squaresTotal % numberOfSquaresInRow == 0;
-
-  labelPosX = rowEnds ? 0 : xPos + squareWidth + 2;
-  labelPosY = rowEnds ? yPos - 15 : yPos;
-
-  let headerMarginBottom = squaresTotal >= (numberOfSquaresInRow * numberOfSquaresInRow) && size.width == size.height ? 15 : 4;
-
-
-
-  return (
-    <div ref={containerRef} style={size} class={'waffledSquaresContainer'} >
-      {size && (
-      <>
-        <h2
-          className={[defaultStyles.header]}
+    return (
+        <div ref={containerRef} style={containerStyle} class={defaultStyles.container} >
+        {containerSize && (
+        <>
+        {console.log('render',containerSize)}
+          <h2
+            className={[defaultStyles.header]}
+            style={{
+              marginBottom: headerMarginBottom,
+              width: containerSize.width
+            }}
+          >{name}
+          </h2>
+          <div style={{position:"relative"}}>
+          <label
+          className={[defaultStyles.label]}
           style={{
-            marginBottom: headerMarginBottom,
-            width: size.width
+            transform: `translate(${labelPosX}px,${labelPosY}px)`
           }}
-        >{name}
-        </h2>
-        <div style={{position:"relative"}}>
-        <label
-        className={[defaultStyles.label]}
-        style={{
-          transform: `translate(${labelPosX}px,${labelPosY}px)`
-        }}
-        >
-          {squaresTotal}
-        </label>
-
-        <div
-          onMouseEnter={() => setHidden(false)}
-          onMouseLeave={() => setHidden(true)}
-          onClick={() => console.log('set results table')}
-
-          style={{
-            width: size.width,
-            height: size.height,
-            backgroundColor: "var(--Neutral-neutral-neutral-93, #EDEDED)",
-            outline: hidden ? 'none' : '2px solid #333'
-          }}
-        >
+          >
+            {squaresTotal}
+          </label>
+  
+          <div
+            onMouseEnter={() => setHidden(false)}
+            onMouseLeave={() => setHidden(true)}
+            onClick={() => console.log('set results table')}
+  
+            style={{
+              width: containerSize.width,
+              height: containerSize.width,
+              backgroundColor: "var(--Neutral-neutral-neutral-93, #EDEDED)",
+              outline: hidden ? 'none' : '2px solid #333'
+            }}
+          >
+          </div>
+          <svg
+            style={{
+              display: 'inline-block',
+              pointerEvents: 'none',
+              position: "absolute",
+              top:0
+            }}
+            width={containerSize.width}
+            height={containerSize.height}
+            viewBox={`0 0 ${containerSize.width} ${containerSize.height}`}
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g>{rows}</g>
+          </svg>
         </div>
-        <svg
-          style={{
-            display: 'inline-block',
-            pointerEvents: 'none',
-            position: "absolute",
-            top:0
-          }}
-          width={size.width}
-          height={size.height}
-          viewBox={`0 0 ${size.width} ${size.height}`}
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g>{rows}</g>
-        </svg>
+        </>
+        )}
       </div>
-      </>
-      )}
-    </div>
-
-  )
-}
+    )
+  }
