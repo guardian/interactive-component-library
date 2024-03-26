@@ -72,7 +72,7 @@ export const WaffledSquare = ({
                     width={squareWidth}
                     height={squareWidth}
                     style={{
-                    fill:colours[i] ? colours[i] : "#ff0000",
+                    fill:colours[i] ? colours[i] : "#f6f6f6",
                     stroke:"#ffffff",
                     pointerEvents:"none"
                     }}
