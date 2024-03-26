@@ -33,8 +33,6 @@ export function StackedBar({ stack, width, height, showBackgroundRect = false, c
     setHideLabels(false)
   }, [stack, width, height])
 
-  console.log({ ...defaultStyles })
-
   styles = mergeStyles({ ...defaultStyles }, styles)
 
   let totalWidth = 0
