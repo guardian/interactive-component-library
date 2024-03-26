@@ -8,7 +8,6 @@ export const WaffledSquare = ({
     name,
     width,
     height,
-    padding = { top: 20, right: 20, bottom: 20, left: 20 },
     squaresTotal,
     numberOfSquaresInRow,
     labelPosX = 0,
