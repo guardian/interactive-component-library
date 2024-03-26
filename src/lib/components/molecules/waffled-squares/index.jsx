@@ -93,7 +93,6 @@ export const WaffledSquare = ({
         <div ref={containerRef} style={containerStyle} class={defaultStyles.container} >
         {containerSize && (
         <>
-        {console.log('render',containerSize)}
           <h2
             className={[defaultStyles.header]}
             style={{
