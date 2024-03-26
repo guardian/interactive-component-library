@@ -5,8 +5,7 @@ export const SquareCutCornerIcon = ({cornerColor, squareColor, squareSize, corne
 
   styles = mergeStyles({...defaultStyles}, styles)
 
-  // expected size is 24px, with a corner size of 15px and a margin of 2px
-  let cornerSide = squareSize / 24 * 15;
+  let cornerSize = squareSize * 0.625
   let cornerMargin = squareSize < 100 ? squareSize / 12 : 10  // margin should increase with the size of square but cap at 10px
 
     return (
@@ -18,9 +17,9 @@ export const SquareCutCornerIcon = ({cornerColor, squareColor, squareSize, corne
 
                 <g id="corner">
 
-                  <polygon id="cornerTriangleBg" className={styles.strokePrimaryBgColor} points={`0,0 0,${cornerSide} ${cornerSide},0`} />
+                  <polygon id="cornerTriangleBg" className={styles.dividingLineColor} points={`0,0 0,${cornerSize} ${cornerSize},0`} />
 
-                  <polygon id="cornerTriangle" fill={cornerColor} className={`fill-color--${cornerPartyAbbreviation}`} points={`0,0 0,${cornerSide - cornerMargin} ${cornerSide - cornerMargin},0`} />
+                  <polygon id="cornerTriangle" fill={cornerColor} className={`fill-color--${cornerPartyAbbreviation}`} points={`0,0 0,${cornerSize - cornerMargin} ${cornerSize - cornerMargin},0`} />
 
                 </g>
             </g>
