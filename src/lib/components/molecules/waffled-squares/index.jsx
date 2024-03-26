@@ -132,8 +132,8 @@ export const WaffledSquare = ({
               top:0
             }}
             width={containerSize.width}
-            height={containerSize.height}
-            viewBox={`0 0 ${containerSize.width} ${containerSize.height}`}
+            height={containerSize.width}
+            viewBox={`0 0 ${containerSize.width} ${containerSize.width}`}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
