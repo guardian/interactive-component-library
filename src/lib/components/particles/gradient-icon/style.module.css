@@ -5,7 +5,9 @@
 }
 
 .previous {
+  stop-color: var(--con);
 }
 
 .next {
+  stop-color: var(--lab);
 }
