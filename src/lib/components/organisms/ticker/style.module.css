@@ -1,0 +1,9 @@
+.container {
+  background-color: #f6f6f6;
+  min-height: 86px;
+
+  display: flex;
+  flex-direction: row;
+  column-gap: var(--space-2);
+  align-items: flex-start;
+}
