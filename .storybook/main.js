@@ -4,11 +4,11 @@ const config = {
   addons: [
     '@storybook/addon-controls',
     '@storybook/addon-links',
-    '@storybook/addon-backgrounds',
     '@storybook/addon-measure',
     '@storybook/addon-viewport',
     '@storybook/addon-docs',
     '@storybook/addon-actions',
+    'storybook-dark-mode',
     {
       name: '@storybook/addon-storysource',
       options: {
