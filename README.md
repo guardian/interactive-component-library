@@ -89,6 +89,15 @@ Always prepending `pnpm`:
 - `build:lib`: Builds the component library into the **dist** folder
 - `build:lib:watch`: Same as previous command, but it watches `/src` folder and rebuilds on changes
 
+## Testing for dark mode in Storybook
+Use the sun/moon button in the toolbar to switch between light and dark mode.
+![Screenshot 2024-03-27 at 08 24 43](https://github.com/guardian/interactive-component-library/assets/1107150/3a93adfc-56da-4c1d-b5b8-dc7ff5aedfbf)
+![Screenshot 2024-03-27 at 08 24 32](https://github.com/guardian/interactive-component-library/assets/1107150/bad208aa-7967-446f-b658-e937aa2d114b)
+
+Enabling dark mode applies `.ios` and `.dark-mode` classes to the `<body>` element, which in turn renders the story preview with dark mode colours (this behaviour can be customised in `.storybook/preview.scss`).
+
+> Note that enabling dark mode using this button does not affect the [`prefers-color-scheme` CSS media feature](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme). If your component uses `prefers-color-scheme` directly, you will also need to change your system or browser setting to see that styling take effect.
+
 ## License
 
 [Apache 2.0](LICENSE)
