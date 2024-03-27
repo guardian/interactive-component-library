@@ -7,12 +7,18 @@ export function mergeStyles(firstStyle, secondStyle) {
     return firstStyle.concat(' ', secondStyle)
   }
 
-  const merged = Object.keys(firstStyle).reduce((result, key) => {
-    let className = firstStyle[key]
-    if (secondStyle && key in secondStyle) {
-      className = className.concat(' ', secondStyle[key])
+  const allKeys = new Set([...Object.keys(firstStyle), ...Object.keys(secondStyle)])
+  const merged = Array.from(allKeys).reduce((result, key) => {
+    const classNames = []
+    if (firstStyle && key in firstStyle) {
+      classNames.push(firstStyle[key])
     }
-    result[key] = className
+
+    if (secondStyle && key in secondStyle) {
+      classNames.push(secondStyle[key])
+    }
+
+    result[key] = classNames.join(' ')
     return result
   }, {})
 

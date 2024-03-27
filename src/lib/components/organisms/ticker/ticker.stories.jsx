@@ -1,6 +1,6 @@
 import { Ticker } from '.'
-import { Container, TickerItem, RelativeTimeSentence } from '$particles'
-import { PageSection, ControlChange } from '$molecules'
+import { Container, RelativeTimeSentence } from '$particles'
+import { PageSection, ControlChange, ResultSummary } from '$molecules'
 import styles from './stories.module.scss'
 
 const meta = {
@@ -42,34 +42,30 @@ const meta = {
       {
         previous: 'lab',
         next: 'con',
-        text: 'Con gain from Lab',
-        constituency: 'Camberwell and Peckham',
+        title: 'Con gain from Lab',
+        text: 'Camberwell and Peckham',
         timestamp: timestamp - minuteInMilliseconds,
       },
       {
         previous: 'con',
         next: 'lab',
-        text: 'Lab gain from Con',
-        constituency: 'Chingford',
+        title: 'Lab gain from Con',
+        text: 'Chingford',
         timestamp: timestamp - minuteInMilliseconds,
       },
       {
         previous: 'lab',
         next: 'con',
-        text: 'Con gain from Lab',
-        constituency: 'Camberwell and Peckham',
+        title: 'Con gain from Lab',
+        text: 'Camberwell and Peckham',
         timestamp: timestamp - minuteInMilliseconds,
       },
     ]
 
     return (
-      <Ticker>
+      <Ticker {...args}>
         {items.map((d, index) => (
-          <TickerItem {...args} key={index}>
-            <ControlChange {...d} />
-            <p className={styles.paragraph}>{d.constituency}</p>
-            <RelativeTimeSentence timeStamp={d.timestamp} styles={{ text: styles.relativeTime }} />
-          </TickerItem>
+          <ResultSummary {...d} key={index} />
         ))}
       </Ticker>
     )
