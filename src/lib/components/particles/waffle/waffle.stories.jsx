@@ -1,5 +1,5 @@
 import { Waffle } from '.'
-import { CircleIcon, SquareCutCornerIcon } from "$particles"
+import { CircleIcon, SquareCutCornerIcon, SquareIcon } from "$particles"
 
 const meta = {
   title: 'Particles/Waffle',
@@ -51,6 +51,33 @@ export const WithCircles = {
                 <CircleIcon abbreviation="sdlp" />
                 <CircleIcon abbreviation="sdlp" />
               </>),
+
+  }
+}
+
+
+export const WithSquares = {
+  args: {
+    fromLeft: true,
+    fromBottom: true,
+    containerWidth: 175,
+    itemWidth: 24,
+
+    children: (<>
+                <SquareIcon size="24" styles={ {squareFill: 'fill-color--con'} } />
+                <SquareIcon size="24" styles={ {squareFill: 'fill-color--con'} } />
+                <SquareIcon size="24" styles={ {squareFill: 'fill-color--con'} } />
+                <SquareIcon size="24" styles={ {squareFill: 'fill-color--con'} } />
+                <SquareIcon size="24" styles={ {squareFill: 'fill-color--con'} } />
+                <SquareIcon size="24" styles={ {squareFill: 'fill-color--con'} } />
+                <SquareIcon size="24" styles={ {squareFill: 'fill-color--con'} } />
+                <SquareIcon size="24" styles={ {squareFill: 'fill-color--con'} } />
+                <SquareIcon size="24" styles={ {squareFill: 'fill-color--lab'} } />
+                <SquareIcon size="24" styles={ {squareFill: 'fill-color--lab'} } />
+                <SquareIcon size="24" styles={ {squareFill: 'fill-color--lab'} } />
+                <SquareIcon size="24" styles={ {squareFill: 'fill-color--snp'} } />
+                <SquareIcon size="24" styles={ {squareFill: 'fill-color--snp'} } />
+            </>),
 
   }
 }
