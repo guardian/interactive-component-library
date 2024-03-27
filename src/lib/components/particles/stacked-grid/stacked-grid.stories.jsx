@@ -13,7 +13,6 @@ export const Default = {
     fromLeft: true,
     fromBottom: true,
     containerWidth: 100,
-    itemWidth: 24,
 
     children: (<>
                 <SquareCutCornerIcon squareSize="24" cornerColor="red" squareColor="teal" />
@@ -38,7 +37,6 @@ export const WithCircles = {
     fromLeft: true,
     fromBottom: true,
     containerWidth: 100,
-    itemWidth: 12,
 
     children: (<>
                 <CircleIcon abbreviation="lab" />

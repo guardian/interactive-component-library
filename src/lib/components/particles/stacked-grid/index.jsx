@@ -15,10 +15,10 @@ const getItemRotate = (fromBottom, fromLeft) => {
   else if(!fromBottom && fromLeft){
     return 'stackedGridRotateItems0'  // the css default
   }
-
 }
 
 // nb: using this trick: https://css-tricks.com/snippets/css/flip-an-image/
+// this works better than changing flex direction because it allows for an X and Y change
 
 const getContainerFlip = (fromBottom, fromLeft) => {
   let scaleX = fromLeft ? 1 : -1 ;
@@ -27,27 +27,27 @@ const getContainerFlip = (fromBottom, fromLeft) => {
 }
 
 
-
-
-export const StackedGrid = ({ fromLeft, fromBottom, containerWidth, itemWidth, children, styles }) => {
+export const StackedGrid = ({ fromLeft, fromBottom, containerWidth, children, styles }) => {
 
 
   // CSS  attributes driven by args
   let containerFlip = getContainerFlip(fromBottom, fromLeft);
   let itemRotateClass = getItemRotate(fromBottom, fromLeft);
 
-  let gridStyles = {
+
+  let flexStyles = {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     width: containerWidth, 
     transform: containerFlip,
-    gridTemplateColumns: `repeat(auto-fill, ${itemWidth}px)`,
   }
 
-  
   styles = mergeStyles(defaultStyles, styles)
 
 
   return (
-      <div style={gridStyles} className={`${styles.stackedGridContainer} ${styles[itemRotateClass]}`}>
+      <div style={flexStyles} className={`${styles.stackedGridContainer} ${styles[itemRotateClass]}`}>
         {children}
       </div>
   )
