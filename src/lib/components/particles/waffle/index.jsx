@@ -18,7 +18,9 @@ const getItemRotate = (fromBottom, fromLeft) => {
 
 }
 
-const getContainerScale = (fromBottom, fromLeft) => {
+// nb: using this trick: https://css-tricks.com/snippets/css/flip-an-image/
+
+const getContainerFlip = (fromBottom, fromLeft) => {
   let scaleX = fromLeft ? 1 : -1 ;
   let scaleY = fromBottom ? -1 : 1 ;
   return `scale(${scaleX}, ${scaleY})`
@@ -31,12 +33,12 @@ export const Waffle = ({ fromLeft, fromBottom, containerWidth, itemWidth, childr
 
 
   // CSS  attributes driven by args
-  let containerScale = getContainerScale(fromBottom, fromLeft);
+  let containerFlip = getContainerFlip(fromBottom, fromLeft);
   let itemRotateClass = getItemRotate(fromBottom, fromLeft);
 
   let gridStyles = {
     width: containerWidth, 
-    transform: containerScale,
+    transform: containerFlip,
     gridTemplateColumns: `repeat(auto-fill, ${itemWidth}px)`,
   }
 
