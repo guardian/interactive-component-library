@@ -2,10 +2,10 @@ import { useLayoutEffect, useEffect, useRef, useState } from 'preact/hooks'
 import { useMousePosition } from './useMousePosition'
 import { createPortal } from 'preact/compat'
 
-export function Tooltip({ for: elementRef, renderIn: refOrSelector, children }) {
+export function Tooltip({ for: element, renderIn: refOrSelector, children }) {
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
   const [displayElement, setDisplayElement] = useState(null)
-  const mousePosition = useMousePosition(elementRef)
+  const mousePosition = useMousePosition(element)
   const tooltipRef = useRef(null)
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export function Tooltip({ for: elementRef, renderIn: refOrSelector, children }) 
 
   useLayoutEffect(() => {
     if (!tooltipRef.current) return
-    const elementRect = elementRef.current.getBoundingClientRect()
+    const elementRect = element.getBoundingClientRect()
 
     const newPosition = {
       x: mousePosition.x + elementRect.x,
@@ -40,7 +40,7 @@ export function Tooltip({ for: elementRef, renderIn: refOrSelector, children }) 
     }
 
     setTooltipPosition(newPosition)
-  }, [elementRef, displayElement, tooltipRef, mousePosition])
+  }, [element, displayElement, tooltipRef, mousePosition])
 
   if (!mousePosition || !displayElement) return
 

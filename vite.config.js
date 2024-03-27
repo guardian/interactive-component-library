@@ -19,6 +19,7 @@ const app = async () => {
         $molecules: path.resolve(__dirname, 'src/lib/components/molecules'),
         $shared: path.resolve(__dirname, 'src/lib/shared'),
         $styles: path.resolve(__dirname, 'src/lib/styles'),
+        $storybook: path.resolve(__dirname, '.storybook'),
       },
     },
     plugins: [peerDepsExternal(), preact({ prefreshEnabled: false })],
@@ -47,9 +48,12 @@ const app = async () => {
       rollupOptions: {
         output: {
           globals: {
+            preact: 'preact',
             'preact/jsx-runtime': 'preact/jsx-runtime',
             'preact/hooks': 'preact/hooks',
             'preact/compat': 'preact/compat',
+            'd3-scale': 'd3-scale',
+            'd3-geo': 'd3-geo',
           },
         },
       },
