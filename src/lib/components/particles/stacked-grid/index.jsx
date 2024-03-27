@@ -4,16 +4,16 @@ import { mergeStyles } from "$styles/helpers/mergeStyles"
 
 const getItemRotate = (fromBottom, fromLeft) => {
   if(fromBottom && fromLeft) {
-    return 'waffleRotateItems270'
+    return 'stackedGridRotateItems270'
   } 
   else if(fromBottom && !fromLeft) {
-    return 'waffleRotateItems180'
+    return 'stackedGridRotateItems180'
   }
   else if(!fromBottom && !fromLeft) {
-    return 'waffleRotateItems90' 
+    return 'stackedGridRotateItems90' 
   }
   else if(!fromBottom && fromLeft){
-    return 'waffleRotateItems0'  // the css default
+    return 'stackedGridRotateItems0'  // the css default
   }
 
 }
@@ -29,7 +29,7 @@ const getContainerFlip = (fromBottom, fromLeft) => {
 
 
 
-export const Waffle = ({ fromLeft, fromBottom, containerWidth, itemWidth, children, styles }) => {
+export const StackedGrid = ({ fromLeft, fromBottom, containerWidth, itemWidth, children, styles }) => {
 
 
   // CSS  attributes driven by args
@@ -47,7 +47,7 @@ export const Waffle = ({ fromLeft, fromBottom, containerWidth, itemWidth, childr
 
 
   return (
-      <div style={gridStyles} className={`${styles.waffleContainer} ${styles[itemRotateClass]}`}>
+      <div style={gridStyles} className={`${styles.stackedGridContainer} ${styles[itemRotateClass]}`}>
         {children}
       </div>
   )

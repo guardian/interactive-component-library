@@ -1,28 +1,28 @@
-.waffleContainer {
+.stackedGridContainer {
   display: grid;
   grid-gap: 2px;
 }
 
 
-.waffleRotateItems0 {
+.stackedGridRotateItems0 {
   > * {
     transform: none;
   }
 }
 
-.waffleRotateItems90 {
+.stackedGridRotateItems90 {
   > * {
     transform: rotate(90deg);
   }
 }
 
-.waffleRotateItems180 {
+.stackedGridRotateItems180 {
   > * {
     transform: rotate(180deg);
   }
 }
 
-.waffleRotateItems270 {
+.stackedGridRotateItems270 {
   > * {
     transform: rotate(270deg);
   }

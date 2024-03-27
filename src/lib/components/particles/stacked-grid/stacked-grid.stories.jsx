@@ -1,9 +1,9 @@
-import { Waffle } from '.'
+import { StackedGrid } from '.'
 import { CircleIcon, SquareCutCornerIcon, SquareIcon } from "$particles"
 
 const meta = {
-  title: 'Particles/Waffle',
-  component: Waffle,
+  title: 'Particles/StackedGrid',
+  component: StackedGrid,
 }
 export default meta
 
