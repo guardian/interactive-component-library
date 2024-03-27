@@ -48,9 +48,12 @@ const app = async () => {
       rollupOptions: {
         output: {
           globals: {
+            preact: 'preact',
             'preact/jsx-runtime': 'preact/jsx-runtime',
             'preact/hooks': 'preact/hooks',
             'preact/compat': 'preact/compat',
+            'd3-scale': 'd3-scale',
+            'd3-geo': 'd3-geo',
           },
         },
       },

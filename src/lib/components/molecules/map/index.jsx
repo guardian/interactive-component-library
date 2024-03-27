@@ -6,7 +6,7 @@ import { SVGRenderer } from './renderers/SVGRenderer'
 // import { CanvasRenderer } from './renderers/CanvasRenderer'
 import { toChildArray } from 'preact'
 import { useRef, useMemo, useLayoutEffect, useState } from 'preact/hooks'
-import { forwardRef, useImperativeHandle } from 'preact/compat'
+import { forwardRef } from 'preact/compat'
 import { useContainerSize } from '$shared/hooks/useContainerSize'
 import styles from './style.module.css'
 export * as MapLayers from './layers'
@@ -69,16 +69,16 @@ export const Map = forwardRef(
       }
     }, [isReady])
 
-    useImperativeHandle(
-      ref,
-      () => ({
-        isReady,
-        getContainer: () => containerRef.current,
-        findFeatureAtPoint,
-      }),
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [isReady],
-    )
+    // useImperativeHandle(
+    //   ref,
+    //   () => ({
+    //     isReady,
+    //     getContainer: () => containerRef.current,
+    //     findFeatureAtPoint,
+    //   }),
+    //   // eslint-disable-next-line react-hooks/exhaustive-deps
+    //   [isReady],
+    // )
 
     function findFeatureAtPoint({ x, y }) {
       const adjustedPoint = [x - padding.left, y - padding.top]
