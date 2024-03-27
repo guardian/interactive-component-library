@@ -1,0 +1,29 @@
+@import "../src/lib/styles/foundation/colors.scss";
+@import "../src/lib/styles/foundation/partyColors.scss";
+@import "../src/lib/styles/foundation/euPartyColors.scss";
+
+.sb-show-main.dark-mode {
+  background-color: #1a1a1a;
+
+  @include dark-mode-colors;
+  @include dark-mode-party-colors-uk;
+  @include dark-mode-party-colors-eu;
+}
+
+/* For browsers that support `scrollbar-*` properties */
+@supports (scrollbar-color: auto) {
+  .sb-show-main.dark-mode {
+    scrollbar-color: #1a1a1a #dcdcdc;
+  }
+}
+
+/* Otherwise, use `::-webkit-scrollbar-*` pseudo-elements */
+@supports selector(::-webkit-scrollbar) {
+  .sb-show-main.dark-mode::-webkit-scrollbar {
+    background: #1a1a1a;
+  }
+
+  .sb-show-main.dark-mode::-webkit-scrollbar-thumb {
+    background: #dcdcdc;
+  }
+}

@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   d3-scale:
     specifier: ^4.0.2
@@ -37,9 +33,6 @@ devDependencies:
   '@storybook/addon-actions':
     specifier: ^7.6.17
     version: 7.6.17
-  '@storybook/addon-backgrounds':
-    specifier: ^7.6.17
-    version: 7.6.17
   '@storybook/addon-controls':
     specifier: ^7.6.17
     version: 7.6.17(react-dom@18.2.0)(react@18.2.0)
@@ -70,12 +63,18 @@ devDependencies:
   '@storybook/blocks':
     specifier: ^7.6.17
     version: 7.6.17(react-dom@18.2.0)(react@18.2.0)
+  '@storybook/manager-api':
+    specifier: ^8.0.4
+    version: 8.0.4(react-dom@18.2.0)(react@18.2.0)
   '@storybook/preact':
     specifier: ^7.6.17
     version: 7.6.17(preact@10.12.1)
   '@storybook/preact-vite':
     specifier: ^7.6.17
     version: 7.6.17(@babel/core@7.22.10)(preact@10.12.1)(typescript@5.1.6)(vite@4.5.2)
+  '@storybook/theming':
+    specifier: ^8.0.4
+    version: 8.0.4(react-dom@18.2.0)(react@18.2.0)
   '@types/node':
     specifier: 20.4.9
     version: 20.4.9
@@ -145,6 +144,9 @@ devDependencies:
   storybook:
     specifier: ^7.6.17
     version: 7.6.17
+  storybook-dark-mode:
+    specifier: ^4.0.1
+    version: 4.0.1(react-dom@18.2.0)(react@18.2.0)
   topojson-client:
     specifier: ^3.1.0
     version: 3.1.0
@@ -2982,6 +2984,16 @@ packages:
       tiny-invariant: 1.3.1
     dev: true
 
+  /@storybook/channels@8.0.4:
+    resolution: {integrity: sha512-haKV+8RbiSzLjicowUfc7h2fTClZHX/nz9SRUecf4IEZUEu2T78OgM/TzqZvL7rA3+/fKqp5iI+3PN3OA75Sdg==}
+    dependencies:
+      '@storybook/client-logger': 8.0.4
+      '@storybook/core-events': 8.0.4
+      '@storybook/global': 5.0.0
+      telejson: 7.2.0
+      tiny-invariant: 1.3.1
+    dev: true
+
   /@storybook/cli@7.6.17:
     resolution: {integrity: sha512-1sCo+nCqyR+nKfTcEidVu8XzNoECC7Y1l+uW38/r7s2f/TdDorXaIGAVrpjbSaXSoQpx5DxYJVaKCcQuOgqwcA==}
     hasBin: true
@@ -3045,6 +3057,12 @@ packages:
       '@storybook/global': 5.0.0
     dev: true
 
+  /@storybook/client-logger@8.0.4:
+    resolution: {integrity: sha512-2SeEg3PT/d0l/+EAVtyj9hmMLTyTPp+bRBSzxYouBjtJPM1jrdKpFagj1o3uBRovwWm9SIVX6/ZsoRC33PEV1g==}
+    dependencies:
+      '@storybook/global': 5.0.0
+    dev: true
+
   /@storybook/codemod@7.6.17:
     resolution: {integrity: sha512-JuTmf2u3C4fCnjO7o3dqRgrq3ozNYfWlrRP8xuIdvT7niMap7a396hJtSKqS10FxCgKFcMAOsRgrCalH1dWxUg==}
     dependencies:
@@ -3087,6 +3105,27 @@ packages:
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
+    dev: true
+
+  /@storybook/components@8.0.4(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-i5ngl5GTOLB9nZ1cmpxTjtWct5IuH9UxzFC73a0jHMkCwN26w16IqufRVDaoQv0AvZN4pd4fNM2in/XVHA10dw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@radix-ui/react-slot': 1.0.2(react@18.2.0)
+      '@storybook/client-logger': 8.0.4
+      '@storybook/csf': 0.1.2
+      '@storybook/global': 5.0.0
+      '@storybook/icons': 1.2.9(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/theming': 8.0.4(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/types': 8.0.4
+      memoizerific: 1.11.3
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      util-deprecate: 1.0.2
+    transitivePeerDependencies:
+      - '@types/react'
     dev: true
 
   /@storybook/core-client@7.6.17:
@@ -3133,6 +3172,12 @@ packages:
 
   /@storybook/core-events@7.6.17:
     resolution: {integrity: sha512-AriWMCm/k1cxlv10f+jZ1wavThTRpLaN3kY019kHWbYT9XgaSuLU67G7GPr3cGnJ6HuA6uhbzu8qtqVCd6OfXA==}
+    dependencies:
+      ts-dedent: 2.2.0
+    dev: true
+
+  /@storybook/core-events@8.0.4:
+    resolution: {integrity: sha512-1FgLacIGi9i6/fyxw7ZJDC621RK47IMaA3keH4lc11ASRzCSwJ4YOrXjBFjfPc79EF2BuX72DDJNbhj6ynfF3g==}
     dependencies:
       ts-dedent: 2.2.0
     dev: true
@@ -3248,6 +3293,17 @@ packages:
     resolution: {integrity: sha512-FcOqPAXACP0I3oJ/ws6/rrPT9WGhu915Cg8D02a9YxLo0DE9zI+a9A5gRGvmQ09fiWPukqI8ZAEoQEdWUKMQdQ==}
     dev: true
 
+  /@storybook/icons@1.2.9(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-cOmylsz25SYXaJL/gvTk/dl3pyk7yBFRfeXTsHvTA3dfhoU/LWSq0NKL9nM7WBasJyn6XPSGnLS4RtKXLw5EUg==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: true
+
   /@storybook/manager-api@7.0.18(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-anQkm09twL96YkKGXHa+LI0+yMaY6Jxs1lRaetHdMlIqN4VHBHhizHaMgtGfH6xCTuO3WdrKTN7cZii5RH7PBQ==}
     peerDependencies:
@@ -3284,6 +3340,29 @@ packages:
       '@storybook/router': 7.6.17
       '@storybook/theming': 7.6.17(react-dom@18.2.0)(react@18.2.0)
       '@storybook/types': 7.6.17
+      dequal: 2.0.3
+      lodash: 4.17.21
+      memoizerific: 1.11.3
+      store2: 2.14.2
+      telejson: 7.2.0
+      ts-dedent: 2.2.0
+    transitivePeerDependencies:
+      - react
+      - react-dom
+    dev: true
+
+  /@storybook/manager-api@8.0.4(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-TudiRmWlsi8kdjwqW0DDLen76Zp4Sci/AnvTbZvZOWe8C2mruxcr6aaGwuIug6y+uxIyXDvURF6Cek5Twz4isg==}
+    dependencies:
+      '@storybook/channels': 8.0.4
+      '@storybook/client-logger': 8.0.4
+      '@storybook/core-events': 8.0.4
+      '@storybook/csf': 0.1.2
+      '@storybook/global': 5.0.0
+      '@storybook/icons': 1.2.9(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/router': 8.0.4
+      '@storybook/theming': 8.0.4(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/types': 8.0.4
       dequal: 2.0.3
       lodash: 4.17.21
       memoizerific: 1.11.3
@@ -3399,6 +3478,14 @@ packages:
       qs: 6.11.1
     dev: true
 
+  /@storybook/router@8.0.4:
+    resolution: {integrity: sha512-hlR80QvmLBflAqMeGcgtDuSe6TJlzdizwEAkBLE1lDvFI6tvvEyAliCAXBpIDdOZTe0u/zeeJkOUXKSx33caoQ==}
+    dependencies:
+      '@storybook/client-logger': 8.0.4
+      memoizerific: 1.11.3
+      qs: 6.11.1
+    dev: true
+
   /@storybook/source-loader@7.6.17:
     resolution: {integrity: sha512-90v1es7dHmHgkGbflPlaRBYcn2+mqdC8OG4QtyYqOUq6xsLsyg+5CX2rupfHbuSLw9r0A3o1ViOII2J/kWtFow==}
     dependencies:
@@ -3453,6 +3540,25 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: true
 
+  /@storybook/theming@8.0.4(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-NxtTU2wMC0lj375ejoT3Npdcqwv6NeUpLaJl6EZCMXSR41ve9WG4suUNWQ63olhqKxirjzAz0IL7ggH7c3hPvA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      '@emotion/use-insertion-effect-with-fallbacks': 1.0.1(react@18.2.0)
+      '@storybook/client-logger': 8.0.4
+      '@storybook/global': 5.0.0
+      memoizerific: 1.11.3
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: true
+
   /@storybook/types@7.0.18:
     resolution: {integrity: sha512-qPop2CbvmX42/BX29YT9jIzW2TlMcMjAE+KCpcKLBiD1oT5DJ1fhMzpe6RW9HkMegkBxjWx54iamN4oHM/pwcQ==}
     dependencies:
@@ -3467,6 +3573,14 @@ packages:
     dependencies:
       '@storybook/channels': 7.6.17
       '@types/babel__core': 7.20.5
+      '@types/express': 4.17.17
+      file-system-cache: 2.3.0
+    dev: true
+
+  /@storybook/types@8.0.4:
+    resolution: {integrity: sha512-OO7QY+qZFCYkItDUBACtIV32p75O7sNziAiyS1V2Oxgo7Ln7fwZwr3mJcA1ruBed6ZcrW3c87k7Xs40T2zAWcg==}
+    dependencies:
+      '@storybook/channels': 8.0.4
       '@types/express': 4.17.17
       file-system-cache: 2.3.0
     dev: true
@@ -9169,6 +9283,23 @@ packages:
     resolution: {integrity: sha512-siT1RiqlfQnGqgT/YzXVUNsom9S0H1OX+dpdGN1xkyYATo4I6sep5NmsRD/40s3IIOvlCq6akxkqG82urIZW1w==}
     dev: true
 
+  /storybook-dark-mode@4.0.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-9l3qY8NdgwZnY+NlO1XHB3eUb6FmZo9GazJeUSeFkjRqwA5FmnMSeq0YVqEOqfwniM/TvQwOiTYd5g/hC2wugA==}
+    dependencies:
+      '@storybook/components': 8.0.4(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/core-events': 8.0.4
+      '@storybook/global': 5.0.0
+      '@storybook/icons': 1.2.9(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/manager-api': 8.0.4(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/theming': 8.0.4(react-dom@18.2.0)(react@18.2.0)
+      fast-deep-equal: 3.1.3
+      memoizerific: 1.11.3
+    transitivePeerDependencies:
+      - '@types/react'
+      - react
+      - react-dom
+    dev: true
+
   /storybook@7.6.17:
     resolution: {integrity: sha512-8+EIo91bwmeFWPg1eysrxXlhIYv3OsXrznTr4+4Eq0NikqAoq6oBhtlN5K2RGS2lBVF537eN+9jTCNbR+WrzDA==}
     hasBin: true
@@ -10306,3 +10437,7 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
