@@ -1,14 +1,15 @@
 import { Ticker } from '.'
-import { Container, RelativeTimeSentence } from '$particles'
-import { PageSection, ControlChange, ResultSummary } from '$molecules'
+import { Container } from '$particles'
+import { PageSection, ResultSummary } from '$molecules'
 import styles from './stories.module.scss'
 
 const meta = {
   title: 'Organisms/Ticker',
   component: Ticker,
   parameters: {
+    layout: 'fullscreen',
     viewport: {
-      defaultViewport: 'wide',
+      defaultViewport: 'leftcol',
     },
   },
   decorators: [
@@ -34,34 +35,7 @@ const meta = {
       </Container>
     ),
   ],
-  render: ({ args }) => {
-    const timestamp = Date.now()
-    const minuteInMilliseconds = 6000
-
-    const items = [
-      {
-        previous: 'lab',
-        next: 'con',
-        title: 'Con gain from Lab',
-        text: 'Camberwell and Peckham',
-        timestamp: timestamp - minuteInMilliseconds,
-      },
-      {
-        previous: 'con',
-        next: 'lab',
-        title: 'Lab gain from Con',
-        text: 'Chingford',
-        timestamp: timestamp - minuteInMilliseconds,
-      },
-      {
-        previous: 'lab',
-        next: 'con',
-        title: 'Con gain from Lab',
-        text: 'Camberwell and Peckham',
-        timestamp: timestamp - minuteInMilliseconds,
-      },
-    ]
-
+  render: ({ items, ...args }) => {
     return (
       <Ticker {...args}>
         {items.map((d, index) => (
@@ -74,4 +48,41 @@ const meta = {
 
 export default meta
 
-export const Default = {}
+const now = Date.now()
+const minuteInMilliseconds = 6000
+
+const items = [
+  {
+    previous: 'lab',
+    next: 'con',
+    title: 'Con gain from Lab',
+    text: 'Camberwell and Peckham',
+    timestamp: now - minuteInMilliseconds,
+  },
+  {
+    previous: 'con',
+    next: 'lab',
+    title: 'Lab gain from Con',
+    text: 'Chingford',
+    timestamp: now - minuteInMilliseconds,
+  },
+  {
+    previous: 'lab',
+    next: 'con',
+    title: 'Con gain from Lab',
+    text: 'Camberwell and Peckham',
+    timestamp: now - minuteInMilliseconds,
+  },
+]
+
+export const ThreeResults = {
+  args: {
+    items,
+  },
+}
+
+export const SixResults = {
+  args: {
+    items: [...items, ...items],
+  },
+}

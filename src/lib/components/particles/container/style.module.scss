@@ -1,4 +1,4 @@
-.container {
+.pageContainer {
 	margin: 0 auto;
 	width: 100%;
 	box-sizing: border-box;
@@ -10,19 +10,19 @@
 	}
 
 	@include mq($from: tablet) {
-		width: map.get($mq-breakpoints, "tablet");
+		max-width: map.get($mq-breakpoints, "tablet");
 	}
 
 	@include mq($from: desktop) {
-		width: map.get($mq-breakpoints, "desktop");
+		max-width: map.get($mq-breakpoints, "desktop");
 	}
 
 	@include mq($from: leftCol) {
-		width: map.get($mq-breakpoints, "leftCol");
+		max-width: map.get($mq-breakpoints, "leftCol");
 	}
 
 	@include mq($from: wide) {
-		width: map.get($mq-breakpoints, "wide");
+		max-width: map.get($mq-breakpoints, "wide");
 	}
 }
 
@@ -33,20 +33,7 @@
 	border-right-width: 0;
 
 	@include mq($from: tablet) {
-		width: calc(map.get($mq-breakpoints, "tablet") + 2px);
 		border-left-width: 1px;
 		border-right-width: 1px;
-	}
-
-	@include mq($from: desktop) {
-		width: calc(map.get($mq-breakpoints, "desktop") + 2px);
-	}
-
-	@include mq($from: leftCol) {
-		width: calc(map.get($mq-breakpoints, "leftCol") + 2px);
-	}
-
-	@include mq($from: wide) {
-		width: calc(map.get($mq-breakpoints, "wide") + 2px);
 	}
 }

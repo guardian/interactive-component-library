@@ -14,27 +14,26 @@ h2 {
 .grid {
   display: grid;
 
-  grid-template-columns: 1fr;
+  grid-template-columns: 100%;
   grid-column-gap: 0px;
   grid-template-areas: "body";
 
   min-height: 150vh;
 
   @include mq($from: desktop) {
-    grid-template-columns: 1fr;
     grid-column-gap: 20px;
     grid-template-areas: "body";
   }
 
 
   @include mq($from: leftCol) {
-    grid-template-columns: 140px 1px 1fr;
+    grid-template-columns: 140px 1px calc(100% - 161px);
     grid-column-gap: 10px;
     grid-template-areas: ".          border-body       body";
   }
 
   @include mq($from: wide) {
-    grid-template-columns: 219px 1px 1fr;
+    grid-template-columns: 219px 1px calc(100% - 240px);
   }
 }
 
@@ -44,6 +43,11 @@ h2 {
 }
 
 .border {
-  grid-area: border-body;
-  border-left: 1px solid #dcdcdc;
+  display: none;
+
+  @include mq($from: leftCol) {
+    display: block;
+    grid-area: border-body;
+    border-left: 1px solid #dcdcdc;
+  }
 }

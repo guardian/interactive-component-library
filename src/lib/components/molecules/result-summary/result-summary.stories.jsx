@@ -1,9 +1,18 @@
 import { ResultSummary } from '.'
-import './stories.module.css'
+import styles from './stories.module.css'
 
 const meta = {
   title: 'Molecules/ResultSummary',
   component: ResultSummary,
+  decorators: [
+    (Story) => {
+      return (
+        <div className={styles.storyBg}>
+          <Story />
+        </div>
+      )
+    },
+  ],
 }
 
 export default meta
