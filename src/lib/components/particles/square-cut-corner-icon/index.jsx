@@ -6,7 +6,7 @@ export const SquareCutCornerIcon = ({cornerColor, squareColor, squareSize, style
   styles = mergeStyles({...defaultStyles}, styles)
 
   let cornerSize = squareSize * 0.625
-  let cornerMargin = squareSize < 100 ? squareSize / 12 : 10  // margin should increase with the size of square but cap at 10px
+  let cornerMargin = squareSize < 100 ? squareSize / 6 : 10  // margin should increase with the size of square but cap at 10px
 
     return (
         <svg width={squareSize} height={squareSize} viewBox={`0 0 ${squareSize} ${squareSize}`} >

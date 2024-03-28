@@ -1,4 +1,5 @@
 .stackedGridContainer {
+  height: min-content;
   > * {
     margin-right: 2px;
     margin-bottom: 2px;
