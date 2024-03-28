@@ -3,6 +3,9 @@ import { Container } from '$particles'
 import { PageSection, ResultSummary } from '$molecules'
 import styles from './stories.module.scss'
 
+const now = Date.now()
+const minuteInMilliseconds = 60000
+
 const meta = {
   title: 'Organisms/Ticker',
   component: Ticker,
@@ -41,7 +44,7 @@ const meta = {
     return (
       <Ticker {...args}>
         {items.map((d, index) => (
-          <ResultSummary {...d} key={index} />
+          <ResultSummary {...d} timestamp={now - minuteInMilliseconds * index} key={index} />
         ))}
       </Ticker>
     )
@@ -50,30 +53,24 @@ const meta = {
 
 export default meta
 
-const now = Date.now()
-const minuteInMilliseconds = 6000
-
 const items = [
   {
     previous: 'lab',
     next: 'con',
     title: 'Con gain from Lab',
     text: 'Camberwell and Peckham',
-    timestamp: now - minuteInMilliseconds,
   },
   {
     previous: 'con',
     next: 'lab',
     title: 'Lab gain from Con',
     text: 'Chingford',
-    timestamp: now - minuteInMilliseconds,
   },
   {
     previous: 'lab',
     next: 'con',
     title: 'Con gain from Lab',
     text: 'Camberwell and Peckham',
-    timestamp: now - minuteInMilliseconds,
   },
 ]
 
@@ -97,7 +94,18 @@ export const LongTitleAndText = {
         next: 'lab',
         title: 'Con’s Iain Duncan Smith loses to Lab',
         text: 'Cumbernauld, Kilsyth and Kirkintilloch East',
-        timestamp: now - minuteInMilliseconds,
+      },
+      {
+        previous: 'lab',
+        next: 'con',
+        title: 'Con gain from Lab',
+        text: 'Camberwell and Peckham',
+      },
+      {
+        previous: 'con',
+        next: 'lab',
+        title: 'Con’s Jane Doe loses to Lab',
+        text: 'Tottenham',
       },
       ...items,
     ],
