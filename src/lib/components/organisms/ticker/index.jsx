@@ -2,7 +2,7 @@ import { toChildArray } from 'preact'
 import { useState, useRef, useLayoutEffect } from 'preact/hooks'
 import { Gradient } from './gradient'
 import { ArrowButton } from '$particles/arrow-button/index'
-import styles from './style.module.css'
+import styles from './style.module.scss'
 
 function totalWidthForElements(elements) {
   return Array.from(elements).reduce((totalWidth, element) => {

@@ -12,7 +12,7 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
     viewport: {
-      defaultViewport: 'leftcol',
+      defaultViewport: 'mobile',
     },
   },
   decorators: [
