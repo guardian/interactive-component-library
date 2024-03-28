@@ -88,3 +88,18 @@ export const SixResults = {
     items: [...items, ...items],
   },
 }
+
+export const LongTitleAndText = {
+  args: {
+    items: [
+      {
+        previous: 'con',
+        next: 'lab',
+        title: 'Con’s Iain Duncan Smith loses to Lab',
+        text: 'Cumbernauld, Kilsyth and Kirkintilloch East',
+        timestamp: now - minuteInMilliseconds,
+      },
+      ...items,
+    ],
+  },
+}
