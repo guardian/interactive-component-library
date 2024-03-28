@@ -1,6 +1,8 @@
 .ticker {
   background-color: #f6f6f6;
   position: relative;
+
+  --ticker-item-width: 200px;
 }
 
 .tickerItems {
@@ -13,13 +15,33 @@
 }
 
 .tickerItem {
-  width: 200px;
+  width: var(--ticker-item-width);
   flex-shrink: 0;
+
+  transform: translateX(calc(-1 * var(--ticker-offset) * var(--ticker-item-width)));
+  transition: transform 0.3s ease-in-out;
+}
+
+.controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 86px;
+  height: 100%;
 }
 
 .gradient {
   position: absolute;
+}
+
+.buttons {
+  position: absolute;
   top: 0;
-  right: -1px;
-  bottom: 0;
+  right: var(--space-5);
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
