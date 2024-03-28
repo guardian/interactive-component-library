@@ -1,6 +1,6 @@
-.container {
+.ticker {
   background-color: #f6f6f6;
-  min-height: 86px;
+  overflow: scroll;
 
   display: flex;
   flex-direction: row;
