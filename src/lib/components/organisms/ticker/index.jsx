@@ -2,7 +2,7 @@ import { toChildArray } from 'preact'
 import { useState, useRef, useLayoutEffect } from 'preact/hooks'
 import { useWindowSize } from '$shared/hooks/useWindowSize'
 import { Gradient } from './gradient'
-import { ArrowButton } from '$particles/arrow-button/index'
+import { ArrowButton, Button } from '$particles'
 import styles from './style.module.scss'
 
 function totalSizeForElements(elements) {
@@ -60,6 +60,9 @@ export function Ticker({ children }) {
         <div className={styles.buttons}>
           <ArrowButton onClick={() => setOffset((d) => d + 1)} disabled={nextButtonDisabled} />
           <ArrowButton direction="left" onClick={() => setOffset((d) => d - 1)} disabled={offset <= 0} />
+        </div>
+        <div className={styles.button}>
+          <Button>Show 20 most recent</Button>
         </div>
       </div>
     </div>
