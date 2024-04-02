@@ -1,0 +1,31 @@
+:global(body) {
+  --top-inset: 0;
+}
+
+:global(body.android) {
+  --top-inset: 58px;
+}
+
+@mixin dynamic-viewport-height {
+  height: calc(100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0) - var(--top-inset));
+
+  @supports (height: 100dvh) {
+    height: calc(100dvh - var(--top-inset));
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    min-height: -webkit-fill-available;
+  }
+}
+
+@mixin max-dynamic-viewport-height {
+  max-height: calc(100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0) - var(--top-inset));
+
+  @supports (height: 100dvh) {
+    max-height: calc(100dvh - var(--top-inset));
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    max-height: -webkit-fill-available;
+  }
+}

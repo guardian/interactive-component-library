@@ -86,3 +86,18 @@
 .buttonInner {
   background-color: var(--tertiary-bg-color);
 }
+
+// Expanded state
+
+.ticker[data-expanded='true'] .tickerItems {
+  @include max-dynamic-viewport-height();
+}
+
+.ticker[data-expanded='true'] .controls {
+  position: sticky;
+  margin-top: -40px;
+
+  .button {
+    bottom: 0;
+  }
+}

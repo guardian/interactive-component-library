@@ -1,13 +1,14 @@
-import defaultStyles from './style.module.scss'
+import { forwardRef } from 'preact/compat'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
+import defaultStyles from './style.module.scss'
 
-export function PageSection({ children, styles, borderTop = false }) {
+export const PageSection = forwardRef(({ children, styles, borderTop = false }, ref) => {
   styles = mergeStyles({...defaultStyles}, styles)
 
   return (
-    <section className={[styles.section, borderTop && styles.borderTop].join(' ')}>
+    <section ref={ref} className={[styles.section, borderTop && styles.borderTop].join(' ')}>
       <div className={styles.header}>{children.header}</div>
       <div className={styles.content}>{children.content}</div>
     </section>
   )
-}
+})

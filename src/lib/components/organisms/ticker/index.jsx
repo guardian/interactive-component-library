@@ -16,13 +16,16 @@ function totalSizeForElements(elements) {
   )
 }
 
-export function Ticker({ children }) {
+export function Ticker({ maxItems = 20, onStateChange, children }) {
   const [offset, setOffset] = useState(0)
   const windowSize = useWindowSize()
 
+  const tickerRef = useRef()
   const tickerItemsRef = useRef()
   const [hideButtons, setHideButtons] = useState(false)
   const [nextButtonDisabled, setNextButtonDisabled] = useState(false)
+
+  const [expanded, setExpanded] = useState(false)
 
   const childArray = toChildArray(children)
 
@@ -44,8 +47,16 @@ export function Ticker({ children }) {
     }
   }, [offset, windowSize, childArray, setHideButtons, setNextButtonDisabled])
 
+  function toggleExpandedState() {
+    setExpanded((expanded) => {
+      const newState = !expanded
+      if (onStateChange) onStateChange({ expanded: newState })
+      return newState
+    })
+  }
+
   return (
-    <div className={styles.ticker} style={`--ticker-offset: ${offset}`}>
+    <div ref={tickerRef} className={styles.ticker} style={`--ticker-offset: ${offset}`} data-expanded={expanded}>
       <div ref={tickerItemsRef} className={styles.tickerItems}>
         {childArray.map((child, index) => (
           <div className={styles.tickerItem} key={index}>
@@ -62,8 +73,12 @@ export function Ticker({ children }) {
           <ArrowButton direction="left" onClick={() => setOffset((d) => d - 1)} disabled={offset <= 0} />
         </div>
         <div className={styles.button}>
-          <Button type="small" styles={{ buttonInner: styles.buttonInner }}>
-            Show 20 most recent
+          <Button
+            type="small"
+            styles={{ buttonInner: styles.buttonInner }}
+            onClick={toggleExpandedState}
+          >
+            {expanded ? 'Show less' : `Show ${maxItems} most recent`}
           </Button>
         </div>
       </div>

@@ -1,10 +1,14 @@
 import { Ticker } from '.'
 import { Container } from '$particles'
 import { PageSection, ResultSummary } from '$molecules'
+import { useRef } from 'preact/hooks'
 import styles from './stories.module.scss'
+import { useEffect } from 'react'
 
 const now = Date.now()
 const minuteInMilliseconds = 60000
+
+let tickerSection = null;
 
 const meta = {
   title: 'Organisms/Ticker',
@@ -17,32 +21,19 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div className={styles.storyContainer}>
-        <Container sideBorders={true}>
-          <div className={styles.grid}>
-            <div className={styles.border} />
-            <div className={styles.body}>
-              <PageSection>
-                {{
-                  header: <h2>Latest seats declared</h2>,
-                  content: <Story />,
-                }}
-              </PageSection>
-              <PageSection borderTop={true}>
-                {{
-                  header: <h2>Next section</h2>,
-                  content: <p className={styles.content}>Section content</p>,
-                }}
-              </PageSection>
-            </div>
-          </div>
-        </Container>
-      </div>
+      <StoryContainer><Story /></StoryContainer>
     ),
   ],
   render: ({ items, ...args }) => {
     return (
-      <Ticker {...args}>
+      <Ticker
+        {...args}
+        onStateChange={({ expanded }) => {
+          if (!expanded) {
+            tickerSection?.scrollIntoView({ behavior: 'instant' })
+          }
+        }}
+      >
         {items.map((d, index) => (
           <ResultSummary {...d} timestamp={now - minuteInMilliseconds * index} key={index} />
         ))}
@@ -86,6 +77,13 @@ export const SixResults = {
   },
 }
 
+export const TwelveResults = {
+  args: {
+    maxItems: 12,
+    items: [...items, ...items, ...items, ...items],
+  },
+}
+
 export const LongTitleAndText = {
   args: {
     items: [
@@ -110,4 +108,34 @@ export const LongTitleAndText = {
       ...items,
     ],
   },
+}
+
+function StoryContainer({children}) {
+  const tickerSectionRef = useRef()
+
+  useEffect(() => {
+    tickerSection = tickerSectionRef.current
+  }, [tickerSectionRef])
+
+  return (<div className={styles.storyContainer}>
+        <Container sideBorders={true}>
+          <div className={styles.grid}>
+            <div className={styles.border} />
+            <div className={styles.body}>
+              <PageSection ref={tickerSectionRef}>
+                {{
+                  header: <h2>Latest seats declared</h2>,
+                  content: children,
+                }}
+              </PageSection>
+              <PageSection borderTop={true}>
+                {{
+                  header: <h2>Next section</h2>,
+                  content: <p className={styles.content}>Section content</p>,
+                }}
+              </PageSection>
+            </div>
+          </div>
+        </Container>
+      </div>)
 }
