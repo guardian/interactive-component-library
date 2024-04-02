@@ -23,7 +23,7 @@ export const WaffledSquare = ({
     let colours = [];
     let headerMarginBottom;
 
-    groups.map(group => {
+    groups.forEach(group => {
 
         for (let i = 0; i < group.squares; i++) {
             colours.push(group.fill)
@@ -145,3 +145,5 @@ export const WaffledSquare = ({
       </div>
     )
   }
+  
+  export default WaffledSquare
