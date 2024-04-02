@@ -62,7 +62,9 @@ export function Ticker({ children }) {
           <ArrowButton direction="left" onClick={() => setOffset((d) => d - 1)} disabled={offset <= 0} />
         </div>
         <div className={styles.button}>
-          <Button>Show 20 most recent</Button>
+          <Button type="small" styles={{ buttonInner: styles.buttonInner }}>
+            Show 20 most recent
+          </Button>
         </div>
       </div>
     </div>

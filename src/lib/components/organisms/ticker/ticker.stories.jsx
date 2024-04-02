@@ -17,7 +17,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div style={{ background: '#f6f6f6' }}>
+      <div className={styles.storyContainer}>
         <Container sideBorders={true}>
           <div className={styles.grid}>
             <div className={styles.border} />

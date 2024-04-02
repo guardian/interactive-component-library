@@ -11,3 +11,9 @@ const meta = {
 export default meta
 
 export const Default = {}
+
+export const Small = {
+  args: {
+    type: 'small',
+  },
+}

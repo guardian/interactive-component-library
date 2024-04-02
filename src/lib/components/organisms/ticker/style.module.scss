@@ -1,5 +1,4 @@
 .ticker {
-  background-color: #f6f6f6;
   position: relative;
 
   --ticker-item-width: 100%;
@@ -72,4 +71,18 @@
     flex-direction: column;
     justify-content: center;
   }
+}
+
+.button {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+
+  @include mq($from: mobileLandscape) {
+    display: none;
+  }
+}
+
+.buttonInner {
+  background-color: var(--tertiary-bg-color);
 }
