@@ -1,4 +1,9 @@
+.storyContainer {
+  background-color: var(--tertiary-bg-color);
+}
+
 h2 {
+  color: var(--primary-text-color);
   font-family: var(--text-headline);
   font-size: var(--headline-xxsmall);
   line-height: var(--headline-line-height);

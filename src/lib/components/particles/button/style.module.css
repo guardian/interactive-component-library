@@ -1,18 +1,27 @@
 .button {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.buttonInner {
   color: var(--primary-text-color);
   font-family: var(--text-sans);
   font-size: var(--sans-xxsmall);
   line-height: var(--sans-line-height);
-
-  height: 40px;
-  min-width: 44px;
-  padding: 8px 12px;
 
   background-color: var(--primary-bg-color);
   border: 1px solid var(--secondary-line-color);
   border-radius: 999px;
 }
 
-.button:hover:enabled {
+.button[data-type='regular'] > .buttonInner {
+  padding: 8px 12px;
+}
+
+.button[data-type='small'] > .buttonInner {
+  padding: 4px 12px;
+}
+
+.button:hover:enabled > .buttonInner {
   background-color: var(--news-grey-05);
 }
