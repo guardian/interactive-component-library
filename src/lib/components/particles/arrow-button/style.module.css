@@ -13,23 +13,23 @@
 }
 
 .icon :global(path) {
-  fill: #121212;
+  fill: var(--news-grey-01);
   stroke: none;
 }
 
 .icon :global(circle) {
-  fill: #fff;
-  stroke: #dcdcdc;
+  fill: var(--primary-bg-color);
+  stroke: var(--news-grey-05);
 }
 
 /* hover state */
 
 .button:hover:enabled .icon :global(circle) {
-  fill: #dcdcdc;
+  fill: var(--news-grey-05);
 }
 
 /* disabled state */
 
 .button:disabled .icon :global(path) {
-  fill: #dcdcdc;
+  fill: var(--news-grey-05);
 }
