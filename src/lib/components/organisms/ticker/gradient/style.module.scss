@@ -11,3 +11,13 @@
   width: 100%;
   height: 100%;
 }
+
+.firstStop {
+  stop-color: var(--tertiary-bg-color);
+  stop-opacity: 0;
+}
+
+.lastStop {
+  stop-color: var(--tertiary-bg-color);
+  stop-opacity: 1;
+}
