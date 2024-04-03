@@ -1,0 +1,27 @@
+.searchContainer {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  color: var(--primary-text-color);
+  font-family: var(--text-sans);
+  font-size: var(--sans-medium);
+
+  background-color: var(--primary-bg-color);
+  padding: var(--space-2) var(--space-9);
+
+  border: 1px solid var(--border-divider-color);
+  border-radius: 999px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 11px;
+  left: 12px;
+  width: 18px;
+  height: 18px;
+}
