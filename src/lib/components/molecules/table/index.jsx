@@ -4,7 +4,7 @@ import { Chevron } from '$particles/chevron'
 import defaultStyles from './style.module.scss'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
 
-export function Table({ columns, data, hideHeader, styles }) {
+export function Table({ columns, data, hideHeader=false, styles }) {
   const [sortState, setSortState] = useState(() => {
     const columnIndex = columns.findIndex((column) => {
       if ('sort' in column) {
