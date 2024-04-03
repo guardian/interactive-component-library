@@ -1,9 +1,13 @@
+import { action } from '@storybook/addon-actions'
 import { ToplineResult } from '.'
-import { InfoIcon } from '$particles/info-icon'
 
 export default {
   title: 'Molecules/ToplineResult',
   component: ToplineResult,
+  args: {
+    onMouseOver: action('mouse over'),
+    onInfoPress: action('info press'),
+  },
 }
 
 export const Default = {
@@ -13,11 +17,7 @@ export const Default = {
     mainNumber: 300,
     secondaryNumber: 120,
   },
-  render: (args) => (
-    <ToplineResult {...args}>
-      <InfoIcon onMouseOver={() => console.log('hello')} />
-    </ToplineResult>
-  )
+  render: (args) => <ToplineResult {...args} />,
 }
 
 export const Row = {
@@ -28,9 +28,5 @@ export const Row = {
     secondaryNumber: 120,
     displayRow: true,
   },
-  render: (args) => (
-    <ToplineResult {...args}>
-      <InfoIcon onMouseOver={() => console.log('hello')} />
-    </ToplineResult>
-  ),
+  render: (args) => <ToplineResult {...args} />,
 }

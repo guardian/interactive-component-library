@@ -1,34 +1,15 @@
+import { withActions } from '@storybook/addon-actions/decorator'
 import { InfoButton } from '.'
-import { Tooltip } from '$molecules/tooltip'
-import { useRef } from 'react'
 
 export default {
   title: 'Particles/InfoButton',
   component: InfoButton,
-}
-
-function TooltipPreview() {
-  const tooltipped = useRef(null)
-  return (
-    <>
-      <div ref={tooltipped} style="width: 100%; height: 300px; background-color: #CCC" />
-      <Tooltip for={tooltipped} renderIn="#storybook-root">
-        {({ x, y }) => (
-          <div style="border: 1px solid #333; background-color: #FFF; padding: 10px;">
-            <p>hello</p>
-            <p>
-              x: {x}, y: {y}
-            </p>
-          </div>
-        )}
-      </Tooltip>
-    </>
-  )
-}
-
-export const Default = {
-  args: {
-    onMouseOver: () => {console.log('hello'); return <TooltipPreview />}
+  parameters: {
+    actions: {
+      handles: ['click', 'clicked'],
+    },
   },
-  render: (args) => <InfoButton {...args} />,
+  decorators: [withActions],
 }
+
+export const Default = {}
