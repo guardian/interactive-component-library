@@ -25,6 +25,9 @@ dependencies:
   preact:
     specifier: ^10.12.1
     version: 10.12.1
+  preact-transitioning:
+    specifier: ^1.4.1
+    version: 1.4.1(preact@10.12.1)
 
 devDependencies:
   '@babel/core':
@@ -8502,6 +8505,23 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
     dev: true
+
+  /preact-merge-refs@1.0.2(preact@10.12.1):
+    resolution: {integrity: sha512-e0P9XELyn1/L/mNsZfyGXks3TIt35aqaAZw6QPxlKa2UUwWOMNmSdgjW4VDbWtP61wjgsLywscOK6w3PUgdp4w==}
+    peerDependencies:
+      preact: '>=10.0.0'
+    dependencies:
+      preact: 10.12.1
+    dev: false
+
+  /preact-transitioning@1.4.1(preact@10.12.1):
+    resolution: {integrity: sha512-zWmus0IcBpiqA/kN7dj6RoZ54/KYH10lN6ckARX1VDTLPdtPd2UhtBa3sWTV+eCKINz3R7kIcfznRSxAc5QuOA==}
+    peerDependencies:
+      preact: '>=10.0.0'
+    dependencies:
+      preact: 10.12.1
+      preact-merge-refs: 1.0.2(preact@10.12.1)
+    dev: false
 
   /preact@10.12.1:
     resolution: {integrity: sha512-l8386ixSsBdbreOAkqtrwqHwdvR35ID8c3rKPa8lCWuO86dBi32QWHV4vfsZK1utLLFMvw+Z5Ad4XLkZzchscg==}

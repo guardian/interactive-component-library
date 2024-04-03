@@ -1,12 +1,22 @@
 import { useLayoutEffect, useEffect, useRef, useState } from 'preact/hooks'
 import { useMousePosition } from './useMousePosition'
 import { createPortal } from 'preact/compat'
+import { mergeStyles } from '$styles/helpers/mergeStyles'
+import { Modal } from './modal'
+import defaultStyles from './style.module.css'
 
-export function Tooltip({ for: element, renderIn: refOrSelector, children }) {
+export const TooltipType = {
+  float: 'float',
+  modal: 'modal',
+}
+
+export function Tooltip({ for: element, renderIn: refOrSelector, type = TooltipType.float, styles, children }) {
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
   const [displayElement, setDisplayElement] = useState(null)
-  const mousePosition = useMousePosition(element)
+  const [mousePosition, hoverActive] = useMousePosition(element)
   const tooltipRef = useRef(null)
+
+  styles = mergeStyles(defaultStyles, styles)
 
   useEffect(() => {
     let element = null
@@ -21,7 +31,7 @@ export function Tooltip({ for: element, renderIn: refOrSelector, children }) {
   }, [refOrSelector])
 
   useLayoutEffect(() => {
-    if (!tooltipRef.current) return
+    if (!tooltipRef.current || !mousePosition) return
     const elementRect = element.getBoundingClientRect()
 
     const newPosition = {
@@ -42,13 +52,21 @@ export function Tooltip({ for: element, renderIn: refOrSelector, children }) {
     setTooltipPosition(newPosition)
   }, [element, displayElement, tooltipRef, mousePosition])
 
-  if (!mousePosition || !displayElement) return
+  if (!displayElement) return
 
-  const style = `position: fixed; left: ${tooltipPosition.x}px; top: ${tooltipPosition.y}px; pointer-events:none;`
+  const fixedStyle =
+    type === TooltipType.modal
+      ? {}
+      : { display: hoverActive ? 'block' : 'none', position: 'fixed', left: tooltipPosition.x, top: tooltipPosition.y }
+
+  const tooltip = (
+    <div ref={tooltipRef} className={styles.tooltip} style={fixedStyle}>
+      {mousePosition && children(mousePosition)}
+    </div>
+  )
+
   return createPortal(
-    <div ref={tooltipRef} style={style}>
-      {children(mousePosition)}
-    </div>,
+    type === TooltipType.modal ? <Modal visible={hoverActive}>{tooltip}</Modal> : tooltip,
     displayElement,
   )
 }

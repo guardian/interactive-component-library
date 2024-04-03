@@ -97,7 +97,8 @@
     "d3-zoom": "^3.0.0",
     "d3-selection": "^3.0.0",
     "d3-transition": "^3.0.1",
-    "preact": "^10.12.1"
+    "preact": "^10.12.1",
+    "preact-transitioning": "^1.4.1"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,css,md}": [
