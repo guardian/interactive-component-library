@@ -1,10 +1,10 @@
 import { useState } from 'preact/hooks'
 import { useTable } from './useTable'
 import { Chevron } from '$particles/chevron'
-import defaultStyles from './style.module.css'
+import defaultStyles from './style.module.scss'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
 
-export function Table({ columns, data, styles }) {
+export function Table({ columns, data, hideHeader=false, styles }) {
   const [sortState, setSortState] = useState(() => {
     const columnIndex = columns.findIndex((column) => {
       if ('sort' in column) {
@@ -34,7 +34,7 @@ export function Table({ columns, data, styles }) {
 
   return (
     <table className={styles.table}>
-      <thead>
+      <thead className={hideHeader && styles.hideHeader}>
         <tr>
           {table.columns.map((column, index) => (
             <th key={column.id} className={mergeStyles(styles.headerCell, column.styles?.headerCell)}>
@@ -48,7 +48,7 @@ export function Table({ columns, data, styles }) {
           ))}
         </tr>
       </thead>
-      <tbody>
+      <tbody className={hideHeader && styles.hideHeaderNoBorder}>
         {table.rows.map((row) => {
           return (
             <tr key={row.id} className={styles.bodyRow}>

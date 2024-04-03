@@ -7,6 +7,21 @@
   text-align: left;
 }
 
+.hideHeader {
+  visibility: hidden;
+  th {
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 0;
+  }
+}
+
+.hideHeaderNoBorder {
+  tr:first-of-type {
+    border-top: none;
+  }
+}
+
 .headerCell {
   font-weight: 700;
   white-space: nowrap;

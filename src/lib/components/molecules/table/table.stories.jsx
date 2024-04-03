@@ -36,6 +36,7 @@ export const Default = {
         lastName: 'Smith',
       },
     ],
+    hideHeader: false,
   },
 }
 
