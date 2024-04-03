@@ -64,7 +64,6 @@ export const Sortable = {
         lastName: 'Smith',
       },
     ],
-    hideHeader: false,
   },
 }
 
@@ -141,6 +140,5 @@ export const PartyResults = {
   args: {
     columns,
     data,
-    hideHeader: false,
   },
 }
