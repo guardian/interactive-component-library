@@ -1,10 +1,10 @@
-import { InfoIcon } from '.'
+import { InfoButton } from '.'
 import { Tooltip } from '$molecules/tooltip'
 import { useRef } from 'react'
 
 export default {
-  title: 'Particles/InfoIcon',
-  component: InfoIcon,
+  title: 'Particles/InfoButton',
+  component: InfoButton,
 }
 
 function TooltipPreview() {
@@ -30,5 +30,5 @@ export const Default = {
   args: {
     onMouseOver: () => {console.log('hello'); return <TooltipPreview />}
   },
-  render: (args) => <InfoIcon {...args} />,
+  render: (args) => <InfoButton {...args} />,
 }

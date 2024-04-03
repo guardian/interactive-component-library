@@ -1,7 +1,7 @@
 import defaultStyles from "./style.module.css"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 
-export const InfoIcon = ({ onMouseOver, styles }) => {
+export const InfoButton = ({ onMouseOver, styles }) => {
   styles = mergeStyles({ ...defaultStyles }, styles)
 
   return (
