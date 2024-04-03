@@ -1,4 +1,6 @@
 .toplineResult {
+  width: fit-content;
+
   .name {
     font-family: var(--text-headline);
     font-size: var(--headline-xxxsmall);
@@ -45,5 +47,14 @@
 
   .displayColumn {
     flex-direction: column;
+  }
+}
+
+.topRow {
+  width: fit-content;
+  border-bottom: 1px solid #DCDCDC;
+
+  @include mq($from: desktop) {
+    border-bottom: none;
   }
 }

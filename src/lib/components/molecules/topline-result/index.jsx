@@ -1,4 +1,4 @@
-import defaultStyles from "./style.module.css"
+import defaultStyles from "./style.module.scss"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 
 export const ToplineResult = ({ name, mainNumber, secondaryNumber, children, styles, displayRow=false, abbreviation, onMouseOver }) => {
