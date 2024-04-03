@@ -1,17 +1,23 @@
 import { useEffect, useState } from 'preact/hooks'
 
 export const useMousePosition = (element) => {
+  const [hoverActive, setHoverActive] = useState(false)
   const [position, setPosition] = useState(null)
 
   const onMouseMove = ({ clientX, clientY, currentTarget }) => {
     const rect = currentTarget.getBoundingClientRect()
     const x = clientX - rect.left
     const y = clientY - rect.top
-    requestAnimationFrame(() => setPosition({ x, y }))
+    requestAnimationFrame(() => {
+      setPosition({ x, y })
+      setHoverActive(true)
+    })
   }
 
   const onMouseOut = () => {
-    requestAnimationFrame(() => setPosition(null))
+    requestAnimationFrame(() => {
+      setHoverActive(false)
+    })
   }
 
   useEffect(() => {
@@ -28,5 +34,5 @@ export const useMousePosition = (element) => {
     }
   }, [element])
 
-  return position
+  return [position, hoverActive]
 }
