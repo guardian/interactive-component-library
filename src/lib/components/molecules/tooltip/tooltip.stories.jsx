@@ -1,4 +1,5 @@
 import { Tooltip, TooltipType } from '.'
+import { InfoButton } from '$particles'
 import { useEffect, useRef, useState } from 'preact/hooks'
 
 export default {
@@ -16,6 +17,10 @@ export const Modal = {
 
 export const Overflow = {
   render: () => <TooltipOverflow />,
+}
+
+export const ButtonPress = {
+  render: () => <TooltipForButton />,
 }
 
 function TooltipPreview({ type }) {
@@ -78,5 +83,39 @@ function TooltipOverflow() {
         </Tooltip>
       )}
     </>
+  )
+}
+
+function TooltipForButton() {
+  const [tooltipTarget, setTooltipTarget] = useState()
+
+  useEffect(() => {
+    function onClick() {
+      setTooltipTarget(null)
+    }
+    window.addEventListener('click', onClick)
+
+    return () => {
+      window.removeEventListener('click', onClick)
+    }
+  }, [])
+
+  return (
+    <div style={{ height: '100vh' }}>
+      <InfoButton
+        onClick={(event) => {
+          setTooltipTarget((target) => {
+            if (target) return null
+            return event.target
+          })
+          event.stopPropagation()
+        }}
+      />
+      {tooltipTarget && (
+        <Tooltip for={tooltipTarget} renderIn="#storybook-root">
+          <div style="border: 1px solid #333; background-color: #FFF; padding: 10px;">Tooltip</div>
+        </Tooltip>
+      )}
+    </div>
   )
 }
