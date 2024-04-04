@@ -1,9 +1,8 @@
 import { Ticker } from '.'
 import { Container } from '$particles'
 import { PageSection, ResultSummary } from '$molecules'
-import { useRef } from 'preact/hooks'
+import { useRef, useEffect } from 'preact/hooks'
 import styles from './stories.module.scss'
-import { useEffect } from 'react'
 
 const now = Date.now()
 const minuteInMilliseconds = 60000
