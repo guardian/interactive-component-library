@@ -31,12 +31,19 @@ export function Search({ placeholder, inputValue, onInputChange, onSubmit, onSel
         placeholder={placeholder}
         ref={inputRef}
         type="text"
+        aria-label="Search input"
         value={inputValue}
-        onFocus={(e) => {
-          e.target.select()
-        }}
         onKeyDown={onKeyDown}
         onInput={(e) => {
+          const suggestions = onInputChange(e)
+          setSuggestions(suggestions)
+        }}
+        onBlur={() => {
+          setSuggestions(null)
+        }}
+        onFocus={(e) => {
+          e.target.select()
+
           const suggestions = onInputChange(e)
           setSuggestions(suggestions)
         }}
@@ -60,11 +67,12 @@ export function Search({ placeholder, inputValue, onInputChange, onSubmit, onSel
 function SuggestionList({ suggestions, highlightText, selectedIndex, styles, onMouseOver, onSelect }) {
   if (!suggestions || suggestions.length === 0) return
   return (
-    <ul className={styles.suggestions}>
+    <ul className={styles.suggestions} aria-label="Search suggestions">
       {suggestions.map((d, index) => {
         return (
           <li
             key={index}
+            aria-label={d.text}
             className={[styles.suggestion, index === selectedIndex && styles.selected].join(' ')}
             onMouseOver={() => onMouseOver(d, index)}
             onClick={() => onSelect(d)}
