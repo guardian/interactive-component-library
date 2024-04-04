@@ -1,0 +1,17 @@
+  .rightAlignToplineResult {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+    > div {
+        align-self: flex-end;
+    }
+  }
+
+  .rightAlignName {
+    &:before {
+        margin-right: 0;
+        margin-left: auto;
+    }
+  }
+  

@@ -1,5 +1,6 @@
 import { action } from '@storybook/addon-actions'
 import { ToplineResult } from '.'
+import styles from './topline-result.stories.module.scss'
 
 export default {
   title: 'Molecules/ToplineResult',
@@ -38,6 +39,10 @@ export const Row = {
     mainNumber: 300,
     secondaryNumber: 120,
     displayRow: true,
+    styles: {
+      toplineResult: styles.rightAlignToplineResult,
+      name: styles.rightAlignName
+    },
   },
   render: (args) => <ToplineResult {...args} />,
 }
