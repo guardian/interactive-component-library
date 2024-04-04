@@ -1,6 +1,6 @@
 import defaultStyles from "./style.module.css"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
-import { useId } from 'react'
+import { useId } from 'preact/compat'
 
 export const GradientIcon = ({
   previous,
