@@ -62,6 +62,7 @@
     "@storybook/manager-api": "^8.0.4",
     "@storybook/preact": "^7.6.17",
     "@storybook/preact-vite": "^7.6.17",
+    "@storybook/test": "^8.0.5",
     "@storybook/theming": "^8.0.4",
     "@types/node": "20.4.9",
     "babel-loader": "9.1.3",

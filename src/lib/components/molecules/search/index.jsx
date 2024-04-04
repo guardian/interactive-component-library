@@ -3,15 +3,14 @@ import { mergeStyles } from '$styles/helpers/mergeStyles'
 import { SearchIcon } from './icons/search'
 import defaultStyles from './style.module.css'
 
-export function Search({ placeholder, inputValue, suggestions = [], onInputChange, onSubmit, onSelect, styles }) {
+export function Search({ placeholder, inputValue, onInputChange, onSubmit, onSelect, styles }) {
   styles = mergeStyles(defaultStyles, styles)
 
-  // const [error, setError] = useState(null)
   const inputRef = useRef(null)
   const [selectedIndex, setSelectedIndex] = useState(-1)
+  const [suggestions, setSuggestions] = useState()
 
   function onKeyDown(event) {
-    console.log('on key down', event.key)
     if (event.key === 'ArrowDown') {
       event.preventDefault()
       setSelectedIndex((currentIndex) => Math.min(currentIndex + 1, suggestions.length - 1))
@@ -35,10 +34,12 @@ export function Search({ placeholder, inputValue, suggestions = [], onInputChang
         value={inputValue}
         onFocus={(e) => {
           e.target.select()
-          // setError(null)
         }}
         onKeyDown={onKeyDown}
-        onInput={onInputChange}
+        onInput={(e) => {
+          const suggestions = onInputChange(e)
+          setSuggestions(suggestions)
+        }}
         className={styles.input}
       />
       <div className={styles.searchIcon}>
@@ -46,7 +47,7 @@ export function Search({ placeholder, inputValue, suggestions = [], onInputChang
       </div>
       <SuggestionList
         suggestions={suggestions}
-        highlightText={inputValue}
+        highlightText={inputRef.current?.value}
         selectedIndex={selectedIndex}
         styles={styles}
         onMouseOver={(_, index) => setSelectedIndex(index)}
@@ -57,7 +58,7 @@ export function Search({ placeholder, inputValue, suggestions = [], onInputChang
 }
 
 function SuggestionList({ suggestions, highlightText, selectedIndex, styles, onMouseOver, onSelect }) {
-  if (suggestions.length === 0) return
+  if (!suggestions || suggestions.length === 0) return
   return (
     <ul className={styles.suggestions}>
       {suggestions.map((d, index) => {
