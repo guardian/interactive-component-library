@@ -20,6 +20,17 @@ export const Default = {
   render: (args) => <ToplineResult {...args} />,
 }
 
+export const WithInfoButton = {
+  args: {
+    name: 'Labour',
+    abbreviation: 'lab',
+    mainNumber: 300,
+    secondaryNumber: 120,
+    showInfoButton: true
+  },
+  render: (args) => <ToplineResult {...args} />,
+}
+
 export const Row = {
   args: {
     name: 'Labour',
