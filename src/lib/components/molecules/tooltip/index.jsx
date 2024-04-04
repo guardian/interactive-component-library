@@ -60,9 +60,10 @@ export function Tooltip({ for: targetElement, renderIn: refOrSelector, type = To
       ? {}
       : {
           display: displayTooltip ? 'block' : 'none',
-          position: 'absolute',
+          position: 'fixed',
           left: tooltipPosition.x,
           top: tooltipPosition.y,
+          zIndex: 100,
         }
 
   const tooltip = (

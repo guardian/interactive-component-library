@@ -11,6 +11,7 @@ export const ToplineResult = ({
   abbreviation,
   onMouseOver,
   onInfoPress,
+  showInfoButton = false,
 }) => {
   styles = mergeStyles({ ...defaultStyles }, styles)
   const displayStyle = displayRow ? styles.displayRow : styles.displayColumn
@@ -19,10 +20,12 @@ export const ToplineResult = ({
     <div class={styles.toplineResult} onMouseOver={onMouseOver}>
       <div class={styles.topRow}>
         <span class={`${styles.name} before-color--${abbreviation}`}>{name}</span>{' '}
-        <span class={styles.infoButton}>
-          <InfoButton onClick={onInfoPress} />
-        </span>
-      </div>
+        { showInfoButton &&
+          <span class={styles.infoButton}>
+            <InfoButton onClick={onInfoPress} />
+          </span>
+        }
+        </div>
       <div class={`${styles.displayNumbers} ${displayStyle}`}>
         <div class={styles.mainNumber}>{mainNumber}</div>
         <div class={styles.secondaryNumber}>{secondaryNumber}</div>
