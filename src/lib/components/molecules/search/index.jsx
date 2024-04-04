@@ -79,9 +79,9 @@ function SuggestionList({ suggestions, highlightText, selectedIndex, styles, onM
           >
             {d.text.split(new RegExp(`(${highlightText})`, 'ig')).map((part, i) =>
               i % 2 === 1 ? (
-                <strong style={{ backgroundColor: '#ffe500', fontWeight: 400 }} key={i}>
+                <span className={styles.highlighted} key={i}>
                   {part}
-                </strong>
+                </span>
               ) : (
                 part
               ),
