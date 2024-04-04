@@ -50,3 +50,8 @@
 .selected {
   background-color: var(--secondary-bg-color);
 }
+
+.highlighted {
+  color: var(--highlighted-text-color);
+  background-color: var(--highlight-color);
+}
