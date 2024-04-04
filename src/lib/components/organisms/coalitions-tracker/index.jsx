@@ -74,24 +74,24 @@ export function CoalitionsTracker({
     <div ref={wrapperRef} className={styles.coalitionsWrapper}>
       <div className={styles.coalitionsContainer}>{parsedLists.map(renderCoalition)}</div>
       <div
+        className={styles.thresholdDot}
         style={{
           position: 'absolute',
           height: thresholdDotWidth,
           width: thresholdDotWidth,
           top: 0,
           left: 0.5 + thresholdLeft - thresholdDotWidth / 2,
-          background: '#121212',
           borderRadius: 50,
         }}
       />
       <div
+        className={styles.thresholdLine}
         style={{
           position: 'absolute',
           height: '100%',
           width: 1,
           top: 0,
           left: thresholdLeft,
-          background: '#121212',
         }}
       />
       <div
