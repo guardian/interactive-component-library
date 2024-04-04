@@ -10,7 +10,7 @@ export function Chevron({ active = false, direction = DIRECTION.down, styles }) 
   const defaultStylesCopy = { ...defaultStyles }
 
   if (active) {
-    defaultStylesCopy.path = mergeStyles(defaultStyles.path, defaultStyles.active)
+    defaultStylesCopy.inactive = mergeStyles(defaultStyles.inactive, defaultStyles.active)
   }
 
   if (direction === DIRECTION.up) {
@@ -26,7 +26,7 @@ export function Chevron({ active = false, direction = DIRECTION.down, styles }) 
           fill-rule="evenodd"
           clip-rule="evenodd"
           d="M7.80569 10.7123L11.6344 15H12.365L16.1938 10.7123L15.4997 10L11.9997 13L8.49976 10L7.80569 10.7123Z"
-          className={styles.path}
+          className={styles.inactive}
         />
       </g>
     </svg>
