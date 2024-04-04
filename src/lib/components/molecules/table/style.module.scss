@@ -5,6 +5,7 @@
   font-size: var(--sans-small);
   line-height: var(--sans-line-height);
   text-align: left;
+  color: var(--primary-text-color);
 }
 
 .hideHeader {
@@ -37,7 +38,7 @@
 }
 
 .bodyRow {
-  border-top: 1px solid #dcdcdc;
+  border-top: 1px solid var(--border-divider-color);
 }
 
 .bodyCell {
