@@ -53,6 +53,7 @@ const app = async () => {
             'preact/jsx-runtime': 'preact/jsx-runtime',
             'preact/hooks': 'preact/hooks',
             'preact/compat': 'preact/compat',
+            'preact-transitioning': 'preact-transitioning',
             'd3-scale': 'd3-scale',
             'd3-geo': 'd3-geo',
           },

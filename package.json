@@ -37,7 +37,8 @@
   },
   "dependencies": {
     "d3-composite-projections": "^1.4.0",
-    "dayjs": "^1.11.10"
+    "dayjs": "^1.11.10",
+    "preact-transitioning": "^1.4.1"
   },
   "devDependencies": {
     "@babel/core": "7.22.10",
@@ -97,8 +98,7 @@
     "d3-zoom": "^3.0.0",
     "d3-selection": "^3.0.0",
     "d3-transition": "^3.0.1",
-    "preact": "^10.12.1",
-    "preact-transitioning": "^1.4.1"
+    "preact": "^10.12.1"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,css,md}": [
