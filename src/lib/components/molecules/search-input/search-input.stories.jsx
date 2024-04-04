@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions'
-import { userEvent, within, expect, waitForElementToBeRemoved } from '@storybook/test'
-import { Search } from '.'
+import { userEvent, within, expect } from '@storybook/test'
+import { SearchInput } from '.'
 
 const suggestions = [
   { text: 'Suggestion 1', value: 1 },
@@ -9,8 +9,8 @@ const suggestions = [
 ]
 
 const meta = {
-  title: 'Molecules/Search',
-  component: Search,
+  title: 'Molecules/SearchInput',
+  component: SearchInput,
   args: {
     placeholder: 'Search',
     onSelect: action('select'),
