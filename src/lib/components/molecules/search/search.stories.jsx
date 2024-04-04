@@ -5,6 +5,8 @@ const meta = {
   title: 'Molecules/Search',
   component: Search,
   args: {
+    placeholder: 'Search',
+    onInputChange: action('input change'),
     onSelect: action('select'),
     onSubmit: action('submit'),
   },
@@ -12,11 +14,7 @@ const meta = {
 
 export default meta
 
-export const Default = {
-  args: {
-    placeholder: 'Search',
-  },
-}
+export const Default = {}
 
 export const WithSuggestions = {
   args: {
