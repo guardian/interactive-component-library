@@ -1,6 +1,6 @@
 import defaultStyles from "./style.module.css"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
-import { uniqueId } from "$shared/helpers"
+import { useId } from 'react'
 
 export const GradientIcon = ({
   previous,
@@ -8,8 +8,8 @@ export const GradientIcon = ({
   styles
 }) => {
   styles = mergeStyles({ ...defaultStyles }, styles)
-  
-  const gradientId = uniqueId()
+
+  const gradientId = useId()
 
   return (
       <svg
