@@ -3,7 +3,7 @@ import { mergeStyles } from '$styles/helpers/mergeStyles'
 import { SearchIcon } from './icons/search'
 import defaultStyles from './style.module.css'
 
-export function Search({ placeholder, inputValue, suggestions = [], onSubmit, onSelect, styles }) {
+export function Search({ placeholder, inputValue, suggestions = [], onInputChange, onSubmit, onSelect, styles }) {
   styles = mergeStyles(defaultStyles, styles)
 
   // const [error, setError] = useState(null)
@@ -38,6 +38,7 @@ export function Search({ placeholder, inputValue, suggestions = [], onSubmit, on
           // setError(null)
         }}
         onKeyDown={onKeyDown}
+        onInput={onInputChange}
         className={styles.input}
       />
       <div className={styles.searchIcon}>
