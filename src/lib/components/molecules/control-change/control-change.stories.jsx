@@ -11,6 +11,19 @@ const hasChangedArgs = {
   text: 'Con gain from Lab'
 }
 
+const hasChangedAlt = {
+  previous: 'snp',
+  next: 'lab',
+  text: 'Lab gain from SNP'
+}
+
+const hasChangedAlt2 = {
+  previous: 'con',
+  next: 'lab',
+  text: 'Lab gain from Con'
+}
+
+
 const hasNotChangedArgs = {
   previous: 'con',
   next: 'con',
@@ -41,5 +54,15 @@ export const HasNotChanged = {
 export const withStyles = {
   args: withStylesArgs,
   render: (args) => <ControlChange {...args} />,
+}
+
+export const ListOfIcons = {
+  render: () => (
+    <div style={{ height: '100vh' }}>
+      <ControlChange {...hasChangedArgs} />
+      <ControlChange {...hasChangedAlt} />
+      <ControlChange {...hasChangedAlt2} />
+    </div>
+  ),
 }
 
