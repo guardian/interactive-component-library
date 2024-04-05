@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'preact/hooks'
 import { MapContext } from '../context/MapContext'
 import { dynamicPropValue } from '../helpers/dynamicPropValue'
 
-export function Line({ features, stroke = '#FFF', strokeWidth = 1, styles }) {
+export function Line({ features, stroke = null, strokeWidth = 1, styles }) {
   const context = useContext(MapContext)
 
   const draw = (ctx, path) => {
