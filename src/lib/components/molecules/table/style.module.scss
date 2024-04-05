@@ -5,7 +5,6 @@
   font-size: var(--sans-small);
   line-height: var(--sans-line-height);
   text-align: left;
-  color: var(--primary-text-color);
 }
 
 .hideHeader {
@@ -28,6 +27,7 @@
   white-space: nowrap;
   padding-top: var(--space-2);
   padding-bottom: var(--space-2);
+  color: var(--primary-text-color);
 }
 
 .headerCellButton {
@@ -35,10 +35,13 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  color: var(--primary-text-color);
+  cursor: pointer;
 }
 
 .bodyRow {
   border-top: 1px solid var(--border-divider-color);
+  color: var(--primary-text-color);
 }
 
 .bodyCell {

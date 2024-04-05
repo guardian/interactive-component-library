@@ -36,6 +36,7 @@
   font-size: var(--sans-small);
   line-height: var(--sans-line-height);
   color: var(--primary-text-color);
+  max-width: 150px;
 
   span {
     display: block;
@@ -51,4 +52,8 @@
 
 .thresholdDot, .thresholdLine {
   background: var(--primary-text-color);
+}
+
+.thresholdDot {
+  border-radius: 50px;
 }

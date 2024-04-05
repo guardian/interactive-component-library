@@ -81,7 +81,6 @@ export function CoalitionsTracker({
           width: thresholdDotWidth,
           top: 0,
           left: 0.5 + thresholdLeft - thresholdDotWidth / 2,
-          borderRadius: 50,
         }}
       />
       <div
@@ -100,7 +99,6 @@ export function CoalitionsTracker({
         style={{
           position: 'absolute',
           minWidth: thresholdTextMinWidth,
-          maxWidth: 150,
           width: 'auto',
           top: -(thresholdDotWidth + 1) / 2,
           left: thresholdLeft + (thresholdDotWidth - 1) / 2 + thresholdTextPaddingLeft,
