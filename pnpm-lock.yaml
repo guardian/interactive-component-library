@@ -47,7 +47,7 @@ devDependencies:
     version: 14.1.4(tslib@2.6.2)(typescript@5.1.6)
   '@preact/preset-vite':
     specifier: ^2.8.0
-    version: 2.8.0(@babel/core@7.22.10)(preact@10.12.1)(vite@4.5.2)
+    version: 2.8.0(@babel/core@7.22.10)(preact@10.12.1)(vite@4.5.3)
   '@preact/signals':
     specifier: ^1.2.2
     version: 1.2.2(preact@10.12.1)
@@ -92,7 +92,7 @@ devDependencies:
     version: 7.6.17(preact@10.12.1)
   '@storybook/preact-vite':
     specifier: ^7.6.17
-    version: 7.6.17(@babel/core@7.22.10)(preact@10.12.1)(typescript@5.1.6)(vite@4.5.2)
+    version: 7.6.17(@babel/core@7.22.10)(preact@10.12.1)(typescript@5.1.6)(vite@4.5.3)
   '@storybook/test':
     specifier: ^8.0.5
     version: 8.0.5(vitest@0.34.1)
@@ -178,8 +178,8 @@ devDependencies:
     specifier: 5.1.6
     version: 5.1.6
   vite:
-    specifier: ^4.0.0
-    version: 4.5.2(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1)
+    specifier: ^4.5.3
+    version: 4.5.3(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1)
   vitest:
     specifier: 0.34.1
     version: 0.34.1(jsdom@22.1.0)(less@4.2.0)(sass@1.71.1)
@@ -2084,7 +2084,7 @@ packages:
     dev: true
     optional: true
 
-  /@preact/preset-vite@2.8.0(@babel/core@7.22.10)(preact@10.12.1)(vite@4.5.2):
+  /@preact/preset-vite@2.8.0(@babel/core@7.22.10)(preact@10.12.1)(vite@4.5.3):
     resolution: {integrity: sha512-rqfNx6utGZRIG6DAstgum30El53i286RfhY1gPS43qq3BvRKaW6YB+PI724HeI2i3V7K2hi6n8wtiBt8x8mLOQ==}
     peerDependencies:
       '@babel/core': 7.x
@@ -2093,7 +2093,7 @@ packages:
       '@babel/core': 7.22.10
       '@babel/plugin-transform-react-jsx': 7.23.4(@babel/core@7.22.10)
       '@babel/plugin-transform-react-jsx-development': 7.22.5(@babel/core@7.22.10)
-      '@prefresh/vite': 2.4.5(preact@10.12.1)(vite@4.5.2)
+      '@prefresh/vite': 2.4.5(preact@10.12.1)(vite@4.5.3)
       '@rollup/pluginutils': 4.2.1
       babel-plugin-transform-hook-names: 1.0.2(@babel/core@7.22.10)
       debug: 4.3.4
@@ -2102,7 +2102,7 @@ packages:
       node-html-parser: 6.1.12
       resolve: 1.22.8
       rs-module-lexer: 2.3.0
-      vite: 4.5.2(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1)
+      vite: 4.5.3(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1)
     transitivePeerDependencies:
       - preact
       - supports-color
@@ -2137,7 +2137,7 @@ packages:
     resolution: {integrity: sha512-KtC/fZw+oqtwOLUFM9UtiitB0JsVX0zLKNyRTA332sqREqSALIIQQxdUCS1P3xR/jT1e2e8/5rwH6gdcMLEmsQ==}
     dev: true
 
-  /@prefresh/vite@2.4.5(preact@10.12.1)(vite@4.5.2):
+  /@prefresh/vite@2.4.5(preact@10.12.1)(vite@4.5.3):
     resolution: {integrity: sha512-iForDVJ2M8gQYnm5pHumvTEJjGGc7YNYC0GVKnHFL+GvFfKHfH9Rpq67nUAzNbjuLEpqEOUuQVQajMazWu2ZNQ==}
     peerDependencies:
       preact: ^10.4.0
@@ -2149,7 +2149,7 @@ packages:
       '@prefresh/utils': 1.2.0
       '@rollup/pluginutils': 4.2.1
       preact: 10.12.1
-      vite: 4.5.2(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1)
+      vite: 4.5.3(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2978,7 +2978,7 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/builder-vite@7.6.17(@preact/preset-vite@2.8.0)(typescript@5.1.6)(vite@4.5.2):
+  /@storybook/builder-vite@7.6.17(@preact/preset-vite@2.8.0)(typescript@5.1.6)(vite@4.5.3):
     resolution: {integrity: sha512-2Q32qalI401EsKKr9Hkk8TAOcHEerqwsjCpQgTNJnCu6GgCVKoVUcb99oRbR9Vyg0xh+jb19XiWqqQujFtLYlQ==}
     peerDependencies:
       '@preact/preset-vite': '*'
@@ -2993,7 +2993,7 @@ packages:
       vite-plugin-glimmerx:
         optional: true
     dependencies:
-      '@preact/preset-vite': 2.8.0(@babel/core@7.22.10)(preact@10.12.1)(vite@4.5.2)
+      '@preact/preset-vite': 2.8.0(@babel/core@7.22.10)(preact@10.12.1)(vite@4.5.3)
       '@storybook/channels': 7.6.17
       '@storybook/client-logger': 7.6.17
       '@storybook/core-common': 7.6.17
@@ -3011,7 +3011,7 @@ packages:
       magic-string: 0.30.5
       rollup: 3.29.4
       typescript: 5.1.6
-      vite: 4.5.2(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1)
+      vite: 4.5.3(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1)
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -3472,18 +3472,18 @@ packages:
     resolution: {integrity: sha512-WaWqB8o9vUc9aaVls+povQSVirf1Xd1LZcVhUKfAocAF3mzYUsnJsVqvnbjRj/F96UFVihOyDt9Zjl/9OvrCvQ==}
     dev: true
 
-  /@storybook/preact-vite@7.6.17(@babel/core@7.22.10)(preact@10.12.1)(typescript@5.1.6)(vite@4.5.2):
+  /@storybook/preact-vite@7.6.17(@babel/core@7.22.10)(preact@10.12.1)(typescript@5.1.6)(vite@4.5.3):
     resolution: {integrity: sha512-ZPOAxx7xBJ85L4PR+JkYiQcmoIXkEpZYkTXPyx331owBqWEos9hdf0WfVtnBa57fDwsbkKGY+uhmqbPrYPa5eA==}
     engines: {node: '>=16'}
     peerDependencies:
       preact: '>=10'
       vite: ^3.0.0 || ^4.0.0 || ^5.0.0
     dependencies:
-      '@preact/preset-vite': 2.8.0(@babel/core@7.22.10)(preact@10.12.1)(vite@4.5.2)
-      '@storybook/builder-vite': 7.6.17(@preact/preset-vite@2.8.0)(typescript@5.1.6)(vite@4.5.2)
+      '@preact/preset-vite': 2.8.0(@babel/core@7.22.10)(preact@10.12.1)(vite@4.5.3)
+      '@storybook/builder-vite': 7.6.17(@preact/preset-vite@2.8.0)(typescript@5.1.6)(vite@4.5.3)
       '@storybook/preact': 7.6.17(preact@10.12.1)
       preact: 10.12.1
-      vite: 4.5.2(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1)
+      vite: 4.5.3(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1)
     transitivePeerDependencies:
       - '@babel/core'
       - encoding
@@ -10506,7 +10506,7 @@ packages:
       mlly: 1.4.0
       pathe: 1.1.1
       picocolors: 1.0.0
-      vite: 4.5.2(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1)
+      vite: 4.5.3(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -10518,8 +10518,8 @@ packages:
       - terser
     dev: true
 
-  /vite@4.5.2(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1):
-    resolution: {integrity: sha512-tBCZBNSBbHQkaGyhGCDUGqeo2ph8Fstyp6FMSvTtsXeZSPpSMGlviAOav2hxVTqFcx8Hj/twtWKsMJXNY0xI8w==}
+  /vite@4.5.3(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1):
+    resolution: {integrity: sha512-kQL23kMeX92v3ph7IauVkXkikdDRsYMGTVl5KY2E9OY4ONLvkHf04MDTbnfo6NKxZiDLWzVpP5oTa8hQD8U3dg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -10609,7 +10609,7 @@ packages:
       strip-literal: 1.0.1
       tinybench: 2.5.0
       tinypool: 0.7.0
-      vite: 4.5.2(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1)
+      vite: 4.5.3(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1)
       vite-node: 0.34.1(@types/node@20.4.9)(less@4.2.0)(sass@1.71.1)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
