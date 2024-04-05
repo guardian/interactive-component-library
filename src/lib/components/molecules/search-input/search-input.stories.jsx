@@ -20,6 +20,7 @@ const meta = {
       if (input === '') return
       return suggestions.filter((d) => d.text.toLowerCase().includes(input.toLowerCase()))
     },
+    onClear: action('clear'),
   },
 }
 
