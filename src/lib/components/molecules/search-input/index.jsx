@@ -18,7 +18,7 @@ export function SearchInput({
   const inputRef = useRef(null)
   const [selectedIndex, setSelectedIndex] = useState(-1)
   const [suggestions, setSuggestions] = useState()
-  const [inFocus, setInFocus] = useState(false)
+  const [showSuggestions, setShowSuggestions] = useState(true)
 
   function onKeyDown(event) {
     if (event.key === 'ArrowDown') {
@@ -29,7 +29,7 @@ export function SearchInput({
       setSelectedIndex((currentIndex) => Math.max(currentIndex - 1, -1))
     } else if (event.key === 'Enter' && selectedIndex >= 0) {
       event.preventDefault()
-      onSelect(suggestions[selectedIndex])
+      onSelectSuggestion(suggestions[selectedIndex])
     } else if (event.key === 'Enter') {
       onSubmit(inputRef.current.value)
     }
@@ -43,11 +43,19 @@ export function SearchInput({
     setSuggestions(suggestions)
   }
 
+  function onSelectSuggestion(suggestion) {
+    inputRef.current.value = suggestion.text
+    onSelect(suggestion)
+
+    inputRef.current.blur()
+  }
+
   const showClearButton = inputRef.current?.value && inputRef.current?.value !== ''
 
   return (
     <div className={styles.searchContainer}>
       <input
+        name="search"
         placeholder={placeholder}
         ref={inputRef}
         type="text"
@@ -58,13 +66,11 @@ export function SearchInput({
           inputChanged(e.target.value)
         }}
         onBlur={() => {
-          setInFocus(false)
-          setSuggestions(null)
+          setShowSuggestions(false)
         }}
         onFocus={(e) => {
           e.target.select()
-          setInFocus(true)
-          inputChanged(e.target.value)
+          setShowSuggestions(true)
         }}
         className={styles.input}
       />
@@ -79,18 +85,21 @@ export function SearchInput({
               const emptyValue = ''
               inputRef.current.value = emptyValue
               inputChanged(emptyValue)
+              inputRef.current.focus()
             }}
           />
         </div>
       )}
-      <SuggestionList
-        suggestions={suggestions}
-        highlightText={inputRef.current?.value}
-        selectedIndex={selectedIndex}
-        styles={styles}
-        onMouseOver={(_, index) => setSelectedIndex(index)}
-        onSelect={onSelect}
-      />
+      {showSuggestions && (
+        <SuggestionList
+          suggestions={suggestions}
+          highlightText={inputRef.current?.value}
+          selectedIndex={selectedIndex}
+          styles={styles}
+          onMouseOver={(_, index) => setSelectedIndex(index)}
+          onSelect={onSelectSuggestion}
+        />
+      )}
     </div>
   )
 }
@@ -105,8 +114,11 @@ function SuggestionList({ suggestions, highlightText, selectedIndex, styles, onM
             key={index}
             aria-label={d.text}
             className={[styles.suggestion, index === selectedIndex && styles.selected].join(' ')}
+            onMouseDown={(e) => e.preventDefault()}
             onMouseOver={() => onMouseOver(d, index)}
-            onClick={() => onSelect(d)}
+            onClick={() => {
+              onSelect(d)
+            }}
           >
             {d.text.split(new RegExp(`(${highlightText})`, 'ig')).map((part, i) =>
               i % 2 === 1 ? (
