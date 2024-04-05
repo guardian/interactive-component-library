@@ -15,10 +15,10 @@ const meta = {
     placeholder: 'Search',
     onSelect: action('select'),
     onSubmit: action('submit'),
-    onInputChange: (e) => {
+    onInputChange: (input) => {
       action('input change')()
-      if (e.target.value === '') return
-      return suggestions.filter((d) => d.text.toLowerCase().includes(e.target.value.toLowerCase()))
+      if (input === '') return
+      return suggestions.filter((d) => d.text.toLowerCase().includes(input.toLowerCase()))
     },
   },
 }

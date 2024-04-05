@@ -1,8 +1,8 @@
-import { CrossIcon } from '.'
+import { CloseButton } from '.'
 
 const meta = {
-  title: 'Particles/CrossIcon',
-  component: CrossIcon,
+  title: 'Particles/CloseButton',
+  component: CloseButton,
   decorators: [
     (Story) => (
       <div style={{ width: 17, height: 17 }}>
@@ -15,3 +15,9 @@ const meta = {
 export default meta
 
 export const Default = {}
+
+export const Borderless = {
+  args: {
+    border: false,
+  },
+}

@@ -1,0 +1,27 @@
+.button {
+  padding: 9px;
+  border: none;
+  width: 33px;
+  height: 33px;
+  background-color: var(--primary-bg-color);
+  border-radius: 999px;
+}
+
+.buttonBorder {
+  border: 1px solid var(--border-divider-color);
+}
+
+.button:hover:enabled {
+  background-color: var(--news-grey-05);
+}
+
+.svg {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.path {
+  fill: var(--primary-text-color);
+  pointer-events: none;
+}

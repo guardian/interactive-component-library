@@ -1,14 +1,24 @@
 import { useRef, useState } from 'preact/hooks'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
 import { SearchIcon } from './icons/search'
+import { CloseButton } from '$particles'
 import defaultStyles from './style.module.css'
 
-export function SearchInput({ placeholder, inputValue, onInputChange, onSubmit, onSelect, styles }) {
+export function SearchInput({
+  placeholder,
+  inputValue,
+  maxSuggestions = 5,
+  onInputChange,
+  onSubmit,
+  onSelect,
+  styles,
+}) {
   styles = mergeStyles(defaultStyles, styles)
 
   const inputRef = useRef(null)
   const [selectedIndex, setSelectedIndex] = useState(-1)
   const [suggestions, setSuggestions] = useState()
+  const [inFocus, setInFocus] = useState(false)
 
   function onKeyDown(event) {
     if (event.key === 'ArrowDown') {
@@ -25,6 +35,16 @@ export function SearchInput({ placeholder, inputValue, onInputChange, onSubmit, 
     }
   }
 
+  function inputChanged(input) {
+    let suggestions = onInputChange(input)
+    if (suggestions) {
+      suggestions = suggestions.slice(0, maxSuggestions)
+    }
+    setSuggestions(suggestions)
+  }
+
+  const showClearButton = inputRef.current?.value && inputRef.current?.value !== ''
+
   return (
     <div className={styles.searchContainer}>
       <input
@@ -35,23 +55,34 @@ export function SearchInput({ placeholder, inputValue, onInputChange, onSubmit, 
         value={inputValue}
         onKeyDown={onKeyDown}
         onInput={(e) => {
-          const suggestions = onInputChange(e)
-          setSuggestions(suggestions)
+          inputChanged(e.target.value)
         }}
         onBlur={() => {
+          setInFocus(false)
           setSuggestions(null)
         }}
         onFocus={(e) => {
           e.target.select()
-
-          const suggestions = onInputChange(e)
-          setSuggestions(suggestions)
+          setInFocus(true)
+          inputChanged(e.target.value)
         }}
         className={styles.input}
       />
       <div className={styles.searchIcon}>
         <SearchIcon />
       </div>
+      {showClearButton && (
+        <div className={styles.clearButton}>
+          <CloseButton
+            border={false}
+            onClick={() => {
+              const emptyValue = ''
+              inputRef.current.value = emptyValue
+              inputChanged(emptyValue)
+            }}
+          />
+        </div>
+      )}
       <SuggestionList
         suggestions={suggestions}
         highlightText={inputRef.current?.value}
