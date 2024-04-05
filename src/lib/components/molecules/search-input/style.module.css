@@ -41,6 +41,8 @@
   background-color: var(--primary-bg-color);
   border: 1px solid var(--border-divider-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  pointer-events: all;
 }
 
 .suggestion {
