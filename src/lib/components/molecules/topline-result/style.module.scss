@@ -31,7 +31,7 @@
     }
 
     .secondaryNumber {
-      color: var(--secondary-text-color);
+      color: var(--secondary-text-color-alt);
       font-size: var(--titlepiece-xxsmall);
     }
 
@@ -56,7 +56,6 @@
 .topRow {
   width: fit-content;
   padding-bottom: 1px;
-  border-bottom: 1px solid #DCDCDC;
 
   display: flex;
   flex-direction: row;

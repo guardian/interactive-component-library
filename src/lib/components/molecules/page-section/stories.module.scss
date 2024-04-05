@@ -43,5 +43,5 @@ h2 {
 
 .border {
   grid-area: border-body;
-  border-left: 1px solid #dcdcdc;
+  border-left: 1px solid var(--border-divider-color);
 }

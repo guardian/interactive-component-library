@@ -8,9 +8,9 @@
 }
 
 .path {
-  fill: #dcdcdc;
+  fill: var(--secondary-line-color);
 }
 
 .active {
-  fill: #333;
+  fill: var(--news-grey-01);
 }
