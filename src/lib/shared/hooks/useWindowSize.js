@@ -1,12 +1,19 @@
 import { useState, useEffect } from 'preact/hooks'
 
 function useWindowSize() {
-  const [windowSize, setWindowSize] = useState({
-    width: window?.innerWidth || 0,
-    height: window?.innerHeight || 0,
+
+  const [windowSize, setWindowSize] = useState(() => {
+    if (typeof window === 'undefined') return { width: 0, height: 0 }
+
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    }
   })
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
     function handleResize() {
       setWindowSize({
         width: window.innerWidth,

@@ -20,6 +20,7 @@
   font-family: var(--text-sans);
   font-size: var(--sans-small);
   line-height: var(--sans-line-height);
+  color: var(--primary-text-color);
 }
 
 .title {
@@ -34,6 +35,8 @@
   font-family: var(--text-sans);
   font-size: var(--sans-small);
   line-height: var(--sans-line-height);
+  color: var(--primary-text-color);
+  max-width: 150px;
 
   span {
     display: block;
@@ -45,4 +48,12 @@
   margin-bottom: var(--space-1);
   font-size: var(--sans-small);
   line-height: var(--sans-line-height);
+}
+
+.thresholdDot, .thresholdLine {
+  background: var(--primary-text-color);
+}
+
+.thresholdDot {
+  border-radius: 50px;
 }

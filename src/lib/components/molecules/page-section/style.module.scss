@@ -31,6 +31,7 @@
 }
 
 .header {
+    color: var(--primary-text-color);
     padding-top: var(--space-2);
     margin-bottom: var(--space-5);
 
@@ -49,6 +50,7 @@
 
 .content {
     padding-top: 0;
+    color: var(--primary-text-color);
 
     @include mq($from: leftCol) {
         padding-top: var(--space-2);
