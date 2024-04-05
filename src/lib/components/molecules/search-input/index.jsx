@@ -11,6 +11,7 @@ export function SearchInput({
   onInputChange,
   onSubmit,
   onSelect,
+  onClear,
   styles,
 }) {
   styles = mergeStyles(defaultStyles, styles)
@@ -86,6 +87,8 @@ export function SearchInput({
               inputRef.current.value = emptyValue
               inputChanged(emptyValue)
               inputRef.current.focus()
+
+              onClear()
             }}
           />
         </div>
