@@ -60,10 +60,12 @@ jobs:
         with:
           version: 8
 
+      # Setup .npmrc file to publish to npm
       - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -72,14 +74,7 @@ jobs:
       - name: Build
         run: pnpm build:lib
 
-      - name: Create .npmrc file with access to Github Packages
-        uses: ferluisxd/create-npmrc@3
-        with:
-          org_name: guardian
+      - name: Publish to NPM
+        run: npm publish
         env:
-          AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish
-        run: pnpm publish --no-git-checks --report-summary
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
