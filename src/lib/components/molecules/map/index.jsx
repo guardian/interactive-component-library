@@ -37,10 +37,10 @@ export const MapConfiguration = {
     drawToCanvas: false,
   },
   London: {
-    projection: Projection.geoMercator,
+    projection: geoMercator(),
     bounds: [
-      [-6.41866730264044, 49.8647926027119],
-      [1.76370537625026, 55.8111151140706],
+      [-0.510356073504132, 51.2867586289553],
+      [0.334043866981608, 51.6918768002741],
     ],
     drawCompositionBorders: false,
     drawToCanvas: false,
