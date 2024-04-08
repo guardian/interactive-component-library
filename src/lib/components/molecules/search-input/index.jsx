@@ -36,18 +36,18 @@ export function SearchInput({
     }
   }
 
-  function inputChanged(input) {
-    let suggestions = onInputChange(input)
+  async function inputChanged(input) {
+    let suggestions = await onInputChange(input)
     if (suggestions) {
       suggestions = suggestions.slice(0, maxSuggestions)
     }
     setSuggestions(suggestions)
+    setSelectedIndex(-1)
   }
 
   function onSelectSuggestion(suggestion) {
-    inputRef.current.value = suggestion.text
     onSelect(suggestion)
-
+    inputRef.current.value = suggestion.text
     inputRef.current.blur()
   }
 
