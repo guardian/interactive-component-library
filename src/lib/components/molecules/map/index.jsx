@@ -1,4 +1,4 @@
-import { geoAlbers, geoContains } from 'd3-geo'
+import { geoAlbers, geoContains, geoMercator, } from 'd3-geo'
 import { geoAlbersUk } from 'd3-composite-projections'
 import { SVGMapProvider } from './context/SVGMapProvider'
 import { SVGRenderer } from './renderers/SVGRenderer'
@@ -14,6 +14,7 @@ export * as MapLayers from './layers'
 export const Projection = {
   geoAlbersUKComposite: geoAlbersUk(),
   geoAlbersEngland: geoAlbers().center([0, 52.7]).rotate([1.1743, 0]).parallels([50, 54]),
+  geoMercator: geoMercator()
 }
 
 export const MapConfiguration = {
@@ -28,6 +29,15 @@ export const MapConfiguration = {
   },
   England: {
     projection: Projection.geoAlbersEngland,
+    bounds: [
+      [-6.41866730264044, 49.8647926027119],
+      [1.76370537625026, 55.8111151140706],
+    ],
+    drawCompositionBorders: false,
+    drawToCanvas: false,
+  },
+  London: {
+    projection: Projection.geoMercator,
     bounds: [
       [-6.41866730264044, 49.8647926027119],
       [1.76370537625026, 55.8111151140706],
