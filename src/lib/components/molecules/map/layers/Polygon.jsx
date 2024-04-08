@@ -2,7 +2,7 @@ import { useContext } from 'preact/hooks'
 import { MapContext } from '../context/MapContext'
 import { dynamicPropValue } from '../helpers/dynamicPropValue'
 
-export function Polygon({ features, fill = null, stroke = null, strokeWidth = 1, styles }) {
+export function Polygon({ id, features, fill = null, stroke = null, strokeWidth = 1, styles }) {
   const context = useContext(MapContext)
   // const { drawToCanvas } = context.config
 
@@ -45,6 +45,7 @@ export function Polygon({ features, fill = null, stroke = null, strokeWidth = 1,
         return (
           <path
             key={index}
+            id={dynamicPropValue(id, d, index)}
             className={dynamicPropValue(styles, d, index)}
             fill={dynamicPropValue(fill, d, index)}
             stroke={dynamicPropValue(stroke, d, index)}
