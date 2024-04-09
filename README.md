@@ -3,21 +3,8 @@
 A set of reusable components for use in interactive pages, written in Preact using [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) principles.
 
 ## Install the component library in a new client project
-
-From [Github Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry):
-
-1. [Create a personal access token (classic)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic) with `read:packages` scope.
-2. Create a file called `.npmrc` in the root of your new project and add the following:
-
 ```
-@guardian:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=YOUR_PERSONAL_ACCESS_TOKEN
-```
-
-3. Install using npm:
-
-```
-npm i @guardian/interactive-component-library
+npm install @guardian/interactive-component-library
 ```
 
 ## Contributing to this repository
