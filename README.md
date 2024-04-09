@@ -76,9 +76,9 @@ npm uninstall --no-save @guardian/interactive-component-library && npm install
 
 To publish a new version of the component library, follow these steps:
 
-1. Update the version number in `package.json`
-2. [Create a new release](https://github.com/guardian/interactive-component-library/releases/new) on GitHub (don't forget to write some release notes)
-3. Publishing the release [triggers a workflow](https://github.com/guardian/interactive-component-library/actions) to package the library and publish it to Github Packages. If the publish actions fails, you can also trigger it manually
+1. [Create a new release](https://github.com/guardian/interactive-component-library/releases/new) on GitHub (don't forget to write some release notes)
+2. Publishing the release [triggers a workflow](https://github.com/guardian/interactive-component-library/actions) to package the library and publish it to the NPM registry. If the publish actions fails, you can also trigger it manually
+3. The publish action also creates a pull request to bump the version number. Merge the pull request to finish the release
 
 ## Scripts
 
