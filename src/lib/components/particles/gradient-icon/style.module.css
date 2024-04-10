@@ -1,3 +1,8 @@
+:global(#gv-gradient-defs) {
+  visibility: hidden;
+  height: 0;
+}
+
 .svg {
   display: 'inline-block';
   transform: 'translateY(-1px)';
