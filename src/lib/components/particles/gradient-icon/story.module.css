@@ -1,0 +1,13 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.previous {
+  stop-color: purple;
+}
+
+.next {
+  stop-color: orange;
+}
