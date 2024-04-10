@@ -4,7 +4,7 @@ import defaultStyles from './style.module.scss'
 
 export const ToplineResult = ({
   name,
-  candidatename,
+  secondaryName,
   mainNumber,
   secondaryNumber,
   styles,
@@ -13,13 +13,12 @@ export const ToplineResult = ({
   onMouseOver,
   onInfoPress,
   showInfoButton = false,
-  showCandidate = false
 }) => {
   styles = mergeStyles({ ...defaultStyles }, styles)
   const displayStyle = displayRow ? styles.displayRow : styles.displayColumn
 
   return (
-    !showCandidate ?
+    !secondaryName ?
     <>    <div class={styles.toplineResult} onMouseOver={onMouseOver}>
       <div class={styles.topRow}>
         <span class={`${styles.name} before-color--${abbreviation}`}>{name}</span>{' '}
@@ -37,7 +36,7 @@ export const ToplineResult = ({
     </>    :  <>
     <div class={styles.toplineResult} onMouseOver={onMouseOver}>
       <div class={styles.topRow}>
-        <span class={`${styles.candidatename} before-color--${abbreviation}`}>{candidatename}</span>{' '}
+        <span class={`${styles.primaryname} before-color--${abbreviation}`}>{name}</span>{' '}
         { showInfoButton &&
           <span class={styles.infoButton}>
             <InfoButton onClick={onInfoPress} />
@@ -45,7 +44,7 @@ export const ToplineResult = ({
         }
         </div>
         <div class={styles.subhead}>
-        <span class={styles.partyname}>{name}</span>{' '}
+        <span class={styles.secondaryname}>{secondaryName}</span>{' '}
         </div>
 
       <div class={`${styles.displayNumbers} ${displayStyle}`}>

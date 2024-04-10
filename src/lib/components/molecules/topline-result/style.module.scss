@@ -1,7 +1,7 @@
 .toplineResult {
   width: fit-content;
 
-  .candidatename {
+  .primaryname {
     color: var(--primary-text-color);
     font-family: var(--text-headline);
     font-size: var(--headline-xxxsmall);
@@ -17,8 +17,11 @@
     }
   }
 
-  .subhead {
-    display: block;
+  .secondaryname {
+    color: var(--primary-text-color);
+    font-family: var(--text-headline);
+    font-size: var(--headline-xxxsmall);
+    font-weight: 500;
   }
 
 
