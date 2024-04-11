@@ -1,12 +1,12 @@
-import {CircleIcon} from '.'
+import { CircleIcon } from '.'
 
 export default {
-    title: 'Particles/CircleIcon',
-    component: CircleIcon
+  title: 'Particles/CircleIcon',
+  component: CircleIcon,
 }
 
 export const Default = {
-    args: {
-        abbreviation: 'lab'
-    }
+  args: {
+    color: 'var(--news-core-03)',
+  },
 }
