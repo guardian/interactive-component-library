@@ -1,0 +1,22 @@
+.refreshIndicator {
+  display: flex;
+  flex-direction: row;
+  column-gap: var(--space-0);
+  align-items: center;
+}
+
+.liveText,
+.refreshText {
+  font-family: var(--text-sans);
+  color: var(--secondary-text-color);
+  line-height: var(--sans-line-height);
+  font-size: var(--sans-small);
+}
+
+.liveText {
+  font-weight: 700;
+}
+
+.refreshText {
+  margin-left: var(--space-0);
+}

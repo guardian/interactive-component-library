@@ -10,3 +10,10 @@ export const Default = {
     color: 'var(--news-core-03)',
   },
 }
+
+export const Pulse = {
+  args: {
+    color: 'var(--news-core-03)',
+    pulse: true,
+  },
+}
