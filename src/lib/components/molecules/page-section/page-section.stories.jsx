@@ -23,7 +23,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <Container sideBorders={true}>
+      <Container sideBorders={true} styles={{ pageContainer: styles.pageContainer }}>
         <div className={styles.grid}>
           <div className={styles.border} />
           <div className={styles.body}>
@@ -57,5 +57,12 @@ export const TwoSections = {
         </PageSection>
       </>
     )
+  },
+}
+
+export const BackgroundColor = {
+  args: {
+    backgroundColor: 'var(--tertiary-bg-color)',
+    borderTop: true,
   },
 }
