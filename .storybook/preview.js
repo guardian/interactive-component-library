@@ -39,6 +39,13 @@ const preview = {
             height: '320px',
           },
         },
+        phablet: {
+          name: 'Phablet',
+          styles: {
+            width: '660px',
+            height: '1024px',
+          },
+        },
         tablet: {
           name: 'Tablet',
           styles: {
