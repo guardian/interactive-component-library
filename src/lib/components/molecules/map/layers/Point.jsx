@@ -2,7 +2,7 @@ import { useContext } from 'preact/hooks'
 import { MapContext } from '../context/MapContext'
 import { dynamicPropValue } from '../helpers/dynamicPropValue'
 
-export function Point({ features, radius = 4, fill = '#FF0000', stroke = 'none', strokeWidth = 1, styles }) {
+export function Point({ id, features, radius = 4, fill = null, stroke = null, strokeWidth = 1, styles }) {
   const context = useContext(MapContext)
 
   return (
@@ -11,6 +11,7 @@ export function Point({ features, radius = 4, fill = '#FF0000', stroke = 'none',
         const [cx, cy] = context.projection(d.geometry.coordinates)
         return (
           <circle
+            id={dynamicPropValue(id, d, index)}
             cx={cx}
             cy={cy}
             r={dynamicPropValue(radius, d, index)}

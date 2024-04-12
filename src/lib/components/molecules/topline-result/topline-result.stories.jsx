@@ -46,3 +46,13 @@ export const Row = {
   },
   render: (args) => <ToplineResult {...args} />,
 }
+
+export const Candidate = {
+  args: {
+    name: 'Mike Bloke',
+    secondaryName: 'Labour',
+    abbreviation: 'lab',
+    mainNumber: "50.4%",
+  },
+  render: (args) => <ToplineResult {...args} />,
+}

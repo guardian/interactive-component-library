@@ -2,22 +2,9 @@
 
 A set of reusable components for use in interactive pages, written in Preact using [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) principles.
 
-## Install
-
-From [Github Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry):
-
-1. [Create a personal access token (classic)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic) with `read:packages` scope.
-2. Create a file called `.npmrc` in the root of your project and add the following:
-
+## Install the component library in a new client project
 ```
-@guardian:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=YOUR_PERSONAL_ACCESS_TOKEN
-```
-
-3. Install using npm:
-
-```
-npm i @guardian/interactive-component-library
+npm install @guardian/interactive-component-library
 ```
 
 ## Contributing to this repository
@@ -76,9 +63,9 @@ npm uninstall --no-save @guardian/interactive-component-library && npm install
 
 To publish a new version of the component library, follow these steps:
 
-1. Update the version number in `package.json`
-2. [Create a new release](https://github.com/guardian/interactive-component-library/releases/new) on GitHub (don't forget to write some release notes)
-3. Publishing the release [triggers a workflow](https://github.com/guardian/interactive-component-library/actions) to package the library and publish it to Github Packages. If the publish actions fails, you can also trigger it manually
+1. [Create a new release](https://github.com/guardian/interactive-component-library/releases/new) on GitHub (don't forget to write some release notes)
+2. Publishing the release [triggers a workflow](https://github.com/guardian/interactive-component-library/actions) to package the library and publish it to the NPM registry. If the publish actions fails, you can also trigger it manually
+3. The publish action also creates a pull request to bump the version number. Merge the pull request to finish the release
 
 ## Scripts
 

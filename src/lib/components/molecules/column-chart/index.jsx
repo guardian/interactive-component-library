@@ -10,36 +10,38 @@ export const ColumnChart = ({
   chartWidth,
   columnWidth,
   columnPadding,
-  styles
+  styles,
 }) => {
-
   styles = mergeStyles(defaultStyles, styles)
-  const yScale = scaleLinear([maxValue,minValue], [0, chartHeight])
+
+  const yScale = scaleLinear([maxValue, minValue], [0, chartHeight])
+  const totalColumnWidth = Number(columnWidth) + Number(columnPadding.left) + Number(columnPadding.right)
 
   return (
-    <svg width={chartWidth} height={chartHeight} style="">
+    <svg width={chartWidth} height={chartHeight}>
       {columns.map((column, index) => {
-
         const getHeight = (input) => {
-        return yScale(0) - yScale(input)
-        } 
-        let totalColumnWidth = Number(columnWidth) + Number(columnPadding.left) + Number(columnPadding.right)
+          return yScale(0) - yScale(input)
+        }
 
         return (
           <g key={index}>
-          <rect
-            key={index}
-            x={index * totalColumnWidth}
-            height={getHeight(Math.abs(column.value))}
-            width={columnWidth}
-            y={column.value > 0 ? (yScale(column.value)): yScale(0)}
-            fill={column.color}
-            className={`${styles.bar} fill-color--${column.id}`}
-            id={column.id}
-          />
-          <text className={styles.text} x={index * totalColumnWidth + 2} y={
-            column.value < 0 ? yScale(0) - 6 : yScale(0) + 20
-          }>{column.label}</text>
+            <rect
+              x={index * totalColumnWidth}
+              height={getHeight(Math.abs(column.value))}
+              width={columnWidth}
+              y={column.value > 0 ? yScale(column.value) : yScale(0)}
+              fill={column.color}
+              className={`${styles.bar} fill-color--${column.id}`}
+              id={column.id}
+            />
+            <text
+              className={styles.text}
+              x={index * totalColumnWidth + 2}
+              y={column.value < 0 ? yScale(0) - 6 : yScale(0) + 20}
+            >
+              {column.label}
+            </text>
           </g>
         )
       })}
