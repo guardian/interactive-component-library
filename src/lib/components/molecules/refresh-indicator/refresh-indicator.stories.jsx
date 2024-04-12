@@ -9,6 +9,6 @@ export default meta
 
 export const Default = {
   args: {
-    secondsUntilNext: 45,
+    text: 'next refresh in 59s',
   },
 }
