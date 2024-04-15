@@ -16,9 +16,10 @@ export const ColumnChart = ({
 
   const yScale = scaleLinear([maxValue, minValue], [0, chartHeight])
   const totalColumnWidth = Number(columnWidth) + Number(columnPadding.left) + Number(columnPadding.right)
+  let marginBottom = minValue < 0 ? 0 : 40
 
   return (
-    <svg width={chartWidth} height={chartHeight}>
+    <svg width={chartWidth} height={chartHeight + marginBottom}>
       {columns.map((column, index) => {
         const getHeight = (input) => {
           return yScale(0) - yScale(input)

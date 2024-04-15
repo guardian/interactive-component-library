@@ -35,3 +35,32 @@ export const Default = {
   },
   render: (args) => <ColumnChart {...args} />,
 }
+
+export const allPositive = {
+  args: {
+    minValue: 0,
+    maxValue: 300,
+    chartHeight: 400,
+    chartWidth: 400,
+    columnWidth: 50,
+    columnPadding: {
+      left: 0,
+      right: 6
+    },
+    columns: [
+      {
+        value : 100,
+        id: "con",
+        color: "blue",
+        label: "Con"
+      },
+      {
+        value : 200,
+        id: "lab",
+        color: "red",
+        label : "Lab"
+      },
+    ]
+  },
+  render: (args) => <ColumnChart {...args} />,
+}
