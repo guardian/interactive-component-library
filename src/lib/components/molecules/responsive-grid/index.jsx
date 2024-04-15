@@ -1,5 +1,6 @@
 import { toChildArray } from 'preact'
-import styles from './style.module.scss'
+import defaultStyles from './style.module.scss'
+import { mergeStyles } from '$styles/helpers/mergeStyles'
 
 export const GridType = {
   small: 'small',
@@ -7,7 +8,9 @@ export const GridType = {
   large: 'large',
 }
 
-export function ResponsiveGrid({ type = GridType.medium, children }) {
+export function ResponsiveGrid({ type = GridType.medium, children, styles }) {
+  styles = mergeStyles({ ...defaultStyles }, styles)
+
   return (
     <div className={styles.grid} data-grid-type={type}>
       {toChildArray(children).map((child, index) => {
