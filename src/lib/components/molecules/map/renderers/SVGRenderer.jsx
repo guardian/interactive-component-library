@@ -3,12 +3,11 @@ import { MapContext } from '../context/MapContext'
 import { CompositionBorders } from '../layers/CompositionBorders'
 
 export function SVGRenderer({ children }) {
-  const { id, mapRef, config, size, selectedFeature, padding } = useContext(MapContext)
+  const { id, config, size, selectedFeature, padding } = useContext(MapContext)
 
   return (
     <svg
       id={id}
-      ref={mapRef}
       width={size.width}
       height={size.height}
       viewBox={`0 0 ${size.width} ${size.height}`}

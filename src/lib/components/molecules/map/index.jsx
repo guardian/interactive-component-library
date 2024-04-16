@@ -1,10 +1,9 @@
-import { geoAlbers, geoContains, geoMercator } from 'd3-geo'
+import { geoAlbers, geoMercator } from 'd3-geo'
 import { geoAlbersUk } from 'd3-composite-projections'
 import { SVGMapProvider } from './context/SVGMapProvider'
 import { SVGRenderer } from './renderers/SVGRenderer'
 // import { CanvasMapProvider } from './context/CanvasMapProvider'
 // import { CanvasRenderer } from './renderers/CanvasRenderer'
-import { toChildArray } from 'preact'
 import { useRef, useMemo, useLayoutEffect, useState, useImperativeHandle } from 'preact/hooks'
 import { forwardRef } from 'preact/compat'
 import { useContainerSize } from '$shared/hooks/useContainerSize'
@@ -79,33 +78,17 @@ export const Map = forwardRef(
       }
     }, [isReady])
 
+    const mapRef = useRef()
+
     useImperativeHandle(
       ref,
       () => ({
         isReady,
         getContainer: () => containerRef.current,
-        findFeatureAtPoint,
+        getContext: () => mapRef.current,
       }),
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       [isReady],
     )
-
-    function findFeatureAtPoint({ x, y }) {
-      const adjustedPoint = [x - padding.left, y - padding.top]
-      const coordinates = config.projection.invert(adjustedPoint)
-
-      for (const child of toChildArray(children)) {
-        if (Object.prototype.hasOwnProperty.call(child.props, 'features')) {
-          const features = child.props.features
-          for (const feature of features) {
-            if (geoContains(feature, coordinates)) {
-              return feature
-            }
-          }
-        }
-      }
-      return null
-    }
 
     const containerSize = useContainerSize(containerRef)
     const containerStyle = useMemo(() => {
@@ -114,8 +97,6 @@ export const Map = forwardRef(
       if (height > 0) style['height'] = height
       return style
     }, [width, height])
-
-    const mapRef = useRef()
 
     const renderSVG = containerSize && !config.drawToCanvas
     // const renderCanvas = containerSize && config.drawToCanvas
