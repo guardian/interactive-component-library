@@ -260,7 +260,7 @@ function BubbleMapWithTooltip(props) {
           }}
           stroke="#dcdcdc"
         />
-        <MapLayers.Point features={bubbleFeatures} radius={16} fill="none" stroke="#FF0000" />
+        <MapLayers.Point features={englandCentroids.features.slice(0, 20)} radius={10} fill="none" stroke="#FF0000" />
       </Map>
       {mapContainer && (
         <Tooltip for={mapContainer} renderIn="#storybook-root">
@@ -269,7 +269,7 @@ function BubbleMapWithTooltip(props) {
             if (!feature) return
             return (
               <div style="border: 1px solid #333; background-color: #FFF; padding: 10px;">
-                <p>{feature.properties['id']}</p>
+                <p>{feature.properties['LAD23CD']}</p>
               </div>
             )
           }}
