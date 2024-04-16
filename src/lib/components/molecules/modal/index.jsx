@@ -1,5 +1,6 @@
 import { CSSTransition } from 'preact-transitioning'
 import { useCallback, useRef } from 'preact/hooks'
+import { createPortal } from 'preact/compat'
 import styles from './style.module.css'
 
 export function Modal({ visible = false, children, onClickOutside }) {
@@ -7,19 +8,20 @@ export function Modal({ visible = false, children, onClickOutside }) {
   const onClick = useCallback(
     (event) => {
       if (!modalBoxRef.current.contains(event.target)) {
-        onClickOutside(event)
+        if (onClickOutside && visible) onClickOutside(event)
       }
     },
-    [onClickOutside],
+    [onClickOutside, visible],
   )
 
-  return (
-    <CSSTransition in={visible} duration={300} classNames={styles} alwaysMounted>
-      <div class={styles.transitionContainer} onClick={onClick}>
+  return createPortal(
+    <CSSTransition in={visible} duration={300} classNames={styles}>
+      <div class={styles.transitionContainer} onClick={onClick} style={{ pointerEvents: visible ? 'auto' : 'none' }}>
         <div ref={modalBoxRef} class={styles.modalBox}>
           {children}
         </div>
       </div>
-    </CSSTransition>
+    </CSSTransition>,
+    document.body,
   )
 }
