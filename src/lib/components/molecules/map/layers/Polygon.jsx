@@ -1,14 +1,19 @@
 import { useContext, useEffect } from 'preact/hooks'
 import { MapContext } from '../context/MapContext'
 import { dynamicPropValue } from '../helpers/dynamicPropValue'
+import { geoContains } from 'd3-geo'
 
 export function Polygon({ id, features, fill = null, stroke = null, strokeWidth = 1, zIndex = 0, styles }) {
   const context = useContext(MapContext)
 
   useEffect(() => {
-    // eslint-disable-next-line no-unused-vars
     function findFeatureAtPoint(point) {
-      // TODO: needs implementation
+      const projectedPoint = context.projection.invert(point)
+      for (const feature of features) {
+        if (geoContains(feature, projectedPoint)) {
+          return feature
+        }
+      }
     }
 
     const layer = {
@@ -20,7 +25,7 @@ export function Polygon({ id, features, fill = null, stroke = null, strokeWidth 
     return () => {
       context.unregisterLayer(layer)
     }
-  }, [context, zIndex])
+  }, [context, zIndex, features])
 
   // const { drawToCanvas } = context.config
 
