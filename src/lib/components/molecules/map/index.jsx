@@ -4,6 +4,7 @@ import { SVGMapProvider } from './context/SVGMapProvider'
 import { SVGRenderer } from './renderers/SVGRenderer'
 // import { CanvasMapProvider } from './context/CanvasMapProvider'
 // import { CanvasRenderer } from './renderers/CanvasRenderer'
+import { toChildArray, cloneElement } from 'preact'
 import { useRef, useMemo, useLayoutEffect, useState, useImperativeHandle } from 'preact/hooks'
 import { forwardRef } from 'preact/compat'
 import { useContainerSize } from '$shared/hooks/useContainerSize'
@@ -114,7 +115,9 @@ export const Map = forwardRef(
             selectedFeature={selectedFeature}
             zoom={zoom}
           >
-            <SVGRenderer>{children}</SVGRenderer>
+            <SVGRenderer>
+              {toChildArray(children).map((child, index) => cloneElement(child, { zIndex: index }))}
+            </SVGRenderer>
           </SVGMapProvider>
         )}
         {/* {renderCanvas && (

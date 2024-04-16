@@ -1,9 +1,27 @@
-import { useContext } from 'preact/hooks'
+import { useContext, useEffect } from 'preact/hooks'
 import { MapContext } from '../context/MapContext'
 import { dynamicPropValue } from '../helpers/dynamicPropValue'
 
-export function Polygon({ id, features, fill = null, stroke = null, strokeWidth = 1, styles }) {
+export function Polygon({ id, features, fill = null, stroke = null, strokeWidth = 1, zIndex = 0, styles }) {
   const context = useContext(MapContext)
+
+  useEffect(() => {
+    // eslint-disable-next-line no-unused-vars
+    function findFeatureAtPoint(point) {
+      // TODO: needs implementation
+    }
+
+    const layer = {
+      zIndex,
+      findFeatureAtPoint,
+    }
+    context.registerLayer(layer)
+
+    return () => {
+      context.unregisterLayer(layer)
+    }
+  }, [context, zIndex])
+
   // const { drawToCanvas } = context.config
 
   // const draw = (ctx, path) => {
