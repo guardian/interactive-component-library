@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'preact/hooks'
 import { MapContext } from '../context/MapContext'
 import { dynamicPropValue } from '../helpers/dynamicPropValue'
 
-export function Point({ id, features, radius = 4, fill = null, stroke = null, strokeWidth = 1, styles }) {
+export function Point({ id, features, radius = 4, fill = null, stroke = null, strokeWidth = 1, zIndex = 0, styles }) {
   const context = useContext(MapContext)
 
   useEffect(() => {
@@ -25,6 +25,7 @@ export function Point({ id, features, radius = 4, fill = null, stroke = null, st
     }
 
     const layer = {
+      zIndex,
       findFeatureAtPoint,
     }
     context.registerLayer(layer)
@@ -32,7 +33,7 @@ export function Point({ id, features, radius = 4, fill = null, stroke = null, st
     return () => {
       context.unregisterLayer(layer)
     }
-  }, [context, features, radius])
+  }, [context, features, radius, zIndex])
 
   return (
     <>
