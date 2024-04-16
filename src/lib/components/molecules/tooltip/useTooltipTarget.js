@@ -10,6 +10,7 @@ export const useTooltipTarget = (targetElement, trackPosition) => {
     const x = clientX - rect.left
     const y = clientY - rect.top
     requestAnimationFrame(() => {
+      setTargetRect(rect)
       setPosition({ x, y })
       setHoverActive(true)
     })
