@@ -1,5 +1,5 @@
 import { toChildArray } from 'preact'
-import { useState, useRef, useLayoutEffect } from 'preact/hooks'
+import { useState, useRef, useLayoutEffect, useMemo } from 'preact/hooks'
 import { useWindowSize } from '$shared/hooks/useWindowSize'
 import { Gradient } from './gradient'
 import { ArrowButton, Button } from '$particles'
@@ -17,13 +17,22 @@ function totalSizeForElements(elements) {
 }
 
 export function Ticker({ maxItems = 20, onStateChange, children }) {
-  const [offset, setOffset] = useState(0)
+  const [pageIndex, setPageIndex] = useState(0)
+  const [pageWidth, setPageWidth] = useState(0)
+  const [numberOfPages, setNumberOfPages] = useState(0)
+
+  const offsetWidth = useMemo(() => {
+    return -pageIndex * (pageWidth || 0)
+  }, [pageIndex, pageWidth])
+
   const windowSize = useWindowSize()
 
   const tickerRef = useRef()
   const tickerItemsRef = useRef()
+  const tickerScrollRef = useRef()
+  const controlsRef = useRef()
+
   const [hideButtons, setHideButtons] = useState(false)
-  const [nextButtonDisabled, setNextButtonDisabled] = useState(false)
 
   const [expanded, setExpanded] = useState(false)
 
@@ -31,21 +40,22 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
 
   useLayoutEffect(() => {
     const tickerItemsContainer = tickerItemsRef.current
-    if (tickerItemsContainer) {
-      const { width, height } = totalSizeForElements(tickerItemsContainer.children)
-      const hideButtons =
-        windowSize.width >= 480
-          ? width <= tickerItemsContainer.clientWidth
-          : height <= tickerItemsContainer.clientHeight
-      setHideButtons(hideButtons)
+    const pageWidth = tickerItemsContainer.clientWidth * 0.75
+    setPageWidth(pageWidth)
 
-      if (tickerItemsContainer.children.length > 0) {
-        const itemWidth = tickerItemsContainer.children[0].clientWidth
-        const nextButtonDisabled = offset * itemWidth > width - tickerItemsContainer.clientWidth
-        setNextButtonDisabled(nextButtonDisabled)
-      }
-    }
-  }, [offset, windowSize, childArray, setHideButtons, setNextButtonDisabled])
+    const numberOfPages = Math.ceil(tickerScrollRef.current.scrollWidth / pageWidth)
+    setNumberOfPages(numberOfPages)
+  }, [])
+
+  useLayoutEffect(() => {
+    const tickerItemsContainer = tickerItemsRef.current
+
+    const hideButtons =
+      windowSize.width >= 480
+        ? tickerScrollRef.current.scrollWidth <= tickerItemsContainer.clientWidth
+        : tickerScrollRef.current.scrollHeight <= tickerItemsContainer.clientHeight
+    setHideButtons(hideButtons)
+  }, [windowSize, setHideButtons])
 
   function toggleExpandedState() {
     setExpanded((expanded) => {
@@ -56,28 +66,31 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
   }
 
   return (
-    <div ref={tickerRef} className={styles.ticker} style={`--ticker-offset: ${offset}`} data-expanded={expanded}>
+    <div
+      ref={tickerRef}
+      className={styles.ticker}
+      style={`--ticker-offset: ${offsetWidth}px;`}
+      data-expanded={expanded}
+    >
       <div ref={tickerItemsRef} className={styles.tickerItems}>
-        {childArray.map((child, index) => (
-          <div className={styles.tickerItem} key={index}>
-            {child}
-          </div>
-        ))}
+        <div ref={tickerScrollRef} className={styles.tickerScroll}>
+          {childArray.map((child, index) => (
+            <div className={styles.tickerItem} key={index}>
+              {child}
+            </div>
+          ))}
+        </div>
       </div>
-      <div className={styles.controls} style={hideButtons && { display: 'none' }}>
+      <div ref={controlsRef} className={styles.controls} style={hideButtons && { display: 'none' }}>
         <div className={styles.gradient}>
           <Gradient />
         </div>
         <div className={styles.buttons}>
-          <ArrowButton onClick={() => setOffset((d) => d + 1)} disabled={nextButtonDisabled} />
-          <ArrowButton direction="left" onClick={() => setOffset((d) => d - 1)} disabled={offset <= 0} />
+          <ArrowButton onClick={() => setPageIndex((d) => d + 1)} disabled={pageIndex >= numberOfPages - 1} />
+          <ArrowButton direction="left" onClick={() => setPageIndex((d) => d - 1)} disabled={pageIndex <= 0} />
         </div>
         <div className={styles.button}>
-          <Button
-            type="small"
-            styles={{ buttonInner: styles.buttonInner }}
-            onClick={toggleExpandedState}
-          >
+          <Button type="small" styles={{ buttonInner: styles.buttonInner }} onClick={toggleExpandedState}>
             {expanded ? 'Show less' : `Show ${maxItems} most recent`}
           </Button>
         </div>
