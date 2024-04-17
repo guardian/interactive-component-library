@@ -5,17 +5,6 @@ import { Gradient } from './gradient'
 import { ArrowButton, Button } from '$particles'
 import styles from './style.module.scss'
 
-function totalSizeForElements(elements) {
-  return Array.from(elements).reduce(
-    (totalSize, element) => {
-      totalSize.width += element.clientWidth
-      totalSize.height += element.clientHeight
-      return totalSize
-    },
-    { width: 0, height: 0 },
-  )
-}
-
 export function Ticker({ maxItems = 20, onStateChange, children }) {
   const [pageIndex, setPageIndex] = useState(0)
   const [pageWidth, setPageWidth] = useState(0)
@@ -82,9 +71,7 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
         </div>
       </div>
       <div ref={controlsRef} className={styles.controls} style={hideButtons && { display: 'none' }}>
-        <div className={styles.gradient}>
-          <Gradient />
-        </div>
+        <div className={styles.gradient}>{!expanded && <Gradient />}</div>
         <div className={styles.buttons}>
           <ArrowButton onClick={() => setPageIndex((d) => d + 1)} disabled={pageIndex >= numberOfPages - 1} />
           <ArrowButton direction="left" onClick={() => setPageIndex((d) => d - 1)} disabled={pageIndex <= 0} />
