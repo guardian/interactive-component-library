@@ -93,8 +93,8 @@
 
 // Expanded state
 
-.ticker[data-expanded='true'] .tickerItems {
-  @include max-dynamic-viewport-height();
+.ticker[data-expanded='true'] .tickerScroll {
+  max-height: fit-content;
 }
 
 .ticker[data-expanded='true'] .controls {

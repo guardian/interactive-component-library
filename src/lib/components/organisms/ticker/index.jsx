@@ -71,14 +71,16 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
         </div>
       </div>
       <div ref={controlsRef} className={styles.controls} style={hideButtons && { display: 'none' }}>
-        <div className={styles.gradient}>{!expanded && <Gradient />}</div>
+        <div className={styles.gradient}>
+          <Gradient />
+        </div>
         <div className={styles.buttons}>
           <ArrowButton onClick={() => setPageIndex((d) => d + 1)} disabled={pageIndex >= numberOfPages - 1} />
           <ArrowButton direction="left" onClick={() => setPageIndex((d) => d - 1)} disabled={pageIndex <= 0} />
         </div>
         <div className={styles.button}>
           <Button type="small" styles={{ buttonInner: styles.buttonInner }} onClick={toggleExpandedState}>
-            {expanded ? 'Show less' : `Show ${maxItems} most recent`}
+            {expanded ? 'Show fewer' : `Show ${maxItems} most recent`}
           </Button>
         </div>
       </div>
