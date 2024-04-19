@@ -5,6 +5,7 @@
     color: var(--primary-text-color);
     font-family: var(--text-headline);
     font-size: var(--headline-xxxsmall);
+    line-height: var(--headline-line-height);
     font-weight: 500;
     font-style: italic;
 
@@ -22,6 +23,7 @@
     font-family: var(--text-headline);
     font-size: var(--headline-xxxsmall);
     font-weight: 500;
+    line-height: var(--headline-line-height);
   }
 
 
@@ -29,6 +31,7 @@
     color: var(--primary-text-color);
     font-family: var(--text-headline);
     font-size: var(--headline-xxxsmall);
+    line-height: var(--headline-line-height);
     font-weight: 500;
 
     &:before {
@@ -48,6 +51,7 @@
     -moz-font-feature-settings: "lnum";
     -webkit-font-feature-settings: "lnum";
     font-feature-settings: "lnum";
+    line-height: var(--titlepiece-line-height);
 
     .mainNumber {
       color: var(--primary-text-color);
@@ -89,5 +93,9 @@
 
   @include mq($from: desktop) {
     border-bottom: none;
+  }
+
+  > * {
+    display: block;
   }
 }

@@ -33,7 +33,7 @@ export function Table({ columns, data, hideHeader=false, styles }) {
   styles = mergeStyles(defaultStyles, styles)
 
   return (
-    <table className={styles.table}>
+    <table className={styles.table} cellSpacing={0} cellPadding={0}>
       <thead className={hideHeader && styles.hideHeader}>
         <tr>
           {table.columns.map((column, index) => (

@@ -6,10 +6,9 @@
 .buttonInner {
   color: var(--primary-text-color);
   font-family: var(--text-sans);
-  font-size: var(--sans-xxsmall);
+  font-size: var(--sans-xsmall);
   line-height: var(--sans-line-height);
 
-  background-color: var(--primary-bg-color);
   border: 1px solid var(--secondary-line-color);
   border-radius: 999px;
 }
