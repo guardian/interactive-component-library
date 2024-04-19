@@ -1,5 +1,5 @@
-import { useEffect } from 'preact/hooks'
-
+import { mergeStyles } from '../../../styles/helpers/mergeStyles'
+import defaultStyles from './style.module.css'
 /**
  * Array of available breakpoints.
  * @typedef {"mobile" | "phablet" | "tablet" | "desktop"} Breakpoint
@@ -16,7 +16,7 @@ import { useEffect } from 'preact/hooks'
  * @interface AdSlotProps
  * @property {string} name - The unique name of the ad slot.
  * @property {SizeMapping} sizeMapping - The size mapping for the ad slot.
- *
+ * @property {Object} styles - The styles for the ad slot.
  */
 
 /**
@@ -26,27 +26,28 @@ import { useEffect } from 'preact/hooks'
  * @param {AdSlotProps} props
  * @returns {React.ComponentElement<AdSlotProps, null>}
  */
-export function AdSlot({ name, sizeMapping }) {
+export function AdSlot({ name, sizeMapping, styles }) {
   const slotId = `dfp-ad--${name}`
-  useEffect(() => {
-    document.dispatchEvent(
-      new CustomEvent('gu.commercial.slot.fill', {
-        detail: {
-          slotId,
-          name,
-          additionalSizes: sizeMapping,
-        },
-      }),
-    )
-  })
+
+  styles = mergeStyles(defaultStyles, styles)
+
+  const mobileSizes = sizeMapping.mobile?.map((size) => size.join(',')).join('|')
+  const tabletSizes = sizeMapping.tablet?.map((size) => size.join(',')).join('|')
+  const desktopSizes = sizeMapping.desktop?.map((size) => size.join(',')).join('|')
+
   return (
-    <div className="ad-slot-container">
+    <div className={['ad-slot-container', styles.container].join(' ')}>
       <div
         id={slotId}
-        className="js-ad-slot ad-slot interactive-ad-slot"
-        data-link-name="ad slot interactive"
-        data-name="interactive"
+        className={['js-ad-slot', 'ad-slot', 'interactive-ad-slot', styles.slot].join(' ')}
+        data-link-name={`ad slot ${name}`}
+        data-name={`${name}`}
+        data-label-show="true"
+        ad-label-text="Advertisement"
         aria-hidden="true"
+        data-mobile={mobileSizes}
+        data-tablet={tabletSizes}
+        data-desktop={desktopSizes}
       />
     </div>
   )

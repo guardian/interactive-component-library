@@ -1,0 +1,7 @@
+.container {
+  max-width: fit-content;
+}
+
+.slot {
+  display: block;
+}
