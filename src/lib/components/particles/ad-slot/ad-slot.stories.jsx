@@ -1,5 +1,7 @@
 import { AdSlot } from '.'
-import { useState } from 'preact/hooks'
+import { useEffect, useState, useRef } from 'preact/hooks'
+import { cloneElement } from 'preact'
+
 import styles from './stories.module.scss'
 
 const meta = {
@@ -50,24 +52,45 @@ export const MPULeaderboardBillboard = {
 function CommercialContainer({ children }) {
   const [size, setSize] = useState([300, 250])
 
-  document.addEventListener('gu.commercial.slot.fill', (event) => {
-    const viewportWidth = window.innerWidth
+  const adSlotRef = useRef(null)
 
-    const sizeMapping = event.detail.additionalSizes
+  useEffect(() => {
+    if (adSlotRef.current) {
+      const slot = adSlotRef.current.base.children[0]
 
-    if (viewportWidth > 980 && sizeMapping.desktop?.length) {
-      setSize(sizeMapping.desktop[0])
-    } else if (viewportWidth > 740 && sizeMapping.tablet?.length) {
-      setSize(sizeMapping.tablet[0])
-    } else if (sizeMapping.mobile?.length) {
-      setSize(sizeMapping.mobile[0])
+      const mobileSizes = slot.dataset.mobile
+      const tabletSizes = slot.dataset.tablet
+      const desktopSizes = slot.dataset.desktop
+
+      const sizeMapping = {
+        mobile: mobileSizes ? mobileSizes.split('|').map((size) => size.split(',').map(Number)) : undefined,
+        tablet: tabletSizes ? tabletSizes.split('|').map((size) => size.split(',').map(Number)) : undefined,
+        desktop: desktopSizes ? desktopSizes.split('|').map((size) => size.split(',').map(Number)) : undefined,
+      }
+
+      console.log(sizeMapping)
+
+      const viewportWidth = window.innerWidth
+
+      console.log(viewportWidth)
+
+      if (viewportWidth >= 980 && sizeMapping.desktop?.length) {
+        setSize(sizeMapping.desktop[0])
+        console.log('desktop')
+      } else if (viewportWidth >= 740 && sizeMapping.tablet?.length) {
+        setSize(sizeMapping.tablet[0])
+        console.log('tablet')
+      } else if (sizeMapping.mobile?.length) {
+        setSize(sizeMapping.mobile[0])
+        console.log('mobile')
+      }
     }
-  })
+  }, [])
 
   return (
     <>
       <div style={{ width: size[0], height: size[1] }} className={styles.adSlotContainer}>
-        {children}
+        {cloneElement(children, { ref: adSlotRef })}
       </div>
     </>
   )
