@@ -79,7 +79,7 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
           <ArrowButton direction="left" onClick={() => setPageIndex((d) => d - 1)} disabled={pageIndex <= 0} />
         </div>
         <div className={styles.button}>
-          <Button type="small" styles={{ buttonInner: styles.buttonInner }} onClick={toggleExpandedState}>
+          <Button type="regular" styles={{ buttonInner: styles.buttonInner }} onClick={toggleExpandedState}>
             {expanded ? 'Show fewer' : `Show ${maxItems} most recent`}
           </Button>
         </div>
