@@ -1,4 +1,4 @@
-export function preventOverlap(labelPositions, iteration = 0, labelHeight = 12) {
+export function preventOverlap(labelPositions, iteration = 0, labelSize = 12, coordinate ='y') {
   const maxIterations = 10
   let totalOverlap = 0
 
@@ -6,14 +6,14 @@ export function preventOverlap(labelPositions, iteration = 0, labelHeight = 12) 
     const previousElement = labelPositions[index - 1]
     const element = labelPositions[index]
 
-    const overlap = previousElement.y - (element.y - labelHeight)
+    const overlap = previousElement[coordinate] - (element[coordinate] - labelSize)
     if (overlap < 0) {
       // no overlap, continue
       continue
     }
 
-    previousElement.y -= overlap / 2
-    element.y += overlap / 2
+    previousElement[coordinate] -= overlap / 2
+    element[coordinate] += overlap / 2
 
     totalOverlap += overlap
   }
@@ -29,10 +29,10 @@ export function uniqueBy(array, key) {
   return [...array.reduce((map, d) => map.set(d[key], d), new Map()).values()]
 }
 
-export function positionLabels(labels) {
+export function positionLabels(labels, coordinate = 'y') {
   labels = uniqueBy(labels, 'value')
-  // sort by y-position
-  labels.sort((a, b) => a.y - b.y)
+  // sort by coordinate-position
+  labels.sort((a, b) => a[coordinate] - b[coordinate])
 
   return preventOverlap(labels)
 }

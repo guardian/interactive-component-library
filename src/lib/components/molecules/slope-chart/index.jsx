@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState, useLayoutEffect } from 'preact/hooks'
-import { positionLabels, scaleLinear } from './slope-chart-util'
+import { positionLabels, scaleLinear } from '$shared/helpers/labelsUtil'
 import { useWindowSize } from '$shared/hooks/useWindowSize'
 import defaultStyles from './style.module.css'
 import { mergeStyles } from '$styles/helpers/mergeStyles'

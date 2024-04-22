@@ -1,14 +1,19 @@
 import { useRef, useMemo } from 'preact/hooks'
 import defaultStyles from './style.module.css'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
-import { positionLabels } from './stackedBarUtil'
+import { preventOverlap } from '$shared/helpers/labelsUtil'
+
+export const LabelType = {
+  hanging: 'hanging',
+  inline: 'inline'
+}
 
 export function StackedBar({
   stack,
   width,
   height,
   hideLabels = false,
-  labelType = 'hanging',
+  labelType = LabelType.hanging,
   showBackgroundRect = false,
   createSVG = true,
   styles,
@@ -17,7 +22,7 @@ export function StackedBar({
   const textElements = useRef([])
 
   styles = mergeStyles({ ...defaultStyles }, styles)
-  const svgHeight = labelType === 'hanging' ? height + 20 : height
+  const svgHeight = labelType === LabelType.hanging ? height + 20 : height
 
   const renderLabel = (config, i) => (
     <text
@@ -59,7 +64,7 @@ export function StackedBar({
           shape-rendering="crispEdges"
         />
         {
-          labelType === 'inline' && !hideLabels &&
+          labelType === LabelType.inline && !hideLabels &&
           renderLabel(labelConfig, index)
         }
       </g>
@@ -80,7 +85,7 @@ export function StackedBar({
       totalW += itemWidth
       return labelConfig
     })
-    return positionLabels(labels)
+    return preventOverlap(labels, 0, 20, 'x')
   }, [stack, height, width])
 
 
@@ -101,7 +106,7 @@ export function StackedBar({
         {showBackgroundRect && backgroundRect}
         <g>
           {content}
-          {labelType === 'hanging' && !hideLabels && hangingLabelConfig.map((config, i) => renderLabel(config, i))}
+          {labelType === LabelType.hanging && !hideLabels && hangingLabelConfig.map((config, i) => renderLabel(config, i))}
         </g>
       </svg>
     )
@@ -110,7 +115,7 @@ export function StackedBar({
   return (
     <g>
       {content}
-      {labelType === 'hanging' && !hideLabels && hangingLabelConfig.map((config, i) => renderLabel(config, i))}
+      {labelType === LabelType.hanging && !hideLabels && hangingLabelConfig.map((config, i) => renderLabel(config, i))}
     </g>
   )
 }
