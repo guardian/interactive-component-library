@@ -1,4 +1,4 @@
-import { mergeStyles } from '../../../styles/helpers/mergeStyles'
+import { mergeStyles } from '$styles/helpers/mergeStyles'
 import defaultStyles from './style.module.css'
 /**
  * Array of available breakpoints.
