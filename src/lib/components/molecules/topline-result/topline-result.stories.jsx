@@ -52,7 +52,8 @@ export const Candidate = {
     name: 'Mike Bloke',
     secondaryName: 'Labour',
     abbreviation: 'lab',
-    mainNumber: "50.4%",
+    mainNumber: "50.4",
+    mainNumberSuffix: "%",
   },
   render: (args) => <ToplineResult {...args} />,
 }
