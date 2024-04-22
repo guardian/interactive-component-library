@@ -68,21 +68,14 @@ function CommercialContainer({ children }) {
         desktop: desktopSizes ? desktopSizes.split('|').map((size) => size.split(',').map(Number)) : undefined,
       }
 
-      console.log(sizeMapping)
-
       const viewportWidth = window.innerWidth
-
-      console.log(viewportWidth)
 
       if (viewportWidth >= 980 && sizeMapping.desktop?.length) {
         setSize(sizeMapping.desktop[0])
-        console.log('desktop')
       } else if (viewportWidth >= 740 && sizeMapping.tablet?.length) {
         setSize(sizeMapping.tablet[0])
-        console.log('tablet')
       } else if (sizeMapping.mobile?.length) {
         setSize(sizeMapping.mobile[0])
-        console.log('mobile')
       }
     }
   }, [])
