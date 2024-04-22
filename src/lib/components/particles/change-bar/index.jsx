@@ -20,7 +20,7 @@ export function ChangeBar({ fraction, positive, party, width, height, styles }) 
   ` height: ${height}; width: ${barwidth}px; ${positive ? `left: ${posleft}` : `left: ${negleft}`}`
   let thisColor = ` bg-color--${party}`
 
-  let zeroStyles = ` height: ${height}; width: 1px; left: 50%; transform: scaleY(2);`
+  let zeroStyles = ` height: ${height};`
 
   styles = mergeStyles({ ...defaultStyles }, styles)
 
@@ -28,6 +28,5 @@ export function ChangeBar({ fraction, positive, party, width, height, styles }) 
   return <div className={styles.wrapper} style={`width: ${width}px`}>
     <div className={styles.bar.concat(thisColor)} style={thisStyles}></div>
     <div className={styles.zero} style={zeroStyles}></div>
-
     </div>
 }
