@@ -77,14 +77,15 @@ export function StackedBar({
   const hangingLabelConfig = useMemo(() => {
     let totalW = 0
     let labels = stack.map((d) => {
+      
       const itemWidth = d.fraction * width
       
       const labelConfig = { x: itemWidth + totalW, y: height + 4, value: d.label, textAnchor: 'end', alignmentBaseline: 'hanging' }
-      console.log(labelConfig)
-      
+  
       totalW += itemWidth
       return labelConfig
     })
+    
     return preventOverlap(labels, 0, 20, 'x')
   }, [stack, height, width])
 
