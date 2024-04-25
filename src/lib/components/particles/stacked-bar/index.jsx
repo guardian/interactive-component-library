@@ -34,7 +34,7 @@ export function StackedBar({
       x={config.x}
       y={config.y}
       textAnchor={config.textAnchor}
-      alignmentBaseline={config.alignmentBaseline}
+      dominantBaseline={config.dominantBaseline}
     >
       {config.value}
     </text>
@@ -50,7 +50,7 @@ export function StackedBar({
       x: itemWidth - 4,
       y: height / 2,
       textAnchor: 'end',
-      alignmentBaseline: 'central',
+      dominantBaseline: 'middle',
     }
 
     const value = (
@@ -80,7 +80,7 @@ export function StackedBar({
       
       const itemWidth = d.fraction * width
       
-      const labelConfig = { x: itemWidth + totalW, y: height + 4, value: d.label, textAnchor: 'end', alignmentBaseline: 'hanging' }
+      const labelConfig = { x: itemWidth + totalW, y: height + 4, value: d.label, textAnchor: 'end', dominantBaseline: 'hanging' }
   
       totalW += itemWidth
       return labelConfig
