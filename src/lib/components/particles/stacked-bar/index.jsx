@@ -13,7 +13,7 @@ export function StackedBar({
   width,
   height,
   hideLabels = false,
-  labelType = LabelType.hanging,
+  labelType = LabelType.inline,
   showBackgroundRect = false,
   createSVG = true,
   styles,
@@ -22,7 +22,7 @@ export function StackedBar({
   const textElements = useRef([])
 
   styles = mergeStyles({ ...defaultStyles }, styles)
-  const svgHeight = labelType === LabelType.hanging ? height + 20 : height
+  const svgHeight = labelType === LabelType.hanging && !hideLabels ? height + 20 : height
 
   const renderLabel = (config, i) => (
     <text
@@ -86,7 +86,7 @@ export function StackedBar({
       return labelConfig
     })
     
-    return preventOverlap(labels, 0, 20, 'x')
+    return preventOverlap(labels, 0, 20, 'x', false)
   }, [stack, height, width])
 
 
