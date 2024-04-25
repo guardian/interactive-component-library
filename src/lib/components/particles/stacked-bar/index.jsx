@@ -86,7 +86,7 @@ export function StackedBar({
       return labelConfig
     })
     
-    return preventOverlap(labels, 0, 20, 'x')
+    return preventOverlap(labels, 0, 20, 'x', false)
   }, [stack, height, width])
 
 
