@@ -13,7 +13,7 @@ export function StackedBar({
   width,
   height,
   hideLabels = false,
-  labelType = LabelType.hanging,
+  labelType = LabelType.inline,
   showBackgroundRect = false,
   createSVG = true,
   styles,
