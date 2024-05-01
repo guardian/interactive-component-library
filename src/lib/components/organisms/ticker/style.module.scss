@@ -1,41 +1,47 @@
 .ticker {
   position: relative;
+  padding-bottom: 44px;
 
   --ticker-item-width: 100%;
 
   @include mq($from: mobileLandscape) {
     --ticker-item-width: 200px;
+    padding: 0;
   }
 }
 
 .tickerItems {
+  width: 100%;
+  overflow: clip;
+}
+
+.tickerScroll {
   display: flex;
   flex-direction: column;
   row-gap: var(--space-2);
   align-items: stretch;
   max-height: 300px;
-
-  overflow: hidden;
+  overflow: visible;
 
   @include mq($from: mobileLandscape) {
     flex-direction: row;
     column-gap: var(--space-2);
+
+    transform: translateX(var(--ticker-offset));
+    transition: transform 0.5s ease-in-out;
   }
 }
 
 .tickerItem {
   width: var(--ticker-item-width);
   flex-shrink: 0;
-
-  transform: translateX(calc(-1 * var(--ticker-offset) * var(--ticker-item-width)));
-  transition: transform 0.3s ease-in-out;
 }
 
 .controls {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 86px;
+  height: 130px;
 
   @include mq($from: mobileLandscape) {
     top: 0;
@@ -46,9 +52,8 @@
 }
 
 .gradient {
-  position: absolute;
+  // position: absolute;
   width: 100%;
-  bottom: 0;
   height: 86px;
 
   @include mq($from: mobileLandscape) {
@@ -74,9 +79,8 @@
 }
 
 .button {
-  position: absolute;
-  bottom: -20px;
-  left: 0;
+  min-height: 40px;
+  background-color: var(--tertiary-bg-color);
 
   @include mq($from: mobileLandscape) {
     display: none;
@@ -89,15 +93,25 @@
 
 // Expanded state
 
-.ticker[data-expanded='true'] .tickerItems {
-  @include max-dynamic-viewport-height();
+.ticker[data-expanded='true'] {
+  padding-bottom: 0;
+}
+
+.ticker[data-expanded='true'] .tickerScroll {
+  max-height: fit-content;
+  margin-bottom: -40px;
 }
 
 .ticker[data-expanded='true'] .controls {
   position: sticky;
   margin-top: -40px;
+  // background-color: aqua;
 
   .button {
+    position: absolute;
+    width: 100%;
+    left: 0;
     bottom: 0;
+    padding-bottom: 8px;
   }
 }

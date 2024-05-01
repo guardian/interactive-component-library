@@ -1,5 +1,5 @@
 .bar {
-  fill: #ccc;
+  fill: var(--undeclared);
 }
 
 .label {
@@ -9,5 +9,5 @@
 }
 
 .backgroundRect {
-  fill: var(--news-grey-05);
+  fill: var(--undeclared);
 }

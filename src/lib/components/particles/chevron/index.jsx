@@ -20,7 +20,7 @@ export function Chevron({ active = false, direction = DIRECTION.down, styles }) 
   styles = mergeStyles(defaultStylesCopy, styles)
 
   return (
-    <svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="16" height="24" viewBox="0 0 16 24" className={styles.svg} fill="none" xmlns="http://www.w3.org/2000/svg">
       <g className={styles.group} style="transform-box: fill-box;">
         <path
           fill-rule="evenodd"

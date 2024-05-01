@@ -1,7 +1,8 @@
-import { useMemo } from 'preact/hooks'
+import { useMemo, useRef, useCallback } from 'preact/hooks'
 import { geoPath } from 'd3-geo'
 import { bboxFeature } from '../helpers/bboxFeature'
 import { MapContext } from './MapContext'
+import { calculateScale } from '../helpers/geoMath'
 
 export function SVGMapProvider({ id, mapRef, width, height, padding, config, zoom, selectedFeature, children }) {
   const contentSize = useMemo(
@@ -18,9 +19,61 @@ export function SVGMapProvider({ id, mapRef, width, height, padding, config, zoo
 
   const path = geoPath().projection(projection)
 
+  const layerSet = useRef(new Set())
+  const layers = useRef([])
+
+  const updateLayers = useCallback((layerSet) => {
+    const _layers = Array.from(layerSet.current)
+    // sort layers in reverse order (top layer first)
+    _layers.sort((a, b) => {
+      return b.zIndex - a.zIndex
+    })
+    layers.current = _layers
+  }, [])
+
+  const registerLayer = useCallback(
+    (layer) => {
+      layerSet.current.add(layer)
+      updateLayers(layerSet)
+    },
+    [updateLayers],
+  )
+
+  const unregisterLayer = useCallback(
+    (layer) => {
+      layerSet.current.delete(layer)
+      updateLayers(layerSet)
+    },
+    [updateLayers],
+  )
+
+  const findFeatureAtPoint = useCallback(
+    ({ x, y }) => {
+      const adjustedPoint = [x - padding.left, y - padding.top]
+
+      for (const layer of layers.current) {
+        if (typeof layer.findFeatureAtPoint === 'function') {
+          const feature = layer.findFeatureAtPoint(adjustedPoint)
+          if (feature) return feature
+        }
+      }
+      return null
+    },
+    [padding],
+  )
+
+  const getVisibleBounds = useCallback(() => {
+    const projectedSW = projection.invert([padding.left, contentSize.height])
+    const projectedNE = projection.invert([padding.left + contentSize.width, padding.top])
+    return [projectedSW, projectedNE]
+  }, [projection, contentSize, padding])
+
+  const getZoomScale = useCallback(() => {
+    return calculateScale(getVisibleBounds(), contentSize.width, contentSize.height)
+  }, [getVisibleBounds, contentSize])
+
   const context = {
     id,
-    mapRef,
     projection,
     config,
     path,
@@ -33,6 +86,13 @@ export function SVGMapProvider({ id, mapRef, width, height, padding, config, zoo
       [width, height],
     ],
     selectedFeature,
+    getZoomScale,
+    registerLayer,
+    unregisterLayer,
+    findFeatureAtPoint,
   }
+
+  mapRef.current = context
+
   return <MapContext.Provider value={context}>{children}</MapContext.Provider>
 }

@@ -33,7 +33,7 @@ export function Table({ columns, data, hideHeader=false, styles }) {
   styles = mergeStyles(defaultStyles, styles)
 
   return (
-    <table className={styles.table}>
+    <table className={styles.table} cellSpacing={0} cellPadding={0}>
       <thead className={hideHeader && styles.hideHeader}>
         <tr>
           {table.columns.map((column, index) => (
@@ -54,7 +54,6 @@ export function Table({ columns, data, hideHeader=false, styles }) {
             <tr key={row.id} className={styles.bodyRow}>
               {row.cells.map((cell) => (
                 <td key={cell.id} className={mergeStyles(styles.bodyCell, cell.column.styles?.bodyCell)}>
-                  {console.log(cell.displayValue)}
                   {cell.displayValue}
                 </td>
               ))}

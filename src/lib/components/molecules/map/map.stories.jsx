@@ -5,7 +5,7 @@ import englandLocalAuthoritiesTopo from './sample-data/England-local-authories-2
 import englandCentroids from './sample-data/England-centroids-LE-2023.json'
 import ukAlbersMap from './sample-data/uk-outline-composite.svg'
 import { feature, mesh } from 'topojson-client'
-import { useLayoutEffect, useRef, useState } from 'preact/hooks'
+import { useEffect, useRef, useState } from 'preact/hooks'
 import { Tooltip } from '$molecules'
 import styles from './stories.module.css'
 
@@ -179,7 +179,7 @@ function MapWithTooltip(props) {
   const mapRef = useRef()
   const [mapContainer, setMapContainer] = useState()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setMapContainer(mapRef.current.getContainer())
   }, [])
 
@@ -219,6 +219,73 @@ export const EnglandTooltipMap = {
     config: MapConfiguration.England,
   },
   render: (args) => <MapWithTooltip {...args} />,
+}
+
+const bubbleFeatures = [
+  {
+    type: 'Feature',
+    properties: { id: '1' },
+    geometry: { type: 'Point', coordinates: [-1.2701895366, 54.6761414291] },
+  },
+  {
+    type: 'Feature',
+    properties: { id: '2' },
+    geometry: { type: 'Point', coordinates: [-0.2689911523, 51.6801735409] },
+  },
+  {
+    type: 'Feature',
+    properties: { id: '3' },
+    geometry: { type: 'Point', coordinates: [-2.0077162436, 52.5147772899] },
+  },
+]
+
+function BubbleMapWithTooltip(props) {
+  const mapRef = useRef()
+  const [mapContainer, setMapContainer] = useState()
+  const [mapContext, setMapContext] = useState()
+
+  useEffect(() => {
+    setMapContainer(mapRef.current.getContainer())
+    setMapContext(mapRef.current.getContext())
+  }, [])
+
+  return (
+    <>
+      <Map {...props} ref={mapRef}>
+        <MapLayers.Polygon
+          features={localAuthorities.features}
+          fill={(_, index) => {
+            if (index % 3) return 'none'
+            return '#dcdcdc'
+          }}
+          stroke="#dcdcdc"
+        />
+        <MapLayers.Point features={englandCentroids.features.slice(0, 20)} radius={10} fill="none" stroke="#FF0000" />
+      </Map>
+      {mapContainer && (
+        <Tooltip for={mapContainer} renderIn="#storybook-root">
+          {({ x, y }) => {
+            const feature = mapContext.findFeatureAtPoint({ x, y })
+            if (!feature) return
+            return (
+              <div style="border: 1px solid #333; background-color: #FFF; padding: 10px;">
+                <p>{feature.properties['LAD23CD']}</p>
+              </div>
+            )
+          }}
+        </Tooltip>
+      )}
+    </>
+  )
+}
+
+export const EnglandBubbleTooltipMap = {
+  name: 'England bubble map with tooltip',
+  args: {
+    id: 'map',
+    config: MapConfiguration.England,
+  },
+  render: (args) => <BubbleMapWithTooltip {...args} />,
 }
 
 export const UKPrerendered = {

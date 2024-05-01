@@ -1,8 +1,23 @@
-.circleicon {
-    display: 'inline-block';
-    margin-right: 4; 
-    transform: 'translateY(-1px)';
+.svg {
+  display: inline-block;
 }
 
-.rect {
+.circle {
+  fill: var(--secondary-text-color);
+}
+
+.pulse {
+  animation: 1.5s linear 0s pulse infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

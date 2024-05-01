@@ -1,3 +1,7 @@
+.svg {
+  display: block;
+}
+
 .group {
   transform-box: fill-box;
   transform-origin: center;

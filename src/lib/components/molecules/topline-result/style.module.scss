@@ -1,10 +1,13 @@
 .toplineResult {
   width: fit-content;
+  display: flex;
+  flex-direction: column;
 
   .primaryname {
     color: var(--primary-text-color);
     font-family: var(--text-headline);
     font-size: var(--headline-xxxsmall);
+    line-height: var(--headline-line-height);
     font-weight: 500;
     font-style: italic;
 
@@ -22,6 +25,7 @@
     font-family: var(--text-headline);
     font-size: var(--headline-xxxsmall);
     font-weight: 500;
+    line-height: var(--headline-line-height);
   }
 
 
@@ -29,6 +33,7 @@
     color: var(--primary-text-color);
     font-family: var(--text-headline);
     font-size: var(--headline-xxxsmall);
+    line-height: var(--headline-line-height);
     font-weight: 500;
 
     &:before {
@@ -43,15 +48,22 @@
   .displayNumbers {
     display: flex;
     align-items: baseline;
+    margin-top: auto;
     font-family: var(--text-titlepiece);
     font-variant-numeric: lining-nums;
     -moz-font-feature-settings: "lnum";
     -webkit-font-feature-settings: "lnum";
     font-feature-settings: "lnum";
+    line-height: var(--titlepiece-line-height);
 
     .mainNumber {
       color: var(--primary-text-color);
       font-size: var(--titlepiece-xsmall);
+      white-space: nowrap;
+    }
+
+    .mainNumberSuffix {
+      font-size: var(--titlepiece-xxxsmall);
     }
 
     .secondaryNumber {
@@ -89,5 +101,9 @@
 
   @include mq($from: desktop) {
     border-bottom: none;
+  }
+
+  > * {
+    display: block;
   }
 }

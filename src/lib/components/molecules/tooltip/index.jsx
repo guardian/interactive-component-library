@@ -79,16 +79,16 @@ export function Tooltip({ for: targetElement, renderIn: refOrSelector, type = To
   )
 }
 
-function tooltipPositionForPoint({ positionInTarget, tooltip, displayElement }) {
-  const displayElementRect = displayElement.getBoundingClientRect()
-
+function tooltipPositionForPoint({ targetRect, positionInTarget, tooltip, displayElement }) {
   const newPosition = {
-    x: positionInTarget.x + displayElementRect.x,
-    y: positionInTarget.y + displayElementRect.y,
+    x: positionInTarget.x + targetRect.x,
+    y: positionInTarget.y + targetRect.y,
   }
 
   const tooltipWidth = tooltip.offsetWidth
   const tooltipHeight = tooltip.offsetHeight
+
+  const displayElementRect = displayElement.getBoundingClientRect()
 
   if (newPosition.x + tooltipWidth > displayElementRect.right) {
     newPosition.x -= tooltipWidth
