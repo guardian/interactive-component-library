@@ -9,6 +9,7 @@ export function StackedBar({ stack, width, height, showBackgroundRect = false, c
   const [hideLabels, setHideLabels] = useState(true)
 
   useLayoutEffect(() => {
+    
     for (let index = 0; index < stack.length; index++) {
       const rectElement = rectElements.current[index]
       const textElement = textElements.current[index]

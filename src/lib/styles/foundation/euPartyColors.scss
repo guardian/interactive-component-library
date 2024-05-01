@@ -9,8 +9,9 @@
     --ecr: #0079B7;
     --id:#DC559D;
     --ni: #333333;
+    --other: #707070;
 
-    --undeclared: #848484;
+    --undeclared: #ededed;
 
   }
   
@@ -24,8 +25,9 @@
     --ecr: #009ae1;
     --id: #DC559D;
     --ni: #A1A1A1;
+    --other: #707070;
 
-    --undeclared: #848484;
+    --undeclared: #ededed;
 
   }
   
@@ -61,6 +63,14 @@
 
 .bg-color--ni {
     background-color: var(--ni) !important;
+}
+
+.bg-color--other {
+    background-color: var(--other) !important;
+}
+
+.bg-color--undeclared {
+    background-color: var(--undeclared) !important;
 }
 
 
@@ -99,6 +109,9 @@
 .fill-color--ni {
     fill: var(--ni) !important;
 }
+.fill-color--other {
+    fill: var(--other) !important;
+}
 
 
 /* STROKE-COLOR --------------------------------------------------- */ 
@@ -133,6 +146,9 @@
 
 .stroke-color--ni {
     stroke: var(--ni) !important;
+}
+.stroke-color--other {
+    stroke: var(--other) !important;
 }
 
 
@@ -169,6 +185,9 @@
 .color--ni {
     color: var(--ni) !important; 
 }
+.color--other {
+    color: var(--other) !important; 
+}
 
 
 /* BORDER-COLOR ----------------------------------------------------- */ 
@@ -203,6 +222,9 @@
 
 .border-color--ni {
     border-color: var(--ni) !important;
+}
+.border-color--other {
+    border-color: var(--other) !important;
 }
 
 
@@ -253,6 +275,11 @@
 .before-color--ni {
     &:before {
         background-color: var(--ni) !important;
+    }
+}
+.before-color--other {
+    &:before {
+        background-color: var(--other) !important;
     }
 }
 
