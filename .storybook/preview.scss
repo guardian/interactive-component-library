@@ -38,6 +38,14 @@
     list-style-type: decimal;
   }
 
+  ul {
+    list-style-type: disc;
+  }
+
+  li {
+    margin: 8px 0;
+  }
+
   pre {
     font-family: ui-monospace, Menlo, Monaco, 'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
       'Droid Sans Mono', 'Courier New', monospace;
@@ -50,4 +58,12 @@
   h2 {
     margin-top: 40px !important;
   }
+}
+
+// Code blocks
+
+td code {
+  background-color: #e5eff5;
+  border-radius: 2px;
+  padding: 2px 4px;
 }
