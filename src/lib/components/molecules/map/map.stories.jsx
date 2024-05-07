@@ -221,24 +221,6 @@ export const EnglandTooltipMap = {
   render: (args) => <MapWithTooltip {...args} />,
 }
 
-const bubbleFeatures = [
-  {
-    type: 'Feature',
-    properties: { id: '1' },
-    geometry: { type: 'Point', coordinates: [-1.2701895366, 54.6761414291] },
-  },
-  {
-    type: 'Feature',
-    properties: { id: '2' },
-    geometry: { type: 'Point', coordinates: [-0.2689911523, 51.6801735409] },
-  },
-  {
-    type: 'Feature',
-    properties: { id: '3' },
-    geometry: { type: 'Point', coordinates: [-2.0077162436, 52.5147772899] },
-  },
-]
-
 function BubbleMapWithTooltip(props) {
   const mapRef = useRef()
   const [mapContainer, setMapContainer] = useState()
