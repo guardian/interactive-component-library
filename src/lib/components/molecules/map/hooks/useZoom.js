@@ -7,13 +7,8 @@ export function useZoom({ enabled, minZoom, maxZoom, extent }) {
 
   const zoomBehaviour = useMemo(() => {
     const zoomBehaviour = zoom()
-      .scaleExtent([2, maxZoom])
-      // .translateExtent(extent)
-      .extent(extent)
-      // .extent([
-      //   [0, 0],
-      //   [934, 544],
-      // ])
+      .scaleExtent([minZoom, maxZoom])
+      .extent(extent) 
       .on('zoom', (event) => {
         setTransform(event.transform)
       })
