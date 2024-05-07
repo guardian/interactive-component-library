@@ -26,7 +26,7 @@ export function ChangeBar({ fraction, positive, party, width, height, styles }) 
 
 
   return <div className={styles.wrapper} style={`width: ${width}px`}>
-    <div className={styles.bar.concat(thisColor)} style={thisStyles}></div>
-    <div className={styles.zero} style={zeroStyles}></div>
+    <div className={styles.bar.concat(thisColor)} style={thisStyles} />
+    <div className={styles.zero} style={zeroStyles} />
     </div>
 }
