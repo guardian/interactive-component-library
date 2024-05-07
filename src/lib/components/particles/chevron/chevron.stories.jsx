@@ -8,11 +8,23 @@ export default {
       options: ['up', 'down'],
       control: { type: 'radio' },
     },
+    size: {
+      options: ['small', 'large'],
+      control: { type: 'radio' },
+    },
   },
 }
 
-export const Default = {
+export const Small = {
   args: {
     active: true,
   },
 }
+
+export const Large = {
+  args: {
+    active: true,
+    size: "large",
+  },
+}
+
