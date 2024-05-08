@@ -62,7 +62,7 @@ function LargeChevron({ styles }) {
       <g className={styles.group}>
         <path
           d="M0.667809 7.5L6.81507 12.1053L8.18493 12.1053L14.3322 7.5L15 8.09868L7.84247 14.5L7.15753 14.5L-2.61693e-08 8.09868L0.667809 7.5Z"
-          fill="#121212"
+          className={styles.path}
         />
       </g>
     </svg>
