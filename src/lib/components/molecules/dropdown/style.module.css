@@ -15,8 +15,8 @@
 }
 
 .icon {
-  width: 19px;
-  height: 20px;
+  width: 17px;
+  height: 17px;
 }
 
 .title {
@@ -24,4 +24,76 @@
   font-family: var(--text-sans);
   font-size: var(--sans-medium);
   line-height: var(--sans-line-height);
+}
+
+.popout {
+  background-color: var(--secondary-bg-color);
+
+  border: 1px solid var(--border-divider-color);
+  border-radius: 8px;
+
+  position: absolute;
+  margin-top: var(--space-2);
+  padding: var(--space-2);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.hint {
+  color: var(--secondary-text-color);
+  font-family: var(--text-sans);
+  font-size: var(--sans-xsmall);
+  line-height: var(--sans-line-height);
+}
+
+.option {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: 175px;
+
+  border: 1px solid var(--border-divider-color);
+  border-radius: 8px;
+  padding: var(--space-1) var(--space-2);
+
+  background-color: var(--primary-bg-color);
+}
+
+.option:hover:enabled {
+  background-color: var(--news-grey-05);
+  cursor: pointer;
+}
+
+.optionIcon {
+  width: 23px;
+  height: 23px;
+}
+
+.optionTitle {
+  color: var(--primary-text-color);
+  font-family: var(--text-sans);
+  font-size: var(--sans-xsmall);
+  line-height: var(--sans-line-height);
+  font-weight: 700;
+}
+
+.optionDescription {
+  color: var(--primary-text-color);
+  font-family: var(--text-sans);
+  font-size: var(--sans-xsmall);
+  line-height: var(--sans-line-height);
+}
+
+.checkmark {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+}
+
+.checkmarkPath {
+  fill: var(--primary-text-color);
 }
