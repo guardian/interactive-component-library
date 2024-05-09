@@ -2,15 +2,9 @@ import { useLayoutEffect, useEffect, useRef, useState } from 'preact/hooks'
 import { useTooltipTarget } from './useTooltipTarget'
 import { createPortal } from 'preact/compat'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
-import { Modal } from './modal'
 import defaultStyles from './style.module.css'
 
-export const TooltipType = {
-  float: 'float',
-  modal: 'modal',
-}
-
-export function Tooltip({ for: targetElement, renderIn: refOrSelector, type = TooltipType.float, styles, children }) {
+export function Tooltip({ for: targetElement, styles, children }) {
   if (!targetElement) throw new Error('Target for tooltip cannot be undefined')
 
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
@@ -23,16 +17,12 @@ export function Tooltip({ for: targetElement, renderIn: refOrSelector, type = To
   styles = mergeStyles(defaultStyles, styles)
 
   useEffect(() => {
-    let element = null
-    if (typeof refOrSelector === 'string') {
-      element = document.querySelector(refOrSelector)
-    } else if ('current' in refOrSelector) {
-      element = refOrSelector.current
-    } else {
-      throw new Error('renderIn prop needs to be a selector or ref (from useRef)')
+    setDisplayElement(document.querySelector("body"))
+
+    return () => {
+      setDisplayElement(null)
     }
-    setDisplayElement(element)
-  }, [refOrSelector])
+  }, [])
 
   useLayoutEffect(() => {
     if (!tooltipRef.current) return
@@ -55,16 +45,13 @@ export function Tooltip({ for: targetElement, renderIn: refOrSelector, type = To
 
   const displayTooltip = hoverActive || !trackPosition
 
-  const fixedStyle =
-    type === TooltipType.modal
-      ? {}
-      : {
-          display: displayTooltip ? 'block' : 'none',
-          position: 'fixed',
-          left: tooltipPosition.x,
-          top: tooltipPosition.y,
-          zIndex: 100,
-        }
+  const fixedStyle = {
+    display: displayTooltip ? 'block' : 'none',
+    position: 'fixed',
+    left: tooltipPosition.x,
+    top: tooltipPosition.y,
+    zIndex: 100,
+  }
 
   const tooltip = (
     <div ref={tooltipRef} className={styles.tooltip} style={fixedStyle}>
@@ -74,7 +61,7 @@ export function Tooltip({ for: targetElement, renderIn: refOrSelector, type = To
   )
 
   return createPortal(
-    type === TooltipType.modal ? <Modal visible={hoverActive}>{tooltip}</Modal> : tooltip,
+    tooltip,
     displayElement,
   )
 }
