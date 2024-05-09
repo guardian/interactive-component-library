@@ -22,32 +22,6 @@ export function StackedBar({
   const textElements = useRef([])
   const [hideLabels, setHideLabels] = useState(true)
 
-  useLayoutEffect(() => {
-    
-    for (let index = 0; index < stack.length; index++) {
-      const rectElement = rectElements.current[index]
-      const textElement = textElements.current[index]
-
-      const paddingX = 8
-      const hideText = textElement.getBBox().width + paddingX > rectElement.getBBox().width
-
-      const rectStyle = window.getComputedStyle(rectElement)
-      const rectColor = rectStyle.getPropertyValue('fill')
-      const textColor = isDarkColor(rectColor) ? '#FFF' : '#121212'
-      textElement.style.fill = textColor
-
-
-      if (hideText) {
-        // if any are too big, hide all and break
-        setHideLabels(true)
-        return
-      }
-    }
-
-    // if all fit, show all after loop ends
-    setHideLabels(false)
-  }, [stack, width, height])
-
   styles = mergeStyles({ ...defaultStyles }, styles)
   const svgHeight = labelType === LabelType.hanging && !hideLabels ? height + 20 : height
 
