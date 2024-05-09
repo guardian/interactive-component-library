@@ -20,7 +20,6 @@ export function StackedBar({
 }) {
   const rectElements = useRef([])
   const textElements = useRef([])
-  const [hideLabels, setHideLabels] = useState(true)
 
   styles = mergeStyles({ ...defaultStyles }, styles)
   const svgHeight = labelType === LabelType.hanging && !hideLabels ? height + 20 : height
