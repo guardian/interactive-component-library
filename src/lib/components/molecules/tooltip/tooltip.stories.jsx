@@ -1,7 +1,7 @@
 import { Tooltip } from '.'
 import { useTouchOrHover } from './useTouchOrHover'
 import { InfoButton } from '$particles'
-import { useEffect, useRef, useState } from 'preact/hooks'
+import { useRef } from 'preact/hooks'
 
 export default {
   title: 'Molecules/Tooltip',
@@ -17,26 +17,19 @@ export const ButtonTouchOrHover = {
 }
 
 function TooltipPreview() {
-  const tooltipped = useRef(null)
-  const [element, setElement] = useState()
-
-  useEffect(() => {
-    setElement(tooltipped.current)
-  }, [tooltipped])
+  const { touchOrHoverRef, touchOrHoverIsActive, positionInTarget } = useTouchOrHover()
 
   return (
     <>
-      <div ref={tooltipped} style="width: 100%; height: 300px; background-color: #CCC" />
-      {element && (
-        <Tooltip for={element}>
-          {({ x, y }) => (
-            <div style="border-top: 1px solid #333; background-color: #FFF; padding: 10px;">
-              <p>Tooltip position</p>
-              <p>
-                x: {x}, y: {y}
-              </p>
-            </div>
-          )}
+      <div ref={touchOrHoverRef} style="width: 100%; height: 300px; background-color: #dcdcdc" />
+      {touchOrHoverIsActive && (
+        <Tooltip for={touchOrHoverRef.current} positionInTarget={positionInTarget}>
+          <div style="border-top: 1px solid #333; background-color: #FFF; padding: 10px;">
+            <p>Tooltip position</p>
+            <p>
+              x: {positionInTarget.x}, y: {positionInTarget.y}
+            </p>
+          </div>
         </Tooltip>
       )}
     </>

@@ -1,23 +1,20 @@
 import { useLayoutEffect, useEffect, useRef, useState } from 'preact/hooks'
-import { useTooltipTarget } from './useTooltipTarget'
 import { createPortal } from 'preact/compat'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
 import defaultStyles from './style.module.css'
 
-export function Tooltip({ for: targetElement, styles, children }) {
+export function Tooltip({ for: targetElement, positionInTarget, show = true, styles, children }) {
   if (!targetElement) throw new Error('Target for tooltip cannot be undefined')
 
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
   const [displayElement, setDisplayElement] = useState(null)
 
-  const trackPosition = typeof children === 'function'
-  const { targetRect, positionInTarget, hoverActive } = useTooltipTarget(targetElement, trackPosition)
-  const tooltipRef = useRef(null)
+  const tooltipRef = useRef()
 
   styles = mergeStyles(defaultStyles, styles)
 
   useEffect(() => {
-    setDisplayElement(document.querySelector("body"))
+    setDisplayElement(document.querySelector('body'))
 
     return () => {
       setDisplayElement(null)
@@ -27,7 +24,9 @@ export function Tooltip({ for: targetElement, styles, children }) {
   useLayoutEffect(() => {
     if (!tooltipRef.current) return
 
-    if (trackPosition && positionInTarget) {
+    const targetRect = targetElement.getBoundingClientRect()
+
+    if (positionInTarget) {
       const newPosition = tooltipPositionForPoint({
         targetRect,
         positionInTarget,
@@ -35,18 +34,20 @@ export function Tooltip({ for: targetElement, styles, children }) {
         displayElement,
       })
       setTooltipPosition(newPosition)
-    } else if (!trackPosition) {
-      const newPosition = tooltipPositionForRect({ targetRect, tooltip: tooltipRef.current, displayElement })
+    } else if (!positionInTarget) {
+      const newPosition = tooltipPositionForRect({
+        targetRect,
+        tooltip: tooltipRef.current,
+        displayElement,
+      })
       setTooltipPosition(newPosition)
     }
-  }, [trackPosition, targetRect, positionInTarget, displayElement, tooltipRef])
+  }, [targetElement, positionInTarget, displayElement, tooltipRef])
 
   if (!displayElement) return
 
-  const displayTooltip = hoverActive || !trackPosition
-
   const fixedStyle = {
-    display: displayTooltip ? 'block' : 'none',
+    display: show ? 'block' : 'none',
     position: 'fixed',
     left: tooltipPosition.x,
     top: tooltipPosition.y,
@@ -55,15 +56,11 @@ export function Tooltip({ for: targetElement, styles, children }) {
 
   const tooltip = (
     <div ref={tooltipRef} className={styles.tooltip} style={fixedStyle}>
-      {positionInTarget && children(positionInTarget)}
-      {!trackPosition && children}
+      {children}
     </div>
   )
 
-  return createPortal(
-    tooltip,
-    displayElement,
-  )
+  return createPortal(tooltip, displayElement)
 }
 
 function tooltipPositionForPoint({ targetRect, positionInTarget, tooltip, displayElement }) {
