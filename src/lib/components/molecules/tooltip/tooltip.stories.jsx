@@ -1,4 +1,5 @@
 import { Tooltip } from '.'
+import { useTouchOrHover } from './useTouchOrHover'
 import { InfoButton } from '$particles'
 import { useEffect, useRef, useState } from 'preact/hooks'
 
@@ -11,7 +12,7 @@ export const Default = {
   render: () => <TooltipPreview />,
 }
 
-export const ButtonPress = {
+export const ButtonTouchOrHover = {
   render: () => <TooltipForButton />,
 }
 
@@ -42,33 +43,31 @@ function TooltipPreview() {
   )
 }
 
-function TooltipForButton({ event = "click" }) {
-  const [tooltipTarget, setTooltipTarget] = useState()
-
-  useEffect(() => {
-    function onClick() {
-      setTooltipTarget(null)
-    }
-    window.addEventListener(event, onClick)
-
-    return () => {
-      window.removeEventListener(event, onClick)
-    }
-  }, [event])
+function TooltipForButton() {
+  const { touchOrHoverRef, touchOrHoverIsActive } = useTouchOrHover()
+  const infoButtonRef = useRef()
 
   return (
     <div style={{ height: '100vh' }}>
-      <InfoButton
-        onClick={(event) => {
-          setTooltipTarget((target) => {
-            if (target) return null
-            return event.target
-          })
-          event.stopPropagation()
+      <div
+        ref={touchOrHoverRef}
+        style={{
+          backgroundColor: '#dcdcdc',
+          width: 200,
+          padding: 12,
+          display: 'flex',
+          flexDirection: 'row',
         }}
-      />
-      {tooltipTarget && (
-        <Tooltip for={tooltipTarget}>
+      >
+        <p>
+          Tooltip shows when gray area receives touch or mouseover event, but is anchored to info button.
+        </p>
+        <div style={{width: 20}}>
+          <InfoButton ref={infoButtonRef} />
+        </div>
+      </div>
+      {touchOrHoverIsActive && (
+        <Tooltip for={infoButtonRef.current}>
           <div style="border: 1px solid #333; background-color: #FFF; padding: 10px;">Tooltip</div>
         </Tooltip>
       )}
