@@ -1,5 +1,5 @@
 import { Tooltip } from '.'
-import { useTouchOrHover } from './useTouchOrHover'
+import { useTouchOrHover } from '$shared/hooks/useTouchOrHover'
 import { InfoButton } from '$particles'
 import { useRef } from 'preact/hooks'
 
@@ -37,7 +37,7 @@ function TooltipPreview() {
 }
 
 function TooltipForButton() {
-  const { touchOrHoverRef, touchOrHoverIsActive } = useTouchOrHover()
+  const { touchOrHoverRef, touchOrHoverIsActive, touchRect } = useTouchOrHover()
   const infoButtonRef = useRef()
 
   return (
@@ -60,7 +60,7 @@ function TooltipForButton() {
         </div>
       </div>
       {touchOrHoverIsActive && (
-        <Tooltip for={infoButtonRef.current}>
+        <Tooltip for={infoButtonRef.current} touchRect={touchRect}>
           <div style="border: 1px solid #333; background-color: #FFF; padding: 10px;">Tooltip</div>
         </Tooltip>
       )}
