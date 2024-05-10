@@ -1,8 +1,9 @@
 import { InfoButton } from '$particles'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
+import { forwardRef } from 'preact/compat'
 import defaultStyles from './style.module.scss'
 
-export const ToplineResult = ({
+export const ToplineResult = forwardRef(({
   name,
   secondaryName,
   mainNumber,
@@ -14,29 +15,31 @@ export const ToplineResult = ({
   onMouseOver,
   onInfoPress,
   showInfoButton = false,
-}) => {
+  infoButtonRef,
+}, ref) => {
   styles = mergeStyles({ ...defaultStyles }, styles)
   const displayStyle = displayRow ? styles.displayRow : styles.displayColumn
 
   return !secondaryName ? (
-    <div class={styles.toplineResult} onMouseOver={onMouseOver}>
+    <div class={styles.toplineResult} onMouseOver={onMouseOver} ref={ref}>
       <div class={styles.topRow}>
         <span class={`${styles.name} before-color--${abbreviation}`}>{name}</span>{' '}
         {showInfoButton && (
           <span class={styles.infoButton}>
-            <InfoButton onClick={onInfoPress} />
+            <InfoButton onClick={onInfoPress} ref={infoButtonRef} />
           </span>
         )}
       </div>
       <div class={`${styles.displayNumbers} ${displayStyle}`}>
         <div class={styles.mainNumber}>
-          {mainNumber}{mainNumberSuffix && <span className={styles.mainNumberSuffix}>{mainNumberSuffix}</span>}
+          {mainNumber}
+          {mainNumberSuffix && <span className={styles.mainNumberSuffix}>{mainNumberSuffix}</span>}
         </div>
         <div class={styles.secondaryNumber}>{secondaryNumber}</div>
       </div>
     </div>
   ) : (
-    <div class={styles.toplineResult} onMouseOver={onMouseOver}>
+    <div class={styles.toplineResult} onMouseOver={onMouseOver} ref={ref}>
       <div class={styles.topRow}>
         <span class={`${styles.primaryname} before-color--${abbreviation}`}>{name}</span>{' '}
         {showInfoButton && (
@@ -51,10 +54,11 @@ export const ToplineResult = ({
 
       <div class={`${styles.displayNumbers} ${displayStyle}`}>
         <div class={styles.mainNumber}>
-          {mainNumber}{mainNumberSuffix && <span className={styles.mainNumberSuffix}>{mainNumberSuffix}</span>}
+          {mainNumber}
+          {mainNumberSuffix && <span className={styles.mainNumberSuffix}>{mainNumberSuffix}</span>}
         </div>
         <div class={styles.secondaryNumber}>{secondaryNumber}</div>
       </div>
     </div>
   )
-}
+})
