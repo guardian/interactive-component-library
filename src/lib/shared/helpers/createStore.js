@@ -16,7 +16,7 @@ export default function createStore(initialStore) {
       return () => {
         listeners.delete(listener)
       }
-    }, [])
+    }, [selectorFn])
 
     const syncedStore = useSyncExternalStore(subscribe, getStore, getServerStore)
     return selectorFn(syncedStore)

@@ -1,8 +1,8 @@
-import { useContext, useRef, useState, useEffect, useCallback, useMemo } from 'preact/hooks'
+import { useContext, useRef, useState, useEffect, useCallback } from 'preact/hooks'
 import { select } from 'd3-selection'
 import { geoPath } from 'd3-geo'
 import { MapContext } from '../context/MapContext'
-import { CompositionBorders } from '../layers/CompositionBorders'
+// import { CompositionBorders } from '../layers/CompositionBorders'
 import { useZoom } from '../hooks/useZoom'
 import { useSignalEffect } from '@preact/signals'
 

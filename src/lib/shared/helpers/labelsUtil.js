@@ -1,4 +1,5 @@
-export function preventOverlap(labelPositions, iteration = 0, labelSize = 12, coordinate ='y', moveBothLabels = true) {
+
+export function preventOverlap(labelPositions, iteration = 0, labelSize = 12, coordinate = 'y', moveBothLabels = true) {
   const maxIterations = 10
   let totalOverlap = 0
 
@@ -24,6 +25,7 @@ export function preventOverlap(labelPositions, iteration = 0, labelSize = 12, co
   }
 
   return labelPositions
+  }
 }
 
 export function uniqueBy(array, key) {

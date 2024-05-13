@@ -1,21 +1,21 @@
-
 import defaultStyles from './style.module.css'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
 
-export const PartyProfile = ({ styles, title, subtitle, blurb, imgSrc, abbreviation }) => {
+const SubtitleStyle = {
+  small: "small",
+  large: "large",
+}
+
+export const PartyProfile = ({ title, subtitle, subtitleStyle = SubtitleStyle.large, blurb, footnote, imgSrc, styles }) => {
   styles = mergeStyles({ ...defaultStyles }, styles)
 
-  return(
+  return (
     <div class={styles.container}>
-        <>
-        <div className={styles.leftCell}>
-        <h3 className={`${styles.title}`}>{title}</h3>
-        <div className={styles.subtitle}>{subtitle}</div>
-        <div className={styles.blurb}>{blurb}</div>
-        </div>
-        <div className={styles.rightCell}>
-          <img  src={imgSrc} className={`${styles.mugshot} bg-color--${abbreviation}`}></img>
-        </div>
-        </>
-    </div>)
+      <img src={imgSrc} className={styles.img} />
+      <h3 className={styles.title}>{title}</h3>
+      <div className={[styles.subtitle, styles[subtitleStyle]].join(' ')}>{subtitle}</div>
+      <div className={styles.blurb}>{blurb}</div>
+      <div className={styles.footnote}>{footnote}</div>
+    </div>
+  )
 }

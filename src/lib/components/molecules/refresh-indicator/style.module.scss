@@ -2,7 +2,17 @@
   display: flex;
   flex-direction: row;
   column-gap: var(--space-0);
-  align-items: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 1px;
+  font-size: var(--sans-small);
+  line-height: var(--sans-line-height);
 }
 
 .liveText,
@@ -19,4 +29,9 @@
 
 .refreshText {
   margin-left: var(--space-0);
+
+  @include mq($from: leftCol, $until: wide) {
+    // force text onto second line for leftCol
+    flex-basis: 100%;
+  }
 }
