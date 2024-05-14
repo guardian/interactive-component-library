@@ -106,7 +106,6 @@ function tooltipPositionForRect({ targetRect, touchRect = { x: 0, y: 0, width: 0
 
   if (rectsIntersect(tooltipRect, touchRect)) {
     // tooltip rect intersects with touch rect, which means it will be (partially) obscured by the user's finger
-    // console.log('rects intersect')
     newPosition.x = touchRect.x + touchRect.width / 2
     newPosition.y = touchRect.y - tooltipHeight
   }
