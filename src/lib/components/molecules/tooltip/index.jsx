@@ -79,16 +79,26 @@ function tooltipPositionForPoint({ targetRect, positionInTarget, tooltip, displa
   if (newPosition.x + tooltipWidth > displayElementRect.right) {
     newPosition.x -= tooltipWidth
   }
+
   if (newPosition.y + tooltipHeight > displayElementRect.bottom) {
     newPosition.y -= tooltipHeight
+  }
+
+  if (newPosition.x <= displayElementRect.left) {
+    newPosition.x = displayElementRect.left + displayElementRect.width / 2 - tooltipWidth / 2
   }
 
   return newPosition
 }
 
-function tooltipPositionForRect({ targetRect, touchRect = { x: 0, y: 0, width: 0, height: 0 }, tooltip, displayElement }) {
+function tooltipPositionForRect({
+  targetRect,
+  touchRect = { x: 0, y: 0, width: 0, height: 0 },
+  tooltip,
+  displayElement,
+}) {
   // touchRect is defined relative to the targetRect
-  
+
   // start with top-right position
   const newPosition = {
     x: targetRect.right,
@@ -118,6 +128,10 @@ function tooltipPositionForRect({ targetRect, touchRect = { x: 0, y: 0, width: 0
 
   if (newPosition.y - tooltipHeight < displayElementRect.top) {
     newPosition.y = targetRect.bottom
+  }
+
+  if (newPosition.x <= displayElementRect.left) {
+    newPosition.x = displayElementRect.left + displayElementRect.width / 2 - tooltipWidth / 2
   }
 
   return newPosition
