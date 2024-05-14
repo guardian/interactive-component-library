@@ -1,43 +1,33 @@
 import { useLayoutEffect, useEffect, useRef, useState } from 'preact/hooks'
-import { useTooltipTarget } from './useTooltipTarget'
 import { createPortal } from 'preact/compat'
+import { rectsIntersect } from '$shared/helpers/geometry'
 import { mergeStyles } from '$styles/helpers/mergeStyles'
-import { Modal } from './modal'
 import defaultStyles from './style.module.css'
 
-export const TooltipType = {
-  float: 'float',
-  modal: 'modal',
-}
-
-export function Tooltip({ for: targetElement, renderIn: refOrSelector, type = TooltipType.float, styles, children }) {
+export function Tooltip({ for: targetElement, touchRect, positionInTarget, show = true, styles, children }) {
   if (!targetElement) throw new Error('Target for tooltip cannot be undefined')
 
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
   const [displayElement, setDisplayElement] = useState(null)
 
-  const trackPosition = typeof children === 'function'
-  const { targetRect, positionInTarget, hoverActive } = useTooltipTarget(targetElement, trackPosition)
-  const tooltipRef = useRef(null)
+  const tooltipRef = useRef()
 
   styles = mergeStyles(defaultStyles, styles)
 
   useEffect(() => {
-    let element = null
-    if (typeof refOrSelector === 'string') {
-      element = document.querySelector(refOrSelector)
-    } else if ('current' in refOrSelector) {
-      element = refOrSelector.current
-    } else {
-      throw new Error('renderIn prop needs to be a selector or ref (from useRef)')
+    setDisplayElement(document.querySelector('body'))
+
+    return () => {
+      setDisplayElement(null)
     }
-    setDisplayElement(element)
-  }, [refOrSelector])
+  }, [])
 
   useLayoutEffect(() => {
     if (!tooltipRef.current) return
 
-    if (trackPosition && positionInTarget) {
+    const targetRect = targetElement.getBoundingClientRect()
+
+    if (positionInTarget) {
       const newPosition = tooltipPositionForPoint({
         targetRect,
         positionInTarget,
@@ -45,38 +35,34 @@ export function Tooltip({ for: targetElement, renderIn: refOrSelector, type = To
         displayElement,
       })
       setTooltipPosition(newPosition)
-    } else if (!trackPosition) {
-      const newPosition = tooltipPositionForRect({ targetRect, tooltip: tooltipRef.current, displayElement })
+    } else if (!positionInTarget) {
+      const newPosition = tooltipPositionForRect({
+        targetRect,
+        touchRect,
+        tooltip: tooltipRef.current,
+        displayElement,
+      })
       setTooltipPosition(newPosition)
     }
-  }, [trackPosition, targetRect, positionInTarget, displayElement, tooltipRef])
+  }, [targetElement, positionInTarget, displayElement, tooltipRef, touchRect])
 
   if (!displayElement) return
 
-  const displayTooltip = hoverActive || !trackPosition
-
-  const fixedStyle =
-    type === TooltipType.modal
-      ? {}
-      : {
-          display: displayTooltip ? 'block' : 'none',
-          position: 'fixed',
-          left: tooltipPosition.x,
-          top: tooltipPosition.y,
-          zIndex: 100,
-        }
+  const fixedStyle = {
+    display: show ? 'block' : 'none',
+    position: 'fixed',
+    left: tooltipPosition.x,
+    top: tooltipPosition.y,
+    zIndex: 100,
+  }
 
   const tooltip = (
     <div ref={tooltipRef} className={styles.tooltip} style={fixedStyle}>
-      {positionInTarget && children(positionInTarget)}
-      {!trackPosition && children}
+      {children}
     </div>
   )
 
-  return createPortal(
-    type === TooltipType.modal ? <Modal visible={hoverActive}>{tooltip}</Modal> : tooltip,
-    displayElement,
-  )
+  return createPortal(tooltip, displayElement)
 }
 
 function tooltipPositionForPoint({ targetRect, positionInTarget, tooltip, displayElement }) {
@@ -93,14 +79,26 @@ function tooltipPositionForPoint({ targetRect, positionInTarget, tooltip, displa
   if (newPosition.x + tooltipWidth > displayElementRect.right) {
     newPosition.x -= tooltipWidth
   }
+
   if (newPosition.y + tooltipHeight > displayElementRect.bottom) {
     newPosition.y -= tooltipHeight
+  }
+
+  if (newPosition.x <= displayElementRect.left) {
+    newPosition.x = displayElementRect.left + displayElementRect.width / 2 - tooltipWidth / 2
   }
 
   return newPosition
 }
 
-function tooltipPositionForRect({ targetRect, tooltip, displayElement }) {
+function tooltipPositionForRect({
+  targetRect,
+  touchRect = { x: 0, y: 0, width: 0, height: 0 },
+  tooltip,
+  displayElement,
+}) {
+  // touchRect is defined relative to the targetRect
+
   // start with top-right position
   const newPosition = {
     x: targetRect.right,
@@ -110,6 +108,18 @@ function tooltipPositionForRect({ targetRect, tooltip, displayElement }) {
   const tooltipWidth = tooltip.offsetWidth
   const tooltipHeight = tooltip.offsetHeight
 
+  const tooltipRect = {
+    ...newPosition,
+    width: tooltipWidth,
+    height: tooltipHeight,
+  }
+
+  if (rectsIntersect(tooltipRect, touchRect)) {
+    // tooltip rect intersects with touch rect, which means it will be (partially) obscured by the user's finger
+    newPosition.x = touchRect.x + touchRect.width / 2
+    newPosition.y = touchRect.y - tooltipHeight
+  }
+
   const displayElementRect = displayElement.getBoundingClientRect()
 
   if (newPosition.x + tooltipWidth > displayElementRect.right) {
@@ -118,6 +128,10 @@ function tooltipPositionForRect({ targetRect, tooltip, displayElement }) {
 
   if (newPosition.y - tooltipHeight < displayElementRect.top) {
     newPosition.y = targetRect.bottom
+  }
+
+  if (newPosition.x <= displayElementRect.left) {
+    newPosition.x = displayElementRect.left + displayElementRect.width / 2 - tooltipWidth / 2
   }
 
   return newPosition
