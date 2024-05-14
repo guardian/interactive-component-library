@@ -2,13 +2,29 @@
 
 @mixin default-party-colors-eu {
     --left: #8B0000;
+    --left-01: #e3b0a3;
+    --left-02: #bc634f;
     --sd: #C70000;
+    --sd-01:#fbb8a6;
+    --sd-02:#e77054;
     --greenefa: #39A566;
+    --greenefa-01: #c1e1ca;
+    --greenefa-02: #82c397;
     --renew: #FF7F0F;
-    --epp: #13bece;
+    --renew-01: #ffd8ba;
+    --renew-02: #ffaf71;
+    --epp: #3dBBE2;
+    --epp-01: #cae8f5;
+    --epp-02: #8fd1ec;
     --ecr: #0079B7;
+    --ecr-01: #bdcfe7;
+    --ecr-02: #77a2ce;
     --id:#DC559D;
-    --ni: #333333;
+    --id-01:#edc0d3;
+    --id-02:#d681a9;
+
+
+    --ni: #606060;
     --other: #707070;
 
     --undeclared: #ededed;
@@ -18,12 +34,28 @@
 @mixin dark-mode-party-colors-eu {
 
     --left: #8B0000;
-    --sd: #dc2e1c;
+    --left-01: #e3b0a3;
+    --left-02: #bc634f;
+    --sd: #C70000;
+    --sd-01:#fbb8a6;
+    --sd-02:#e77054;
     --greenefa: #39A566;
+    --greenefa-01: #c1e1ca;
+    --greenefa-02: #82c397;
     --renew: #FF7F0F;
-    --epp: #3DBBE2;
-    --ecr: #009ae1;
-    --id: #DC559D;
+    --renew-01: #ffd8ba;
+    --renew-02: #ffaf71;
+    --epp: #3dBBE2;
+    --epp-01: #cae8f5;
+    --epp-02: #8fd1ec;
+    --ecr: #0079B7;
+    --ecr-01: #bdcfe7;
+    --ecr-02: #77a2ce;
+    --id:#DC559D;
+    --id-01:#edc0d3;
+    --id-02:#d681a9;
+
+
     --ni: #A1A1A1;
     --other: #707070;
 
@@ -36,29 +68,70 @@
 .bg-color--left {
     background-color: var(--left) !important;
 }
-
+.bg-color--left--01 {
+    background-color: var(--left-01) !important;
+}
+.bg-color--left--02 {
+    background-color: var(--left-02) !important;
+}
 .bg-color--sd {
     background-color: var(--sd) !important;
+}
+.bg-color--sd--01 {
+    background-color: var(--sd-01) !important;
+}
+.bg-color--sd--02 {
+    background-color: var(--sd-02) !important;
 }
 
 .bg-color--greenefa {
     background-color: var(--greenefa) !important;
 }
+.bg-color--greenefa--01 {
+    background-color: var(--greenefa-01) !important;
+}
+.bg-color--greenefa--02 {
+    background-color: var(--greenefa-02) !important;
+}
 
 .bg-color--renew {
     background-color: var(--renew) !important;
+}
+.bg-color--renew--01 {
+    background-color: var(--renew-01) !important;
+}
+.bg-color--renew--02 {
+    background-color: var(--renew-02) !important;
 }
 
 .bg-color--epp {
     background-color: var(--epp) !important;
 }
+.bg-color--epp--01 {
+    background-color: var(--epp-01) !important;
+}
+.bg-color--epp--02 {
+    background-color: var(--epp-02) !important;
+}
 
 .bg-color--ecr {
     background-color: var(--ecr) !important;
 }
+.bg-color--ecr--01 {
+    background-color: var(--ecr-01) !important;
+}
+.bg-color--ecr--02 {
+    background-color: var(--ecr-02) !important;
+}
 
 .bg-color--id {
     background-color: var(--id) !important;
+}
+.bg-color--id--01 {
+    background-color: var(--id-01) !important;
+}
+.bg-color--id--02 {
+    background-color: var(--id-02) !important;
 }
 
 .bg-color--ni {
@@ -112,6 +185,9 @@
 .fill-color--other {
     fill: var(--other) !important;
 }
+.fill-color--undeclared {
+    fill: var(--undeclared) !important;
+}
 
 
 /* STROKE-COLOR --------------------------------------------------- */ 
@@ -149,6 +225,9 @@
 }
 .stroke-color--other {
     stroke: var(--other) !important;
+}
+.stroke-color--undeclared {
+    stroke: var(--undeclared) !important;
 }
 
 
@@ -188,6 +267,9 @@
 .color--other {
     color: var(--other) !important; 
 }
+.color--undeclared {
+    color: var(--undeclared) !important; 
+}
 
 
 /* BORDER-COLOR ----------------------------------------------------- */ 
@@ -225,6 +307,9 @@
 }
 .border-color--other {
     border-color: var(--other) !important;
+}
+.border-color--undeclared {
+    border-color: var(--undeclared) !important;
 }
 
 
@@ -280,6 +365,11 @@
 .before-color--other {
     &:before {
         background-color: var(--other) !important;
+    }
+}
+.before-color--undeclared {
+    &:before {
+        background-color: var(--undeclared) !important;
     }
 }
 
