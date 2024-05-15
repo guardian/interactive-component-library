@@ -1,7 +1,7 @@
 {
   "name": "@guardian/interactive-component-library",
   "private": false,
-  "version": "v0.1.0-alpha.20",
+  "version": "v0.1.0-alpha.21",
   "packageManager": "pnpm@8.4.0",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
     "./dist/style.css": "./dist/style.css"
   },
   "engines": {
-    "node": "18"
+    "node": ">=18"
   },
   "scripts": {
     "dev": "storybook dev -p 6006",
