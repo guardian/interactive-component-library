@@ -97,6 +97,13 @@
 .bg-color--renew {
     background-color: var(--renew) !important;
 }
+.bg-color--renew--01 {
+    background-color: var(--renew-01) !important;
+}
+
+.bg-color--renew {
+    background-color: var(--renew-02) !important;
+}
 
 .bg-color--epp {
     background-color: var(--epp) !important;
@@ -217,8 +224,12 @@
 .stroke-color--ni {
     stroke: var(--ni) !important;
 }
-
-
+.stroke-color--other {
+    stroke: var(--other) !important;
+}
+.stroke-color--undeclared {
+    stroke: var(--undeclared) !important;
+}
 /* COLOR ----------------------------------------------------------- */ 
 
 .color--left {
