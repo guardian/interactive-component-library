@@ -1,13 +1,17 @@
-
 // from visuals colour guide: https://www.figma.com/file/RZHnmwc2tmB6j1k4bNtyND/Style-Guide?type=design&node-id=1124%3A325&mode=design&t=bRPBxmJ7FZ5Wlk0R-1
 
 @mixin default-colors {
+  --border-divider-color: #DCDCDC;
+
   --primary-text-color: #121212;
   --secondary-text-color: #707070;
+  --secondary-text-color-alt: #707070;
 
   --primary-bg-color: #FFFFFF;
   --secondary-bg-color: #F3F3F3;
-  
+  --tertiary-bg-color: #f6f6f6;
+  --quaternary-bg-color: #FFF;
+
   --primary-line-color: #333333;
   --secondary-line-color: #DCDCDC;
 
@@ -16,6 +20,8 @@
   --primary-button-highlight-color: #333;
 
   --highlight-color: #ffe500;
+  --highlighted-text-color: #121212;
+
   --info-color: #00B2FF;
 
   --news-core-01: #005689;
@@ -31,15 +37,19 @@
   --news-grey-04: #BABABA; // Axis lines 
   --news-grey-05: #DCDCDC; // Structure
   --news-grey-06: #F3F3F3; // Structure
-
 }
 
 @mixin dark-mode-colors {
+  --border-divider-color: #606060;
+
   --primary-text-color: #DCDCDC;
   --secondary-text-color: #C8C8C8;
+  --secondary-text-color-alt: #999999;
 
   --primary-bg-color: #1A1A1A;
   --secondary-bg-color: #383838;
+  --tertiary-bg-color: #1A1A1A;
+  --quaternary-bg-color: #121212;
 
   --primary-line-color: #DCDCDC;
   --secondary-line-color: #707070;
@@ -51,18 +61,17 @@
   --highlight-color: #CDA500;
   --info-color: #0077B6;
 
-  --news-core-01: #0077B6; 
+  --news-core-01: #0077B6;
   --news-core-02: #00B2FF;
   --news-core-03: #E33824;
-  --news-core-04: #23B4A9; 
+  --news-core-04: #23B4A9;
   --news-core-05: #494949;
   --news-core-06: #cca36e;
 
-  --news-grey-01: #DCDCDC;  // Furniture
-  --news-grey-02: #C8C8C8;  // Furniture
-  --news-grey-03: #A1A1A1;  // Categorical
-  --news-grey-04: #707070;  // Axis lines 
-  --news-grey-05: #494949;  // Structure
-  --news-grey-06: #383838;  // Structure
-
+  --news-grey-01: #DCDCDC; // Furniture
+  --news-grey-02: #C8C8C8; // Furniture
+  --news-grey-03: #A1A1A1; // Categorical
+  --news-grey-04: #707070; // Axis lines 
+  --news-grey-05: #494949; // Structure
+  --news-grey-06: #383838; // Structure
 }

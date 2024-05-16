@@ -1,0 +1,26 @@
+.button {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.buttonInner {
+  color: var(--primary-text-color);
+  font-family: var(--text-sans);
+  font-size: var(--sans-xsmall);
+  line-height: var(--sans-line-height);
+
+  border: 1px solid var(--secondary-line-color);
+  border-radius: 999px;
+}
+
+.button[data-type='regular'] > .buttonInner {
+  padding: 8px 12px;
+}
+
+.button[data-type='small'] > .buttonInner {
+  padding: 4px 12px;
+}
+
+.button:hover:enabled > .buttonInner {
+  background-color: var(--news-grey-05);
+}

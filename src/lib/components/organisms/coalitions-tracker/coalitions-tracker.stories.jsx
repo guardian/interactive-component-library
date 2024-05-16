@@ -20,7 +20,7 @@ const results = [
   },
   {
     partyName: 'Liberal Democrats',
-    abbreviation: 'ld',
+    abbreviation: 'libdem',
     totalSeats: 10,
   },
   {
@@ -36,9 +36,9 @@ const results = [
 ]
 
 const data = [
-  { name: 'Lab-Lib', parties: ['ld', 'lab'], description: 'lorem ipsum dolor sit' },
-  { name: 'Lab-Lib-Green', parties: ['snp', 'lab', 'ld', 'green'], description: 'Sed ut perspiciatis unde omnis ist' },
-  { name: 'Lab-SNP', parties: ['lab', 'snp'], description: 'Ut enim ad minima veniam, quis nostrum exercitationem' },
+  { name: 'Lab-Lib', parties: ['libdem', 'lab'], description: 'lorem ipsum dolor sit' },
+  { name: 'Lab-Lib-Green', parties: ['snp', 'lab', 'libdem', 'green'], description: 'Sed ut perspiciatis unde omnis ist' },
+  { name: 'Lab-SNP', parties: ['lab', 'snp'], description: 'Ut enim ad minima veniam, quis nostrum exercitationem, Ut enim ad minima veniam, quis nostrum exercitationem Ut enim ad minima veniam, quis nostrum exercitationem' },
 ].map((a) => ({
   name: a.name,
   description: a.description,
@@ -49,6 +49,7 @@ export const Default = {
   args: {
     coalitions: data,
     listMembersAccessor: 'parties',
+    abbreviationAccessor: 'partyName',
     threshold: 350,
     thresholdTextBold: '350 seats needed for a working majority',
     thresholdText: 'After Sinn Fein seats discounted',

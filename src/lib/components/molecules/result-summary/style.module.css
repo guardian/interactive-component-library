@@ -1,0 +1,17 @@
+.container {
+  background-color: var(--quaternary-bg-color);
+  border-radius: 4px;
+  padding: 4px 8px 6px 8px;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--space-0);
+  height: 100%;
+}
+
+.paragraph {
+  font-family: var(--text-sans);
+  font-size: var(--sans-xsmall);
+  line-height: var(--sans-line-height);
+  color: var(--primary-text-color);
+}

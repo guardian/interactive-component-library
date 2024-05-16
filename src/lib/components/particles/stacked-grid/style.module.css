@@ -1,0 +1,33 @@
+.stackedGridContainer {
+  width: 100%;
+  height: min-content;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.stackedGridRotateItems0 {
+  > * {
+    transform: none;
+  }
+}
+
+.stackedGridRotateItems90 {
+  > * {
+    transform: rotate(90deg);
+  }
+}
+
+.stackedGridRotateItems180 {
+  > * {
+    transform: rotate(180deg);
+  }
+}
+
+.stackedGridRotateItems270 {
+  > * {
+    transform: rotate(270deg);
+  }
+}

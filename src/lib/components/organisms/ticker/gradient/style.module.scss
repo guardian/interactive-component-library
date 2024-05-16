@@ -1,0 +1,23 @@
+.gradient {
+  transform: rotate(90deg);
+  transform-origin: 50% 50%;
+
+  @include mq($from: mobileLandscape) {
+    transform: none;
+  }
+}
+
+.gradient :global(rect) {
+  width: 100%;
+  height: 100%;
+}
+
+.firstStop {
+  stop-color: var(--tertiary-bg-color);
+  stop-opacity: 0;
+}
+
+.lastStop {
+  stop-color: var(--tertiary-bg-color);
+  stop-opacity: 1;
+}

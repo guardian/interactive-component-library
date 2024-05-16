@@ -1,0 +1,41 @@
+.context-story {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #fff;
+  margin-bottom: 20px;
+  height: 80vh;
+}
+
+.context-docs {
+  width: 300px;
+  height: 300px;
+}
+
+.button {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  background: #052962;
+  color: #fff;
+
+  cursor: pointer;
+  transition: all 0.3s ease-in-out 0s;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+
+  font-family: var(--text-sans);
+  font-size: var(--sans-small);
+  line-height: var(--sans-line-height);
+  font-weight: 700;
+  height: 44px;
+  min-height: 44px;
+  padding: 0px 20px 2px;
+  border-radius: 44px;
+}
+
+.button:hover {
+  background-color: #234b8a;
+}

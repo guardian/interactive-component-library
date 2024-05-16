@@ -2,22 +2,9 @@
 
 A set of reusable components for use in interactive pages, written in Preact using [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) principles.
 
-## Install
-
-From [Github Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry):
-
-1. [Create a personal access token (classic)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic) with `read:packages` scope.
-2. Create a file called `.npmrc` in the root of your project and add the following:
-
+## Install the component library in a new client project
 ```
-@guardian:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=YOUR_PERSONAL_ACCESS_TOKEN
-```
-
-3. Install using npm:
-
-```
-npm i @guardian/interactive-component-library
+npm install @guardian/interactive-component-library
 ```
 
 ## Contributing to this repository
@@ -76,9 +63,9 @@ npm uninstall --no-save @guardian/interactive-component-library && npm install
 
 To publish a new version of the component library, follow these steps:
 
-1. Update the version number in `package.json`
-2. [Create a new release](https://github.com/guardian/interactive-component-library/releases/new) on GitHub (don't forget to write some release notes)
-3. Publishing the release [triggers a workflow](https://github.com/guardian/interactive-component-library/actions) to package the library and publish it to Github Packages. If the publish actions fails, you can also trigger it manually
+1. [Create a new release](https://github.com/guardian/interactive-component-library/releases/new) on GitHub (don't forget to write some release notes)
+2. Publishing the release [triggers a workflow](https://github.com/guardian/interactive-component-library/actions) to package the library and publish it to the NPM registry. If the publish actions fails, you can also trigger it manually
+3. The publish action also creates a pull request to bump the version number. Merge the pull request to finish the release
 
 ## Scripts
 
@@ -88,6 +75,15 @@ Always prepending `pnpm`:
 - `build`: Builds the static storybook project
 - `build:lib`: Builds the component library into the **dist** folder
 - `build:lib:watch`: Same as previous command, but it watches `/src` folder and rebuilds on changes
+
+## Testing for dark mode in Storybook
+Use the sun/moon button in the toolbar to switch between light and dark mode.
+![Screenshot 2024-03-27 at 08 24 43](https://github.com/guardian/interactive-component-library/assets/1107150/3a93adfc-56da-4c1d-b5b8-dc7ff5aedfbf)
+![Screenshot 2024-03-27 at 08 24 32](https://github.com/guardian/interactive-component-library/assets/1107150/bad208aa-7967-446f-b658-e937aa2d114b)
+
+Enabling dark mode applies `.ios` and `.dark-mode` classes to the `<body>` element, which in turn renders the story preview with dark mode colours (this behaviour can be customised in `.storybook/preview.scss`).
+
+> Note that enabling dark mode using this button does not affect the [`prefers-color-scheme` CSS media feature](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme). If your component uses `prefers-color-scheme` directly, you will also need to change your system or browser setting to see that styling take effect.
 
 ## License
 

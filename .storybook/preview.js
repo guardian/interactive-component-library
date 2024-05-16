@@ -1,19 +1,21 @@
+import { themes } from '@storybook/theming'
 import '../src/lib/styles/main.scss'
+import './preview.scss'
 
 const preview = {
   parameters: {
+    darkMode: {
+      stylePreview: true,
+      dark: { ...themes.dark, appBg: 'black' },
+      light: { ...themes.light, appBg: 'white' },
+      darkClass: ['dark-mode', 'ios'],
+    },
     options: {
       storySort: {
         order: ['Particles', 'Molecules', 'Organisms'],
       },
     },
     actions: { argTypesRegex: '^on[A-Z].*' },
-    backgrounds: {
-      values: [
-        { name: 'light', value: '#fff' },
-        { name: 'dark', value: '#1a1a1a' },
-      ],
-    },
     viewport: {
       viewports: {
         mobilesmall: {
@@ -35,6 +37,13 @@ const preview = {
           styles: {
             width: '480px',
             height: '320px',
+          },
+        },
+        phablet: {
+          name: 'Phablet',
+          styles: {
+            width: '660px',
+            height: '1024px',
           },
         },
         tablet: {

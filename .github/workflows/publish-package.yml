@@ -1,10 +1,50 @@
 name: Publish package to GitHub Packages
 on:
-  release:
-    types: [published, edited]
+  push:
+    tags:
+      - v*
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag name'
+        required: true
+        type: string
+env:
+  TAG_NAME: ${{ inputs.tag || github.ref_name }}
 jobs:
+  bump-version:
+    name: Bump version in package.json
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ env.TAG_NAME }}
+
+      - name: Change version in package.json
+        uses: jossef/action-set-json-field@v2
+        with:
+          file: package.json
+          field: version
+          value: ${{ env.TAG_NAME }}
+
+      - name: Print package.json
+        run: cat package.json
+
+      - name: Create Pull Request for new version
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Bump version to ${{ env.TAG_NAME }}'
+          branch: 'auto-version-${{ env.TAG_NAME }}'
+          base: main
+          title: 'Bump version to ${{ env.TAG_NAME }}'
+          body: 'Automated pull requested created because a tag with the name ${{ env.TAG_NAME }} was pushed to the repo.'
   build:
+    needs: bump-version
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -13,20 +53,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref }}
+          ref: 'auto-version-${{ env.TAG_NAME }}'
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 8
 
-      # Set up .npmrc file to publish to GitHub Packages
+      # Setup .npmrc file to publish to npm
       - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18.x'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@guardian'
+          registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -35,7 +74,7 @@ jobs:
       - name: Build
         run: pnpm build:lib
 
-      - name: Publish
-        run: pnpm publish --report-summary
+      - name: Publish to NPM
+        run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

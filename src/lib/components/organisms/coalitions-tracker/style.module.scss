@@ -1,5 +1,6 @@
-.coalitionsContainer {
-  padding-top: 0px;
+.coalitionsWrapper {
+  max-width: 100%;
+  position: relative;
 }
 
 .coalitionsContainer {
@@ -11,7 +12,7 @@
 }
 
 .coalition {
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-4);
 }
 
 .title,
@@ -19,12 +20,7 @@
   font-family: var(--text-sans);
   font-size: var(--sans-small);
   line-height: var(--sans-line-height);
-
-  max-width: calc(80% - 12px);
-
-  @include mq($from: tablet) {
-    max-width: 620px;
-  }
+  color: var(--primary-text-color);
 }
 
 .title {
@@ -37,8 +33,10 @@
 
 .thresholdText {
   font-family: var(--text-sans);
-  font-size: var(--sans-xxsmall);
+  font-size: var(--sans-small);
   line-height: var(--sans-line-height);
+  color: var(--primary-text-color);
+  max-width: 150px;
 
   span {
     display: block;
@@ -47,5 +45,15 @@
 
 .thresholdTextBold {
   font-weight: 700;
-  margin-bottom: var(--space-1)
+  margin-bottom: var(--space-1);
+  font-size: var(--sans-small);
+  line-height: var(--sans-line-height);
+}
+
+.thresholdDot, .thresholdLine {
+  background: var(--primary-text-color);
+}
+
+.thresholdDot {
+  border-radius: 50px;
 }

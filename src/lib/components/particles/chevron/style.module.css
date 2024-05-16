@@ -1,3 +1,7 @@
+.svg {
+  display: block;
+}
+
 .group {
   transform-box: fill-box;
   transform-origin: center;
@@ -8,9 +12,9 @@
 }
 
 .path {
-  fill: #dcdcdc;
+  fill: var(--secondary-line-color);
 }
 
 .active {
-  fill: #333;
+  fill: var(--news-grey-01);
 }

@@ -1,4 +1,5 @@
 export function mergeStyles(firstStyle, secondStyle) {
+  if (!firstStyle) return secondStyle
   if (!secondStyle) return firstStyle
   if (typeof firstStyle === 'string') {
     if (typeof secondStyle !== 'string') {
@@ -7,12 +8,9 @@ export function mergeStyles(firstStyle, secondStyle) {
     return firstStyle.concat(' ', secondStyle)
   }
 
-  const merged = Object.keys(firstStyle).reduce((result, key) => {
-    let className = firstStyle[key]
-    if (secondStyle && key in secondStyle) {
-      className = className.concat(' ', secondStyle[key])
-    }
-    result[key] = className
+  const allKeys = new Set([...Object.keys(firstStyle), ...Object.keys(secondStyle)])
+  const merged = Array.from(allKeys).reduce((result, key) => {
+    result[key] = mergeStyles(firstStyle[key], secondStyle[key])
     return result
   }, {})
 

@@ -1,0 +1,117 @@
+.ticker {
+  position: relative;
+  padding-bottom: 44px;
+
+  --ticker-item-width: 100%;
+
+  @include mq($from: mobileLandscape) {
+    --ticker-item-width: 200px;
+    padding: 0;
+  }
+}
+
+.tickerItems {
+  width: 100%;
+  overflow: clip;
+}
+
+.tickerScroll {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--space-2);
+  align-items: stretch;
+  max-height: 300px;
+  overflow: visible;
+
+  @include mq($from: mobileLandscape) {
+    flex-direction: row;
+    column-gap: var(--space-2);
+
+    transform: translateX(var(--ticker-offset));
+    transition: transform 0.5s ease-in-out;
+  }
+}
+
+.tickerItem {
+  width: var(--ticker-item-width);
+  flex-shrink: 0;
+}
+
+.controls {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 130px;
+
+  @include mq($from: mobileLandscape) {
+    top: 0;
+    right: 0;
+    width: 86px;
+    height: 100%;
+  }
+}
+
+.gradient {
+  // position: absolute;
+  width: 100%;
+  height: 86px;
+
+  @include mq($from: mobileLandscape) {
+    width: auto;
+    height: 100%;
+    right: 0;
+  }
+}
+
+.buttons {
+  display: none;
+
+  @include mq($from: mobileLandscape) {
+    position: absolute;
+    top: 0;
+    right: var(--space-5);
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.button {
+  min-height: 40px;
+  background-color: var(--tertiary-bg-color);
+
+  @include mq($from: mobileLandscape) {
+    display: none;
+  }
+}
+
+.buttonInner {
+  background-color: var(--tertiary-bg-color);
+}
+
+// Expanded state
+
+.ticker[data-expanded='true'] {
+  padding-bottom: 0;
+}
+
+.ticker[data-expanded='true'] .tickerScroll {
+  max-height: fit-content;
+  margin-bottom: -40px;
+}
+
+.ticker[data-expanded='true'] .controls {
+  position: sticky;
+  margin-top: -40px;
+  // background-color: aqua;
+
+  .button {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    padding-bottom: 8px;
+  }
+}

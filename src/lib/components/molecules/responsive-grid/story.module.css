@@ -1,0 +1,6 @@
+.gridItem {
+  padding: 12px;
+  font-family: var(--text-body);
+  font-size: var(--body-medium);
+  line-height: var(--body-line-height);
+}

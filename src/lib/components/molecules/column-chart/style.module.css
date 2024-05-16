@@ -1,0 +1,11 @@
+.text {
+    font-family: var(--text-sans);
+    fill: var(--primary-text-color);
+}
+
+.axis {
+    fill: var(--primary-line-color);
+} 
+
+.bar {
+}

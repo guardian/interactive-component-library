@@ -1,0 +1,61 @@
+@mixin gridWithInternalBorders($numberOfColumns) {
+  display: grid;
+  grid-template-columns: repeat($numberOfColumns, 1fr);
+
+  &>* {
+    border-right: var(--grid-border);
+    border-bottom: var(--grid-border);
+
+    &:nth-child(#{$numberOfColumns}n + #{$numberOfColumns}) {
+      border-right: 0;
+    }
+
+    &:nth-child(#{$numberOfColumns}n+1):nth-last-child(-n+#{$numberOfColumns}),
+    &:nth-child(#{$numberOfColumns}n+1):nth-last-child(-n+#{$numberOfColumns})~* {
+      border-bottom: 0;
+    }
+  }
+}
+
+.grid {
+  --grid-border: 1px solid var(--border-divider-color);
+  display: grid;
+}
+
+.grid[data-grid-type="small"] {
+  @include mq($until: tablet) {
+    @include gridWithInternalBorders(2);
+  }
+
+  @include mq($from: tablet, $until: desktop) {
+    @include gridWithInternalBorders(3);
+  }
+
+  @include mq($from: desktop) {
+    @include gridWithInternalBorders(5);
+  }
+}
+
+.grid[data-grid-type="medium"] {
+  @include mq($until: tablet) {
+    @include gridWithInternalBorders(1);
+  }
+
+  @include mq($from: tablet, $until: desktop) {
+    @include gridWithInternalBorders(2);
+  }
+
+  @include mq($from: desktop) {
+    @include gridWithInternalBorders(3);
+  }
+}
+
+.grid[data-grid-type="large"] {
+  @include mq($until: desktop) {
+    @include gridWithInternalBorders(1);
+  }
+
+  @include mq($from: desktop) {
+    @include gridWithInternalBorders(2);
+  }
+}

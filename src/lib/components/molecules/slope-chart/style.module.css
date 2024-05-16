@@ -1,3 +1,11 @@
+.slopeChartContainer {
+  max-width: 300px;
+}
+
+.svg {
+  overflow: visible;
+}
+
 .line {
   stroke: #121212;
   stroke-width: 2;
@@ -10,6 +18,7 @@
 .label {
   font-family: var(--text-sans);
   font-size: var(--sans-xxsmall);
+  fill: var(--primary-text-color);
 }
 
 .y1Label {
@@ -21,7 +30,7 @@
 }
 
 .axis {
-  stroke: var(--news-grey-04);
+  stroke: var(--primary-line-color);
   stroke-width: 1;
 }
 

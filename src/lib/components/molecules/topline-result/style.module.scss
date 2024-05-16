@@ -1,0 +1,109 @@
+.toplineResult {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+
+  .primaryname {
+    color: var(--primary-text-color);
+    font-family: var(--text-headline);
+    font-size: var(--headline-xxxsmall);
+    line-height: var(--headline-line-height);
+    font-weight: 500;
+    font-style: italic;
+
+    &:before {
+      content: '';
+      height: 4px;
+      width: 2.2em;
+      border-radius: 50px;
+      display: block;
+    }
+  }
+
+  .secondaryname {
+    color: var(--primary-text-color);
+    font-family: var(--text-headline);
+    font-size: var(--headline-xxxsmall);
+    font-weight: 500;
+    line-height: var(--headline-line-height);
+  }
+
+
+  .name {
+    color: var(--primary-text-color);
+    font-family: var(--text-headline);
+    font-size: var(--headline-xxxsmall);
+    line-height: var(--headline-line-height);
+    font-weight: 500;
+
+    &:before {
+      content: '';
+      height: 4px;
+      width: 2.2em;
+      border-radius: 50px;
+      display: block;
+    }
+  }
+
+  .displayNumbers {
+    display: flex;
+    align-items: baseline;
+    margin-top: auto;
+    font-family: var(--text-titlepiece);
+    font-variant-numeric: lining-nums;
+    -moz-font-feature-settings: "lnum";
+    -webkit-font-feature-settings: "lnum";
+    font-feature-settings: "lnum";
+    line-height: var(--titlepiece-line-height);
+
+    .mainNumber {
+      color: var(--primary-text-color);
+      font-size: var(--titlepiece-xsmall);
+      white-space: nowrap;
+    }
+
+    .mainNumberSuffix {
+      font-size: var(--titlepiece-xxxsmall);
+    }
+
+    .secondaryNumber {
+      color: var(--secondary-text-color-alt);
+      font-size: var(--titlepiece-xxsmall);
+    }
+
+    >div {
+      flex-shrink: 0;
+    }
+  }
+
+  .displayRow {
+    flex-direction: row;
+
+    .mainNumber {
+      margin-right: var(--space-0);
+    }
+  }
+
+  .displayColumn {
+    flex-direction: column;
+  }
+
+}
+
+.topRow {
+  width: fit-content;
+  padding-bottom: 1px;
+
+  display: flex;
+  flex-direction: row;
+  column-gap: var(--space-1);
+  align-items: flex-end;
+
+  @include mq($from: desktop) {
+    border-bottom: none;
+  }
+
+  > * {
+    display: block;
+  }
+}
