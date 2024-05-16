@@ -17,7 +17,7 @@ export function Dropdown({ title, hint, options, onSelect }) {
   }, [options, selectedIndex])
   
   return (
-    <div>
+    <div className={styles.container}>
       <button className={styles.button} onClick={() => setExpanded((current) => !current)}>
         <img src={iconForSelectedOption} className={styles.icon} />
         <span className={styles.title}>{title}</span>
