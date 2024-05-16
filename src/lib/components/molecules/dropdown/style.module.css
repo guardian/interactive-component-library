@@ -39,6 +39,7 @@
   border-radius: 8px;
 
   position: absolute;
+  z-index: 99;
   margin-top: var(--space-2);
   padding: var(--space-2);
 
