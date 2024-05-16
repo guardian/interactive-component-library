@@ -8,17 +8,17 @@
     --ukip: #BB3B80;
     --snp: #F5DC00;
     --dup: #8B0000;
-    --alliance: #C9BB19;
+    --al: #C9BB19;
     --uup: #004975;
     --sdlp: #23B4A9;
-    --plaid: #135E58;
-    --sinnfein: #22874D;
+    --pc: #135E58;
+    --sf: #22874D;
     --reform: #3DBBE2;
     --ind: #333333;
     --other: #848484;
     --noc: #c8c8c8;
     --speaker: #767676;
-    --change: #333;
+    --tig: #333;
 
     --undeclared: #E7E7E7;
   }
@@ -32,16 +32,16 @@
     --ukip: #DC559D;
     --snp: #F5DC00;
     --dup: #B23C2D;
-    --alliance: #ab9f00;
+    --al: #ab9f00;
     --uup: #346896;
     --sdlp: #28b8ad;
-    --plaid: #37716b;
-    --sinnfein: #22874D;
+    --pc: #37716b;
+    --sf: #22874D;
     --reform: #3DBBE2;
     --ind: #A1A1A1;
     --other: #707070;
     --speaker: #707070;
-    --change: #494949;
+    --tig: #494949;
 
     --undeclared: #494949;
   
@@ -77,8 +77,8 @@
     background-color: var(--dup) !important;
 }
 
-.bg-color--alliance {
-    background-color: var(--alliance) !important;
+.bg-color--al {
+    background-color: var(--al) !important;
 }
 
 .bg-color--uup {
@@ -89,12 +89,12 @@
     background-color: var(--sdlp) !important;
 }
 
-.bg-color--plaid {
-    background-color: var(--plaid) !important;
+.bg-color--pc {
+    background-color: var(--pc) !important;
 }
 
-.bg-color--sinnfein {
-    background-color: var(--sinnfein) !important;
+.bg-color--sf {
+    background-color: var(--sf) !important;
 }
 
 .bg-color--reform {
@@ -113,8 +113,8 @@
     background-color: var(--speaker) !important;
 }
 
-.bg-color--change {
-    background-color: var(--change) !important;
+.bg-color--tig {
+    background-color: var(--tig) !important;
 }
 
 .bg-color--undeclared {
@@ -158,8 +158,8 @@
     fill: var(--dup) !important;
 }
 
-.fill-color--alliance {
-    fill: var(--alliance) !important;
+.fill-color--al {
+    fill: var(--al) !important;
 }
 
 .fill-color--uup {
@@ -170,12 +170,12 @@
     fill: var(--sdlp) !important;
 }
 
-.fill-color--plaid {
-    fill: var(--plaid) !important;
+.fill-color--pc {
+    fill: var(--pc) !important;
 }
 
-.fill-color--sinnfein {
-    fill: var(--sinnfein) !important;
+.fill-color--sf {
+    fill: var(--sf) !important;
 }
 
 .fill-color--reform {
@@ -194,8 +194,8 @@
     fill: var(--speaker) !important;
 }
 
-.fill-color--change {
-    fill: var(--change) !important;
+.fill-color--tig {
+    fill: var(--tig) !important;
 }
 
 .fill-color--undeclared {
@@ -236,8 +236,8 @@
     stop-color: var(--dup) !important;
 }
 
-.stop-color--alliance {
-    stop-color: var(--alliance) !important;
+.stop-color--al {
+    stop-color: var(--al) !important;
 }
 
 .stop-color--uup {
@@ -248,12 +248,12 @@
     stop-color: var(--sdlp) !important;
 }
 
-.stop-color--plaid {
-    stop-color: var(--plaid) !important;
+.stop-color--pc {
+    stop-color: var(--pc) !important;
 }
 
-.stop-color--sinnfein {
-    stop-color: var(--sinnfein) !important;
+.stop-color--sf {
+    stop-color: var(--sf) !important;
 }
 
 .stop-color--reform {
@@ -272,8 +272,8 @@
     stop-color: var(--speaker) !important;
 }
 
-.stop-color--change {
-    stop-color: var(--change) !important;
+.stop-color--tig {
+    stop-color: var(--tig) !important;
 }
 
 .stop-color--undeclared {
@@ -316,8 +316,8 @@
     stroke: var(--dup) !important;
 }
 
-.stroke-color--alliance {
-    stroke: var(--alliance) !important;
+.stroke-color--al {
+    stroke: var(--al) !important;
 }
 
 .stroke-color--uup {
@@ -329,12 +329,12 @@
 }
 
 
-.stroke-color--plaid {
-    stroke: var(--plaid) !important;
+.stroke-color--pc {
+    stroke: var(--pc) !important;
 }
 
-.stroke-color--sinnfein {
-    stroke: var(--sinnfein) !important;
+.stroke-color--sf {
+    stroke: var(--sf) !important;
 }
 
 .stroke-color--reform {
@@ -353,8 +353,8 @@
     stroke: var(--speaker) !important;
 }
 
-.stroke-color--change {
-    stroke: var(--change) !important;
+.stroke-color--tig {
+    stroke: var(--tig) !important;
 }
 
 .stroke-color--undeclared {
@@ -395,8 +395,8 @@
     color: var(--dup) !important; 
 }
 
-.color--alliance {
-    color: var(--alliance) !important; 
+.color--al {
+    color: var(--al) !important; 
 }
 
 .color--uup {
@@ -407,12 +407,12 @@
     color: var(--sdlp) !important; 
 }
 
-.color--plaid {
-    color: var(--plaid) !important; 
+.color--pc {
+    color: var(--pc) !important; 
 }
 
-.color--sinnfein {
-    color: var(--sinnfein) !important; 
+.color--sf {
+    color: var(--sf) !important; 
 }
 
 .color--reform {
@@ -431,8 +431,8 @@
     color: var(--speaker) !important; 
 }
 
-.color--change {
-    color: var(--change) !important; 
+.color--tig {
+    color: var(--tig) !important; 
 }
 
 .color--undeclared {
@@ -471,8 +471,8 @@
     border-color: var(--dup) !important;
 }
 
-.border-color--alliance {
-    border-color: var(--alliance) !important;
+.border-color--al {
+    border-color: var(--al) !important;
 }
 
 .border-color--uup {
@@ -483,12 +483,12 @@
     border-color: var(--sdlp) !important;
 }
 
-.border-color--plaid {
-    border-color: var(--plaid) !important;
+.border-color--pc {
+    border-color: var(--pc) !important;
 }
 
-.border-color--sinnfein {
-    border-color: var(--sinnfein) !important;
+.border-color--sf {
+    border-color: var(--sf) !important;
 }
 
 .border-color--reform {
@@ -507,8 +507,8 @@
     border-color: var(--speaker) !important;
 }
 
-.border-color--change {
-    border-color: var(--change) !important;
+.border-color--tig {
+    border-color: var(--tig) !important;
 }
 
 
@@ -566,9 +566,9 @@
     }
 }
 
-.before-color--alliance {
+.before-color--al {
     &:before {
-        background-color: var(--alliance) !important;
+        background-color: var(--al) !important;
     }
 }
 
@@ -584,15 +584,15 @@
     }
 }
 
-.before-color--plaid {
+.before-color--pc {
     &:before {
-        background-color: var(--plaid) !important;
+        background-color: var(--pc) !important;
     }
 }
 
-.before-color--sinnfein {
+.before-color--sf {
     &:before {
-        background-color: var(--sinnfein) !important;
+        background-color: var(--sf) !important;
     }
 }
 
@@ -620,9 +620,9 @@
     }
 }
 
-.before-color--change {
+.before-color--tig {
     &:before {
-        background-color: var(--change) !important;
+        background-color: var(--tig) !important;
     }
 }
 
