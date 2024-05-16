@@ -2,3 +2,7 @@
   stroke: var(--primary-bg-color);
   stroke-width: 1px;
 }
+
+.container {
+  width: 100%;
+}
