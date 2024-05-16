@@ -1,16 +1,21 @@
 import defaultStyles from "./style.module.css"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 
+export const WaffleType = {
+  circle: 'circle',
+  square: 'square',
+}
 
-const renderUnit = (squares, attributes) => squares ? <rect {...attributes} /> : <circle {...attributes} />
+const WaffleUnit = ({ type, attributes }) => type === WaffleType.square ? <rect {...attributes} /> : <circle {...attributes} />
 
-export const Waffle = ({ units, rows, total, squares = false, abbreviationAccessor = 'party', onMouseOver, paddingTop, showHalfLine, styles }) => {
-  //units is an array of objects with the following structure: { [abbreviationAccessor]: 'A' }.
+export const Waffle = ({ units, numberOfRows, type = WaffleType.circle, idAccessor = 'party', onMouseOver, paddingTop, showHalfLine, styles }) => {
+  //units is an array of objects with the following structure: { [idAccessor]: 'A' }.
   const width = 1300
-  const columns = Math.ceil(total / rows)
+  const total = units.length
+  const columns = Math.ceil(total / numberOfRows)
   const unitWidth = width / columns
   const unitHeight = unitWidth
-  const height = rows * unitHeight + paddingTop
+  const height = numberOfRows * unitHeight + paddingTop
   
   styles = mergeStyles(defaultStyles, styles)
 
@@ -19,11 +24,11 @@ export const Waffle = ({ units, rows, total, squares = false, abbreviationAccess
       <g>
         {
           units.map((unit, j) => {
-            const attributes = squares ?
-            { onMouseOver: e => onMouseOver(unit, e), class: `${styles.unit} fill-color--${unit[abbreviationAccessor]}`, height: unitHeight, width: unitWidth, x: unitWidth * Math.floor(j / rows), y: unitHeight * (j % rows) + paddingTop} :
-            { onMouseOver: e => onMouseOver(unit, e), class: `${styles.unit} fill-color--${unit[abbreviationAccessor]}`, r: unitWidth / 2, transform: `translate(${unitWidth * Math.floor(j / rows) + unitWidth / 2}, ${unitHeight * (j % rows) + unitHeight / 2 + paddingTop})` }
+            const attributes = type === WaffleType.square ?
+            { onMouseOver: e => onMouseOver(unit, e), class: `${styles.unit} fill-color--${unit[idAccessor]}`, height: unitHeight, width: unitWidth, x: unitWidth * Math.floor(j / numberOfRows), y: unitHeight * (j % numberOfRows) + paddingTop} :
+            { onMouseOver: e => onMouseOver(unit, e), class: `${styles.unit} fill-color--${unit[idAccessor]}`, r: unitWidth / 2, transform: `translate(${unitWidth * Math.floor(j / numberOfRows) + unitWidth / 2}, ${unitHeight * (j % numberOfRows) + unitHeight / 2 + paddingTop})` }
 
-            return renderUnit(squares, attributes)
+            return <WaffleUnit key={`wu-${j}`} type={type} attributes={attributes} />
           })
         }
       </g>

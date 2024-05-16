@@ -1,4 +1,4 @@
-import { Waffle } from '.'
+import { Waffle, WaffleType } from '.'
 
 const meta = {
   title: 'Particles/Waffle',
@@ -16,28 +16,26 @@ const summary = {
   undeclared: 19
 }
 
-
+// the output of the following line is: [{party: 'lab'}, {party: 'lab'}, ... {party: 'con'} ...]
 const partySeats = Object.keys(summary).map(party => Array(summary[party]).fill({ party })).flat()
+
 const args = {
   units: partySeats,
-  rows: 5,
-  total: 650, 
-  abbreviationAccessor:'party',
+  numberOfRows: 5,
+  idAccessor:'party',
   paddingTop: 16,
   onMouseOver: (a, b) => console.log(a, b),
   showHalfLine: true
 }
 
-console.log(partySeats)
 
-
-export const Default = {
+export const Circles = {
   args,
-  render: (args) => <Waffle {...args} squares={false} />,
+  render: (args) => <Waffle {...args} type={WaffleType.circle} />,
 }
 
 export const Squares = {
   args,
-  render: (args) => <Waffle {...args} squares={true} />,
+  render: (args) => <Waffle {...args} type={WaffleType.square} />,
 }
 
