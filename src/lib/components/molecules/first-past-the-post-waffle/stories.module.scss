@@ -1,0 +1,25 @@
+.line {
+    height: 100%;
+    width: 1px;
+    left: calc(50% - 0.5px);
+    background-color: var(--primary-text-color);
+    font-size: 14px;
+    margin-top: 0;
+    position: absolute;
+    bottom: 3px;
+    z-index: 2;
+
+    &:before {
+      content: "326 for a majority";
+      font-family: var(--text-sans);
+      line-height: var(--line-height-regular);
+      font-size: var(--sans-small);
+      color: var(--primary-text-color);
+      position: absolute;
+      width: 120px;
+      transform: translate(-60px);
+      display: flex;
+      justify-content: space-around;
+      top: -20px;
+    }
+}

@@ -1,4 +1,5 @@
 import { Waffle, WaffleType } from '.'
+import styles from './stories.module.css'
 
 // this should also be the sort order, from bigger party to smaller with undeclared at the end
 const summary = {
@@ -10,7 +11,7 @@ const summary = {
   undeclared: 19
 }
 
-// the output of the following line is: [{party: 'lab'}, {party: 'lab'}, ... {party: 'con'} ...]
+// the output of the following line is: [{party: 'lab', class: fill-color-lab}, ...]
 const partySeats = Object.keys(summary)
   .map(party => Array(summary[party]).fill({ party, class: `fill-color--${party}` }))
   .flat()
@@ -22,9 +23,7 @@ const meta = {
     units: partySeats,
     numberOfRows: 5,
     idAccessor: 'party',
-    paddingTop: 16,
     onMouseOver: (a, b) => console.log(a, b),
-    showHalfLine: true,
     type: WaffleType.circle
   }
 }

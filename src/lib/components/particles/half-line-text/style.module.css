@@ -1,6 +1,0 @@
-.text {
-  text-anchor: middle;
-  alignment-baseline: hanging;
-  font-family: var(--text-sans);
-  color: var(--primary-text-color);
-}

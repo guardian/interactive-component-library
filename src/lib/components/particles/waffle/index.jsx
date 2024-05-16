@@ -10,7 +10,7 @@ export const WaffleType = {
 
 const WaffleUnit = ({ type, attributes }) => type === WaffleType.square ? <rect {...attributes} /> : <circle {...attributes} />
 
-export const Waffle = ({ units, numberOfRows, type = WaffleType.circle, idAccessor = 'party', onMouseOver, paddingTop, showHalfLine, styles }) => {
+export const Waffle = ({ units, numberOfRows, type = WaffleType.circle, idAccessor, onMouseOver, styles }) => {
 
   const containerRef = useRef()
   const containerSize = useContainerSize(containerRef)
@@ -19,11 +19,10 @@ export const Waffle = ({ units, numberOfRows, type = WaffleType.circle, idAccess
   const columns = Math.ceil(total / numberOfRows)
   const unitWidth = width / columns
   const unitHeight = unitWidth
-  const height = numberOfRows * unitHeight + paddingTop
+  const height = numberOfRows * unitHeight
   
   styles = mergeStyles(defaultStyles, styles)
 
-  
   return (
     <div ref={containerRef} className={styles.container}>
       { containerSize &&
@@ -41,7 +40,7 @@ export const Waffle = ({ units, numberOfRows, type = WaffleType.circle, idAccess
                     height: unitHeight,
                     width: unitWidth,
                     x: unitWidth * Math.floor(j / numberOfRows),
-                    y: unitHeight * (j % numberOfRows) + paddingTop
+                    y: unitHeight * (j % numberOfRows)
                   }
                 } else {
                   attributes = {
@@ -49,7 +48,7 @@ export const Waffle = ({ units, numberOfRows, type = WaffleType.circle, idAccess
                     onMouseOver: e => onMouseOver(unit, e),
                     class: `${styles.unit} ${unit.class}`,
                     r: unitWidth / 2,
-                    transform: `translate(${unitWidth * Math.floor(j / numberOfRows) + unitWidth / 2}, ${unitHeight * (j % numberOfRows) + unitHeight / 2 + paddingTop})`
+                    transform: `translate(${unitWidth * Math.floor(j / numberOfRows) + unitWidth / 2}, ${unitHeight * (j % numberOfRows) + unitHeight / 2 })`
                   }
                 }
 
@@ -57,11 +56,6 @@ export const Waffle = ({ units, numberOfRows, type = WaffleType.circle, idAccess
               })
             }
           </g>
-          {showHalfLine &&
-            <g>
-              <line class={styles.line} x1={width / 2} x2={width / 2} y1={0} y2={height} stroke='#121212' />
-            </g>
-          }
         </svg>
       }
     </div>
