@@ -67,3 +67,44 @@ export const Default = {
     ],
   },
 }
+
+export const OnlyTitles = {
+  args: {
+    icon: iconProportional,
+    title: 'Change view',
+    options: [
+      {
+        title: 'Proportional',
+        icon: iconProportional,
+      },
+      {
+        title: 'Left',
+        icon: iconLeft,
+      },
+      {
+        title: 'SD',
+        icon: iconSD,
+      },
+      {
+        title: 'Greens/EFA',
+        icon: iconGreens,
+      },
+      {
+        title: 'Renew',
+        icon: iconRenew,
+      },
+      {
+        title: 'EPP',
+        icon: iconEPP,
+      },
+      {
+        title: 'ECR',
+        icon: iconECR,
+      },
+      {
+        title: 'ID',
+        icon: iconID,
+      },
+    ],
+  },
+}
