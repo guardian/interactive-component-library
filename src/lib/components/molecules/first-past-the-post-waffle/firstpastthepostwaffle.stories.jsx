@@ -32,13 +32,30 @@ const args = {
   lineOverHang: 15
 }
 
+const longerLineArgs = {
+  lineOverHang: 30
+}
+
 export const Default = {
   args,
   render: (args) => (
     <FirstPastThePostWaffle {...args}>
       {{
         waffle: <Waffle {...waffleArgs} />,
-        halfLineText: '326 to win',
+        halfLineText: <p>326 to win</p>,
+      }}
+    </FirstPastThePostWaffle>
+  )
+}
+
+
+export const LongerLine = {
+  args: longerLineArgs,
+  render: (args) => (
+    <FirstPastThePostWaffle {...args}>
+      {{
+        waffle: <Waffle {...waffleArgs} />,
+        halfLineText: <p>326 to win</p>,
       }}
     </FirstPastThePostWaffle>
   )
