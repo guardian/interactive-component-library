@@ -1,5 +1,4 @@
 import { Waffle, WaffleType } from '.'
-import styles from './stories.module.css'
 
 // this should also be the sort order, from bigger party to smaller with undeclared at the end
 const summary = {

@@ -1,3 +1,23 @@
 .wrapper {
   position: relative;
 }
+
+.line {
+    height: calc(100% - 3px - 20px);
+    width: 1px;
+    left: calc(50% - 0.5px);
+    background-color: var(--primary-text-color);
+    position: absolute;
+    bottom: 3px;
+    z-index: 2;
+}
+
+.halfLineText {
+  width: 100%;
+  text-align: center;
+  font-family: var(--text-sans);
+  line-height: var(--line-height-regular);
+  font-size: var(--sans-xsmall);
+  color: var(--primary-text-color);
+  position: relative;
+}

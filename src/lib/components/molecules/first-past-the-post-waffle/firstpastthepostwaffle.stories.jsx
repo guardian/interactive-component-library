@@ -1,6 +1,5 @@
 import { FirstPastThePostWaffle } from '.'
 import { Waffle, WaffleType } from '$particles'
-import styles from './stories.module.scss'
 
 export default {
   title: 'Molecules/FPTPWaffle',
@@ -30,7 +29,7 @@ const waffleArgs = {
 }
 
 const args = {
-
+  lineOverHang: 15
 }
 
 export const Default = {
@@ -39,7 +38,7 @@ export const Default = {
     <FirstPastThePostWaffle {...args}>
       {{
         waffle: <Waffle {...waffleArgs} />,
-        halfLine: <div class={styles.line}>&nbsp;</div>
+        halfLineText: '326 to win',
       }}
     </FirstPastThePostWaffle>
   )
