@@ -13,6 +13,17 @@ export function Modal({ visible = false, children, onClickOutside }) {
     },
     [onClickOutside, visible],
   )
+  
+  useEffect(() => {
+    if (visible) {
+      window.addEventListener("scroll", onClick, { once: true });
+    }
+    return () => {
+      if (visible) {
+        window.removeEventListener("scroll", onClick);
+      }
+    };
+  }, [onClick, visible]);
 
   return createPortal(
     <CSSTransition in={visible} duration={300} classNames={styles}>
