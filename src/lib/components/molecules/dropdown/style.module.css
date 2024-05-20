@@ -1,3 +1,8 @@
+.container {
+  position: relative;
+  display: inline-block;
+}
+
 .button {
   display: flex;
   flex-direction: row;
@@ -27,12 +32,14 @@
 }
 
 .popout {
+  min-width: 100%;
   background-color: var(--secondary-bg-color);
 
   border: 1px solid var(--border-divider-color);
   border-radius: 8px;
 
   position: absolute;
+  z-index: 99;
   margin-top: var(--space-2);
   padding: var(--space-2);
 
@@ -59,6 +66,7 @@
   border: 1px solid var(--border-divider-color);
   border-radius: 8px;
   padding: var(--space-1) var(--space-2);
+  padding-right: 24px;
 
   background-color: var(--primary-bg-color);
 }
