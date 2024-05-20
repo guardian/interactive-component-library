@@ -1,5 +1,5 @@
 import { CSSTransition } from 'preact-transitioning'
-import { useCallback, useRef } from 'preact/hooks'
+import { useCallback, useRef, useEffect } from 'preact/hooks'
 import { createPortal } from 'preact/compat'
 import styles from './style.module.css'
 
