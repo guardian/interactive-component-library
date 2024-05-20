@@ -24,6 +24,7 @@ export const Default = {
     icon: iconProportional,
     title: "Change view",
     collapseOnSelect: false,
+    expandByDefault: true,
     options: [
       {
         title: "Proportional",

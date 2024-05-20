@@ -2,8 +2,8 @@ import { useState, useCallback, useMemo } from "preact/hooks"
 import { Chevron } from "$particles"
 import styles from "./style.module.css"
 
-export function Dropdown({ title, hint, options, onSelect, collapseOnSelect = false }) {
-  const [expanded, setExpanded] = useState(true)
+export function Dropdown({ title, hint, options, onSelect, collapseOnSelect = false, expandByDefault = true }) {
+  const [expanded, setExpanded] = useState(expandByDefault)
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   const onOptionClick = useCallback(
