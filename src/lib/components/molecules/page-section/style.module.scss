@@ -28,7 +28,7 @@
     @include mq($from: leftCol) {
         transform: translate(-180px);
         width: calc(100% + 200px);
-        //background-color: transparent;
+        background-color: transparent;
     }
 
     @include mq($from: wide) {
