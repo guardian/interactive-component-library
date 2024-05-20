@@ -1,27 +1,31 @@
-import { useState, useCallback, useMemo } from 'preact/hooks'
-import { Chevron } from '$particles'
-import styles from './style.module.css'
+import { useState, useCallback, useMemo } from "preact/hooks"
+import { Chevron } from "$particles"
+import styles from "./style.module.css"
 
-export function Dropdown({ title, hint, options, onSelect }) {
+export function Dropdown({ title, hint, options, onSelect, collapseOnSelect = false }) {
   const [expanded, setExpanded] = useState(true)
   const [selectedIndex, setSelectedIndex] = useState(0)
 
-  const onOptionClick = useCallback((option, index) => {
-    setSelectedIndex(index)
-    if (onSelect) onSelect(option, index)
-  }, [onSelect])
+  const onOptionClick = useCallback(
+    (option, index) => {
+      setSelectedIndex(index)
+      if (onSelect) onSelect(option, index)
+      if (collapseOnSelect) setExpanded(false)
+    },
+    [onSelect],
+  )
 
   const iconForSelectedOption = useMemo(() => {
     const selectedOption = options[selectedIndex]
     return selectedOption.icon
   }, [options, selectedIndex])
-  
+
   return (
     <div className={styles.container}>
       <button className={styles.button} onClick={() => setExpanded((current) => !current)}>
         <img src={iconForSelectedOption} className={styles.icon} />
         <span className={styles.title}>{title}</span>
-        <Chevron active={true} size="large" direction={expanded ? 'up' : 'down'} />
+        <Chevron active={true} size="large" direction={expanded ? "up" : "down"} />
       </button>
 
       <div className={styles.popout} style={{ visibility: expanded ? "visible" : "hidden" }}>
