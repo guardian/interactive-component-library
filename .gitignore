@@ -28,3 +28,6 @@ storybook-static
 
 # Testing
 coverage
+
+# Vite
+vite.config.*.timestamp-*
