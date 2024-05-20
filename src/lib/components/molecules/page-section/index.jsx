@@ -15,6 +15,7 @@ export const PageSection = forwardRef(
       setMinHeight(headerElement.offsetHeight)
     }, [children])
 
+
     useEffect(() => {
       if (visible) {
         window.addEventListener("scroll", onClick, { once: true });
