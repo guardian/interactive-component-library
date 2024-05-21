@@ -26,3 +26,7 @@
   fill: var(--primary-text-color);
   pointer-events: none;
 }
+
+.button:enabled {
+  cursor: pointer;
+}

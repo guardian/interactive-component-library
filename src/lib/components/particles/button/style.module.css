@@ -13,14 +13,18 @@
   border-radius: 999px;
 }
 
-.button[data-type='regular'] > .buttonInner {
+.button[data-type="regular"] > .buttonInner {
   padding: 8px 12px;
 }
 
-.button[data-type='small'] > .buttonInner {
+.button[data-type="small"] > .buttonInner {
   padding: 4px 12px;
 }
 
 .button:hover:enabled > .buttonInner {
   background-color: var(--news-grey-05);
+}
+
+.button:enabled {
+  cursor: pointer;
 }

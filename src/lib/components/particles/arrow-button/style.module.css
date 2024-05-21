@@ -33,3 +33,7 @@
 .button:disabled .icon :global(path) {
   fill: var(--news-grey-05);
 }
+
+.button:enabled {
+  cursor: pointer;
+}
