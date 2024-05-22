@@ -5,6 +5,7 @@
     --left-01: #e3b0a3;
     --left-02: #bc634f;
     --sd: #C70000;
+    --sd-00:#ffffff;
     --sd-01:#fbb8a6;
     --sd-02:#e77054;
     --greenefa: #39A566;
@@ -28,6 +29,8 @@
     --other: #a0a0a0;
 
     --undeclared: #ededed;
+
+    --declared: #ffffff;
 
   }
   
@@ -61,6 +64,8 @@
 
     --undeclared: #ededed;
 
+    --declared: #bababa;
+
   }
   
 /* BACKGROUND-COLOR -------------------------------------------- */ 
@@ -76,6 +81,9 @@
 }
 .bg-color--sd {
     background-color: var(--sd) !important;
+}
+.bg-color--sd--00 {
+    background-color: var(--sd-01) !important;
 }
 .bg-color--sd--01 {
     background-color: var(--sd-01) !important;
@@ -145,6 +153,9 @@
 
 .bg-color--undeclared {
     background-color: var(--undeclared) !important;
+}
+.bg-color--declared {
+    background-color: var(--declared) !important;
 }
 
 
