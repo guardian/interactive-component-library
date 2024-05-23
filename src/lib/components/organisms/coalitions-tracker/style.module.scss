@@ -12,7 +12,7 @@
 }
 
 .coalition {
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-0);
 }
 
 .title,
@@ -50,7 +50,8 @@
   line-height: var(--sans-line-height);
 }
 
-.thresholdDot, .thresholdLine {
+.thresholdDot,
+.thresholdLine {
   background: var(--primary-text-color);
 }
 
