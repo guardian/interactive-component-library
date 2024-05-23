@@ -1,633 +1,621 @@
-
 @mixin default-party-colors-uk {
-    
-    --con: #0077B6;
-    --lab: #C70000;
-    --libdem: #E05E00;
-    --green: #39A566;
-    --ukip: #BB3B80;
-    --snp: #F5DC00;
-    --dup: #8B0000;
-    --al: #C9BB19;
-    --uup: #004975;
-    --sdlp: #23B4A9;
-    --pc: #135E58;
-    --sf: #22874D;
-    --reform: #3DBBE2;
-    --ind: #333333;
-    --other: #848484;
-    --noc: #c8c8c8;
-    --speaker: #767676;
-    --tig: #333;
+  --con: #0077b6;
+  --lab: #c70000;
+  --libdem: #e05e00;
+  --green: #39a566;
+  --ukip: #bb3b80;
+  --snp: #f5dc00;
+  --dup: #8b0000;
+  --alliance: #c9bb19;
+  --alba: #2f3192;
+  --uup: #004975;
+  --sdlp: #23b4a9;
+  --pc: #135e58;
+  --sf: #22874d;
+  --reform: #3dbbe2;
+  --ind: #333333;
+  --other: #848484;
+  --speaker: #848484;
+  --noc: #c8c8c8;
 
-    --undeclared: #E7E7E7;
-  }
-  
+  --undeclared: #e7e7e7;
+}
+
 @mixin dark-mode-party-colors-uk {
+  --con: #009ae1;
+  --lab: #dc2e1c;
+  --libdem: #ff7f0f;
+  --green: #39a566;
+  --ukip: #dc559d;
+  --snp: #f5dc00;
+  --alba: #3c3eb9;
+  --dup: #b23c2d;
+  --alliance: #ab9f00;
+  --uup: #346896;
+  --sdlp: #28b8ad;
+  --pc: #37716b;
+  --sf: #22874d;
+  --reform: #3dbbe2;
+  --ind: #a1a1a1;
+  --noc: #333333;
+  --other: #707070;
+  --speaker: #707070;
 
-    --con: #009ae1;
-    --lab: #dc2e1c;
-    --libdem: #FF7F0F;
-    --green: #39A566;
-    --ukip: #DC559D;
-    --snp: #F5DC00;
-    --dup: #B23C2D;
-    --al: #ab9f00;
-    --uup: #346896;
-    --sdlp: #28b8ad;
-    --pc: #37716b;
-    --sf: #22874D;
-    --reform: #3DBBE2;
-    --ind: #A1A1A1;
-    --other: #707070;
-    --speaker: #707070;
-    --tig: #494949;
+  --undeclared: #494949;
+}
 
-    --undeclared: #494949;
-  
-  }
-  
-/* BACKGROUND-COLOR -------------------------------------------- */ 
+/* BACKGROUND-COLOR -------------------------------------------- */
 
 .bg-color--con {
-    background-color: var(--con) !important;
+  background-color: var(--con) !important;
 }
 
 .bg-color--lab {
-    background-color: var(--lab) !important;
+  background-color: var(--lab) !important;
 }
 
 .bg-color--libdem {
-    background-color: var(--libdem) !important;
+  background-color: var(--libdem) !important;
 }
 
 .bg-color--green {
-    background-color: var(--green) !important;
+  background-color: var(--green) !important;
 }
 
 .bg-color--ukip {
-    background-color: var(--ukip) !important;
+  background-color: var(--ukip) !important;
 }
 
 .bg-color--snp {
-    background-color: var(--snp) !important;
+  background-color: var(--snp) !important;
 }
 
 .bg-color--dup {
-    background-color: var(--dup) !important;
+  background-color: var(--dup) !important;
 }
 
-.bg-color--al {
-    background-color: var(--al) !important;
+.bg-color--alliance {
+  background-color: var(--alliance) !important;
+}
+
+.bg-color--alba {
+  background-color: var(--alba) !important;
 }
 
 .bg-color--uup {
-    background-color: var(--uup) !important;
+  background-color: var(--uup) !important;
 }
 
 .bg-color--sdlp {
-    background-color: var(--sdlp) !important;
+  background-color: var(--sdlp) !important;
 }
 
 .bg-color--pc {
-    background-color: var(--pc) !important;
+  background-color: var(--pc) !important;
 }
 
 .bg-color--sf {
-    background-color: var(--sf) !important;
+  background-color: var(--sf) !important;
 }
 
 .bg-color--reform {
-    background-color: var(--reform) !important;
+  background-color: var(--reform) !important;
 }
 
 .bg-color--ind {
-    background-color: var(--ind) !important;
+  background-color: var(--ind) !important;
 }
 
 .bg-color--other {
-    background-color: var(--other) !important;
+  background-color: var(--other) !important;
 }
 
 .bg-color--speaker {
-    background-color: var(--speaker) !important;
-}
-
-.bg-color--tig {
-    background-color: var(--tig) !important;
+  background-color: var(--speaker) !important;
 }
 
 .bg-color--undeclared {
-    background-color: var(--undeclared) !important;
+  background-color: var(--undeclared) !important;
 }
 
 .bg-color--noc {
-    background-color: var(--noc) !important;
+  background-color: var(--noc) !important;
 }
 
-
-
-  
-/* FILL ----------------------------------------------------------- */ 
+/* FILL ----------------------------------------------------------- */
 
 .fill-color--con {
-    fill: var(--con) !important;
+  fill: var(--con) !important;
 }
 
 .fill-color--lab {
-    fill: var(--lab) !important;
+  fill: var(--lab) !important;
 }
 
 .fill-color--libdem {
-    fill: var(--libdem) !important;
+  fill: var(--libdem) !important;
 }
 
 .fill-color--green {
-    fill: var(--green) !important;
+  fill: var(--green) !important;
 }
 
 .fill-color--ukip {
-    fill: var(--ukip) !important;
+  fill: var(--ukip) !important;
 }
 
 .fill-color--snp {
-    fill: var(--snp) !important;
+  fill: var(--snp) !important;
 }
 
 .fill-color--dup {
-    fill: var(--dup) !important;
+  fill: var(--dup) !important;
 }
 
-.fill-color--al {
-    fill: var(--al) !important;
+.fill-color--alliance {
+  fill: var(--alliance) !important;
+}
+
+.fill-color--alba {
+  fill: var(--alba) !important;
 }
 
 .fill-color--uup {
-    fill: var(--uup) !important;
+  fill: var(--uup) !important;
 }
 
 .fill-color--sdlp {
-    fill: var(--sdlp) !important;
+  fill: var(--sdlp) !important;
 }
 
 .fill-color--pc {
-    fill: var(--pc) !important;
+  fill: var(--pc) !important;
 }
 
 .fill-color--sf {
-    fill: var(--sf) !important;
+  fill: var(--sf) !important;
 }
 
 .fill-color--reform {
-    fill: var(--reform) !important;
+  fill: var(--reform) !important;
 }
 
 .fill-color--ind {
-    fill: var(--ind) !important;
+  fill: var(--ind) !important;
 }
 
 .fill-color--other {
-    fill: var(--other) !important;
+  fill: var(--other) !important;
 }
 
 .fill-color--speaker {
-    fill: var(--speaker) !important;
-}
-
-.fill-color--tig {
-    fill: var(--tig) !important;
+  fill: var(--speaker) !important;
 }
 
 .fill-color--undeclared {
-    fill: var(--undeclared) !important;
+  fill: var(--undeclared) !important;
 }
 
 .fill-color--noc {
-    fill: var(--noc) !important;
+  fill: var(--noc) !important;
 }
 
-/* STOP ----------------------------------------------------------- */ 
+/* STOP ----------------------------------------------------------- */
 
 .stop-color--con {
-    stop-color: var(--con) !important;
+  stop-color: var(--con) !important;
 }
 
 .stop-color--lab {
-    stop-color: var(--lab) !important;
+  stop-color: var(--lab) !important;
 }
 
 .stop-color--libdem {
-    stop-color: var(--libdem) !important;
+  stop-color: var(--libdem) !important;
 }
 
 .stop-color--green {
-    stop-color: var(--green) !important;
+  stop-color: var(--green) !important;
 }
 
 .stop-color--ukip {
-    stop-color: var(--ukip) !important;
+  stop-color: var(--ukip) !important;
 }
 
 .stop-color--snp {
-    stop-color: var(--snp) !important;
+  stop-color: var(--snp) !important;
 }
 
 .stop-color--dup {
-    stop-color: var(--dup) !important;
+  stop-color: var(--dup) !important;
 }
 
-.stop-color--al {
-    stop-color: var(--al) !important;
+.stop-color--alliance {
+  stop-color: var(--alliance) !important;
+}
+
+.stop-color--alba {
+  stop-color: var(--alba) !important;
 }
 
 .stop-color--uup {
-    stop-color: var(--uup) !important;
+  stop-color: var(--uup) !important;
 }
 
 .stop-color--sdlp {
-    stop-color: var(--sdlp) !important;
+  stop-color: var(--sdlp) !important;
 }
 
 .stop-color--pc {
-    stop-color: var(--pc) !important;
+  stop-color: var(--pc) !important;
 }
 
 .stop-color--sf {
-    stop-color: var(--sf) !important;
+  stop-color: var(--sf) !important;
 }
 
 .stop-color--reform {
-    stop-color: var(--reform) !important;
+  stop-color: var(--reform) !important;
 }
 
 .stop-color--ind {
-    stop-color: var(--ind) !important;
+  stop-color: var(--ind) !important;
 }
 
 .stop-color--other {
-    stop-color: var(--other) !important;
+  stop-color: var(--other) !important;
 }
 
 .stop-color--speaker {
-    stop-color: var(--speaker) !important;
-}
-
-.stop-color--tig {
-    stop-color: var(--tig) !important;
+  stop-color: var(--speaker) !important;
 }
 
 .stop-color--undeclared {
-    stop-color: var(--undeclared) !important;
+  stop-color: var(--undeclared) !important;
 }
 
 .stop-color--noc {
-    stop-color: var(--noc) !important;
+  stop-color: var(--noc) !important;
 }
 
-
-
-/* STROKE-COLOR --------------------------------------------------- */ 
+/* STROKE-COLOR --------------------------------------------------- */
 
 .stroke-color--con {
-    stroke: var(--con) !important;
+  stroke: var(--con) !important;
 }
 
 .stroke-color--lab {
-    stroke: var(--lab) !important;
+  stroke: var(--lab) !important;
 }
 
 .stroke-color--libdem {
-    stroke: var(--libdem) !important;
+  stroke: var(--libdem) !important;
 }
 
 .stroke-color--green {
-    stroke: var(--green) !important;
+  stroke: var(--green) !important;
 }
 
 .stroke-color--ukip {
-    stroke: var(--ukip) !important;
+  stroke: var(--ukip) !important;
 }
 
 .stroke-color--snp {
-    stroke: var(--snp) !important;
+  stroke: var(--snp) !important;
 }
 
 .stroke-color--dup {
-    stroke: var(--dup) !important;
+  stroke: var(--dup) !important;
 }
 
-.stroke-color--al {
-    stroke: var(--al) !important;
+.stroke-color--alliance {
+  stroke: var(--alliance) !important;
+}
+
+.stroke-color--alba {
+  stroke: var(--alba) !important;
 }
 
 .stroke-color--uup {
-    stroke: var(--uup) !important;
+  stroke: var(--uup) !important;
 }
 
 .stroke-color--sdlp {
-    stroke: var(--sdlp) !important;
+  stroke: var(--sdlp) !important;
 }
 
-
 .stroke-color--pc {
-    stroke: var(--pc) !important;
+  stroke: var(--pc) !important;
 }
 
 .stroke-color--sf {
-    stroke: var(--sf) !important;
+  stroke: var(--sf) !important;
 }
 
 .stroke-color--reform {
-    stroke: var(--reform) !important;
+  stroke: var(--reform) !important;
 }
 
 .stroke-color--ind {
-    stroke: var(--ind) !important;
+  stroke: var(--ind) !important;
 }
 
 .stroke-color--other {
-    stroke: var(--other) !important;
+  stroke: var(--other) !important;
 }
 
 .stroke-color--speaker {
-    stroke: var(--speaker) !important;
-}
-
-.stroke-color--tig {
-    stroke: var(--tig) !important;
+  stroke: var(--speaker) !important;
 }
 
 .stroke-color--undeclared {
-    stroke: var(--undeclared) !important;
+  stroke: var(--undeclared) !important;
 }
 
 .stroke-color--noc {
-    stroke: var(--noc) !important;
+  stroke: var(--noc) !important;
 }
 
-/* COLOR ----------------------------------------------------------- */ 
+/* COLOR ----------------------------------------------------------- */
 
 .color--con {
-    color: var(--con) !important; 
+  color: var(--con) !important;
 }
 
 .color--lab {
-    color: var(--lab) !important; 
+  color: var(--lab) !important;
 }
 
 .color--libdem {
-    color: var(--libdem) !important; 
+  color: var(--libdem) !important;
 }
 
 .color--green {
-    color: var(--green) !important; 
+  color: var(--green) !important;
 }
 
 .color--ukip {
-    color: var(--ukip) !important; 
+  color: var(--ukip) !important;
 }
 
 .color--snp {
-    color: var(--snp) !important; 
+  color: var(--snp) !important;
 }
 
 .color--dup {
-    color: var(--dup) !important; 
+  color: var(--dup) !important;
 }
 
-.color--al {
-    color: var(--al) !important; 
+.color--alliance {
+  color: var(--alliance) !important;
+}
+
+.color--alba {
+  color: var(--alba) !important;
 }
 
 .color--uup {
-    color: var(--uup) !important; 
+  color: var(--uup) !important;
 }
 
 .color--sdlp {
-    color: var(--sdlp) !important; 
+  color: var(--sdlp) !important;
 }
 
 .color--pc {
-    color: var(--pc) !important; 
+  color: var(--pc) !important;
 }
 
 .color--sf {
-    color: var(--sf) !important; 
+  color: var(--sf) !important;
 }
 
 .color--reform {
-    color: var(--reform) !important; 
+  color: var(--reform) !important;
 }
 
 .color--ind {
-    color: var(--ind) !important; 
+  color: var(--ind) !important;
 }
 
 .color--other {
-    color: var(--other) !important; 
+  color: var(--other) !important;
 }
 
 .color--speaker {
-    color: var(--speaker) !important; 
-}
-
-.color--tig {
-    color: var(--tig) !important; 
+  color: var(--speaker) !important;
 }
 
 .color--undeclared {
-    color: var(--undeclared) !important; 
+  color: var(--undeclared) !important;
 }
 
-
-
-/* BORDER-COLOR ----------------------------------------------------- */ 
+/* BORDER-COLOR ----------------------------------------------------- */
 
 .border-color--con {
-    border-color: var(--con) !important;
+  border-color: var(--con) !important;
 }
 
 .border-color--lab {
-    border-color: var(--lab) !important;
+  border-color: var(--lab) !important;
 }
 
 .border-color--libdem {
-    border-color: var(--libdem) !important;
+  border-color: var(--libdem) !important;
 }
 
 .border-color--green {
-    border-color: var(--green) !important;
+  border-color: var(--green) !important;
 }
 
 .border-color--ukip {
-    border-color: var(--ukip) !important;
+  border-color: var(--ukip) !important;
 }
 
 .border-color--snp {
-    border-color: var(--snp) !important;
+  border-color: var(--snp) !important;
 }
 
 .border-color--dup {
-    border-color: var(--dup) !important;
+  border-color: var(--dup) !important;
 }
 
-.border-color--al {
-    border-color: var(--al) !important;
+.border-color--alliance {
+  border-color: var(--alliance) !important;
+}
+
+.border-color--alba {
+  border-color: var(--alba) !important;
 }
 
 .border-color--uup {
-    border-color: var(--uup) !important;
+  border-color: var(--uup) !important;
 }
 
 .border-color--sdlp {
-    border-color: var(--sdlp) !important;
+  border-color: var(--sdlp) !important;
 }
 
 .border-color--pc {
-    border-color: var(--pc) !important;
+  border-color: var(--pc) !important;
 }
 
 .border-color--sf {
-    border-color: var(--sf) !important;
+  border-color: var(--sf) !important;
 }
 
 .border-color--reform {
-    border-color: var(--reform) !important;
+  border-color: var(--reform) !important;
 }
 
 .border-color--ind {
-    border-color: var(--ind) !important;
+  border-color: var(--ind) !important;
 }
 
 .border-color--other {
-    border-color: var(--other) !important;
+  border-color: var(--other) !important;
 }
 
 .border-color--speaker {
-    border-color: var(--speaker) !important;
+  border-color: var(--speaker) !important;
 }
-
-.border-color--tig {
-    border-color: var(--tig) !important;
-}
-
 
 .border-color--undeclared {
-    border-color: var(--undeclared) !important;
+  border-color: var(--undeclared) !important;
 }
 
 /* BEFORE-ELEMENT-COLOR ----------------------------------------------------- */
 
 .before-color--con {
-    &:before {
-        background-color: var(--con) !important;
-    }
+  &:before {
+    background-color: var(--con) !important;
+  }
 }
 
 .before-color--lab {
-    &:before {
-        background-color: var(--lab) !important;
-    }
+  &:before {
+    background-color: var(--lab) !important;
+  }
 }
 
 .before-color--libdem {
-    &:before {
-        background-color: var(--libdem) !important;
-    }
+  &:before {
+    background-color: var(--libdem) !important;
+  }
 }
 
 .before-color--lib-dem {
-    &:before {
-        background-color: var(--libdem) !important;
-    }
+  &:before {
+    background-color: var(--libdem) !important;
+  }
 }
 
 .before-color--green {
-    &:before {
-        background-color: var(--green) !important;
-    }
+  &:before {
+    background-color: var(--green) !important;
+  }
 }
 
 .before-color--ukip {
-    &:before {
-        background-color: var(--ukip) !important;
-    }
+  &:before {
+    background-color: var(--ukip) !important;
+  }
 }
 
 .before-color--snp {
-    &:before {
-        background-color: var(--snp) !important;
-    }
+  &:before {
+    background-color: var(--snp) !important;
+  }
 }
 
 .before-color--dup {
-    &:before {
-        background-color: var(--dup) !important;
-    }
+  &:before {
+    background-color: var(--dup) !important;
+  }
 }
 
-.before-color--al {
-    &:before {
-        background-color: var(--al) !important;
-    }
+.before-color--alliance {
+  &:before {
+    background-color: var(--alliance) !important;
+  }
+}
+
+.before-color--alba {
+  &:before {
+    background-color: var(--alba) !important;
+  }
 }
 
 .before-color--uup {
-    &:before {
-        background-color: var(--uup) !important;
-    }
+  &:before {
+    background-color: var(--uup) !important;
+  }
 }
 
 .before-color--sdlp {
-    &:before {
-        background-color: var(--sdlp) !important;
-    }
+  &:before {
+    background-color: var(--sdlp) !important;
+  }
 }
 
 .before-color--pc {
-    &:before {
-        background-color: var(--pc) !important;
-    }
+  &:before {
+    background-color: var(--pc) !important;
+  }
 }
 
 .before-color--sf {
-    &:before {
-        background-color: var(--sf) !important;
-    }
+  &:before {
+    background-color: var(--sf) !important;
+  }
 }
 
 .before-color--reform {
-    &:before {
-        background-color: var(--reform) !important;
-    }
+  &:before {
+    background-color: var(--reform) !important;
+  }
 }
 
 .before-color--ind {
-    &:before {
-        background-color: var(--ind) !important;
-    }
+  &:before {
+    background-color: var(--ind) !important;
+  }
 }
 
 .before-color--other {
-    &:before {
-        background-color: var(--other) !important;
-    }
+  &:before {
+    background-color: var(--other) !important;
+  }
 }
 
 .before-color--speaker {
-    &:before {
-        background-color: var(--speaker) !important;
-    }
-}
-
-.before-color--tig {
-    &:before {
-        background-color: var(--tig) !important;
-    }
+  &:before {
+    background-color: var(--speaker) !important;
+  }
 }
 
 .before-color--undeclared {
-    &:before {
-        background-color: var(--undeclared) !important;
-    }
+  &:before {
+    background-color: var(--undeclared) !important;
+  }
 }
