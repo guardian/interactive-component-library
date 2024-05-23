@@ -9,7 +9,7 @@ export function preventOverlap(labelPositions, iteration = 0, labelSize = 12, co
     const overlap = previousElement[coordinate] - (element[coordinate] - labelSize)
     if (overlap < 0) {
       // no overlap, continue
-      return preventOverlap(labelPositions, iteration + 1, labelSize, coordinate, moveBothLabels)
+      continue
     }
 
     if (moveBothLabels) {
