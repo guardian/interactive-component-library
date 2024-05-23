@@ -19,12 +19,14 @@ export function preventOverlap(labelPositions, iteration = 0, labelSize = 12, co
       previousElement[coordinate] -= overlap
     }
 
-    if (totalOverlap > 0 && iteration < maxIterations) {
-      return preventOverlap(labelPositions, iteration + 1, labelSize, coordinate, moveBothLabels)
-    }
-
-    return labelPositions
+    totalOverlap += overlap
   }
+
+  if (totalOverlap > 0 && iteration < maxIterations) {
+    return preventOverlap(labelPositions, iteration + 1, labelSize, coordinate, moveBothLabels)
+  }
+
+  return labelPositions
 }
 
 export function uniqueBy(array, key) {
@@ -33,13 +35,11 @@ export function uniqueBy(array, key) {
 
 export function positionLabels(labels, labelSize = 12, coordinate = "y", moveBothLabels = true) {
   labels = uniqueBy(labels, "value")
-
   // sort by coordinate-position
   labels.sort((a, b) => a[coordinate] - b[coordinate])
 
   return preventOverlap(labels, 0, labelSize, coordinate, moveBothLabels)
 }
-
 // same as this one https://gist.github.com/vectorsize/7031902
 export function scaleLinear(domain, range) {
   const [domainMin, domainMax] = domain

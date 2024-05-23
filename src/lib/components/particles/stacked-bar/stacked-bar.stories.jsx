@@ -82,6 +82,10 @@ export const HangingLabels = {
     height: 32,
     showBackgroundRect: false,
     labelType: LabelType.hanging,
+    labelOverlapConfig: {
+      labelSize: 25,
+      moveBothLabels: false,
+    },
   },
   render: (args) => <StackedBar {...args} />,
 }

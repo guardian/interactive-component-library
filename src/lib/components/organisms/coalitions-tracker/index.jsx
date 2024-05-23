@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState, useRef } from "preact/hooks"
 import { useWindowSize } from "$shared/hooks/useWindowSize"
-import { StackedBar, LabelType } from "$particles/stacked-bar"
+import { StackedBar, LabelType, LabelOverlapConfig } from "$particles/stacked-bar"
 import defaultStyles from "./style.module.scss"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 
@@ -15,6 +15,7 @@ export function CoalitionsTracker({
   thresholdTextBold,
   thresholdText,
   styles,
+  labelOverlapConfig = LabelOverlapConfig,
 }) {
   const wrapperRef = useRef(null)
   const thresholdTextRef = useRef(null)
@@ -65,7 +66,7 @@ export function CoalitionsTracker({
         <p className={styles.description} style={{ maxWidth: thresholdLeft <= 620 ? thresholdLeft - 8 : 620 }}>
           {list.description}
         </p>
-        <StackedBar labelType={LabelType.hanging} stack={list.stack} width={list.width} height={barChartHeight} createSVG={true} />
+        <StackedBar labelOverlapConfig={labelOverlapConfig} labelType={LabelType.hanging} stack={list.stack} width={list.width} height={barChartHeight} createSVG={true} />
       </div>
     )
   }
