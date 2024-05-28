@@ -26,6 +26,8 @@
 
   --undeclared: #ededed;
   --declared: #fff;
+
+  --new-group-01: #333333;
 }
 
 @mixin dark-mode-party-colors-eu {
@@ -56,6 +58,8 @@
 
   --undeclared: #ededed;
   --declared: #bababa;
+
+  --new-group-01: #cccccc;
 }
 
 /* BACKGROUND-COLOR -------------------------------------------- */
@@ -145,7 +149,9 @@
 .bg-color--declared {
   background-color: var(--declared) !important;
 }
-
+.bg-color--new-group-01 {
+  background-color: var(--new-group-01) !important;
+}
 /* FILL ----------------------------------------------------------- */
 
 .fill-color--left {
@@ -185,7 +191,9 @@
 .fill-color--undeclared {
   fill: var(--undeclared) !important;
 }
-
+.fill-color--new-group-01 {
+  fill: var(--new-group-01) !important;
+}
 /* STROKE-COLOR --------------------------------------------------- */
 
 .stroke-color--left {
@@ -224,6 +232,9 @@
 }
 .stroke-color--undeclared {
   stroke: var(--undeclared) !important;
+}
+.stroke-color--new-group-01 {
+  stroke: var(--new-group-01) !important;
 }
 /* COLOR ----------------------------------------------------------- */
 
@@ -264,7 +275,9 @@
 .color--undeclared {
   color: var(--undeclared) !important;
 }
-
+.color--new-group-01 {
+  color: var(--new-group-01) !important;
+}
 /* BORDER-COLOR ----------------------------------------------------- */
 
 .border-color--left {
@@ -302,6 +315,9 @@
   border-color: var(--other) !important;
 }
 .border-color--undeclared {
+  border-color: var(--undeclared) !important;
+}
+.border-color--new-group-01 {
   border-color: var(--undeclared) !important;
 }
 
@@ -362,5 +378,11 @@
 .before-color--undeclared {
   &:before {
     background-color: var(--undeclared) !important;
+  }
+}
+
+.before-color--new-group-01 {
+  &:before {
+    background-color: var(--new-group-01) !important;
   }
 }
