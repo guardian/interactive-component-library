@@ -15,10 +15,33 @@ export function Dropdown({ title, hint, options, onSelect, collapseOnSelect = fa
     [onSelect],
   )
 
+  const optionGroups = useMemo(() => {
+    const containsOptionGroups = "options" in options[0]
+    if (!containsOptionGroups) {
+      // create single option group
+      return [{ options }]
+    }
+
+    // assign consecutive indices to options within groups
+    let optionIndex = 0
+    for (const group of options) {
+      for (const option of group.options) {
+        option.index = optionIndex
+        optionIndex++
+      }
+    }
+
+    return options
+  }, options)
+
+  const flatOptions = useMemo(() => {
+    return optionGroups.map((group) => group.options).flat()
+  }, [optionGroups])
+
   const iconForSelectedOption = useMemo(() => {
-    const selectedOption = options[selectedIndex]
+    const selectedOption = flatOptions[selectedIndex]
     return selectedOption.icon
-  }, [options, selectedIndex])
+  }, [flatOptions, selectedIndex])
 
   return (
     <div className={styles.container}>
@@ -30,22 +53,35 @@ export function Dropdown({ title, hint, options, onSelect, collapseOnSelect = fa
 
       <div className={styles.popout} style={{ visibility: expanded ? "visible" : "hidden" }}>
         {hint && <p className={styles.hint}>{hint}</p>}
-        {options.map((option, index) => (
-          <button key={option.title} className={styles.option} onClick={() => onOptionClick(option, index)}>
+        {optionGroups.map((group) => (
+          <OptionGroup {...group} selectedIndex={selectedIndex} onOptionClick={onOptionClick} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function OptionGroup({ title, options, selectedIndex, onOptionClick }) {
+  return (
+    <>
+      {title && <p className={styles.groupHeader}>{title}</p>}
+      {options.map((option) => {
+        return (
+          <button key={option.title} className={styles.option} onClick={() => onOptionClick(option, option.index)}>
             <img src={option.icon} className={styles.optionIcon} />
             <div className={styles.optionText}>
               <h4 className={styles.optionTitle}>{option.title}</h4>
               <p className={styles.optionDescription}>{option.description}</p>
             </div>
-            {index === selectedIndex && (
+            {option.index === selectedIndex && (
               <div className={styles.checkmark}>
                 <Checkmark />
               </div>
             )}
           </button>
-        ))}
-      </div>
-    </div>
+        )
+      })}
+    </>
   )
 }
 
