@@ -110,3 +110,55 @@ export const OnlyTitles = {
     ],
   },
 }
+
+export const groups = {
+  args: {
+    icon: iconProportional,
+    title: "Change view",
+    collapseOnSelect: true,
+    options: [
+      {
+        title: "Seats in parliament",
+        options: [
+          {
+            title: "Proportional",
+            icon: iconProportional,
+          },
+        ],
+      },
+      {
+        title: "Percentage of seats in country",
+        options: [
+          {
+            title: "Left",
+            icon: iconLeft,
+          },
+          {
+            title: "SD",
+            icon: iconSD,
+          },
+          {
+            title: "Greens/EFA",
+            icon: iconGreens,
+          },
+          {
+            title: "Renew",
+            icon: iconRenew,
+          },
+          {
+            title: "EPP",
+            icon: iconEPP,
+          },
+          {
+            title: "ECR",
+            icon: iconECR,
+          },
+          {
+            title: "ID",
+            icon: iconID,
+          },
+        ],
+      },
+    ],
+  },
+}

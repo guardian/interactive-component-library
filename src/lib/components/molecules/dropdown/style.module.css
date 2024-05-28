@@ -55,6 +55,13 @@
   line-height: var(--sans-line-height);
 }
 
+.groupHeader {
+  color: var(--primary-text-color);
+  font-family: var(--text-sans);
+  font-size: var(--sans-xsmall);
+  line-height: var(--sans-line-height);
+}
+
 .option {
   position: relative;
   display: flex;
