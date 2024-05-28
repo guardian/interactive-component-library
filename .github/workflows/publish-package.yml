@@ -53,7 +53,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: 'auto-version-${{ env.TAG_NAME }}'
+          ref: refs/tags/${{ env.TAG_NAME }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
