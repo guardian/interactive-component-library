@@ -50,10 +50,11 @@ jobs:
       contents: read
       packages: write
     steps:
+      # Checkout branch that was created in previous job
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: refs/tags/${{ env.TAG_NAME }}
+          ref: 'auto-version-${{ env.TAG_NAME }}'
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
