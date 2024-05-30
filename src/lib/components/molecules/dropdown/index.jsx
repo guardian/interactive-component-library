@@ -64,7 +64,7 @@ export function Dropdown({ title, hint, options, onSelect, collapseOnSelect = fa
 function OptionGroup({ title, options, selectedIndex, onOptionClick }) {
   return (
     <>
-      {title && <p className={styles.groupHeader}>{title}</p>}
+      {title && <span className={styles.groupHeader}>{title}</span>}
       {options.map((option) => {
         return (
           <button key={option.title} className={styles.option} onClick={() => onOptionClick(option, option.index)}>
