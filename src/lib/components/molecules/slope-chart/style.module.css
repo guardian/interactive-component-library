@@ -11,6 +11,11 @@
   stroke-width: 2;
 }
 
+.lineWhite {
+  stroke: var(--primary-bg-color);
+  stroke-width: 3.25;
+}
+
 .circle {
   fill: #121212;
 }
