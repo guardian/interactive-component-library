@@ -19,6 +19,26 @@
   --noc: #c8c8c8;
 
   --undeclared: #e7e7e7;
+
+  --con-2: #d4edff;
+  --lab-2: #ffdbd4;
+  --libdem-2: #ffe2cd;
+  --green-2: #d3f2de;
+  --ukip-2: #ffe6f4;
+  --snp-2: #fff7c7;
+  --dup-2: #eabcb2;
+  --alliance-2: #eee1a4;
+  --alba-2: #bdbeea;
+  --uup-2: #c5ccdb;
+  --sdlp-2: #d9f2ef;
+  --pc-2: #bacecb;
+  --sf-2: #c1d7bf;
+  --reform-2: #c3e5f4;
+  --ind-2: #e7e7e7;
+  --other-2: #c8c8c8;
+  --speaker-2: #c8c8c8;
+
+  --undeclared-2: #e7e7e7;
 }
 
 @mixin dark-mode-party-colors-uk {
@@ -42,6 +62,26 @@
   --speaker: #707070;
 
   --undeclared: #494949;
+
+  --con-2: #244057;
+  --lab-2: #592318;
+  --libdem-2: #64381a;
+  --green-2: #254430;
+  --ukip-2: #572d41;
+  --snp-2: #453d1c;
+  --dup-2: #4b241d;
+  --alliance-2: #484219;
+  --alba-2: #292b7f;
+  --uup-2: #253546;
+  --sdlp-2: #254a46;
+  --pc-2: #263f3c;
+  --sf-2: #1f3b27;
+  --reform-2: #2a4b57;
+  --ind-2: #383838;
+  --other-2: #333333;
+  --speaker-2: #333333;
+
+  --undeclared-2: #e7e7e7;
 }
 
 /* BACKGROUND-COLOR -------------------------------------------- */
@@ -122,6 +162,80 @@
   background-color: var(--noc) !important;
 }
 
+/* BACKGROUND-COLOR 2 -------------------------------------------- */
+
+.bg-color--con-2 {
+  background-color: var(--con-2) !important;
+}
+
+.bg-color--lab-2 {
+  background-color: var(--lab-2) !important;
+}
+
+.bg-color--libdem-2 {
+  background-color: var(--libdem-2) !important;
+}
+
+.bg-color--green-2 {
+  background-color: var(--green-2) !important;
+}
+
+.bg-color--ukip-2 {
+  background-color: var(--ukip-2) !important;
+}
+
+.bg-color--snp-2 {
+  background-color: var(--snp-2) !important;
+}
+
+.bg-color--dup-2 {
+  background-color: var(--dup-2) !important;
+}
+
+.bg-color--alliance-2 {
+  background-color: var(--alliance-2) !important;
+}
+
+.bg-color--alba-2 {
+  background-color: var(--alba-2) !important;
+}
+
+.bg-color--uup-2 {
+  background-color: var(--uup-2) !important;
+}
+
+.bg-color--sdlp-2 {
+  background-color: var(--sdlp-2) !important;
+}
+
+.bg-color--pc-2 {
+  background-color: var(--pc-2) !important;
+}
+
+.bg-color--sf-2 {
+  background-color: var(--sf-2) !important;
+}
+
+.bg-color--reform-2 {
+  background-color: var(--reform-2) !important;
+}
+
+.bg-color--ind-2 {
+  background-color: var(--ind-2) !important;
+}
+
+.bg-color--other-2 {
+  background-color: var(--other-2) !important;
+}
+
+.bg-color--speaker-2 {
+  background-color: var(--speaker-2) !important;
+}
+
+.bg-color--undeclared-2 {
+  background-color: var(--undeclared-2) !important;
+}
+
 /* FILL ----------------------------------------------------------- */
 
 .fill-color--con {
@@ -198,6 +312,80 @@
 
 .fill-color--noc {
   fill: var(--noc) !important;
+}
+
+/* FILL 2 ----------------------------------------------------------- */
+
+.fill-color--con-2 {
+  fill: var(--con-2) !important;
+}
+
+.fill-color--lab-2 {
+  fill: var(--lab-2) !important;
+}
+
+.fill-color--libdem-2 {
+  fill: var(--libdem-2) !important;
+}
+
+.fill-color--green-2 {
+  fill: var(--green-2) !important;
+}
+
+.fill-color--ukip-2 {
+  fill: var(--ukip-2) !important;
+}
+
+.fill-color--snp-2 {
+  fill: var(--snp-2) !important;
+}
+
+.fill-color--dup-2 {
+  fill: var(--dup-2) !important;
+}
+
+.fill-color--alliance-2 {
+  fill: var(--alliance-2) !important;
+}
+
+.fill-color--alba-2 {
+  fill: var(--alba-2) !important;
+}
+
+.fill-color--uup-2 {
+  fill: var(--uup-2) !important;
+}
+
+.fill-color--sdlp-2 {
+  fill: var(--sdlp-2) !important;
+}
+
+.fill-color--pc-2 {
+  fill: var(--pc-2) !important;
+}
+
+.fill-color--sf-2 {
+  fill: var(--sf-2) !important;
+}
+
+.fill-color--reform-2 {
+  fill: var(--reform-2) !important;
+}
+
+.fill-color--ind-2 {
+  fill: var(--ind-2) !important;
+}
+
+.fill-color--other-2 {
+  fill: var(--other-2) !important;
+}
+
+.fill-color--speaker-2 {
+  fill: var(--speaker-2) !important;
+}
+
+.fill-color--undeclared-2 {
+  fill: var(--undeclared-2) !important;
 }
 
 /* STOP ----------------------------------------------------------- */
