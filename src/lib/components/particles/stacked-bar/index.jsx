@@ -13,12 +13,28 @@ export const LabelOverlapConfig = {
   moveBothLabels: false,
 }
 
-export function StackedBar({ stack, width, height, hideLabels = false, labelType = LabelType.inline, showBackgroundRect = false, createSVG = true, styles, labelOverlapConfig = LabelOverlapConfig }) {
+export function StackedBar({
+  stack,
+  width,
+  height,
+  hideLabels = false,
+  labelType = LabelType.inline,
+  showBackgroundRect = false,
+  createSVG = true,
+  labelOverlapConfig = LabelOverlapConfig,
+  border = false,
+  styles,
+}) {
   const rectElements = useRef([])
   const textElements = useRef([])
 
   styles = mergeStyles({ ...defaultStyles }, styles)
   const svgHeight = labelType === LabelType.hanging && !hideLabels ? height + 20 : height
+
+  // no secondary colors used for borders
+  const cleanBorderAbbr = (abbrText) => {
+    return abbrText.split("-")[0]
+  }
 
   const renderLabel = (config, i) => (
     <text
@@ -54,9 +70,10 @@ export function StackedBar({ stack, width, height, hideLabels = false, labelType
           ref={(element) => (rectElements.current[index] = element)}
           width={itemWidth}
           height={height}
-          className={`${styles.bar} fill-color--${d.abbreviation}`}
+          className={`${styles.bar} fill-color--${d.abbreviation} ${border && "stroke-color--" + cleanBorderAbbr(d.abbreviation)}`}
           style={{ fill: d.fill }}
           shape-rendering="crispEdges"
+          // stroke={border && var()}
         />
         {labelType === LabelType.inline && !hideLabels && renderLabel(labelConfig, index)}
       </g>
