@@ -31,10 +31,8 @@ export function StackedBar({
   styles = mergeStyles({ ...defaultStyles }, styles)
   const svgHeight = labelType === LabelType.hanging && !hideLabels ? height + 20 : height
 
-  // no secondary colors used for borders
-  const cleanBorderAbbr = (abbrText) => {
-    return abbrText.split("-")[0]
-  }
+  // no secondary colors used for borders, so eg: 'lab-2' should be converted to 'lab'
+  const cleanBorderAbbr = (abbrText) => abbrText.split("-")[0]
 
   const renderLabel = (config, i) => (
     <text
@@ -73,7 +71,6 @@ export function StackedBar({
           className={`${styles.bar} fill-color--${d.abbreviation} ${border && "stroke-color--" + cleanBorderAbbr(d.abbreviation)}`}
           style={{ fill: d.fill }}
           shape-rendering="crispEdges"
-          // stroke={border && var()}
         />
         {labelType === LabelType.inline && !hideLabels && renderLabel(labelConfig, index)}
       </g>
