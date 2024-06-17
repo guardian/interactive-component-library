@@ -1,17 +1,19 @@
 const config = {
-  core: {},
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  core: {
+    disableTelemetry: true,
+  },
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
-    '@storybook/addon-controls',
-    '@storybook/addon-links',
-    '@storybook/addon-measure',
-    '@storybook/addon-viewport',
-    '@storybook/addon-docs',
-    '@storybook/addon-actions',
-    '@storybook/addon-interactions',
-    'storybook-dark-mode',
+    "@storybook/addon-controls",
+    "@storybook/addon-links",
+    "@storybook/addon-measure",
+    "@storybook/addon-viewport",
+    "@storybook/addon-docs",
+    "@storybook/addon-actions",
+    "@storybook/addon-interactions",
+    "storybook-dark-mode",
     {
-      name: '@storybook/addon-storysource',
+      name: "@storybook/addon-storysource",
       options: {
         sourceLoaderOptions: {
           injectStoryParameters: false,
@@ -20,12 +22,12 @@ const config = {
     },
   ],
   framework: {
-    name: '@storybook/preact-vite',
+    name: "@storybook/preact-vite",
     options: {},
   },
   docs: {
-    autodocs: 'tag',
-    defaultName: 'Documentation',
+    autodocs: "tag",
+    defaultName: "Documentation",
   },
 }
 export default config

@@ -1,3 +1,7 @@
+.borderTop::before {
+  border-top: 1px solid var(--border-divider-color);
+}
+
 .section {
   position: relative;
   z-index: 0;
@@ -37,8 +41,39 @@
   }
 }
 
-.borderTop::before {
-  border-top: 1px solid var(--border-divider-color);
+.section.fullWidth {
+  transform: translate(-10px);
+  width: calc(100% + 20px);
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+
+  @include mq($from: mobileLandscape) {
+    transform: translate(-20px);
+    width: calc(100% + 40px);
+  }
+
+  @include mq($from: tablet) {
+    transform: translate(-20px);
+    width: calc(100% + 60px);
+  }
+
+  @include mq($from: leftCol) {
+    transform: translate(-180px);
+    width: calc(100% + 200px);
+  }
+
+  @include mq($from: wide) {
+    transform: translate(-260px);
+    width: calc(100% + 280px);
+  }
+}
+
+.section.fullWidth::before {
+  transform: none;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
 }
 
 .header {
@@ -61,13 +96,27 @@
   }
 }
 
+// this :global(body) scope exists to match the specifity of the previous selector
+:global(body) .header.fullWidth {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  transform: none;
+  padding-top: 0;
+  margin-bottom: var(--space-2);
+  max-width: 100%;
+
+  @include mq($from: leftCol) {
+    margin-bottom: 0;
+  }
+}
+
 .content {
   position: relative;
   padding-top: 0;
   color: var(--primary-text-color);
-}
 
-:global(body:not(.ios, .android)) .content {
   @include mq($from: leftCol) {
     padding-top: var(--space-2);
 
@@ -83,4 +132,12 @@
       z-index: -2;
     }
   }
+}
+
+.content.fullWidth {
+  padding-top: 0;
+}
+
+.content.fullWidth::before {
+  display: none;
 }

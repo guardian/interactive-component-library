@@ -1,6 +1,6 @@
-import { CSSTransition } from "preact-transitioning"
 import { useCallback, useEffect, useRef } from "preact/hooks"
 import { createPortal } from "preact/compat"
+import { CSSTransition } from "preact-transitioning"
 import styles from "./style.module.css"
 
 export function Modal({ visible = false, children, onClickOutside }) {
