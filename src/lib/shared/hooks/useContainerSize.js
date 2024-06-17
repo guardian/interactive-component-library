@@ -5,9 +5,22 @@ export function useContainerSize(containerRef) {
 
   useLayoutEffect(() => {
     const container = containerRef.current
-
     if (!container) return
-    setContainerSize({ width: container.clientWidth, height: container.clientHeight })
+
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        setContainerSize({
+          width: entry.contentRect.width,
+          height: entry.contentRect.height,
+        })
+      }
+    })
+
+    observer.observe(container)
+
+    return () => {
+      observer.disconnect()
+    }
   }, [containerRef])
 
   return containerSize
