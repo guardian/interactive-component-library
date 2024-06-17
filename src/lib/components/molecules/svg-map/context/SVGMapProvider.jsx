@@ -1,8 +1,8 @@
-import { useMemo, useRef, useCallback } from 'preact/hooks'
-import { geoPath } from 'd3-geo'
-import { bboxFeature } from '../helpers/bboxFeature'
-import { MapContext } from './MapContext'
-import { calculateScale } from '../helpers/geoMath'
+import { useMemo, useRef, useCallback } from "preact/hooks"
+import { geoPath } from "d3-geo"
+import { bboxFeature } from "../helpers/bboxFeature"
+import { MapContext } from "./MapContext"
+import { calculateScale } from "../helpers/geoMath"
 
 export function SVGMapProvider({ id, mapRef, width, height, padding, config, zoom, selectedFeature, children }) {
   const contentSize = useMemo(
@@ -52,7 +52,7 @@ export function SVGMapProvider({ id, mapRef, width, height, padding, config, zoo
       const adjustedPoint = [x - padding.left, y - padding.top]
 
       for (const layer of layers.current) {
-        if (typeof layer.findFeatureAtPoint === 'function') {
+        if (typeof layer.findFeatureAtPoint === "function") {
           const feature = layer.findFeatureAtPoint(adjustedPoint)
           if (feature) return feature
         }

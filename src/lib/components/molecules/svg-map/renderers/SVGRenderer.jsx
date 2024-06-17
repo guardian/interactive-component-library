@@ -1,6 +1,6 @@
-import { useContext } from 'preact/hooks'
-import { MapContext } from '../context/MapContext'
-import { CompositionBorders } from '../layers/CompositionBorders'
+import { useContext } from "preact/hooks"
+import { MapContext } from "../context/MapContext"
+import { CompositionBorders } from "../layers/CompositionBorders"
 
 export function SVGRenderer({ children }) {
   const { id, config, size, selectedFeature, padding } = useContext(MapContext)
@@ -20,8 +20,7 @@ export function SVGRenderer({ children }) {
     >
       <g transform={`translate(${padding.left} ${padding.top})`}>
         <g>{children}</g>
-        {config.drawCompositionBorders &&
-          Object.prototype.hasOwnProperty.call(config.projection, 'getCompositionBorders') && <CompositionBorders />}
+        {config.drawCompositionBorders && Object.prototype.hasOwnProperty.call(config.projection, "getCompositionBorders") && <CompositionBorders />}
       </g>
     </svg>
   )

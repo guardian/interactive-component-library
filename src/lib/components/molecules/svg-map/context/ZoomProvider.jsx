@@ -1,6 +1,6 @@
-import { useContext } from 'preact/hooks'
-import { MapContext } from './MapContext'
-import { useZoom } from '../hooks/useZoom'
+import { useContext } from "preact/hooks"
+import { MapContext } from "./MapContext"
+import { useZoom } from "../hooks/useZoom"
 
 export function ZoomProvider({ config, zoomTo, children }) {
   const context = useContext(MapContext)

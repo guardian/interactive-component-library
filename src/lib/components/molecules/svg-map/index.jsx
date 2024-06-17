@@ -2,8 +2,6 @@ import { geoAlbers, geoMercator } from "d3-geo"
 import { geoAlbersUk } from "d3-composite-projections"
 import { SVGMapProvider } from "./context/SVGMapProvider"
 import { SVGRenderer } from "./renderers/SVGRenderer"
-import { CanvasMapProvider } from "./context/CanvasMapProvider"
-// import { CanvasRenderer } from './renderers/CanvasRenderer'
 import { cloneElement } from "preact"
 import { useRef, useMemo, useLayoutEffect, useState, useImperativeHandle } from "preact/hooks"
 import { forwardRef } from "preact/compat"
@@ -13,7 +11,7 @@ import styles from "./style.module.css"
 export * as MapLayers from "./layers"
 export * as Controls from "./controls"
 
-export const Projection = {
+export const _Projection = {
   geoAlbersUKComposite: geoAlbersUk(),
   geoAlbersEngland: geoAlbers().center([0, 52.7]).rotate([1.1743, 0]).parallels([50, 54]),
   geoMercator: geoMercator(),
@@ -21,7 +19,7 @@ export const Projection = {
 
 export const MapConfiguration = {
   UKComposite: {
-    projection: Projection.geoAlbersUKComposite,
+    projection: _Projection.geoAlbersUKComposite,
     bounds: [
       [-8.642194417322951, 49.88234469492934],
       [1.7683086664999994, 60.8456995072],
@@ -30,7 +28,7 @@ export const MapConfiguration = {
     drawToCanvas: false,
   },
   England: {
-    projection: Projection.geoAlbersEngland,
+    projection: _Projection.geoAlbersEngland,
     bounds: [
       [-6.41866730264044, 49.8647926027119],
       [1.76370537625026, 55.8111151140706],
@@ -56,7 +54,7 @@ const DEFAULT_ZOOM = {
   maxZoom: 8,
 }
 
-export const Map = forwardRef(({ id, width, height, config, children, padding = { top: 20, right: 20, bottom: 20, left: 20 }, zoom, selectedFeature }, ref) => {
+export const SVGMap = forwardRef(({ id, width, height, config, children, padding = { top: 20, right: 20, bottom: 20, left: 20 }, zoom, selectedFeature }, ref) => {
   padding = padding || ZERO_PADDING
   zoom = Object.assign(DEFAULT_ZOOM, zoom)
 
@@ -99,7 +97,6 @@ export const Map = forwardRef(({ id, width, height, config, children, padding = 
   const organisedChildren = useOrganisedChildren(children)
 
   const renderSVG = containerSize && !config.drawToCanvas
-  const renderCanvas = containerSize && config.drawToCanvas
 
   return (
     <div ref={containerRef} className={styles.container} style={containerStyle}>
@@ -107,11 +104,6 @@ export const Map = forwardRef(({ id, width, height, config, children, padding = 
         <SVGMapProvider id={id} width={containerSize.width} height={containerSize.height} padding={padding} config={config} mapRef={mapRef} selectedFeature={selectedFeature} zoom={zoom}>
           <SVGRenderer>{organisedChildren.layers.map((child, index) => cloneElement(child, { zIndex: index }))}</SVGRenderer>
         </SVGMapProvider>
-      )}
-      {renderCanvas && (
-        <CanvasMapProvider id={id} width={containerSize.width} height={containerSize.height} padding={padding} config={config} mapRef={mapRef} selectedFeature={selectedFeature} zoom={zoom}>
-          {/* <CanvasRenderer ref={rendererRef}>{children}</CanvasRenderer> */}
-        </CanvasMapProvider>
       )}
       <div className={styles.controls}>
         <div className={styles.zoomControl}>

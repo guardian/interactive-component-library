@@ -1,6 +1,6 @@
-import { useContext, useEffect } from 'preact/hooks'
-import { MapContext } from '../context/MapContext'
-import { dynamicPropValue } from '../helpers/dynamicPropValue'
+import { useContext, useEffect } from "preact/hooks"
+import { MapContext } from "../context/MapContext"
+import { dynamicPropValue } from "../helpers/dynamicPropValue"
 
 export function Line({ id, features, stroke = null, strokeWidth = 1, styles }) {
   const context = useContext(MapContext)
@@ -28,7 +28,7 @@ export function Line({ id, features, stroke = null, strokeWidth = 1, styles }) {
   }, [])
 
   if (context.config.drawToCanvas) {
-    return '<!--Line layer-->'
+    return "<!--Line layer-->"
   }
 
   return (
