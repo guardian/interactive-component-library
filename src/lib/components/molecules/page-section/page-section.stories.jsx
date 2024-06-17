@@ -1,14 +1,14 @@
-import { PageSection } from '.'
-import { Container } from '$particles'
-import styles from './stories.module.scss'
+import { PageSection, SectionLayout } from "."
+import { Container } from "$particles"
+import styles from "./stories.module.scss"
 
 const meta = {
-  title: 'Molecules/PageSection',
+  title: "Molecules/PageSection",
   component: PageSection,
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
     viewport: {
-      defaultViewport: 'reset',
+      defaultViewport: "reset",
     },
   },
   render: (args) => {
@@ -62,7 +62,7 @@ export const TwoSections = {
 
 export const BackgroundColor = {
   args: {
-    backgroundColor: 'var(--tertiary-bg-color)',
+    backgroundColor: "var(--tertiary-bg-color)",
     borderTop: true,
   },
 }
@@ -77,13 +77,10 @@ export const SectionWithLongHeaderContent = {
               <div>
                 <h2>Section one</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla, libero vel fermentum
-                  dapibus, neque eros interdum magna, at cursus enim justo nec elit. Orci varius natoque penatibus et
-                  magnis dis parturient montes, nascetur ridiculus mus. Maecenas accumsan sem lacinia turpis
-                  ullamcorper, imperdiet dictum justo euismod. Quisque justo sem, porta non dictum eget, pharetra a
-                  erat. Quisque sollicitudin aliquet sem, sed feugiat tortor luctus id. Maecenas tincidunt sapien sit
-                  amet urna varius finibus. Nunc finibus arcu ac elementum gravida. Aenean blandit ut arcu eget ornare.
-                  Curabitur in malesuada ipsum, ut aliquet est.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla, libero vel fermentum dapibus, neque eros interdum magna, at cursus enim justo nec elit. Orci varius natoque
+                  penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas accumsan sem lacinia turpis ullamcorper, imperdiet dictum justo euismod. Quisque justo sem, porta non
+                  dictum eget, pharetra a erat. Quisque sollicitudin aliquet sem, sed feugiat tortor luctus id. Maecenas tincidunt sapien sit amet urna varius finibus. Nunc finibus arcu ac elementum
+                  gravida. Aenean blandit ut arcu eget ornare. Curabitur in malesuada ipsum, ut aliquet est.
                 </p>
               </div>
             ),
@@ -98,5 +95,11 @@ export const SectionWithLongHeaderContent = {
         </PageSection>
       </>
     )
+  },
+}
+
+export const FullWidth = {
+  args: {
+    layout: SectionLayout.fullWidth,
   },
 }
