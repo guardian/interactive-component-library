@@ -1,15 +1,17 @@
-import { geoAlbers, geoMercator } from 'd3-geo'
-import { geoAlbersUk } from 'd3-composite-projections'
-import { SVGMapProvider } from './context/SVGMapProvider'
-import { SVGRenderer } from './renderers/SVGRenderer'
-// import { CanvasMapProvider } from './context/CanvasMapProvider'
+import { geoAlbers, geoMercator } from "d3-geo"
+import { geoAlbersUk } from "d3-composite-projections"
+import { SVGMapProvider } from "./context/SVGMapProvider"
+import { SVGRenderer } from "./renderers/SVGRenderer"
+import { CanvasMapProvider } from "./context/CanvasMapProvider"
 // import { CanvasRenderer } from './renderers/CanvasRenderer'
-import { toChildArray, cloneElement } from 'preact'
-import { useRef, useMemo, useLayoutEffect, useState, useImperativeHandle } from 'preact/hooks'
-import { forwardRef } from 'preact/compat'
-import { useContainerSize } from '$shared/hooks/useContainerSize'
-import styles from './style.module.css'
-export * as MapLayers from './layers'
+import { cloneElement } from "preact"
+import { useRef, useMemo, useLayoutEffect, useState, useImperativeHandle } from "preact/hooks"
+import { forwardRef } from "preact/compat"
+import { useContainerSize } from "$shared/hooks/useContainerSize"
+import { useOrganisedChildren } from "./hooks/useOrganisedChildren"
+import styles from "./style.module.css"
+export * as MapLayers from "./layers"
+export * as Controls from "./controls"
 
 export const Projection = {
   geoAlbersUKComposite: geoAlbersUk(),
@@ -54,87 +56,71 @@ const DEFAULT_ZOOM = {
   maxZoom: 8,
 }
 
-export const Map = forwardRef(
-  (
-    {
-      id,
-      width,
-      height,
-      config,
-      children,
-      padding = { top: 20, right: 20, bottom: 20, left: 20 },
-      zoom,
-      selectedFeature,
-    },
-    ref,
-  ) => {
-    padding = padding || ZERO_PADDING
-    zoom = Object.assign(DEFAULT_ZOOM, zoom)
+export const Map = forwardRef(({ id, width, height, config, children, padding = { top: 20, right: 20, bottom: 20, left: 20 }, zoom, selectedFeature }, ref) => {
+  padding = padding || ZERO_PADDING
+  zoom = Object.assign(DEFAULT_ZOOM, zoom)
 
-    const containerRef = useRef()
-    const [isReady, setIsReady] = useState(false)
-    useLayoutEffect(() => {
-      if (!isReady) {
-        setIsReady(true)
+  const containerRef = useRef()
+  const rendererRef = useRef()
+  const [isReady, setIsReady] = useState(false)
+
+  useLayoutEffect(() => {
+    if (!isReady) {
+      setIsReady(true)
+    }
+
+    return () => {
+      if (isReady) {
+        setIsReady(false)
       }
-    }, [isReady])
+    }
+  }, [isReady])
 
-    const mapRef = useRef()
+  const mapRef = useRef()
 
-    useImperativeHandle(
-      ref,
-      () => ({
-        isReady,
-        getContainer: () => containerRef.current,
-        getContext: () => mapRef.current,
-      }),
-      [isReady],
-    )
+  useImperativeHandle(
+    ref,
+    () => ({
+      isReady,
+      getContainer: () => containerRef.current,
+      getContext: () => mapRef.current,
+    }),
+    [isReady],
+  )
 
-    const containerSize = useContainerSize(containerRef)
-    const containerStyle = useMemo(() => {
-      const style = {}
-      if (width > 0) style['width'] = width
-      if (height > 0) style['height'] = height
-      return style
-    }, [width, height])
+  const containerSize = useContainerSize(containerRef)
+  const containerStyle = useMemo(() => {
+    const style = {}
+    if (width > 0) style["width"] = width
+    if (height > 0) style["height"] = height
+    return style
+  }, [width, height])
 
-    const renderSVG = containerSize && !config.drawToCanvas
-    // const renderCanvas = containerSize && config.drawToCanvas
+  const organisedChildren = useOrganisedChildren(children)
 
-    return (
-      <div ref={containerRef} className={styles.container} style={containerStyle}>
-        {renderSVG && (
-          <SVGMapProvider
-            id={id}
-            width={containerSize.width}
-            height={containerSize.height}
-            padding={padding}
-            config={config}
-            mapRef={mapRef}
-            selectedFeature={selectedFeature}
-            zoom={zoom}
-          >
-            <SVGRenderer>
-              {toChildArray(children).map((child, index) => cloneElement(child, { zIndex: index }))}
-            </SVGRenderer>
-          </SVGMapProvider>
-        )}
-        {/* {renderCanvas && (
-        <CanvasMapProvider
-          id={id}
-          width={containerSize.width}
-          height={containerSize.height}
-          padding={padding}
-          config={config}
-          mapRef={mapRef}
-          selectedFeature={selectedFeature}
-          zoom={zoom}
-        >
-          <CanvasRenderer>{children}</CanvasRenderer>
+  const renderSVG = containerSize && !config.drawToCanvas
+  const renderCanvas = containerSize && config.drawToCanvas
+
+  return (
+    <div ref={containerRef} className={styles.container} style={containerStyle}>
+      {renderSVG && (
+        <SVGMapProvider id={id} width={containerSize.width} height={containerSize.height} padding={padding} config={config} mapRef={mapRef} selectedFeature={selectedFeature} zoom={zoom}>
+          <SVGRenderer>{organisedChildren.layers.map((child, index) => cloneElement(child, { zIndex: index }))}</SVGRenderer>
+        </SVGMapProvider>
+      )}
+      {renderCanvas && (
+        <CanvasMapProvider id={id} width={containerSize.width} height={containerSize.height} padding={padding} config={config} mapRef={mapRef} selectedFeature={selectedFeature} zoom={zoom}>
+          {/* <CanvasRenderer ref={rendererRef}>{children}</CanvasRenderer> */}
         </CanvasMapProvider>
-      )} */}
+      )}
+      <div className={styles.controls}>
+        <div className={styles.zoomControl}>
+          {cloneElement(organisedChildren.controls["ZoomControl"], {
+            onZoomIn: () => rendererRef.current.zoomIn(),
+            onZoomOut: () => rendererRef.current.zoomOut(),
+          })}
+        </div>
       </div>
-    )
-  },
-)
+    </div>
+  )
+})

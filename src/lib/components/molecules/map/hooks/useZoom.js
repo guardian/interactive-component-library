@@ -1,21 +1,21 @@
-import { zoom, zoomIdentity } from 'd3-zoom'
-import { useState, useMemo, useCallback } from 'preact/hooks'
-import 'd3-transition'
+import { zoom, zoomIdentity } from "d3-zoom"
+import { useState, useMemo, useCallback } from "preact/hooks"
+import "d3-transition"
 
 export function useZoom({ enabled, minZoom, maxZoom, extent }) {
   const [transform, setTransform] = useState(zoomIdentity)
 
   const zoomBehaviour = useMemo(() => {
+    if (!enabled) return null
+
     const zoomBehaviour = zoom()
       .scaleExtent([minZoom, maxZoom])
-      .extent(extent) 
-      .on('zoom', (event) => {
+      .extent(extent)
+      .on("zoom", (event) => {
         setTransform(event.transform)
       })
 
-    // setTransform(zoomBehaviour.transform())
-
-    return enabled && zoomBehaviour
+    return zoomBehaviour
   }, [enabled, minZoom, maxZoom, extent])
 
   const fitBounds = useCallback(

@@ -1,6 +1,6 @@
 import { Meta, Canvas, Source, Controls } from '@storybook/blocks'
 import { Hint } from '$storybook/blocks/Hint.jsx'
-import * as MapStories from './map.stories.jsx'
+import * as StaticMapStories from './static-map.stories.jsx'
 import * as PolygonStories from './layers/polygon.stories.jsx'
 import * as PointStories from './layers/point.stories.jsx'
 import * as LineStories from './layers/line.stories.jsx'
@@ -8,7 +8,7 @@ import * as PrerenderedStories from './layers/prerendered.stories.jsx'
 import styles from './stories.module.css'
 import ukCountriesTopoJSON from './sample-data/UK-countries-topo.json?url'
 
-<Meta of={MapStories} name="Documentation" />
+<Meta title="Molecules/Map/Getting started" />
 
 # Map
 
@@ -64,7 +64,7 @@ import { Map, MapConfiguration, MapLayers } from '@guardian/interactive-componen
 
 5. That's it! You should now have created this map. 
 
-<Canvas of={MapStories.UKMap} layout="centered" source={{code: `
+<Canvas of={StaticMapStories.UKMap} layout="centered" source={{code: `
 // UKMap.jsx
 import { feature } from 'topojson-client'
 import ukCountriesTopo from './path-to-topo.json'
@@ -87,7 +87,7 @@ export function UKMap() {
 
 ### Map
 
-<Controls of={MapStories.UKMap} />
+<Controls of={StaticMapStories.UKMap} />
 
 ### MapLayers.Polygon
 

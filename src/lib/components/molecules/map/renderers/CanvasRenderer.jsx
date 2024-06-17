@@ -1,12 +1,13 @@
-import { useContext, useRef, useState, useEffect, useCallback } from 'preact/hooks'
-import { select } from 'd3-selection'
-import { geoPath } from 'd3-geo'
-import { MapContext } from '../context/MapContext'
-// import { CompositionBorders } from '../layers/CompositionBorders'
-import { useZoom } from '../hooks/useZoom'
-import { useSignalEffect } from '@preact/signals'
+import { useContext, useRef, useState, useEffect, useCallback } from "preact/hooks"
+import { select } from "d3-selection"
+import { geoPath } from "d3-geo"
+import { MapContext } from "../context/MapContext"
+import { CompositionBorders } from "../layers/CompositionBorders"
+import { useZoom } from "../hooks/useZoom"
+import { useSignalEffect } from "@preact/signals"
+import { forwardRef } from "preact/compat"
 
-export function CanvasRenderer({ children }) {
+export const CanvasRenderer = forwardRef(({ children }, ref) => {
   const canvasRef = useRef()
   const context = useContext(MapContext)
   const { zoomBehaviour, transform, fitBounds } = useZoom({
@@ -18,15 +19,14 @@ export function CanvasRenderer({ children }) {
   const [path, setPath] = useState()
 
   useEffect(() => {
-    const ctx = canvasRef.current?.getContext('2d')
+    const ctx = canvasRef.current?.getContext("2d", { alpha: false })
     setPath(() => geoPath(context.projection, ctx))
   }, [context.projection])
 
   useEffect(() => {
-    if (canvasRef.current) {
+    if (canvasRef.current && zoomBehaviour) {
       const element = select(canvasRef.current)
       element.call(zoomBehaviour)
-      // zoomBehaviour.scaleBy(element, 2)
     }
   }, [canvasRef, zoomBehaviour])
 
@@ -38,29 +38,30 @@ export function CanvasRenderer({ children }) {
   })
 
   const update = useCallback(() => {
-    const ctx = canvasRef.current?.getContext('2d')
+    const ctx = canvasRef.current?.getContext("2d")
     if (!ctx) return
 
     ctx.save()
     ctx.clearRect(0, 0, context.sizeInPixels.width, context.sizeInPixels.height)
-    // console.log('transform.x', transform.x, 'transform.y', transform.y)
+
+    ctx.save()
+    // draw white bg
+    ctx.fillStyle = "white"
+    ctx.fillRect(0, 0, context.sizeInPixels.width, context.sizeInPixels.height)
+    ctx.restore()
+
     ctx.translate(transform.x, transform.y)
     ctx.scale(transform.k, transform.k)
 
     // set defaults
-    ctx.lineJoin = 'round'
-    ctx.lineCap = 'round'
-
-    // JUST FOR DEBUGGING
-    // drawHouse(ctx)
+    ctx.lineJoin = "round"
+    ctx.lineCap = "round"
 
     for (const drawMapElement of drawingFunctions) {
       ctx.save()
-      drawMapElement(ctx, path)
+      drawMapElement(ctx, path, transform)
       ctx.restore()
     }
-
-    drawCircleAtPoint(ctx, { x: context.sizeInPixels.width / 2, y: context.sizeInPixels.height / 2 })
 
     ctx.restore()
 
@@ -100,55 +101,34 @@ export function CanvasRenderer({ children }) {
     setPendingUpdate(true)
   }
 
+  const zoomIn = useCallback(() => {
+    const element = select(canvasRef.current)
+    element.transition().duration(500).call(zoomBehaviour.scaleBy, 2)
+  })
+
+  const zoomOut = useCallback(() => {
+    const element = select(canvasRef.current)
+    element.transition().duration(500).call(zoomBehaviour.scaleBy, 0.5)
+  })
+
   const canvasContext = {
     ...context,
+    path,
     register,
     unregister,
     invalidate,
+    zoomIn,
+    zoomOut,
   }
 
+  ref.current = canvasContext
+
   return (
-    <canvas
-      ref={canvasRef}
-      id={context.id}
-      width={sizeInPixels.width}
-      height={sizeInPixels.height}
-      style={{ width, height }}
-    >
+    <canvas ref={canvasRef} id={context.id} width={sizeInPixels.width} height={sizeInPixels.height} style={{ width, height }}>
       <MapContext.Provider value={canvasContext}>
         {children}
-        {/* <CompositionBorders /> */}
+        {context.config.drawCompositionBorders && Object.prototype.hasOwnProperty.call(context.config.projection, "getCompositionBorders") && <CompositionBorders />}
       </MapContext.Provider>
     </canvas>
   )
-}
-
-// function drawHouse(ctx) {
-//   // Set line width
-//   ctx.lineWidth = 10
-
-//   // Wall
-//   ctx.strokeRect(75, 140, 150, 110)
-
-//   // Door
-//   ctx.fillRect(130, 190, 40, 60)
-
-//   // Roof
-//   ctx.beginPath()
-//   ctx.moveTo(50, 140)
-//   ctx.lineTo(150, 60)
-//   ctx.lineTo(250, 140)
-//   ctx.closePath()
-//   ctx.stroke()
-// }
-
-function drawCircleAtPoint(ctx, point) {
-  ctx.save()
-
-  ctx.beginPath()
-  ctx.arc(point.x, point.y, 10, 0, 2 * Math.PI, false)
-  ctx.fillStyle = '#FF0000'
-  ctx.fill()
-
-  ctx.restore()
-}
+})
