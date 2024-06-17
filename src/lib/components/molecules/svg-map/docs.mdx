@@ -1,6 +1,6 @@
 import { Meta, Canvas, Source, Controls } from '@storybook/blocks'
 import { Hint } from '$storybook/blocks/Hint.jsx'
-import * as StaticMapStories from './static-map.stories.jsx'
+import * as StaticMapStories from './svg-map.stories.jsx'
 import * as PolygonStories from './layers/polygon.stories.jsx'
 import * as PointStories from './layers/point.stories.jsx'
 import * as LineStories from './layers/line.stories.jsx'
@@ -8,7 +8,7 @@ import * as PrerenderedStories from './layers/prerendered.stories.jsx'
 import styles from './stories.module.css'
 import ukCountriesTopoJSON from './sample-data/UK-countries-topo.json?url'
 
-<Meta title="Molecules/Map/Getting started" />
+<Meta title="Molecules/SVGMap/Getting started" />
 
 # Map
 
@@ -38,7 +38,7 @@ const ukCountries = feature(ukCountriesTopo, ukCountriesTopo.objects['countries'
 <Source dark={true} code={`
 // UKMap.jsx
 // ...
-import { Map, MapConfiguration, MapLayers } from '@guardian/interactive-component-library'
+import { SVGMap, MapConfiguration, MapLayers } from '@guardian/interactive-component-library'
 // ...
 `} />
 
@@ -47,7 +47,7 @@ import { Map, MapConfiguration, MapLayers } from '@guardian/interactive-componen
 <Source dark={true} code={`
 // UKMap.jsx
 // ...
-<Map config={MapConfiguration.UKComposite}></Map>
+<SVGMap config={MapConfiguration.UKComposite}></SVGMap>
 // ...
 `} />
 
@@ -56,9 +56,9 @@ import { Map, MapConfiguration, MapLayers } from '@guardian/interactive-componen
 <Source dark={true} code={`
 // UKMap.jsx
 // ...
-<Map config={MapConfiguration.UKComposite}>
+<SVGMap config={MapConfiguration.UKComposite}>
   <MapLayers.Polygon features={[ukCountries]} fill="#707070" />
-</Map>
+</SVGMap>
 // ...
 `} />
 
@@ -68,15 +68,15 @@ import { Map, MapConfiguration, MapLayers } from '@guardian/interactive-componen
 // UKMap.jsx
 import { feature } from 'topojson-client'
 import ukCountriesTopo from './path-to-topo.json'
-import { Map, MapConfiguration, MapLayers } from '@guardian/interactive-component-library'
+import { SVGMap, MapConfiguration, MapLayers } from '@guardian/interactive-component-library'
 
 const ukCountries = feature(ukCountriesTopo, ukCountriesTopo.objects['countries'])
 
 export function UKMap() {
   return (
-    <Map config={MapConfiguration.UKComposite}>
+    <SVGMap config={MapConfiguration.UKComposite}>
       <MapLayers.Polygon features={[ukCountries]} fill="#707070" />
-    </Map>
+    </SVGMap>
   )
 }
 `}} />

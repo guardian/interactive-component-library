@@ -1,4 +1,4 @@
-import { Map, MapConfiguration, MapLayers, Projection } from "."
+import { SVGMap, MapConfiguration, MapLayers, _Projection } from "."
 import ukCountriesTopo from "./sample-data/UK-countries-topo.json"
 import westminsterConstituenciesTopo from "./sample-data/UK-constituencies-simplified-topo.json"
 import englandLocalAuthoritiesTopo from "./sample-data/England-local-authories-2023-topo.json"
@@ -20,8 +20,8 @@ const borders = mesh(westminsterConstituenciesTopo, westminsterConstituenciesTop
 const localAuthorities = feature(englandLocalAuthoritiesTopo, englandLocalAuthoritiesTopo.objects["local-authorities"])
 
 const meta = {
-  title: "Molecules/Map/Static maps",
-  component: Map,
+  title: "Molecules/SVGMap/Maps",
+  component: SVGMap,
   parameters: {
     viewport: {
       defaultViewport: "desktop",
@@ -60,7 +60,7 @@ const meta = {
       description: "D3 projection function, e.g. d3.geoAlbers() (required)",
       control: "select",
       options: ["GeoAlbers UK composite", "GeoAlbers England"],
-      mapping: { "GeoAlbers UK composite": Projection.UKComposite, "GeoAlbers England": Projection.geoAlbersEngland },
+      mapping: { "GeoAlbers UK composite": _Projection.UKComposite, "GeoAlbers England": _Projection.geoAlbersEngland },
     },
     bounds: {
       table: { category: "config" },
@@ -99,9 +99,9 @@ export const UKMap = {
     config: MapConfiguration.UKComposite,
   },
   render: (args) => (
-    <Map {...args}>
+    <SVGMap {...args}>
       <MapLayers.Polygon features={[ukCountries]} fill="#707070" />
-    </Map>
+    </SVGMap>
   ),
 }
 
@@ -112,10 +112,10 @@ export const UKConstituencies = {
     config: MapConfiguration.UKComposite,
   },
   render: (args) => (
-    <Map {...args}>
+    <SVGMap {...args}>
       <MapLayers.Polygon features={constituencies.features} fill="#dcdcdc" />
       <MapLayers.Line features={[borders]} />
-    </Map>
+    </SVGMap>
   ),
 }
 
@@ -128,10 +128,10 @@ export const UKChoropleth = {
     config: MapConfiguration.UKComposite,
   },
   render: (args) => (
-    <Map {...args}>
+    <SVGMap {...args}>
       <MapLayers.Polygon features={constituencies.features} styles={(_, index) => `fill-color--${parties[index % 4]}`} />
       <MapLayers.Line features={[borders]} />
-    </Map>
+    </SVGMap>
   ),
 }
 
@@ -142,7 +142,7 @@ export const BubbleMap = {
     config: MapConfiguration.England,
   },
   render: (args) => (
-    <Map {...args}>
+    <SVGMap {...args}>
       <MapLayers.Polygon
         features={localAuthorities.features}
         fill={(_, index) => {
@@ -161,7 +161,7 @@ export const BubbleMap = {
         fill="none"
         stroke="#FF0000"
       />
-    </Map>
+    </SVGMap>
   ),
 }
 
@@ -175,7 +175,7 @@ function MapWithTooltip(props) {
 
   return (
     <>
-      <Map {...props} ref={mapRef}>
+      <SVGMap {...props} ref={mapRef}>
         <MapLayers.Polygon
           features={localAuthorities.features}
           fill={(_, index) => {
@@ -184,7 +184,7 @@ function MapWithTooltip(props) {
           }}
           stroke="#dcdcdc"
         />
-      </Map>
+      </SVGMap>
       {mapContainer && (
         <Tooltip for={mapContainer} renderIn="#storybook-root">
           {({ x, y }) => {
@@ -223,7 +223,7 @@ function BubbleMapWithTooltip(props) {
 
   return (
     <>
-      <Map {...props} ref={mapRef}>
+      <SVGMap {...props} ref={mapRef}>
         <MapLayers.Polygon
           features={localAuthorities.features}
           fill={(_, index) => {
@@ -233,7 +233,7 @@ function BubbleMapWithTooltip(props) {
           stroke="#dcdcdc"
         />
         <MapLayers.Point features={englandCentroids.features.slice(0, 20)} radius={10} fill="none" stroke="#FF0000" />
-      </Map>
+      </SVGMap>
       {mapContainer && (
         <Tooltip for={mapContainer} renderIn="#storybook-root">
           {({ x, y }) => {
@@ -272,9 +272,9 @@ export const UKPrerendered = {
     },
   },
   render: (args) => (
-    <Map {...args}>
+    <SVGMap {...args}>
       <MapLayers.Prerendered url={ukAlbersMap} />
-    </Map>
+    </SVGMap>
   ),
 }
 
@@ -297,9 +297,9 @@ export const UKLocator = {
     padding: null,
   },
   render: (args) => (
-    <Map {...args}>
+    <SVGMap {...args}>
       <MapLayers.Prerendered url={ukAlbersMap} />
       <MapLayers.Point features={[pointFeature]} radius={6} stroke="#FFF" />
-    </Map>
+    </SVGMap>
   ),
 }

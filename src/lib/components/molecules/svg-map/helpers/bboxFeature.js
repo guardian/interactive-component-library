@@ -9,7 +9,7 @@ export function bboxFeature(bounds) {
   const maxLat = bounds[1][1]
 
   const feature = {
-    type: 'Feature',
+    type: "Feature",
     properties: {},
     geometry: {
       coordinates: [
@@ -21,7 +21,7 @@ export function bboxFeature(bounds) {
           [minLon, maxLat],
         ],
       ],
-      type: 'Polygon',
+      type: "Polygon",
     },
   }
 
