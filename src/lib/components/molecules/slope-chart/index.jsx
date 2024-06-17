@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, useLayoutEffect } from "preact/hooks"
+import { useMemo, useRef } from "preact/hooks"
 import { positionLabels, scaleLinear } from "$shared/helpers/labelsUtil"
 import { useContainerSize } from "$shared/hooks/useContainerSize"
 import defaultStyles from "./style.module.css"
