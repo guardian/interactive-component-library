@@ -2,7 +2,7 @@ import { ZoomControl } from "./ZoomControl"
 import { action } from "@storybook/addon-actions"
 
 const meta = {
-  title: "Molecules/Map/Controls",
+  title: "Molecules/CanvasMap/Controls",
   component: ZoomControl,
   args: {
     onZoomIn: action("zoom in"),

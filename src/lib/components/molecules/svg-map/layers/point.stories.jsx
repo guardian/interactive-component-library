@@ -8,7 +8,7 @@ import englandCentroids from "../sample-data/England-centroids-LE-2023.json"
 const localAuthorities = feature(englandLocalAuthoritiesTopo, englandLocalAuthoritiesTopo.objects["local-authorities"])
 
 const meta = {
-  title: "Molecules/Map/Layers",
+  title: "Molecules/SVGMap/Layers",
   component: Layer,
   argTypes: {
     fill: {

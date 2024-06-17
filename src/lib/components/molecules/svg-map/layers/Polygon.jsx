@@ -59,10 +59,6 @@ export function Polygon({ id, features, fill = null, stroke = null, strokeWidth 
     }
   }, [context, zIndex, findFeatureAtPoint])
 
-  if (drawToCanvas) {
-    return <PolygonCanvas context={context} features={features} fill={fill} stroke={stroke} strokeWidth={strokeWidth} />
-  }
-
   return (
     <>
       {features.map((d, index) => {
@@ -80,36 +76,4 @@ export function Polygon({ id, features, fill = null, stroke = null, strokeWidth 
       })}
     </>
   )
-}
-
-function PolygonCanvas({ context, features, fill, stroke, strokeWidth }) {
-  const draw = useCallback(
-    (ctx, path, transform) => {
-      for (const [index, feature] of features.entries()) {
-        ctx.beginPath()
-        ctx.lineWidth = dynamicPropValue(strokeWidth, feature, index) / transform.k
-        ctx.strokeStyle = dynamicPropValue(stroke, feature, index)
-        ctx.fillStyle = dynamicPropValue(fill, feature, index)
-        path(feature)
-
-        if (fill) ctx.fill()
-        if (stroke) ctx.stroke()
-      }
-    },
-    [features, fill, stroke, strokeWidth],
-  )
-
-  useEffect(() => {
-    context.register(draw)
-
-    return () => {
-      context.unregister(draw)
-    }
-  }, [draw])
-
-  useEffect(() => {
-    context.invalidate()
-  }, [features, fill, stroke, strokeWidth])
-
-  return "<!--Polygon layer-->"
 }

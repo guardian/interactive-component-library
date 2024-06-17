@@ -1,4 +1,4 @@
-import { Map, MapConfiguration } from "../"
+import { SVGMap, MapConfiguration } from "../"
 import { Polygon as Layer } from "./Polygon"
 import { feature } from "topojson-client"
 import { saveSVG } from "../helpers/saveSVG"
@@ -8,7 +8,7 @@ import styles from "../stories.module.css"
 const ukCountries = feature(ukCountriesTopo, ukCountriesTopo.objects["countries"])
 
 const meta = {
-  title: "Molecules/Map/Layers",
+  title: "Molecules/SVGMap/Layers",
   component: Layer,
   argTypes: {
     fill: {
@@ -22,9 +22,9 @@ const meta = {
     (Story) => (
       <>
         <div style={{ width: "100%", height: "500px" }}>
-          <Map id="map" config={MapConfiguration.UKComposite}>
+          <SVGMap id="map" config={MapConfiguration.UKComposite}>
             <Story />
-          </Map>
+          </SVGMap>
         </div>
         <button className={styles.button} onClick={() => saveSVG("map")}>
           Download SVG
