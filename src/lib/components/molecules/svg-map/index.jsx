@@ -97,6 +97,8 @@ export const SVGMap = forwardRef(({ id, width, height, config, children, padding
   const organisedChildren = useOrganisedChildren(children)
 
   const renderSVG = containerSize && !config.drawToCanvas
+  const zoomControl = organisedChildren.controls["ZoomControl"]
+  const renderZoomControl = zoomControl && zoom.enabled
 
   return (
     <div ref={containerRef} className={styles.container} style={containerStyle}>
@@ -106,12 +108,14 @@ export const SVGMap = forwardRef(({ id, width, height, config, children, padding
         </SVGMapProvider>
       )}
       <div className={styles.controls}>
-        <div className={styles.zoomControl}>
-          {cloneElement(organisedChildren.controls["ZoomControl"], {
-            onZoomIn: () => rendererRef.current.zoomIn(),
-            onZoomOut: () => rendererRef.current.zoomOut(),
-          })}
-        </div>
+        {renderZoomControl && (
+          <div className={styles.zoomControl}>
+            {cloneElement(zoomControl, {
+              onZoomIn: () => rendererRef.current.zoomIn(),
+              onZoomOut: () => rendererRef.current.zoomOut(),
+            })}
+          </div>
+        )}
       </div>
     </div>
   )
