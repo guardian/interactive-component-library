@@ -115,7 +115,8 @@ export const groups = {
   args: {
     icon: iconProportional,
     title: "Change view",
-    collapseOnSelect: true,
+    multipleSelect: true,
+    collapseOnSelect: false,
     options: [
       {
         title: "Seats in parliament",

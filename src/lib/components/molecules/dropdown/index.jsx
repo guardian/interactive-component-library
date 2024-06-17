@@ -12,6 +12,7 @@ export function Dropdown({ title, hint, options, onSelect, multipleSelect = fals
       // create single option group
       options.forEach((option, index) => {
         option.index = index
+        option.group = 0
       })
       return [{ group: 0, options }]
     }
