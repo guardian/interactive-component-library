@@ -11,7 +11,7 @@ const borders = mesh(westminsterConstituenciesTopo, westminsterConstituenciesTop
 })
 
 const meta = {
-  title: "Molecules/Map/Layers",
+  title: "Molecules/SVGMap/Layers",
   component: Layer,
   argTypes: {
     stroke: {

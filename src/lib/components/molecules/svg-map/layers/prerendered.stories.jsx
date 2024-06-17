@@ -1,9 +1,9 @@
-import { Map, MapConfiguration } from "../"
+import { SVGMap, MapConfiguration } from "../"
 import { Prerendered as Layer } from "./Prerendered"
 import ukAlbersMap from "../sample-data/uk-outline-composite.svg"
 
 const meta = {
-  title: "Molecules/Map/Layers",
+  title: "Molecules/SVGMap/Layers",
   component: Layer,
   argTypes: {
     url: {
@@ -14,9 +14,9 @@ const meta = {
   decorators: [
     (Story) => (
       <div style={{ width: "344px", height: "500px", margin: "0 auto" }}>
-        <Map config={{ ...MapConfiguration.UKComposite, drawCompositionBorders: false }}>
+        <SVGMap config={{ ...MapConfiguration.UKComposite, drawCompositionBorders: false }}>
           <Story />
-        </Map>
+        </SVGMap>
       </div>
     ),
   ],
