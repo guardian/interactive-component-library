@@ -1,13 +1,13 @@
 import { useMemo, useRef, useState, useLayoutEffect } from "preact/hooks"
 import { positionLabels, scaleLinear } from "$shared/helpers/labelsUtil"
-import { useWindowSize } from "$shared/hooks/useWindowSize"
+import { useContainerSize } from "$shared/hooks/useContainerSize"
 import defaultStyles from "./style.module.css"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 
 export const SlopeChart = ({ domain, lines, y1Label = (d) => d.y1, y2Label = (d) => d.y2, axis, styles, padding = { left: 24, right: 24, top: 20, bottom: 20 } }) => {
   const wrapperRef = useRef(null)
-  const windowSize = useWindowSize()
-  const [width, setWidth] = useState(0)
+  const containerSize = useContainerSize(wrapperRef)
+  const width = containerSize ? containerSize.width : 0
 
   const contentWidth = Math.floor(width - padding.left - padding.right)
   // force 1:1 aspect ratio for chart area
@@ -16,11 +16,6 @@ export const SlopeChart = ({ domain, lines, y1Label = (d) => d.y1, y2Label = (d)
   const height = contentHeight + padding.top + padding.bottom
   const yScale = scaleLinear(domain, [contentHeight, 0])
   const show = width > 0
-
-  useLayoutEffect(() => {
-    const newWidth = wrapperRef.current.getBoundingClientRect().width
-    setWidth(newWidth)
-  }, [windowSize])
 
   const y1Labels = useMemo(() => {
     let labels = lines.map((d) => ({ y: yScale(d.y1), value: y1Label(d) }))
