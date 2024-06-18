@@ -1,19 +1,10 @@
-import { useRef, useState } from 'preact/hooks'
-import { mergeStyles } from '$styles/helpers/mergeStyles'
-import { SearchIcon } from './icons/search'
-import { CloseButton } from '$particles'
-import defaultStyles from './style.module.css'
+import { useRef, useState } from "preact/hooks"
+import { mergeStyles } from "$styles/helpers/mergeStyles"
+import { SearchIcon } from "./icons/search"
+import { CloseButton } from "$particles"
+import defaultStyles from "./style.module.css"
 
-export function SearchInput({
-  placeholder,
-  inputValue,
-  maxSuggestions = 5,
-  onInputChange,
-  onSubmit,
-  onSelect,
-  onClear,
-  styles,
-}) {
+export function SearchInput({ placeholder, inputValue, maxSuggestions = 5, onInputChange, onSubmit, onSelect, onClear, styles }) {
   styles = mergeStyles(defaultStyles, styles)
 
   const inputRef = useRef(null)
@@ -22,16 +13,16 @@ export function SearchInput({
   const [showSuggestions, setShowSuggestions] = useState(true)
 
   function onKeyDown(event) {
-    if (event.key === 'ArrowDown') {
+    if (event.key === "ArrowDown") {
       event.preventDefault()
       setSelectedIndex((currentIndex) => Math.min(currentIndex + 1, suggestions.length - 1))
-    } else if (event.key === 'ArrowUp') {
+    } else if (event.key === "ArrowUp") {
       event.preventDefault()
       setSelectedIndex((currentIndex) => Math.max(currentIndex - 1, -1))
-    } else if (event.key === 'Enter' && selectedIndex >= 0) {
+    } else if (event.key === "Enter" && selectedIndex >= 0) {
       event.preventDefault()
       onSelectSuggestion(suggestions[selectedIndex])
-    } else if (event.key === 'Enter') {
+    } else if (event.key === "Enter") {
       onSubmit(inputRef.current.value)
     }
   }
@@ -51,7 +42,7 @@ export function SearchInput({
     inputRef.current.blur()
   }
 
-  const showClearButton = inputRef.current?.value && inputRef.current?.value !== ''
+  const showClearButton = (inputRef.current?.value && inputRef.current?.value !== "") || (inputValue && inputValue !== "")
 
   return (
     <div className={styles.searchContainer}>
@@ -83,7 +74,7 @@ export function SearchInput({
           <CloseButton
             border={false}
             onClick={() => {
-              const emptyValue = ''
+              const emptyValue = ""
               inputRef.current.value = emptyValue
               inputChanged(emptyValue)
               inputRef.current.focus()
@@ -116,14 +107,14 @@ function SuggestionList({ suggestions, highlightText, selectedIndex, styles, onM
           <li
             key={index}
             aria-label={d.text}
-            className={[styles.suggestion, index === selectedIndex && styles.selected].join(' ')}
+            className={[styles.suggestion, index === selectedIndex && styles.selected].join(" ")}
             onMouseDown={(e) => e.preventDefault()}
             onMouseOver={() => onMouseOver(d, index)}
             onClick={() => {
               onSelect(d)
             }}
           >
-            {d.text.split(new RegExp(`(${highlightText})`, 'ig')).map((part, i) =>
+            {d.text.split(new RegExp(`(${highlightText})`, "ig")).map((part, i) =>
               i % 2 === 1 ? (
                 <span className={styles.highlighted} key={i}>
                   {part}
