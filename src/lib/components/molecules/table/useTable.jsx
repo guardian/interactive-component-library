@@ -1,4 +1,4 @@
-import { useMemo } from 'preact/hooks'
+import { useMemo } from "preact/hooks"
 
 const sortAscending = (accessor) => {
   return (a, b) => {
@@ -25,9 +25,11 @@ export function useTable({ columns, data, sortState }) {
     if (sortState.columnIndex < 0) {
       return data
     }
+    const dataCopy = new Array(...data)
     const column = columns[sortState.columnIndex]
     const sortFunction = sortState.ascending ? sortAscending(column.accessor) : sortDescending(column.accessor)
-    return data.toSorted(sortFunction)
+    dataCopy.sort(sortFunction)
+    return dataCopy
   }, [columns, data, sortState])
 
   const columnModels = useMemo(() => {
