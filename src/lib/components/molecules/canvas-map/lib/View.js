@@ -38,14 +38,14 @@ export class View {
 
   // map size in pixels (i.e. scaled by device pixel ratio)
   get mapSize() {
-    return sizeMinusPadding(scaleSize(this.viewPortSize, this.pixelRatio), this.scaledPadding)
+    return scaleSize(this.viewPortSize, this.pixelRatio)
   }
 
-  // padding in pixels (i.e. scaled by device pixel ratio)
   get padding() {
     return this._padding
   }
 
+  // padding in pixels (i.e. scaled by device pixel ratio)
   get scaledPadding() {
     const scaledPadding = { ...this._padding }
     return scalePadding(scaledPadding, this.pixelRatio)
@@ -115,12 +115,9 @@ export class View {
 
   // get extent for drawn map
   getMapExtent() {
-    const [width, height] = this.mapSize
-    const { left, top } = this.scaledPadding
-    return [
-      [left, top],
-      [width, height],
-    ]
+    const mapSizeInPixels = this.mapSize
+    const paddingInPixels = this.scaledPadding
+    return [[paddingInPixels.left, paddingInPixels.top], sizeMinusPadding(mapSizeInPixels, paddingInPixels)]
   }
 
   // visible extent in map coordinates
