@@ -8,7 +8,7 @@
   line-height: var(--sans-line-height);
 }
 
-.labelWhite {
+.labelStroke {
   stroke: var(--primary-bg-color);
   stroke-width: 3px;
   stroke-linejoin: round;
