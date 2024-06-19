@@ -20,6 +20,10 @@
   box-sizing: border-box;
 }
 
+input:focus {
+  border: 1px solid var(--primary-text-color);
+}
+
 .searchIcon {
   position: absolute;
   top: 11px;
@@ -38,11 +42,14 @@
 .suggestions {
   position: absolute;
   width: 100%;
+  margin-top: var(--space-2);
   z-index: 1;
 
   background-color: var(--primary-bg-color);
   border: 1px solid var(--border-divider-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: clip;
 
   pointer-events: all;
 }
