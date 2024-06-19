@@ -25,6 +25,8 @@ export function Modal({ visible = false, children, onClickOutside }) {
     }
   }, [onClick, visible])
 
+  if (typeof document === "undefined") return
+
   return createPortal(
     <CSSTransition in={visible} duration={300} classNames={styles}>
       <div class={styles.transitionContainer} onClick={onClick} style={{ pointerEvents: visible ? "auto" : "none" }}>
