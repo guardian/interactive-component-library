@@ -8,6 +8,12 @@
   line-height: var(--sans-line-height);
 }
 
+.labelWhite {
+  stroke: var(--primary-bg-color);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
 .backgroundRect {
   fill: var(--undeclared);
 }
