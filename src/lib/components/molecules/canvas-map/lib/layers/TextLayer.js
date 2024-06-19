@@ -2,7 +2,7 @@ import { TextLayerRenderer } from "../renderers/TextLayerRenderer"
 import { Style, Text } from "../styles"
 import { Dispatcher } from "../events/Dispatcher"
 import { combineExtents } from "../util/extent"
-import { EventType } from "../events"
+import { MapEvent } from "../events"
 import { VectorSource } from "../sources/VectorSource"
 
 export class TextLayer {
@@ -38,7 +38,7 @@ export class TextLayer {
 
   set style(style) {
     this._style = style
-    this.dispatcher.dispatch(EventType.CHANGE)
+    this.dispatcher.dispatch(MapEvent.CHANGE)
   }
 
   getExtent() {

@@ -29,12 +29,12 @@ export class Dispatcher {
     listenersForEvent.delete(listenerKey)
   }
 
-  dispatch(eventType) {
+  dispatch(eventType, payload) {
     const listenersForEvent = this._listenersByEvent.get(eventType)
     if (!listenersForEvent) return
 
     listenersForEvent.forEach((callback) => {
-      callback(this.target)
+      callback(this.target, payload)
     })
   }
 }

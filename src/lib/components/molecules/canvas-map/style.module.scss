@@ -39,15 +39,3 @@
     -1px 1px 0px white,
     1px -1px white;
 }
-
-.zoomControl {
-  position: absolute;
-  top: var(--space-10);
-  right: 10px;
-  z-index: 10;
-
-  @include mq($from: leftCol) {
-    top: var(--space-5);
-    right: var(--space-5);
-  }
-}

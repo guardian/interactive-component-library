@@ -1,2 +1,2 @@
 export * from "./Dispatcher"
-export * from "./EventType"
+export * from "./MapEvent"
