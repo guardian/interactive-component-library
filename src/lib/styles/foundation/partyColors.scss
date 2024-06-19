@@ -17,6 +17,7 @@
   --other: #848484;
   --speaker: #848484;
   --noc: #c8c8c8;
+  --wpb: #7d0068;
 
   --undeclared: #e7e7e7;
 
@@ -37,6 +38,7 @@
   --ind-2: #e7e7e7;
   --other-2: #c8c8c8;
   --speaker-2: #c8c8c8;
+  --wpb-2: #d8b2d1;
 
   --undeclared-2: #e7e7e7;
 }
@@ -60,6 +62,7 @@
   --noc: #333333;
   --other: #707070;
   --speaker: #707070;
+  --wpb: #8c136e;
 
   --undeclared: #494949;
 
@@ -80,6 +83,7 @@
   --ind-2: #383838;
   --other-2: #333333;
   --speaker-2: #333333;
+  --wpb-2: #571644;
 
   --undeclared-2: #e7e7e7;
 }
@@ -162,6 +166,10 @@
   background-color: var(--noc) !important;
 }
 
+.bg-color--wpb {
+  background-color: var(--wpb) !important;
+}
+
 /* BACKGROUND-COLOR 2 -------------------------------------------- */
 
 .bg-color--con-2 {
@@ -234,6 +242,10 @@
 
 .bg-color--undeclared-2 {
   background-color: var(--undeclared-2) !important;
+}
+
+.bg-color--wpb-2 {
+  background-color: var(--wpb) !important;
 }
 
 /* FILL ----------------------------------------------------------- */
@@ -314,6 +326,10 @@
   fill: var(--noc) !important;
 }
 
+.fill-color--wpb {
+  fill: var(--wpb) !important;
+}
+
 /* FILL 2 ----------------------------------------------------------- */
 
 .fill-color--con-2 {
@@ -386,6 +402,10 @@
 
 .fill-color--undeclared-2 {
   fill: var(--undeclared-2) !important;
+}
+
+.fill-color--wpb-2 {
+  fill: var(--wpb-2) !important;
 }
 
 /* STOP ----------------------------------------------------------- */
@@ -466,6 +486,10 @@
   stop-color: var(--noc) !important;
 }
 
+.stop-color--wpb {
+  stop-color: var(--wpb) !important;
+}
+
 /* STROKE-COLOR --------------------------------------------------- */
 
 .stroke-color--con {
@@ -544,6 +568,10 @@
   stroke: var(--noc) !important;
 }
 
+.stroke-color--wpb {
+  stroke: var(--wpb) !important;
+}
+
 /* COLOR ----------------------------------------------------------- */
 
 .color--con {
@@ -618,6 +646,10 @@
   color: var(--undeclared) !important;
 }
 
+.color--wpb {
+  color: var(--wpb) !important;
+}
+
 /* BORDER-COLOR ----------------------------------------------------- */
 
 .border-color--con {
@@ -690,6 +722,10 @@
 
 .border-color--undeclared {
   border-color: var(--undeclared) !important;
+}
+
+.border-color--wpb {
+  border-color: var(--wpb) !important;
 }
 
 /* BEFORE-ELEMENT-COLOR ----------------------------------------------------- */
@@ -805,5 +841,11 @@
 .before-color--undeclared {
   &:before {
     background-color: var(--undeclared) !important;
+  }
+}
+
+.before-color--wpb {
+  &:before {
+    background-color: var(--wpb) !important;
   }
 }
