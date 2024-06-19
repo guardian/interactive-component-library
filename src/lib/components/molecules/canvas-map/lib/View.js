@@ -117,7 +117,7 @@ export class View {
   getMapExtent() {
     const mapSizeInPixels = this.mapSize
     const paddingInPixels = this.scaledPadding
-    return [[paddingInPixels.left, paddingInPixels.top], sizeMinusPadding(mapSizeInPixels, paddingInPixels)]
+    return [[paddingInPixels.left, paddingInPixels.top], sizeMinusPadding(mapSizeInPixels, { ...paddingInPixels, left: 0, top: 0 })]
   }
 
   // visible extent in map coordinates
