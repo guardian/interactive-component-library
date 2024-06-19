@@ -1,7 +1,7 @@
 import { VectorLayerRenderer } from "../renderers/VectorLayerRenderer"
 import { Style, Stroke } from "../styles"
 import { combineExtents } from "../util/extent"
-import { Dispatcher, EventType } from "../events"
+import { Dispatcher, MapEvent } from "../events"
 import { VectorSource } from "../sources/VectorSource"
 
 export class VectorLayer {
@@ -30,9 +30,9 @@ export class VectorLayer {
     }
     this._source = source
 
-    source.on(EventType.CHANGE, () => {
+    source.on(MapEvent.CHANGE, () => {
       this._extent = null
-      this.dispatcher.dispatch(EventType.CHANGE)
+      this.dispatcher.dispatch(MapEvent.CHANGE)
     })
   }
 
@@ -56,7 +56,7 @@ export class VectorLayer {
 
   set style(style) {
     this._style = style
-    this.dispatcher.dispatch(EventType.CHANGE)
+    this.dispatcher.dispatch(MapEvent.CHANGE)
   }
 
   getStyleFunction() {

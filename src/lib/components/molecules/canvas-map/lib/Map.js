@@ -5,7 +5,7 @@ import { MapRenderer } from "./renderers/MapRenderer"
 import { zoom, zoomIdentity } from "d3-zoom"
 import { select } from "d3-selection"
 import { timer } from "d3-timer"
-import { EventType } from "./events"
+import { MapEvent, Dispatcher } from "./events"
 import "d3-transition"
 
 export class Map {
@@ -14,6 +14,9 @@ export class Map {
     this.view = options.view
     this.target = options.target
     this.layers = []
+
+    // Create event dispatcher
+    this.dispatcher = new Dispatcher(this)
 
     // Create container div and add to viewport
     this._viewport = document.createElement("div")
@@ -56,9 +59,8 @@ export class Map {
       .on("zoom", (event) => {
         this.view.transform = event.transform
         this._requestRender()
-        if (this._onZoomEventCallback) {
-          this._onZoomEventCallback(event.transform.k)
-        }
+
+        this.dispatcher.dispatch(MapEvent.ZOOM, { currentZoomLevel: event.transform.k })
       })
 
     // Add zoom behaviour to viewport
@@ -102,7 +104,7 @@ export class Map {
     this.layers = this.layers.concat(layers)
 
     layers.forEach((layer) => {
-      layer.on(EventType.CHANGE, () => {
+      layer.on(MapEvent.CHANGE, () => {
         this._requestRender()
       })
     })

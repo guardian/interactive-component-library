@@ -1,4 +1,6 @@
 export * from "./Map"
+export * from "./controls"
+export * from "./lib/events"
 export * from "./lib/projection"
 export * from "./lib/layers"
 export * from "./lib/styles"

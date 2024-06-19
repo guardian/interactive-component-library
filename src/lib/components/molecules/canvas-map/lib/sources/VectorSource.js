@@ -1,6 +1,6 @@
 import RBush from "rbush"
 import knn from "rbush-knn"
-import { Dispatcher, EventType } from "../events"
+import { Dispatcher, MapEvent } from "../events"
 
 export class VectorSource {
   constructor({ features }) {
@@ -44,6 +44,6 @@ export class VectorSource {
     }
 
     this._features = features
-    this.dispatcher.dispatch(EventType.CHANGE)
+    this.dispatcher.dispatch(MapEvent.CHANGE)
   }
 }
