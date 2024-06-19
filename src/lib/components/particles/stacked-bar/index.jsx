@@ -39,7 +39,7 @@ export function StackedBar({
       key={`label-${i}`}
       ref={(element) => (textElements.current[i] = element)}
       text-rendering="optimizeLegibility"
-      className={styles.label}
+      className={`${styles.label} ${config.hasStroke ? styles.labelStroke : ""}`}
       style={{ display: "visible" }} // using visibility rather than display makes sure the text width is always calculated correctly
       x={config.x}
       y={config.y}
@@ -94,6 +94,8 @@ export function StackedBar({
     return preventOverlap(labels, 0, labelOverlapConfig.labelSize, "x", labelOverlapConfig.moveBothLabels)
   }, [stack, height, width])
 
+  const strokedHangingLabelConfig = useMemo(() => [...hangingLabelConfig].map((l) => ({ ...l, hasStroke: true })), [hangingLabelConfig])
+
   const backgroundRect = (
     <g>
       <rect x="0" y="0" height={height} width={width} className={styles.backgroundRect} />
@@ -106,6 +108,7 @@ export function StackedBar({
         {showBackgroundRect && backgroundRect}
         <g>
           {content}
+          {labelType === LabelType.hanging && !hideLabels && strokedHangingLabelConfig.map((config, i) => renderLabel(config, i))}
           {labelType === LabelType.hanging && !hideLabels && hangingLabelConfig.map((config, i) => renderLabel(config, i))}
         </g>
       </svg>
