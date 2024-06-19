@@ -9,10 +9,11 @@ export function hasArea(size) {
  * Calculate size minus padding
  */
 export function sizeMinusPadding(size, padding) {
+  let newSize = [...size]
   if (padding) {
-    size = [size[0] - padding.left - padding.right, size[1] - padding.top - padding.bottom]
+    newSize = [size[0] - padding.left - padding.right, size[1] - padding.top - padding.bottom]
   }
-  return size
+  return newSize
 }
 
 /**
@@ -33,8 +34,8 @@ export function scaleSize(size, ratio, dest) {
 export function scalePadding(padding, ratio) {
   const scaled = {
     top: Math.round(padding.top * ratio),
-    right: Math.round(padding.top * ratio),
-    bottom: Math.round(padding.top * ratio),
+    right: Math.round(padding.right * ratio),
+    bottom: Math.round(padding.bottom * ratio),
     left: Math.round(padding.left * ratio),
   }
   return scaled
