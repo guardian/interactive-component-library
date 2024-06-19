@@ -24,6 +24,7 @@ export function SearchInput({ placeholder, inputValue, maxSuggestions = 5, onInp
       onSelectSuggestion(suggestions[selectedIndex])
     } else if (event.key === "Enter") {
       onSubmit(inputRef.current.value)
+      inputRef.current.blur()
     }
   }
 
