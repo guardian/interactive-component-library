@@ -10,7 +10,7 @@ export class FeatureRenderer {
   }
 
   render(frameState, feature, context) {
-    const { projection, transform } = frameState.viewState
+    const { projection, transform, pixelRatio } = frameState.viewState
 
     this.drawingFunction.context(context)
 
@@ -24,7 +24,7 @@ export class FeatureRenderer {
     const { stroke, fill } = this.style
 
     if (stroke) {
-      context.lineWidth = stroke.width / transform.k
+      context.lineWidth = (stroke.width * pixelRatio) / transform.k
       context.strokeStyle = stroke.color
       context.stroke()
     }
