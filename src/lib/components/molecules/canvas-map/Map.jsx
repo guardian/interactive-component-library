@@ -1,16 +1,18 @@
 import { useState, useEffect, useRef } from "preact/hooks"
 import { forwardRef } from "preact/compat"
 import { Map as _Map } from "./lib/Map"
+import { MapEvent } from "./lib/events"
 import { View } from "./lib/View"
 import styles from "./style.module.scss"
+
+const mobileHelpText = "Use two fingers to zoom"
 
 export const Map = forwardRef(({ config, onLoad, children }, ref) => {
   const { layers } = children
 
   const [map, setMap] = useState()
-  const [hideDefaultHelpText, setHideDefaultHelpText] = useState(false)
   const [zoomHelpText, setZoomHelpText] = useState("")
-  const [highlightHelpText, setHighlightHelpText] = useState(false)
+  const [showHelpText, setShowHelpText] = useState(false)
 
   useEffect(() => {
     const map = new _Map({
@@ -37,16 +39,16 @@ export const Map = forwardRef(({ config, onLoad, children }, ref) => {
     if (!map) return
     let timeoutID
 
-    map.onFilterEvent(() => {
+    map.onFilterEvent((showHelpText) => {
       if (timeoutID) clearTimeout(timeoutID)
-      setHighlightHelpText(true)
-      timeoutID = setTimeout(() => {
-        setHighlightHelpText()
-      }, 1000)
-    })
 
-    map.onZoomEvent((zoomLevel) => {
-      setHideDefaultHelpText(zoomLevel > 1)
+      setShowHelpText(showHelpText)
+
+      if (showHelpText) {
+        timeoutID = setTimeout(() => {
+          setShowHelpText(false)
+        }, 1000)
+      }
     })
 
     return () => {
@@ -62,13 +64,11 @@ export const Map = forwardRef(({ config, onLoad, children }, ref) => {
 
   const targetRef = useRef()
 
-  const hideHelpText = hideDefaultHelpText && !highlightHelpText
-  const helpText = highlightHelpText ? zoomHelpText : config.defaultHelpText
-
   return (
     <div ref={targetRef} className={styles.mapContainer}>
-      <div className={styles.helpTextContainer} style={{ opacity: hideHelpText ? 0 : 1 }} aria-hidden>
-        <p className={[styles.helpText, highlightHelpText && styles.highlight].join(" ")}>{helpText}</p>
+      <div className={styles.helpTextContainer} style={{ opacity: showHelpText ? 1 : 0 }} aria-hidden>
+        <p className={[styles.helpText, styles.desktopHelpText].join(" ")}>{zoomHelpText}</p>
+        <p className={[styles.helpText, styles.mobileHelpText].join(" ")}>{mobileHelpText}</p>
       </div>
     </div>
   )
