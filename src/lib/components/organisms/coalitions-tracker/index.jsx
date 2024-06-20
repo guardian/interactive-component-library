@@ -66,7 +66,7 @@ export function CoalitionsTracker({
         <p className={styles.description} style={{ maxWidth: thresholdLeft <= 620 ? thresholdLeft - 8 : 620 }}>
           {list.description}
         </p>
-        <StackedBar labelOverlapConfig={labelOverlapConfig} labelType={LabelType.hanging} stack={list.stack} width={list.width} height={barChartHeight} createSVG={true} />
+        <StackedBar labelOverlapConfig={labelOverlapConfig} labelType={LabelType.hanging} stack={list.stack} width={list.width} height={barChartHeight} createSVG={true} styles={styles} />
       </div>
     )
   }
