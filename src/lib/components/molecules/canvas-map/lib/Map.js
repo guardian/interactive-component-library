@@ -42,15 +42,24 @@ export class Map {
     this._zoomBehaviour = zoom()
       .scaleExtent(this.view.scaleExtent)
       .filter((event) => {
-        // only allow wheel events when zoom bypass key is pressed
-        if (event.type === "wheel" && !event[this._zoomBypassKey]) {
-          this._filterEventCallback(this._zoomBypassKey)
-          return false
+        const filterEvent = (filter) => {
+          this._filterEventCallback(filter)
+          return !filter
         }
 
-        if ("targetTouches" in event && event.targetTouches.length < 2) {
-          console.log("stop event", event)
-          return false
+        // only allow wheel events when zoom bypass key is pressed
+        if (event.type === "wheel" && !event[this._zoomBypassKey]) {
+          return filterEvent(true)
+        }
+
+        if ("targetTouches" in event) {
+          if (event.targetTouches.length < 2) {
+            // ignore single touches
+            return false
+          }
+          // stop event from propagating when there are two target touches
+          event.preventDefault()
+          return filterEvent(false)
         }
 
         // default to d3 implementation
@@ -65,6 +74,13 @@ export class Map {
 
     // Add zoom behaviour to viewport
     select(this._viewport).call(this._zoomBehaviour)
+
+    // Show help text when single touch moved
+    this._viewport.addEventListener("touchmove", (event) => {
+      if (event.targetTouches.length < 2) {
+        this._filterEventCallback(true)
+      }
+    })
   }
 
   /** PUBLIC GETTERS */
@@ -85,10 +101,6 @@ export class Map {
 
   onFilterEvent(callback) {
     this._filterEventCallback = callback
-  }
-
-  onZoomEvent(callback) {
-    this._onZoomEventCallback = callback
   }
 
   fitObject(geoJSON) {
