@@ -20,6 +20,7 @@ export class Map {
 
     // Create container div and add to viewport
     this._viewport = document.createElement("div")
+    this._viewport.className = "gv-map"
     this._viewport.style.position = "relative"
     this._viewport.style.overflow = "hidden"
     this._viewport.style.top = 0
@@ -81,6 +82,11 @@ export class Map {
         this._filterEventCallback(true)
       }
     })
+  }
+
+  destroy() {
+    this._resizeObserver.disconnect()
+    this._viewport.remove()
   }
 
   /** PUBLIC GETTERS */
