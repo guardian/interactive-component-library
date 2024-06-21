@@ -7,6 +7,8 @@ export class VectorLayerRenderer {
   }
 
   renderFrame(frameState, targetElement) {
+    if (this.layer.opacity === 0) return targetElement
+
     const { projection, sizeInPixels, visibleExtent, transform } = frameState.viewState
 
     const container = this.getOrCreateContainer(targetElement, sizeInPixels)
@@ -28,13 +30,14 @@ export class VectorLayerRenderer {
     const features = source.getFeaturesInExtent(visibleExtent)
 
     for (const feature of features) {
-      context.save()
       const styleFunction = feature.getStyleFunction() || this.layer.getStyleFunction()
       const featureStyle = styleFunction(feature)
-      if (!featureStyle) continue
-      this.featureRenderer.setStyle(featureStyle)
-      this.featureRenderer.render(frameState, feature, context)
-      context.restore()
+      if (featureStyle?.stroke || featureStyle?.fill) {
+        context.save()
+        this.featureRenderer.setStyle(featureStyle)
+        this.featureRenderer.render(frameState, feature, context)
+        context.restore()
+      }
     }
 
     if (Object.prototype.hasOwnProperty.call(projection, "getCompositionBorders")) {
