@@ -1,5 +1,6 @@
 .borderTop::before {
   border-top: 1px solid var(--border-divider-color);
+  z-index: 1;
 }
 
 .section {
