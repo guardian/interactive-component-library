@@ -164,15 +164,35 @@ export class Map {
     return select(this._viewport).transition().duration(options.duration).call(this._zoomBehaviour.scaleTo, zoomLevel).end()
   }
 
-  zoomToFeature(feature, focalPoint) {
+  zoomToFeature(feature, focalPoint, padding = { top: 40, right: 40, bottom: 40, left: 40 }) {
     const extent = feature.getExtent()
-    const [[x, y], [width, height]] = this.view.boundsForExtent(extent)
-    const viewPortSize = this.view.viewPortSize
+    const [[featureX, featureY], [featureWidth, featureHeight]] = this.view.boundsForExtent(extent)
+    const [viewPortWidth, viewPortHeight] = this.view.viewPortSize
+
+    const paddedViewPortWidth = viewPortWidth - padding.left - padding.right
+    const paddedViewPortHeight = viewPortHeight - padding.top - padding.bottom
+
+    const featureScale = Math.min(paddedViewPortWidth / featureWidth, paddedViewPortHeight / featureHeight)
+    const zoomScale = Math.min(this.view.maxZoom, featureScale)
+
+    const scaledPadding = {
+      top: padding.top / zoomScale,
+      right: padding.right / zoomScale,
+      bottom: padding.bottom / zoomScale,
+      left: padding.left / zoomScale,
+    }
+
+    const paddedFeatureBounds = {
+      x: featureX - scaledPadding.left,
+      y: featureY - scaledPadding.top,
+      width: featureWidth + scaledPadding.left + scaledPadding.right,
+      height: featureHeight + scaledPadding.top + scaledPadding.bottom,
+    }
 
     const newTransform = zoomIdentity
-      .translate(viewPortSize[0] / 2, viewPortSize[1] / 2)
-      .scale(Math.min(this.view.maxZoom, 0.9 * Math.min(viewPortSize[0] / width, viewPortSize[1] / height)))
-      .translate(-x - width / 2, -y - height / 2)
+      .translate(viewPortWidth / 2, viewPortHeight / 2)
+      .scale(zoomScale)
+      .translate(-(paddedFeatureBounds.x + paddedFeatureBounds.width / 2), -(paddedFeatureBounds.y + paddedFeatureBounds.height / 2))
 
     select(this._viewport).transition().duration(500).call(this._zoomBehaviour.transform, newTransform, focalPoint)
   }
