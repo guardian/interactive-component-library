@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'preact/hooks'
+import { useState, useLayoutEffect } from "preact/hooks"
 
 function useWindowSize() {
-
   const [windowSize, setWindowSize] = useState(() => {
-    if (typeof window === 'undefined') return { width: 0, height: 0 }
+    if (typeof window === "undefined") return { width: 0, height: 0 }
 
     return {
       width: window.innerWidth,
@@ -11,8 +10,8 @@ function useWindowSize() {
     }
   })
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return
+  useLayoutEffect(() => {
+    if (typeof window === "undefined") return
 
     function handleResize() {
       setWindowSize({
@@ -21,9 +20,9 @@ function useWindowSize() {
       })
     }
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener("resize", handleResize)
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener("resize", handleResize)
     }
   }, [])
 
