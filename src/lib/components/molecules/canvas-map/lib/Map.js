@@ -129,7 +129,7 @@ export class Map {
       return
     }
 
-    ;[...this.layers].forEach((layer) => {
+    new Array(...this.layers).forEach((layer) => {
       if (!layers.includes(layer)) {
         this.removeLayer(layer)
       }

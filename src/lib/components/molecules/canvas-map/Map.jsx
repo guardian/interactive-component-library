@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "preact/hooks"
 import { forwardRef } from "preact/compat"
 import { Map as _Map } from "./lib/Map"
-import { MapEvent } from "./lib/events"
 import { View } from "./lib/View"
 import styles from "./style.module.scss"
 
