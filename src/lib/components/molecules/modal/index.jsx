@@ -3,7 +3,7 @@ import { createPortal } from "preact/compat"
 import { CSSTransition } from "preact-transitioning"
 import styles from "./style.module.css"
 
-export function Modal({ visible = false, children, onClickOutside }) {
+export function Modal({ visible = false, blurBackground = true, children, onClickOutside }) {
   const modalBoxRef = useRef()
   const onClick = useCallback(
     (event) => {
@@ -29,7 +29,7 @@ export function Modal({ visible = false, children, onClickOutside }) {
 
   return createPortal(
     <CSSTransition in={visible} duration={300} classNames={styles}>
-      <div class={styles.transitionContainer} onClick={onClick} style={{ pointerEvents: visible ? "auto" : "none" }}>
+      <div className={[styles.transitionContainer, blurBackground && styles.blur, visible && styles.visible].join(" ")} onClick={onClick}>
         <div ref={modalBoxRef} class={styles.modalBox}>
           {children}
         </div>
