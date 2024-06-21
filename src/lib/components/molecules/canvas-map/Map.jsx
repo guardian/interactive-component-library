@@ -9,6 +9,8 @@ const mobileHelpText = "Use two fingers to zoom"
 export const Map = forwardRef(({ config, onLoad, children }, ref) => {
   const { layers } = children
 
+  const targetRef = useRef()
+
   const [map, setMap] = useState()
   const [zoomHelpText, setZoomHelpText] = useState("")
   const [showHelpText, setShowHelpText] = useState(false)
@@ -29,6 +31,7 @@ export const Map = forwardRef(({ config, onLoad, children }, ref) => {
     setZoomHelpText(zoomHelpText)
 
     return () => {
+      map.destroy()
       if (ref) ref.current = null
       setMap(null)
     }
@@ -60,8 +63,6 @@ export const Map = forwardRef(({ config, onLoad, children }, ref) => {
       map.setLayers(layers)
     }
   }, [map, layers])
-
-  const targetRef = useRef()
 
   return (
     <div ref={targetRef} className={styles.mapContainer}>
