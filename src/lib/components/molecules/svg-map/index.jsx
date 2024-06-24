@@ -101,7 +101,7 @@ export const SVGMap = forwardRef(({ id, width, height, config, children, padding
   const renderZoomControl = zoomControl && zoom.enabled
 
   return (
-    <div ref={containerRef} className={styles.container} style={containerStyle}>
+    <figure ref={containerRef} className={styles.container} style={containerStyle}>
       {renderSVG && (
         <SVGMapProvider id={id} width={containerSize.width} height={containerSize.height} padding={padding} config={config} mapRef={mapRef} selectedFeature={selectedFeature} zoom={zoom}>
           <SVGRenderer>{organisedChildren.layers.map((child, index) => cloneElement(child, { zIndex: index }))}</SVGRenderer>
@@ -117,6 +117,6 @@ export const SVGMap = forwardRef(({ id, width, height, config, children, padding
           </div>
         )}
       </div>
-    </div>
+    </figure>
   )
 })
