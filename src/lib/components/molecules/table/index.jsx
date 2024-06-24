@@ -1,13 +1,13 @@
-import { useState } from 'preact/hooks'
-import { useTable } from './useTable'
-import { Chevron } from '$particles/chevron'
-import defaultStyles from './style.module.scss'
-import { mergeStyles } from '$styles/helpers/mergeStyles'
+import { useState } from "preact/hooks"
+import { useTable } from "./useTable"
+import { Chevron } from "$particles/chevron"
+import defaultStyles from "./style.module.scss"
+import { mergeStyles } from "$styles/helpers/mergeStyles"
 
-export function Table({ columns, data, hideHeader=false, styles }) {
+export function Table({ columns, data, hideHeader = false, styles }) {
   const [sortState, setSortState] = useState(() => {
     const columnIndex = columns.findIndex((column) => {
-      if ('sort' in column) {
+      if ("sort" in column) {
         return true
       }
       return false
@@ -37,13 +37,8 @@ export function Table({ columns, data, hideHeader=false, styles }) {
       <thead className={hideHeader && styles.hideHeader}>
         <tr>
           {table.columns.map((column, index) => (
-            <th key={column.id} className={mergeStyles(styles.headerCell, column.styles?.headerCell)}>
-              <HeaderCell
-                key={index}
-                styles={mergeStyles(styles, column.styles)}
-                onClick={() => sortByColumn(index)}
-                {...column.headerProps}
-              />
+            <th scope="col" key={column.id} className={mergeStyles(styles.headerCell, column.styles?.headerCell)}>
+              <HeaderCell key={index} styles={mergeStyles(styles, column.styles)} onClick={() => sortByColumn(index)} {...column.headerProps} />
             </th>
           ))}
         </tr>
@@ -70,9 +65,9 @@ function HeaderCell({ text, sortable, isSorted, styles, onClick }) {
     return text
   }
 
-  let direction = 'down'
+  let direction = "down"
   if (isSorted?.ascending === false) {
-    direction = 'up'
+    direction = "up"
   }
 
   return (
