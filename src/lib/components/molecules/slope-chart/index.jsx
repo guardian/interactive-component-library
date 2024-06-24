@@ -4,7 +4,7 @@ import { useContainerSize } from "$shared/hooks/useContainerSize"
 import defaultStyles from "./style.module.css"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 
-export const SlopeChart = ({ domain, lines, y1Label = (d) => d.y1, y2Label = (d) => d.y2, axis, styles, padding = { left: 24, right: 24, top: 20, bottom: 20 } }) => {
+export const SlopeChart = ({ domain, lines, y1Label = (d) => d.y1, y2Label = (d) => d.y2, axis, styles, padding = { left: 24, right: 24, top: 20, bottom: 20 }, svgId }) => {
   const wrapperRef = useRef(null)
   const containerSize = useContainerSize(wrapperRef)
   const width = containerSize ? containerSize.width : 0
@@ -30,7 +30,7 @@ export const SlopeChart = ({ domain, lines, y1Label = (d) => d.y1, y2Label = (d)
   styles = mergeStyles({ ...defaultStyles }, styles)
 
   const chart = (
-    <svg class={styles.svg} width={width} height={height}>
+    <svg class={styles.svg} width={width} height={height} id={svgId}>
       <g transform={`translate(${padding.left} ${padding.top})`}>
         {/* draw axis */}
         <g transform={`translate(0 ${contentHeight})`}>

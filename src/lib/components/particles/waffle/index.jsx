@@ -10,7 +10,7 @@ export const WaffleType = {
 
 const WaffleUnit = ({ type, attributes }) => (type === WaffleType.square ? <rect {...attributes} /> : <circle {...attributes} />)
 
-export const Waffle = ({ units, numberOfRows, type = WaffleType.circle, idAccessor, onMouseOver = () => {}, onClick = () => {}, styles }) => {
+export const Waffle = ({ units, numberOfRows, type = WaffleType.circle, idAccessor, onMouseOver = () => {}, onClick = () => {}, styles, svgId }) => {
   const containerRef = useRef()
   const containerSize = useContainerSize(containerRef)
   const width = containerSize ? containerSize.width : 0
@@ -25,7 +25,7 @@ export const Waffle = ({ units, numberOfRows, type = WaffleType.circle, idAccess
   return (
     <div ref={containerRef} className={styles.container}>
       {containerSize && (
-        <svg viewBox={`0 0 ${width} ${height}`} class={styles.svg}>
+        <svg viewBox={`0 0 ${width} ${height}`} class={styles.svg} id={svgId}>
           <g>
             {units.map((unit, j) => {
               let attributes
