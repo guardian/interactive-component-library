@@ -35,8 +35,7 @@
   }
 }
 
-.enterActive,
-.exit {
+.enterActive {
   .blur {
     background-color: rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(4px);
@@ -44,5 +43,15 @@
 
   .modalBox {
     transform: translateY(0);
+  }
+}
+
+.exitActive {
+  .blur {
+    background-color: transparent;
+    backdrop-filter: none;
+  }
+  .modalBox {
+    transform: translateY(100%);
   }
 }
