@@ -29,6 +29,7 @@ export const Default = {
       endLabel: "2024",
     },
     padding: { left: 24, right: 36, top: 20, bottom: 20 },
+    svgId: "slope-chart-svg",
   },
   render: (args) => <SlopeChart {...args} />,
 }
