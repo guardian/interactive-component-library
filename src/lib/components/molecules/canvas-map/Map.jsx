@@ -65,11 +65,11 @@ export const Map = forwardRef(({ config, onLoad, children }, ref) => {
   }, [map, layers])
 
   return (
-    <div ref={targetRef} className={styles.mapContainer}>
+    <figure ref={targetRef} className={styles.mapContainer}>
       <div className={styles.helpTextContainer} style={{ opacity: showHelpText ? 1 : 0 }} aria-hidden>
         <p className={[styles.helpText, styles.desktopHelpText].join(" ")}>{zoomHelpText}</p>
         <p className={[styles.helpText, styles.mobileHelpText].join(" ")}>{mobileHelpText}</p>
       </div>
-    </div>
+    </figure>
   )
 })
