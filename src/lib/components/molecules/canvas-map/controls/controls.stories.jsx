@@ -13,3 +13,9 @@ const meta = {
 export default meta
 
 export const Zoom = {}
+
+export const ResetEnabled = {
+  args: {
+    resetEnabled: true,
+  },
+}
