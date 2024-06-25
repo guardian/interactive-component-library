@@ -4,6 +4,15 @@ const sortAscending = (accessor) => {
   return (a, b) => {
     const valueA = a[accessor]
     const valueB = b[accessor]
+
+    if (!valueA || !valueB) {
+      if (valueB === null) {
+        return -1
+      } else if (!valueA === null) {
+        return 1
+      }
+    }
+
     if (valueA < valueB) return -1
     if (valueA > valueB) return 1
     return 0
@@ -14,6 +23,15 @@ const sortDescending = (accessor) => {
   return (a, b) => {
     const valueA = a[accessor]
     const valueB = b[accessor]
+
+    if (!valueA && !valueB) {
+      return 0
+    } else if (!valueB === null) {
+      return 1
+    } else if (!valueA === null) {
+      return -1
+    }
+
     if (valueA > valueB) return -1
     if (valueA < valueB) return 1
     return 0

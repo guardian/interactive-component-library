@@ -57,15 +57,33 @@ export const Sortable = {
         accessor: "lastName",
         sortable: true,
       },
+      {
+        header: "Age",
+        accessor: "age",
+        sortable: true,
+        cell: (d) => (d["age"] === null ? "-" : d["age"].toFixed(0)),
+      },
     ],
     data: [
       {
         firstName: "Margaret",
         lastName: "Jones",
+        age: 22,
       },
       {
         firstName: "Jake",
         lastName: "Smith",
+        age: 18,
+      },
+      {
+        firstName: "Fred",
+        lastName: "Bloggs",
+        age: null,
+      },
+      {
+        firstName: "Baby",
+        lastName: "Yoda",
+        age: 0,
       },
     ],
   },
