@@ -5,12 +5,10 @@ const sortAscending = (accessor) => {
     const valueA = a[accessor]
     const valueB = b[accessor]
 
-    if (!valueA || !valueB) {
-      if (valueB === null) {
-        return -1
-      } else if (!valueA === null) {
-        return 1
-      }
+    if (valueA === null) {
+      return -1
+    } else if (valueB === null) {
+      return 1
     }
 
     if (valueA < valueB) return -1
@@ -24,11 +22,9 @@ const sortDescending = (accessor) => {
     const valueA = a[accessor]
     const valueB = b[accessor]
 
-    if (!valueA && !valueB) {
-      return 0
-    } else if (!valueB === null) {
+    if (valueA === null) {
       return 1
-    } else if (!valueA === null) {
+    } else if (valueB === null) {
       return -1
     }
 
@@ -147,6 +143,6 @@ class CellModel {
       throw new Error(`Missing value for key ${this.column.accessor} in ${rowData}`)
     }
 
-    return this.row[this.column.accessor].toString()
+    return this.row[this.column.accessor] !== null ? this.row[this.column.accessor].toString() : "null"
   }
 }
