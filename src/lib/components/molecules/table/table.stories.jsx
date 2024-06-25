@@ -71,6 +71,11 @@ export const Sortable = {
         age: 22,
       },
       {
+        firstName: "Freda",
+        lastName: "Bloggs",
+        age: null,
+      },
+      {
         firstName: "Jake",
         lastName: "Smith",
         age: 18,
@@ -84,6 +89,11 @@ export const Sortable = {
         firstName: "Baby",
         lastName: "Yoda",
         age: 0,
+      },
+      {
+        firstName: "Han",
+        lastName: "Solo",
+        age: -0,
       },
     ],
   },
