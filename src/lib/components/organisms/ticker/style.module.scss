@@ -93,16 +93,16 @@
 
 // Expanded state
 
-.ticker[data-expanded='true'] {
+.ticker[data-expanded="true"] {
   padding-bottom: 0;
 }
 
-.ticker[data-expanded='true'] .tickerScroll {
+.ticker[data-expanded="true"] .tickerScroll {
   max-height: fit-content;
   margin-bottom: -40px;
 }
 
-.ticker[data-expanded='true'] .controls {
+.ticker[data-expanded="true"] .controls {
   position: sticky;
   margin-top: -40px;
   // background-color: aqua;
@@ -114,4 +114,32 @@
     bottom: 0;
     padding-bottom: 8px;
   }
+}
+
+// card slide in animations
+
+.tickerItem {
+}
+
+.enter {
+  opacity: 0.5;
+  transform: translateX(-50%) !important;
+  outline: 5px solid purple;
+}
+
+.enter {
+  opacity: 0.5;
+  transform: translateX(-50%) !important;
+  outline: 5px solid purple;
+}
+
+.enterActive {
+  opacity: 1;
+  transform: translateX(-10%);
+  transition: transform 600ms ease-in-out;
+  outline: 5px solid green;
+}
+
+.enterDone {
+  transform: translateX(-5%);
 }

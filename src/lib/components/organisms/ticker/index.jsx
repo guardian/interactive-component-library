@@ -1,8 +1,10 @@
 import { toChildArray } from "preact"
 import { useState, useRef, useLayoutEffect, useMemo } from "preact/hooks"
+import { CSSTransition, TransitionGroup } from "preact-transitioning"
 import { useWindowSize } from "$shared/hooks/useWindowSize"
 import { Gradient } from "./gradient"
 import { ArrowButton, Button } from "$particles"
+
 import styles from "./style.module.scss"
 
 export function Ticker({ maxItems = 20, onStateChange, children }) {
@@ -56,11 +58,24 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
     <div ref={tickerRef} className={styles.ticker} style={`--ticker-offset: ${offsetWidth}px;`} data-expanded={expanded}>
       <div ref={tickerItemsRef} className={styles.tickerItems}>
         <div ref={tickerScrollRef} className={styles.tickerScroll}>
-          {childArray.map((child, index) => (
-            <div className={styles.tickerItem} key={index}>
-              {child}
-            </div>
-          ))}
+          <TransitionGroup>
+            {childArray.map((child, index) => {
+              return (
+                <CSSTransition
+                  in={true}
+                  key={index}
+                  classNames={{
+                    enter: "enter",
+                    enterActive: "enterActive",
+                  }}
+                  onEnter={() => console.log("Entering active:", index, styles.enter)}
+                  onEntered={() => console.log("Entered:", index)}
+                >
+                  <div className={styles.tickerItem}>{child}</div>
+                </CSSTransition>
+              )
+            })}
+          </TransitionGroup>
         </div>
       </div>
       <div ref={controlsRef} className={styles.controls} style={hideButtons && { display: "none" }}>
