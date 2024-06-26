@@ -6,10 +6,12 @@
   line-height: var(--sans-line-height);
   text-align: left;
   border: none;
+  border-collapse: separate;
 }
 
 .hideHeader {
   visibility: hidden;
+
   th {
     padding-top: 0;
     padding-bottom: 0;
@@ -29,6 +31,14 @@
   padding-top: var(--space-2);
   padding-bottom: var(--space-2);
   color: var(--primary-text-color);
+  border-bottom: 1px solid var(--border-divider-color);
+}
+
+.stickyHeader {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: var(--primary-bg-color);
 }
 
 .headerCellButton {
@@ -41,7 +51,6 @@
 }
 
 .bodyRow {
-  border-top: 1px solid var(--border-divider-color);
   color: var(--primary-text-color);
 }
 
@@ -49,4 +58,9 @@
   font-weight: normal;
   padding-top: var(--space-2);
   padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border-divider-color);
+}
+
+.bodyRow:last-child > .bodyCell {
+  border-bottom: 0;
 }
