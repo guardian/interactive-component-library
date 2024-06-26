@@ -37,7 +37,7 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
   }, [])
 
   useLayoutEffect(() => {
-    const hideButtons = childArray.length < 3
+    const hideButtons = childArray.length < 4
 
     setHideButtons(hideButtons)
   }, [childArray])
