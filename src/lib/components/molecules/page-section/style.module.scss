@@ -1,12 +1,39 @@
 .borderTop::before {
   border-top: 1px solid var(--border-divider-color);
-  z-index: 1;
 }
 
 .section {
   position: relative;
   z-index: 0;
   margin-bottom: var(--space-8);
+}
+
+.section.fullWidth {
+  transform: translate(-10px);
+  width: calc(100% + 20px);
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+
+  @include mq($from: mobileLandscape) {
+    transform: translate(-20px);
+    width: calc(100% + 40px);
+  }
+
+  @include mq($from: tablet) {
+    transform: translate(-20px);
+    width: calc(100% + 60px);
+  }
+
+  @include mq($from: leftCol) {
+    transform: translate(-180px);
+    width: calc(100% + 200px);
+  }
+
+  @include mq($from: wide) {
+    transform: translate(-260px);
+    width: calc(100% + 280px);
+  }
 }
 
 .section::before {
@@ -42,38 +69,10 @@
   }
 }
 
-.section.fullWidth {
-  transform: translate(-10px);
-  width: calc(100% + 20px);
-  margin: 0;
-  padding: 0;
-  background-color: var(--background-color);
-
-  @include mq($from: mobileLandscape) {
-    transform: translate(-20px);
-    width: calc(100% + 40px);
-  }
-
-  @include mq($from: tablet) {
-    transform: translate(-20px);
-    width: calc(100% + 60px);
-  }
-
-  @include mq($from: leftCol) {
-    transform: translate(-180px);
-    width: calc(100% + 200px);
-  }
-
-  @include mq($from: wide) {
-    transform: translate(-260px);
-    width: calc(100% + 280px);
-  }
-}
-
 .section.fullWidth::before {
   transform: none;
   width: 100%;
-  height: 100%;
+  height: 1px;
   background-color: transparent;
 }
 
@@ -127,7 +126,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      transform: translateX(-9px);
+      transform: translate(-9px, 1px);
       width: calc(100% + 29px);
       height: calc(100% + var(--space-8));
       background-color: var(--background-color);
