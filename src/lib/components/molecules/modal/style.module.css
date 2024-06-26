@@ -6,7 +6,6 @@
   bottom: 0;
   transition: all 300ms ease-in-out;
   z-index: 9999;
-  pointer-events: none;
 }
 
 .blur {
