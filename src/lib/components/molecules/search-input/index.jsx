@@ -12,18 +12,35 @@ export function SearchInput({ placeholder, inputValue, maxSuggestions = 5, onInp
   const [suggestions, setSuggestions] = useState()
   const [showSuggestions, setShowSuggestions] = useState(true)
 
-  function onKeyDown(event) {
+  async function updateSelectedIndex(diff) {
+    setSelectedIndex((currentIndex) => {
+      const newIndex = Math.max(Math.min(currentIndex + diff, suggestions.length - 1), -1)
+      if (newIndex >= 0 && suggestions[newIndex].disabled) {
+        return currentIndex
+      }
+      return newIndex
+    })
+  }
+
+  async function onKeyDown(event) {
     if (event.key === "ArrowDown") {
       event.preventDefault()
-      setSelectedIndex((currentIndex) => Math.min(currentIndex + 1, suggestions.length - 1))
+      updateSelectedIndex(1)
     } else if (event.key === "ArrowUp") {
       event.preventDefault()
-      setSelectedIndex((currentIndex) => Math.max(currentIndex - 1, -1))
+      updateSelectedIndex(-1)
     } else if (event.key === "Enter" && selectedIndex >= 0) {
       event.preventDefault()
       onSelectSuggestion(suggestions[selectedIndex])
     } else if (event.key === "Enter") {
-      onSubmit(inputRef.current.value)
+      event.preventDefault()
+      if (onSubmit) {
+        const shouldBlur = await onSubmit(inputRef.current.value)
+        if (shouldBlur) {
+          inputRef.current.blur()
+        }
+      }
+    } else if (event.key === "Escape") {
       inputRef.current.blur()
     }
   }
@@ -104,26 +121,29 @@ function SuggestionList({ suggestions, highlightText, selectedIndex, styles, onM
   return (
     <ul className={styles.suggestions} aria-label="Search suggestions">
       {suggestions.map((d, index) => {
+        const shouldHighlight = !d.disabled
         return (
           <li
             key={index}
             aria-label={d.text}
-            className={[styles.suggestion, index === selectedIndex && styles.selected].join(" ")}
+            className={[styles.suggestion, index === selectedIndex && styles.selected, d.disabled && styles.disabled].join(" ")}
             onMouseDown={(e) => e.preventDefault()}
             onMouseOver={() => onMouseOver(d, index)}
             onClick={() => {
               onSelect(d)
             }}
           >
-            {d.text.split(new RegExp(`(${highlightText})`, "ig")).map((part, i) =>
-              i % 2 === 1 ? (
-                <span className={styles.highlighted} key={i}>
-                  {part}
-                </span>
-              ) : (
-                part
-              ),
-            )}
+            {shouldHighlight &&
+              d.text.split(new RegExp(`(${highlightText})`, "ig")).map((part, i) =>
+                i % 2 === 1 ? (
+                  <span className={styles.highlighted} key={i}>
+                    {part}
+                  </span>
+                ) : (
+                  part
+                ),
+              )}
+            {!shouldHighlight && d.text}
           </li>
         )
       })}
