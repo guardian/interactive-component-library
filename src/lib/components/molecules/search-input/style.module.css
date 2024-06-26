@@ -65,6 +65,11 @@ input:focus {
   line-height: var(--sans-line-height);
 }
 
+.suggestion.disabled {
+  color: var(--secondary-text-color);
+  pointer-events: none;
+}
+
 .selected {
   background-color: var(--secondary-bg-color);
 }
