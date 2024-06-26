@@ -37,12 +37,10 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
   }, [])
 
   useLayoutEffect(() => {
-    const tickerItemsContainer = tickerItemsRef.current
-
-    const hideButtons = windowSize.width >= 480 ? tickerScrollRef.current.scrollWidth <= tickerItemsContainer.clientWidth : childArray.length < 3
+    const hideButtons = childArray.length < 3
 
     setHideButtons(hideButtons)
-  }, [windowSize, setHideButtons])
+  }, [childArray])
 
   function toggleExpandedState() {
     setExpanded((expanded) => {
