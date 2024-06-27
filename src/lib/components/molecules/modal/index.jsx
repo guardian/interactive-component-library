@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useRef } from "preact/hooks"
 import { createPortal } from "preact/compat"
 import { CSSTransition } from "preact-transitioning"
-import styles from "./style.module.css"
+import defaultStyles from "./style.module.css"
+import { mergeStyles } from "$styles/helpers/mergeStyles"
 
-export function Modal({ visible = false, blurBackground = true, children, onClickOutside }) {
+export function Modal({ visible = false, blurBackground = true, styles, children, onClickOutside }) {
+  styles = mergeStyles(defaultStyles, styles)
   const modalBoxRef = useRef()
   const onClick = useCallback(
     (event) => {
