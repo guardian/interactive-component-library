@@ -24,20 +24,14 @@ export class FeatureRenderer {
     const { stroke, fill } = this.style
 
     if (stroke) {
-      context.save()
-      context.globalAlpha = stroke.opacity
       context.lineWidth = (stroke.width * pixelRatio) / transform.k
-      context.strokeStyle = stroke.color
+      context.strokeStyle = stroke.getRgba()
       context.stroke()
-      context.restore()
     }
 
     if (fill) {
-      context.save()
-      context.globalAlpha = fill.opacity
-      context.fillStyle = fill.color
+      context.fillStyle = fill.getRgba()
       context.fill()
-      context.restore()
     }
   }
 }
