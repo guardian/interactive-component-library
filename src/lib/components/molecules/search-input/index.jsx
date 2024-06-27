@@ -4,7 +4,7 @@ import { SearchIcon } from "./icons/search"
 import { CloseButton } from "$particles"
 import defaultStyles from "./style.module.css"
 
-export function SearchInput({ placeholder, inputValue, maxSuggestions = 5, onInputChange, onSubmit, onSelect, onClear, styles }) {
+export function SearchInput({ placeholder, inputValue, maxSuggestions = 5, onInputChange, onSubmit, onSelect, onClear, onFocus, styles }) {
   styles = mergeStyles(defaultStyles, styles)
 
   const inputRef = useRef(null)
@@ -81,6 +81,8 @@ export function SearchInput({ placeholder, inputValue, maxSuggestions = 5, onInp
         onFocus={(e) => {
           e.target.select()
           setShowSuggestions(true)
+
+          onFocus && onFocus(e)
         }}
         className={styles.input}
       />
