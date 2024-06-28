@@ -8,7 +8,7 @@ export const SectionLayout = {
   fullWidth: "fullWidth",
 }
 
-export const PageSection = forwardRef(({ children, layout = SectionLayout.default, styles, borderTop = false, backgroundColor = "transparent" }, ref) => {
+export const PageSection = forwardRef(({ id, children, layout = SectionLayout.default, styles, borderTop = false, backgroundColor = "transparent" }, ref) => {
   styles = mergeStyles({ ...defaultStyles }, styles)
 
   const [minHeight, setMinHeight] = useState("auto")
@@ -20,7 +20,8 @@ export const PageSection = forwardRef(({ children, layout = SectionLayout.defaul
   }, [children])
 
   return (
-    <section ref={ref} className={[styles.section, styles[layout], borderTop && styles.borderTop].join(" ")} style={{ "--background-color": backgroundColor, minHeight }}>
+    <section id={id} ref={ref} className={[styles.section, styles[layout]].join(" ")} style={{ "--background-color": backgroundColor, minHeight }}>
+      {borderTop && <div className={styles.borderTop} />}
       <div className={[styles.header, styles[layout]].join(" ")} ref={headerRef}>
         {children.header}
       </div>
