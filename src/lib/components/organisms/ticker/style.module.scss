@@ -81,6 +81,7 @@
 .button {
   min-height: 40px;
   background-color: var(--tertiary-bg-color);
+  padding-bottom: 20px;
 
   @include mq($from: mobileLandscape) {
     display: none;
@@ -93,16 +94,16 @@
 
 // Expanded state
 
-.ticker[data-expanded='true'] {
+.ticker[data-expanded="true"] {
   padding-bottom: 0;
 }
 
-.ticker[data-expanded='true'] .tickerScroll {
+.ticker[data-expanded="true"] .tickerScroll {
   max-height: fit-content;
   margin-bottom: -40px;
 }
 
-.ticker[data-expanded='true'] .controls {
+.ticker[data-expanded="true"] .controls {
   position: sticky;
   margin-top: -40px;
   // background-color: aqua;
