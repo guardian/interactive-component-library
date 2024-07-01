@@ -23,9 +23,11 @@ export class TextLayerRenderer {
     style.overflow = "hidden"
   }
 
-  renderFrame(frameState) {
+  renderFrame(frameState, targetElement) {
+    if (this.layer.opacity === 0) return targetElement
+
     const { declutterTree } = frameState
-    const { projection, sizeInPixels, visibleExtent, transform } = frameState.viewState
+    const { projection, viewPortSize, sizeInPixels, visibleExtent, transform } = frameState.viewState
 
     // set opacity
     this._element.style.opacity = this.layer.opacity
@@ -50,18 +52,18 @@ export class TextLayerRenderer {
       const textElement = this.getTextElementWithID(feature.uid)
       textElement.innerText = featureStyle.text.content
 
-      // calculate position
-      const [x, y] = transform.apply(point.coordinates)
+      // calculate relative position
+      const [relativeX, relativeY] = transform.apply(point.coordinates).map((d, i) => d / sizeInPixels[i])
       const position = {
-        left: `${(x / sizeInPixels[0]) * 100}%`,
-        top: `${(y / sizeInPixels[1]) * 100}%`,
+        left: `${relativeX * 100}%`,
+        top: `${relativeY * 100}%`,
       }
 
       // apply style to text element
       this.styleTextElement(textElement, featureStyle.text, position)
 
       // skip item if it collides with existing elements
-      const bbox = this.getElementBBox(textElement, { x, y })
+      const bbox = this.getElementBBox(textElement, { x: relativeX * viewPortSize[0], y: relativeY * viewPortSize[1] })
       if (declutterTree.collides(bbox)) {
         continue
       }
@@ -139,7 +141,7 @@ export class TextLayerRenderer {
     style.top = `${bbox.minY}px`
     style.width = `${bbox.maxX - bbox.minX}px`
     style.height = `${bbox.maxY - bbox.minY}px`
-    style.border = "1px solid black"
+    style.border = "2px solid black"
 
     return element
   }
