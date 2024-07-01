@@ -1,6 +1,8 @@
 import { sizeMinusPadding, scaleSize, scalePadding } from "./util/size"
 import { bboxFeature } from "./util/bboxFeature"
-import { ZoomTransform } from "d3-zoom"
+import { ZoomTransform, zoomIdentity } from "d3-zoom"
+import { zoomLevelToZoomScale, zoomLevelForResolution } from "./util/zoomLevel"
+import { resolutionForExtent } from "./util/resolution"
 
 export class View {
   constructor({ projection, extent, minZoom, maxZoom, padding }) {
@@ -10,6 +12,7 @@ export class View {
     this.extent = extent
     this.minZoom = minZoom
     this.maxZoom = maxZoom
+    this._transform = zoomIdentity
     this._padding = padding
     this._viewPortSize = [0, 0]
     this.pixelRatio = window.devicePixelRatio
@@ -21,6 +24,8 @@ export class View {
 
     if (previousSize !== size) {
       this.fitObject(bboxFeature(this.extent))
+      const initialExtent = this.getVisibleExtent(zoomIdentity, this.projection)
+      this.initialResolution = resolutionForExtent(initialExtent, size)
     }
   }
 
@@ -51,9 +56,10 @@ export class View {
     return scalePadding(scaledPadding, this.pixelRatio)
   }
 
-  // defines the upper and lower limits for zoom behaviour
+  // calculates the upper and lower zoom scales
   get scaleExtent() {
-    return [this.minZoom, this.maxZoom]
+    const maxScale = zoomLevelToZoomScale(this.maxZoom, this.initialResolution)
+    return [1, maxScale]
   }
 
   setProjection(projection) {
@@ -111,6 +117,16 @@ export class View {
     const bottomLeft = [bounds[0][0], bounds[1][1]]
     const points = [topLeft, topRight, bottomRight, bottomLeft, topLeft]
     return points.map((d) => this.invert(d))
+  }
+
+  // map resolution (meters per pixel)
+  getResolution() {
+    return resolutionForExtent(this.getVisibleExtent(this.transform, this.projection), this.viewPortSize)
+  }
+
+  // map zoom level (0 = the entire world)
+  getZoomLevel() {
+    return zoomLevelForResolution(this.getResolution())
   }
 
   // get extent for drawn map
