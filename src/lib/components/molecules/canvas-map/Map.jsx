@@ -6,7 +6,7 @@ import styles from "./style.module.scss"
 
 const mobileHelpText = "Use two fingers to zoom"
 
-export const Map = forwardRef(({ config, onLoad, children }, ref) => {
+export const Map = forwardRef(({ config, inModalState = false, onLoad, children }, ref) => {
   const { layers } = children
 
   const targetRef = useRef()
@@ -20,6 +20,7 @@ export const Map = forwardRef(({ config, onLoad, children }, ref) => {
       view: new View(config.view),
       target: targetRef.current,
     })
+    map.collaborativeGesturesEnabled = !inModalState
     map.addLayers(layers)
 
     setMap(map)
@@ -63,6 +64,11 @@ export const Map = forwardRef(({ config, onLoad, children }, ref) => {
       map.setLayers(layers)
     }
   }, [map, layers])
+
+  useEffect(() => {
+    if (!map) return
+    map.collaborativeGesturesEnabled = !inModalState
+  }, [inModalState])
 
   return (
     <figure ref={targetRef} className={styles.mapContainer}>

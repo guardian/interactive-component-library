@@ -53,7 +53,7 @@ export class Map {
           return filterEvent(true)
         }
 
-        if ("targetTouches" in event) {
+        if ("targetTouches" in event && this.collaborativeGesturesEnabled) {
           if (event.targetTouches.length < 2) {
             // ignore single touches
             return false
@@ -80,6 +80,8 @@ export class Map {
     this._viewport.addEventListener("touchmove", (event) => {
       if (event.targetTouches.length < 2) {
         this._filterEventCallback(true)
+      } else {
+        event.stopImmediatePropagation()
       }
     })
   }
