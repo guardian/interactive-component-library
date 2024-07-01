@@ -35,7 +35,7 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
 
     const numberOfPages = Math.ceil(tickerScrollRef.current.scrollWidth / pageWidth)
     setNumberOfPages(numberOfPages)
-  }, [])
+  }, [childArray])
 
   useLayoutEffect(() => {
     const hideButtons = childArray.length < 4
