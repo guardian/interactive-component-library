@@ -66,6 +66,10 @@ export class Map {
     return this.view.transform.k
   }
 
+  get isTransitioning() {
+    return this._isTransitioning
+  }
+
   /** PUBLIC METHODS */
 
   onFilterEvent(callback) {
@@ -190,6 +194,7 @@ export class Map {
     const ease = options.ease || ((t) => t)
     return new Promise((resolve) => {
       this._isTransitioning = true
+      this.dispatcher.dispatch(MapEvent.TRANSITION_START)
 
       const _timer = timer((elapsed) => {
         const t = Math.min(elapsed / options.duration, 1)
@@ -198,6 +203,7 @@ export class Map {
         if (elapsed >= options.duration) {
           _timer.stop()
           this._isTransitioning = false
+          this.dispatcher.dispatch(MapEvent.TRANSITION_END)
           resolve()
         }
       })
