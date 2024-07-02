@@ -34,7 +34,7 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
 
     const numberOfPages = Math.ceil(tickerScrollRef.current.scrollWidth / pageWidth)
     setNumberOfPages(numberOfPages)
-  }, [])
+  }, [childArray])
 
   useLayoutEffect(() => {
     const hideButtons = childArray.length < 4
@@ -43,6 +43,9 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
   }, [childArray])
 
   function toggleExpandedState() {
+    if (expanded) {
+      tickerRef.current.scrollIntoView({ behavior: "smooth", alignToTop: true }) //scroll user up to top of ticker when closing at mobile
+    }
     setExpanded((expanded) => {
       const newState = !expanded
       if (onStateChange) onStateChange({ expanded: newState })
