@@ -1,4 +1,4 @@
-import { hasArea } from "./util/size"
+import { sizeForElement } from "./util/size"
 import { arrayEquals } from "./util/array"
 import { containsCoordinate } from "./util/extent"
 import { MapRenderer } from "./renderers/MapRenderer"
@@ -33,7 +33,9 @@ export class Map {
     this._renderer = new MapRenderer(this)
 
     // Create resize observer
-    this._resizeObserver = new ResizeObserver(() => this._updateSize())
+    this._resizeObserver = new ResizeObserver(() => {
+      this._updateSize()
+    })
     // Trigger fires when observer is first added, ensuring _updateSize() is called
     this._resizeObserver.observe(this.target)
 
@@ -213,33 +215,11 @@ export class Map {
   _updateSize() {
     const targetElement = this.target
 
-    let size
-    if (targetElement) {
-      const computedStyle = getComputedStyle(targetElement)
-      const width =
-        targetElement.offsetWidth -
-        parseFloat(computedStyle["borderLeftWidth"]) -
-        parseFloat(computedStyle["paddingLeft"]) -
-        parseFloat(computedStyle["paddingRight"]) -
-        parseFloat(computedStyle["borderRightWidth"])
-      const height =
-        targetElement.offsetHeight -
-        parseFloat(computedStyle["borderTopWidth"]) -
-        parseFloat(computedStyle["paddingTop"]) -
-        parseFloat(computedStyle["paddingBottom"]) -
-        parseFloat(computedStyle["borderBottomWidth"])
-      if (!isNaN(width) && !isNaN(height)) {
-        size = [width, height]
-        if (!hasArea(size) && !!(targetElement.offsetWidth || targetElement.offsetHeight || targetElement.getClientRects().length)) {
-          console.warn("No map visible because the map container's width or height are 0.")
-        }
-      }
-    }
-
+    let newSize = sizeForElement(targetElement)
     const oldSize = this.size
-    if (size && (!oldSize || !arrayEquals(size, oldSize))) {
-      this._size = size
-      this._updateViewportSize(size)
+    if (newSize && (!oldSize || !arrayEquals(newSize, oldSize))) {
+      this._size = newSize
+      this._updateViewportSize(newSize)
     }
   }
 
