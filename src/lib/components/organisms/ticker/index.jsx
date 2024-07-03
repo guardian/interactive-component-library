@@ -58,7 +58,7 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
       <div ref={tickerItemsRef} className={styles.tickerItems}>
         <div ref={tickerScrollRef} className={styles.tickerScroll}>
           {childArray.map((child, index) => (
-            <div className={styles.tickerItem} key={index}>
+            <div className={styles.tickerItem} key={child?.props?.id ?? index}>
               {child}
             </div>
           ))}
