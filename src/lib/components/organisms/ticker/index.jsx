@@ -69,7 +69,7 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
           <Gradient />
         </div>
         <div className={styles.buttons}>
-          <ArrowButton onClick={() => setPageIndex((d) => d + 1)} disabled={pageIndex >= numberOfPages - 1} />
+          <ArrowButton onClick={() => setPageIndex((d) => d + 1)} disabled={pageIndex >= numberOfPages - 2} />
           <ArrowButton direction="left" onClick={() => setPageIndex((d) => d - 1)} disabled={pageIndex <= 0} />
         </div>
         <div className={styles.button}>
