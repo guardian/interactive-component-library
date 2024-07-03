@@ -60,7 +60,7 @@ export class Map {
     return this._viewport
   }
 
-  get zoomLevel() {
+  get zoomScale() {
     return this.view.transform.k
   }
 
@@ -118,15 +118,15 @@ export class Map {
   }
 
   async zoomIn(options) {
-    return this.zoomTo(this.zoomLevel * 2, options)
+    return this.zoomTo(this.zoomScale * 2, options)
   }
 
   async zoomOut(options) {
-    return this.zoomTo(this.zoomLevel * 0.5, options)
+    return this.zoomTo(this.zoomScale * 0.5, options)
   }
 
-  async zoomTo(zoomLevel, options = { duration: 500 }) {
-    return select(this._viewport).transition().duration(options.duration).call(this._zoomBehaviour.scaleTo, zoomLevel).end()
+  async zoomTo(zoomScale, options = { duration: 500 }) {
+    return select(this._viewport).transition().duration(options.duration).call(this._zoomBehaviour.scaleTo, zoomScale).end()
   }
 
   zoomToFeature(feature, focalPoint, padding = { top: 40, right: 40, bottom: 40, left: 40 }) {
