@@ -58,8 +58,6 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 8
 
       # Setup .npmrc file to publish to npm
       - name: Set up Node
