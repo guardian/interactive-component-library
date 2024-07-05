@@ -6,6 +6,7 @@
   font-family: var(--text-sans);
   font-size: var(--sans-xsmall);
   line-height: var(--sans-line-height);
+  fill: var(--primary-text-color);
 }
 
 .labelStroke {

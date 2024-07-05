@@ -1,4 +1,4 @@
-import { hasArea } from "./util/size"
+import { sizeForElement } from "./util/size"
 import { arrayEquals } from "./util/array"
 import { containsCoordinate } from "./util/extent"
 import { MapRenderer } from "./renderers/MapRenderer"
@@ -33,55 +33,16 @@ export class Map {
     this._renderer = new MapRenderer(this)
 
     // Create resize observer
-    this._resizeObserver = new ResizeObserver(() => this._updateSize())
+    this._resizeObserver = new ResizeObserver(() => {
+      this._updateSize()
+    })
     // Trigger fires when observer is first added, ensuring _updateSize() is called
     this._resizeObserver.observe(this.target)
 
-    // Create d3-zoom object to allow panning and zooming
-    this.view.transform = zoomIdentity
-    this._zoomBypassKey = navigator.userAgent.indexOf("Mac") !== -1 ? "metaKey" : "ctrlKey"
-    this._zoomBehaviour = zoom()
-      .scaleExtent(this.view.scaleExtent)
-      .filter((event) => {
-        const filterEvent = (filter) => {
-          this._filterEventCallback(filter)
-          return !filter
-        }
-
-        // only allow wheel events when zoom bypass key is pressed
-        if (event.type === "wheel" && !event[this._zoomBypassKey]) {
-          return filterEvent(true)
-        }
-
-        if ("targetTouches" in event && this.collaborativeGesturesEnabled) {
-          if (event.targetTouches.length < 2) {
-            // ignore single touches
-            return false
-          }
-          // stop event from propagating when there are two target touches
-          event.preventDefault()
-          return filterEvent(false)
-        }
-
-        // default to d3 implementation
-        return (!event.ctrlKey || event.type === "wheel") && !event.button
-      })
-      .on("zoom", (event) => {
-        this.view.transform = event.transform
-        this._requestRender()
-
-        this.dispatcher.dispatch(MapEvent.ZOOM, { currentZoomLevel: event.transform.k })
-      })
-
-    // Add zoom behaviour to viewport
-    select(this._viewport).call(this._zoomBehaviour)
-
     // Show help text when single touch moved
     this._viewport.addEventListener("touchmove", (event) => {
-      if (event.targetTouches.length < 2) {
+      if (event.targetTouches.length < 2 && this.collaborativeGesturesEnabled) {
         this._filterEventCallback(true)
-      } else {
-        event.stopImmediatePropagation()
       }
     })
   }
@@ -101,8 +62,12 @@ export class Map {
     return this._viewport
   }
 
-  get zoomLevel() {
+  get zoomScale() {
     return this.view.transform.k
+  }
+
+  get isTransitioning() {
+    return this._isTransitioning
   }
 
   /** PUBLIC METHODS */
@@ -155,15 +120,15 @@ export class Map {
   }
 
   async zoomIn(options) {
-    return this.zoomTo(this.zoomLevel * 2, options)
+    return this.zoomTo(this.zoomScale * 2, options)
   }
 
   async zoomOut(options) {
-    return this.zoomTo(this.zoomLevel * 0.5, options)
+    return this.zoomTo(this.zoomScale * 0.5, options)
   }
 
-  async zoomTo(zoomLevel, options = { duration: 500 }) {
-    return select(this._viewport).transition().duration(options.duration).call(this._zoomBehaviour.scaleTo, zoomLevel).end()
+  async zoomTo(zoomScale, options = { duration: 500 }) {
+    return select(this._viewport).transition().duration(options.duration).call(this._zoomBehaviour.scaleTo, zoomScale).end()
   }
 
   zoomToFeature(feature, focalPoint, padding = { top: 40, right: 40, bottom: 40, left: 40 }) {
@@ -175,7 +140,7 @@ export class Map {
     const paddedViewPortHeight = viewPortHeight - padding.top - padding.bottom
 
     const featureScale = Math.min(paddedViewPortWidth / featureWidth, paddedViewPortHeight / featureHeight)
-    const zoomScale = Math.min(this.view.maxZoom, featureScale)
+    const zoomScale = Math.min(this.view.scaleExtent[1], featureScale)
 
     const scaledPadding = {
       top: padding.top / zoomScale,
@@ -229,6 +194,7 @@ export class Map {
     const ease = options.ease || ((t) => t)
     return new Promise((resolve) => {
       this._isTransitioning = true
+      this.dispatcher.dispatch(MapEvent.TRANSITION_START)
 
       const _timer = timer((elapsed) => {
         const t = Math.min(elapsed / options.duration, 1)
@@ -237,6 +203,7 @@ export class Map {
         if (elapsed >= options.duration) {
           _timer.stop()
           this._isTransitioning = false
+          this.dispatcher.dispatch(MapEvent.TRANSITION_END)
           resolve()
         }
       })
@@ -248,33 +215,11 @@ export class Map {
   _updateSize() {
     const targetElement = this.target
 
-    let size
-    if (targetElement) {
-      const computedStyle = getComputedStyle(targetElement)
-      const width =
-        targetElement.offsetWidth -
-        parseFloat(computedStyle["borderLeftWidth"]) -
-        parseFloat(computedStyle["paddingLeft"]) -
-        parseFloat(computedStyle["paddingRight"]) -
-        parseFloat(computedStyle["borderRightWidth"])
-      const height =
-        targetElement.offsetHeight -
-        parseFloat(computedStyle["borderTopWidth"]) -
-        parseFloat(computedStyle["paddingTop"]) -
-        parseFloat(computedStyle["paddingBottom"]) -
-        parseFloat(computedStyle["borderBottomWidth"])
-      if (!isNaN(width) && !isNaN(height)) {
-        size = [width, height]
-        if (!hasArea(size) && !!(targetElement.offsetWidth || targetElement.offsetHeight || targetElement.getClientRects().length)) {
-          console.warn("No map visible because the map container's width or height are 0.")
-        }
-      }
-    }
-
+    let newSize = sizeForElement(targetElement)
     const oldSize = this.size
-    if (size && (!oldSize || !arrayEquals(size, oldSize))) {
-      this._size = size
-      this._updateViewportSize(size)
+    if (newSize && (!oldSize || !arrayEquals(newSize, oldSize))) {
+      this._size = newSize
+      this._updateViewportSize(newSize)
     }
   }
 
@@ -282,13 +227,56 @@ export class Map {
     const view = this.view
     if (view) {
       view.viewPortSize = size
+      this._createZoomBehaviour(size)
     }
 
-    // constrain zoom to size of the viewport
-    this._zoomBehaviour.extent([[0, 0], size])
-    this._zoomBehaviour.translateExtent([[0, 0], size])
-
     this._requestRender()
+  }
+
+  _createZoomBehaviour(viewPortSize) {
+    if (this._zoomBehaviour) {
+      this._zoomBehaviour.on("zoom", null)
+    }
+
+    // Create d3-zoom object to allow panning and zooming
+    this._zoomBypassKey = navigator.userAgent.indexOf("Mac") !== -1 ? "metaKey" : "ctrlKey"
+    this._zoomBehaviour = zoom()
+      .extent([[0, 0], viewPortSize])
+      .translateExtent([[0, 0], viewPortSize])
+      .scaleExtent(this.view.scaleExtent)
+      .filter((event) => {
+        const filterEvent = (filter) => {
+          this._filterEventCallback(filter)
+          return !filter
+        }
+
+        // only allow wheel events when zoom bypass key is pressed
+        if (event.type === "wheel" && !event[this._zoomBypassKey]) {
+          return filterEvent(true)
+        }
+
+        if ("targetTouches" in event && this.collaborativeGesturesEnabled) {
+          if (event.targetTouches.length < 2) {
+            // ignore single touches
+            return false
+          }
+          // stop event from propagating when there are two target touches
+          event.preventDefault()
+          return filterEvent(false)
+        }
+
+        // default to d3 implementation
+        return (!event.ctrlKey || event.type === "wheel") && !event.button
+      })
+      .on("zoom", (event) => {
+        this.view.transform = event.transform
+        this._requestRender()
+
+        this.dispatcher.dispatch(MapEvent.ZOOM, { zoomScale: event.transform.k })
+      })
+
+    // Add zoom behaviour to viewport
+    select(this._viewport).call(this._zoomBehaviour)
   }
 
   _requestRender() {

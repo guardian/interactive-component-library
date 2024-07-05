@@ -40,3 +40,30 @@ export function scalePadding(padding, ratio) {
   }
   return scaled
 }
+
+export function sizeForElement(element) {
+  const computedStyle = getComputedStyle(element)
+  if (!computedStyle) return null
+
+  let size
+  const width =
+    element.offsetWidth -
+    parseFloat(computedStyle["borderLeftWidth"]) -
+    parseFloat(computedStyle["paddingLeft"]) -
+    parseFloat(computedStyle["paddingRight"]) -
+    parseFloat(computedStyle["borderRightWidth"])
+  const height =
+    element.offsetHeight -
+    parseFloat(computedStyle["borderTopWidth"]) -
+    parseFloat(computedStyle["paddingTop"]) -
+    parseFloat(computedStyle["paddingBottom"]) -
+    parseFloat(computedStyle["borderBottomWidth"])
+  if (!isNaN(width) && !isNaN(height)) {
+    size = [width, height]
+    if (!hasArea(size) && !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length)) {
+      console.warn("No map visible because the map container's width or height are 0.")
+    }
+  }
+
+  return size
+}

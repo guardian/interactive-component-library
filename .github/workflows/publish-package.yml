@@ -1,4 +1,4 @@
-name: Publish package to GitHub Packages
+name: Publish package to NPM
 on:
   push:
     tags:
@@ -57,9 +57,7 @@ jobs:
           ref: 'auto-version-${{ env.TAG_NAME }}'
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
+        uses: pnpm/action-setup@v4
 
       # Setup .npmrc file to publish to npm
       - name: Set up Node

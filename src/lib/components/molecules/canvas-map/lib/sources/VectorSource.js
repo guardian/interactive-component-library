@@ -21,7 +21,14 @@ export class VectorSource {
 
   getFeaturesAtCoordinate(coordinate) {
     const [lon, lat] = coordinate
-    return knn(this._featuresRtree, lon, lat, 1, (d) => d.feature.containsCoordinate(coordinate)).map((d) => d.feature)
+    const features = knn(this._featuresRtree, lon, lat, 10, (d) => d.feature.containsCoordinate(coordinate)).map((d) => {
+      const midX = d.minX + (d.minX + d.maxX) / 2
+      const midY = d.minY + (d.minY + d.maxY) / 2
+      d.distance = Math.hypot(midX - lon, midY - lat)
+      return d
+    })
+    features.sort((a, b) => a.distance - b.distance)
+    return features.map((d) => d.feature)
   }
 
   getFeaturesInExtent(extent) {

@@ -34,7 +34,7 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
 
     const numberOfPages = Math.ceil(tickerScrollRef.current.scrollWidth / pageWidth)
     setNumberOfPages(numberOfPages)
-  }, [])
+  }, [childArray])
 
   useLayoutEffect(() => {
     const hideButtons = childArray.length < 4
@@ -43,6 +43,9 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
   }, [childArray])
 
   function toggleExpandedState() {
+    if (expanded) {
+      tickerRef.current.scrollIntoView({ behavior: "smooth", alignToTop: true }) //scroll user up to top of ticker when closing at mobile
+    }
     setExpanded((expanded) => {
       const newState = !expanded
       if (onStateChange) onStateChange({ expanded: newState })
@@ -55,7 +58,7 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
       <div ref={tickerItemsRef} className={styles.tickerItems}>
         <div ref={tickerScrollRef} className={styles.tickerScroll}>
           {childArray.map((child, index) => (
-            <div className={styles.tickerItem} key={index}>
+            <div className={styles.tickerItem} key={child?.props?.id ?? index}>
               {child}
             </div>
           ))}
@@ -66,7 +69,7 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
           <Gradient />
         </div>
         <div className={styles.buttons}>
-          <ArrowButton onClick={() => setPageIndex((d) => d + 1)} disabled={pageIndex >= numberOfPages - 1} />
+          <ArrowButton onClick={() => setPageIndex((d) => d + 1)} disabled={pageIndex >= numberOfPages - 2} />
           <ArrowButton direction="left" onClick={() => setPageIndex((d) => d - 1)} disabled={pageIndex <= 0} />
         </div>
         <div className={styles.button}>

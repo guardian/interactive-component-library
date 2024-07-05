@@ -28,7 +28,12 @@ export const Map = forwardRef(({ config, inModalState = false, onLoad, children 
 
     onLoad && onLoad(map)
 
-    const zoomHelpText = navigator.userAgent.indexOf("Mac") !== -1 ? "Use ⌘ + scroll to zoom" : "Use Ctrl + scroll to zoom"
+    let zoomHelpText = ""
+    if (navigator.userAgentData?.mobile || navigator.userAgent.indexOf("Mobile") !== -1) {
+      zoomHelpText = mobileHelpText
+    } else {
+      zoomHelpText = navigator.userAgent.indexOf("Mac") !== -1 ? "Use ⌘ + scroll to zoom" : "Use Ctrl + scroll to zoom"
+    }
     setZoomHelpText(zoomHelpText)
 
     return () => {

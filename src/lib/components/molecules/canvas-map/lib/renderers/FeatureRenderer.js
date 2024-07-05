@@ -10,7 +10,12 @@ export class FeatureRenderer {
   }
 
   render(frameState, feature, context) {
+    if (!this.style) {
+      return
+    }
+
     const { projection, transform, pixelRatio } = frameState.viewState
+    const { stroke, fill } = this.style
 
     this.drawingFunction.context(context)
 
@@ -21,17 +26,15 @@ export class FeatureRenderer {
       this.drawingFunction(geometry)
     }
 
-    const { stroke, fill } = this.style
+    if (fill) {
+      context.fillStyle = fill.getRgba()
+      context.fill()
+    }
 
     if (stroke) {
       context.lineWidth = (stroke.width * pixelRatio) / transform.k
       context.strokeStyle = stroke.getRgba()
       context.stroke()
-    }
-
-    if (fill) {
-      context.fillStyle = fill.getRgba()
-      context.fill()
     }
   }
 }
