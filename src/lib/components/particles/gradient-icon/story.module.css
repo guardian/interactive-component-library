@@ -5,9 +5,9 @@
 }
 
 .previous {
-  stop-color: purple;
+  stop-color: var(--other);
 }
 
 .next {
-  stop-color: orange;
+  stop-color: var(--other);
 }

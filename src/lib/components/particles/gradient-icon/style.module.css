@@ -4,15 +4,15 @@
 }
 
 .svg {
-  display: 'inline-block';
-  transform: 'translateY(-1px)';
+  display: "inline-block";
+  transform: "translateY(-1px)";
   fill: none;
 }
 
 .previous {
-  stop-color: var(--con);
+  stop-color: var(--other);
 }
 
 .next {
-  stop-color: var(--lab);
+  stop-color: var(--other);
 }
