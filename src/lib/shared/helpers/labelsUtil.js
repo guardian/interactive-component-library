@@ -1,3 +1,14 @@
+// @ts-check
+
+/**
+ * @template {{ y: number }} T
+ * @param {T[]} labelPositions
+ * @param {number} iteration
+ * @param {number} labelSize
+ * @param {string} coordinate
+ * @param {boolean} moveBothLabels
+ * @returns
+ */
 export function preventOverlap(labelPositions, iteration = 0, labelSize = 12, coordinate = "y", moveBothLabels = true) {
   const maxIterations = 10
   let totalOverlap = 0
@@ -29,10 +40,26 @@ export function preventOverlap(labelPositions, iteration = 0, labelSize = 12, co
   return labelPositions
 }
 
+/**
+ * Unique objects for a given key’s value
+ *
+ * @template T extends Record<string, unknown>
+ * @param {T[]} array
+ * @param {keyof T} key
+ * @returns {T[]}
+ */
 export function uniqueBy(array, key) {
   return [...array.reduce((map, d) => map.set(d[key], d), new Map()).values()]
 }
 
+/**
+ * @template {{ value: string, y: number }} T
+ * @param {T[]} labels
+ * @param {number} labelSize
+ * @param {string} coordinate
+ * @param {boolean} moveBothLabels
+ * @returns {T[]}
+ */
 export function positionLabels(labels, labelSize = 12, coordinate = "y", moveBothLabels = true) {
   labels = uniqueBy(labels, "value")
   // sort by coordinate-position
@@ -40,7 +67,16 @@ export function positionLabels(labels, labelSize = 12, coordinate = "y", moveBot
 
   return preventOverlap(labels, 0, labelSize, coordinate, moveBothLabels)
 }
-// same as this one https://gist.github.com/vectorsize/7031902
+
+/**
+ * Create a function that maps a value from a source domain to a target range.
+ *
+ * same as this one https://gist.github.com/vectorsize/7031902
+ *
+ * @param {[number, number]} domain
+ * @param {[number, number]} range
+ * @returns {(x: number) => number}
+ */
 export function scaleLinear(domain, range) {
   const [domainMin, domainMax] = domain
   const [rangeMin, rangeMax] = range
