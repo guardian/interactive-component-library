@@ -1,7 +1,7 @@
 // @ts-check
 
 /**
- * @template {{ y: number }} T
+ * @template {Record<string, unknown>} T
  * @param {T[]} labelPositions
  * @param {number} iteration
  * @param {number} labelSize
@@ -12,6 +12,8 @@
 export function preventOverlap(labelPositions, iteration = 0, labelSize = 12, coordinate = "y", moveBothLabels = true) {
   const maxIterations = 10
   let totalOverlap = 0
+
+  if (!isCoordinateArray(labelPositions, coordinate)) return labelPositions
 
   for (let index = 1; index < labelPositions.length; index++) {
     const previousElement = labelPositions[index - 1]
@@ -53,7 +55,7 @@ export function uniqueBy(array, key) {
 }
 
 /**
- * @template {{ value: string, y: number }} T
+ * @template {{ value: string }} T
  * @param {T[]} labels
  * @param {number} labelSize
  * @param {string} coordinate
@@ -87,4 +89,9 @@ export function scaleLinear(domain, range) {
   return function (x) {
     return slope * x + intercept
   }
+}
+
+/** @type {<T extends Record<string, unknown>, K extends string>(positions: T[], key: K) => positions is Array<T &{ [key in K]: number }> } */
+function isCoordinateArray(positions, key) {
+  return positions.every((position) => typeof position[key] === "number")
 }
