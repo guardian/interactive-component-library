@@ -1,3 +1,11 @@
+// @ts-check
+
+/**
+ * @template T
+ * @param {T} oldState
+ * @param {T} newState
+ * @returns {boolean}
+ */
 export default function shouldUpdate(oldState, newState) {
   if (oldState === newState) return false
 
@@ -11,6 +19,11 @@ export default function shouldUpdate(oldState, newState) {
   return true
 }
 
+/**
+ *
+ * @param {unknown} obj
+ * @returns {obj is Record<string, unknown>}
+ */
 function isObj(obj) {
-  return typeof obj === 'object' && !Array.isArray(obj) && obj !== null
+  return typeof obj === "object" && !Array.isArray(obj) && obj !== null
 }
