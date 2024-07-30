@@ -1,8 +1,8 @@
-import { FirstPastThePostWaffle } from '.'
-import { Waffle, WaffleType } from '$particles'
+import { FirstPastThePostWaffle } from "."
+import { Waffle, WaffleType } from "$particles"
 
 export default {
-  title: 'Molecules/FPTPWaffle',
+  title: "Molecules/FPTPWaffle",
   component: FirstPastThePostWaffle,
 }
 
@@ -12,28 +12,30 @@ const summary = {
   snp: 50,
   ld: 30,
   green: 1,
-  undeclared: 19
+  undeclared: 19,
 }
 
 // the output of the following line is: [{party: 'lab', class: fill-color-lab}, ...]
 const partySeats = Object.keys(summary)
-  .map(party => Array(summary[party]).fill({ party, class: `fill-color--${party}` }))
+  .map((party) =>
+    Array(summary[party]).fill({ party, class: `fill-color--${party}` }),
+  )
   .flat()
 
 const waffleArgs = {
   units: partySeats,
   numberOfRows: 5,
-  idAccessor: 'party',
+  idAccessor: "party",
   onMouseOver: (a, b) => console.log(a, b),
-  type: WaffleType.circle
+  type: WaffleType.circle,
 }
 
 const args = {
-  lineOverHang: 15
+  lineOverHang: 15,
 }
 
 const longerLineArgs = {
-  lineOverHang: 30
+  lineOverHang: 30,
 }
 
 export const Default = {
@@ -45,9 +47,8 @@ export const Default = {
         halfLineText: <p>326 to win</p>,
       }}
     </FirstPastThePostWaffle>
-  )
+  ),
 }
-
 
 export const LongerLine = {
   args: longerLineArgs,
@@ -58,5 +59,5 @@ export const LongerLine = {
         halfLineText: <p>326 to win</p>,
       }}
     </FirstPastThePostWaffle>
-  )
+  ),
 }

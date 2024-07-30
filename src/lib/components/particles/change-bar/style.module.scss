@@ -1,18 +1,18 @@
 .wrapper {
-	overflow: visible;
-	position: relative;
+  overflow: visible;
+  position: relative;
 }
 
 .bar {
-	position: relative;
-	height: 1em;
-  }
-  
+  position: relative;
+  height: 1em;
+}
+
 .zero {
-	background-color: var(--primary-text-color);
-	position: absolute;
-	top: 0px;
-	transform: scaleY(2);
-	width: 1px;
-	left: 50%;
+  background-color: var(--primary-text-color);
+  position: absolute;
+  top: 0px;
+  transform: scaleY(2);
+  width: 1px;
+  left: 50%;
 }

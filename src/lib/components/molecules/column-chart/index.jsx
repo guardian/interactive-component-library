@@ -1,6 +1,6 @@
-import defaultStyles from './style.module.css'
-import { mergeStyles } from '$styles/helpers/mergeStyles'
-import { scaleLinear } from 'd3-scale'
+import defaultStyles from "./style.module.css"
+import { mergeStyles } from "$styles/helpers/mergeStyles"
+import { scaleLinear } from "d3-scale"
 
 export const ColumnChart = ({
   columns,
@@ -15,7 +15,10 @@ export const ColumnChart = ({
   styles = mergeStyles(defaultStyles, styles)
 
   const yScale = scaleLinear([maxValue, minValue], [0, chartHeight])
-  const totalColumnWidth = Number(columnWidth) + Number(columnPadding.left) + Number(columnPadding.right)
+  const totalColumnWidth =
+    Number(columnWidth) +
+    Number(columnPadding.left) +
+    Number(columnPadding.right)
   let marginBottom = minValue < 0 ? 0 : 40
 
   return (
@@ -46,7 +49,13 @@ export const ColumnChart = ({
           </g>
         )
       })}
-      <rect className={styles.axis} x={0} y={yScale(0)} width={chartWidth} height={1} />
+      <rect
+        className={styles.axis}
+        x={0}
+        y={yScale(0)}
+        width={chartWidth}
+        height={1}
+      />
     </svg>
   )
 }

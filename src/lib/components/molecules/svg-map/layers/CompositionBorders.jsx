@@ -8,7 +8,9 @@ export function CompositionBorders({ styles }) {
   const { projection, config } = context
 
   if (config.drawToCanvas) {
-    return <CompositionBordersCanvas context={context} projection={projection} />
+    return (
+      <CompositionBordersCanvas context={context} projection={projection} />
+    )
   }
 
   styles = mergeStyles(defaultStyles, styles)

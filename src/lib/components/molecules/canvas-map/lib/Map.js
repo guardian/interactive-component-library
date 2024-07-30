@@ -128,18 +128,30 @@ export class Map {
   }
 
   async zoomTo(zoomScale, options = { duration: 500 }) {
-    return select(this._viewport).transition().duration(options.duration).call(this._zoomBehaviour.scaleTo, zoomScale).end()
+    return select(this._viewport)
+      .transition()
+      .duration(options.duration)
+      .call(this._zoomBehaviour.scaleTo, zoomScale)
+      .end()
   }
 
-  zoomToFeature(feature, focalPoint, padding = { top: 40, right: 40, bottom: 40, left: 40 }) {
+  zoomToFeature(
+    feature,
+    focalPoint,
+    padding = { top: 40, right: 40, bottom: 40, left: 40 },
+  ) {
     const extent = feature.getExtent()
-    const [[featureX, featureY], [featureWidth, featureHeight]] = this.view.boundsForExtent(extent)
+    const [[featureX, featureY], [featureWidth, featureHeight]] =
+      this.view.boundsForExtent(extent)
     const [viewPortWidth, viewPortHeight] = this.view.viewPortSize
 
     const paddedViewPortWidth = viewPortWidth - padding.left - padding.right
     const paddedViewPortHeight = viewPortHeight - padding.top - padding.bottom
 
-    const featureScale = Math.min(paddedViewPortWidth / featureWidth, paddedViewPortHeight / featureHeight)
+    const featureScale = Math.min(
+      paddedViewPortWidth / featureWidth,
+      paddedViewPortHeight / featureHeight,
+    )
     const zoomScale = Math.min(this.view.scaleExtent[1], featureScale)
 
     const scaledPadding = {
@@ -159,9 +171,15 @@ export class Map {
     const newTransform = zoomIdentity
       .translate(viewPortWidth / 2, viewPortHeight / 2)
       .scale(zoomScale)
-      .translate(-(paddedFeatureBounds.x + paddedFeatureBounds.width / 2), -(paddedFeatureBounds.y + paddedFeatureBounds.height / 2))
+      .translate(
+        -(paddedFeatureBounds.x + paddedFeatureBounds.width / 2),
+        -(paddedFeatureBounds.y + paddedFeatureBounds.height / 2),
+      )
 
-    select(this._viewport).transition().duration(500).call(this._zoomBehaviour.transform, newTransform, focalPoint)
+    select(this._viewport)
+      .transition()
+      .duration(500)
+      .call(this._zoomBehaviour.transform, newTransform, focalPoint)
   }
 
   async resetZoom(options) {
@@ -175,7 +193,10 @@ export class Map {
     const matchingFeatures = []
     for (const layer of this.layers) {
       const layerExtent = layer.getExtent()
-      if (layer.hitDetectionEnabled && containsCoordinate(layerExtent, mapCoordinate)) {
+      if (
+        layer.hitDetectionEnabled &&
+        containsCoordinate(layerExtent, mapCoordinate)
+      ) {
         const features = layer.findFeatures(mapCoordinate)
         if (features) {
           matchingFeatures.push(...features)
@@ -239,7 +260,8 @@ export class Map {
     }
 
     // Create d3-zoom object to allow panning and zooming
-    this._zoomBypassKey = navigator.userAgent.indexOf("Mac") !== -1 ? "metaKey" : "ctrlKey"
+    this._zoomBypassKey =
+      navigator.userAgent.indexOf("Mac") !== -1 ? "metaKey" : "ctrlKey"
     this._zoomBehaviour = zoom()
       .extent([[0, 0], viewPortSize])
       .translateExtent([[0, 0], viewPortSize])
@@ -272,7 +294,9 @@ export class Map {
         this.view.transform = event.transform
         this._requestRender()
 
-        this.dispatcher.dispatch(MapEvent.ZOOM, { zoomScale: event.transform.k })
+        this.dispatcher.dispatch(MapEvent.ZOOM, {
+          zoomScale: event.transform.k,
+        })
       })
 
     // Add zoom behaviour to viewport
@@ -280,8 +304,15 @@ export class Map {
   }
 
   _requestRender() {
-    if (!this._renderer || !!this._animationFrameRequestID || this._isTransitioning) return
-    this._animationFrameRequestID = requestAnimationFrame(this._renderFrame.bind(this))
+    if (
+      !this._renderer ||
+      !!this._animationFrameRequestID ||
+      this._isTransitioning
+    )
+      return
+    this._animationFrameRequestID = requestAnimationFrame(
+      this._renderFrame.bind(this),
+    )
   }
 
   _renderFrame() {

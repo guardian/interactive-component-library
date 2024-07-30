@@ -1,16 +1,16 @@
-import { Chevron } from '.'
+import { Chevron } from "."
 
 export default {
-  title: 'Particles/Chevron',
+  title: "Particles/Chevron",
   component: Chevron,
   argTypes: {
     direction: {
-      options: ['up', 'down'],
-      control: { type: 'radio' },
+      options: ["up", "down"],
+      control: { type: "radio" },
     },
     size: {
-      options: ['small', 'large'],
-      control: { type: 'radio' },
+      options: ["small", "large"],
+      control: { type: "radio" },
     },
   },
 }
@@ -27,4 +27,3 @@ export const Large = {
     size: "large",
   },
 }
-

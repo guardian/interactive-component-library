@@ -12,7 +12,9 @@ const summary = {
 
 // the output of the following line is: [{party: 'lab', class: fill-color-lab}, ...]
 const partySeats = Object.keys(summary)
-  .map((party) => Array(summary[party]).fill({ party, class: `fill-color--${party}` }))
+  .map((party) =>
+    Array(summary[party]).fill({ party, class: `fill-color--${party}` }),
+  )
   .flat()
 
 const meta = {

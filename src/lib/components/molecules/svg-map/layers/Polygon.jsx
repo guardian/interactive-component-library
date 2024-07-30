@@ -4,7 +4,15 @@ import { dynamicPropValue } from "../helpers/dynamicPropValue"
 import { geoContains } from "d3-geo"
 import Flatbush from "flatbush"
 
-export function Polygon({ id, features, fill = null, stroke = null, strokeWidth = 1, zIndex = 0, styles }) {
+export function Polygon({
+  id,
+  features,
+  fill = null,
+  stroke = null,
+  strokeWidth = 1,
+  zIndex = 0,
+  styles,
+}) {
   const context = useContext(MapContext)
   const { drawToCanvas } = context.config
 
@@ -18,7 +26,12 @@ export function Polygon({ id, features, fill = null, stroke = null, strokeWidth 
     for (const feature of features) {
       const bounds = context.path.bounds(feature)
 
-      index.add(Math.floor(bounds[0][0]), Math.floor(bounds[0][1]), Math.ceil(bounds[1][0]), Math.ceil(bounds[1][1]))
+      index.add(
+        Math.floor(bounds[0][0]),
+        Math.floor(bounds[0][1]),
+        Math.ceil(bounds[1][0]),
+        Math.ceil(bounds[1][1]),
+      )
     }
 
     index.finish()

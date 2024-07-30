@@ -38,7 +38,11 @@ export class View {
   }
 
   get transform() {
-    return new ZoomTransform(this._transform.k, this._transform.x * this.pixelRatio, this._transform.y * this.pixelRatio)
+    return new ZoomTransform(
+      this._transform.k,
+      this._transform.x * this.pixelRatio,
+      this._transform.y * this.pixelRatio,
+    )
   }
 
   // map size in pixels (i.e. scaled by device pixel ratio)
@@ -121,7 +125,10 @@ export class View {
 
   // map resolution (meters per pixel)
   getResolution() {
-    return resolutionForExtent(this.getVisibleExtent(this.transform, this.projection), this.viewPortSize)
+    return resolutionForExtent(
+      this.getVisibleExtent(this.transform, this.projection),
+      this.viewPortSize,
+    )
   }
 
   // map zoom level (0 = the entire world)
@@ -133,7 +140,14 @@ export class View {
   getMapExtent() {
     const mapSizeInPixels = this.mapSize
     const paddingInPixels = this.scaledPadding
-    return [[paddingInPixels.left, paddingInPixels.top], sizeMinusPadding(mapSizeInPixels, { ...paddingInPixels, left: 0, top: 0 })]
+    return [
+      [paddingInPixels.left, paddingInPixels.top],
+      sizeMinusPadding(mapSizeInPixels, {
+        ...paddingInPixels,
+        left: 0,
+        top: 0,
+      }),
+    ]
   }
 
   // visible extent in map coordinates

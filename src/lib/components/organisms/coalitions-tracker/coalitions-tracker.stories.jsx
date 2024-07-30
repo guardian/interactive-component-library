@@ -36,17 +36,29 @@ const results = [
 ]
 
 const data = [
-  { name: "Lab-Lib", parties: ["libdem", "lab"], description: "lorem ipsum dolor sit" },
-  { name: "Lab-Lib-Green", parties: ["snp", "lab", "libdem", "green"], description: "Sed ut perspiciatis unde omnis ist" },
+  {
+    name: "Lab-Lib",
+    parties: ["libdem", "lab"],
+    description: "lorem ipsum dolor sit",
+  },
+  {
+    name: "Lab-Lib-Green",
+    parties: ["snp", "lab", "libdem", "green"],
+    description: "Sed ut perspiciatis unde omnis ist",
+  },
   {
     name: "Lab-SNP",
     parties: ["lab", "snp"],
-    description: "Ut enim ad minima veniam, quis nostrum exercitationem, Ut enim ad minima veniam, quis nostrum exercitationem Ut enim ad minima veniam, quis nostrum exercitationem",
+    description:
+      "Ut enim ad minima veniam, quis nostrum exercitationem, Ut enim ad minima veniam, quis nostrum exercitationem Ut enim ad minima veniam, quis nostrum exercitationem",
   },
 ].map((a) => ({
   name: a.name,
   description: a.description,
-  parties: a.parties.map((p) => ({ partyName: p, totalSeats: results.find((r) => r.abbreviation === p).totalSeats })),
+  parties: a.parties.map((p) => ({
+    partyName: p,
+    totalSeats: results.find((r) => r.abbreviation === p).totalSeats,
+  })),
 }))
 
 export const Default = {

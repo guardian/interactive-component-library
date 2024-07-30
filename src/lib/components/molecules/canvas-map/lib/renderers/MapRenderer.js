@@ -36,7 +36,10 @@ export class MapRenderer {
         viewState.projection = layer.projection
       }
 
-      const element = layer.renderFrame({ ...frameState, viewState, declutterTree }, previousElement)
+      const element = layer.renderFrame(
+        { ...frameState, viewState, declutterTree },
+        previousElement,
+      )
       if (element !== previousElement) {
         mapElements.push(element)
         previousElement = element
@@ -53,7 +56,9 @@ export class MapRenderer {
 
     const declutterTree = new RBush()
 
-    const layersToDeclutter = [...visibleLayers].filter((layer) => !!layer.declutter).reverse()
+    const layersToDeclutter = [...visibleLayers]
+      .filter((layer) => !!layer.declutter)
+      .reverse()
     for (const layer of layersToDeclutter) {
       renderLayer(layer, declutterTree)
     }

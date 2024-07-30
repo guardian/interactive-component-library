@@ -1,4 +1,4 @@
-import styles from './style.module.scss'
+import styles from "./style.module.scss"
 
 export function Gradient() {
   return (
@@ -14,7 +14,13 @@ export function Gradient() {
         <rect fill="url(#paint0_linear_3798_6653)" />
       </g>
       <defs>
-        <linearGradient id="paint0_linear_3798_6653" x1="0%" y1="0%" x2="100%" y2="0%">
+        <linearGradient
+          id="paint0_linear_3798_6653"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="0%"
+        >
           <stop className={styles.firstStop} />
           <stop className={styles.lastStop} offset="1" />
         </linearGradient>

@@ -3,6 +3,7 @@
 A set of reusable components for use in interactive pages, written in Preact using [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) principles.
 
 ## Install the component library in a new client project
+
 ```
 npm install @guardian/interactive-component-library
 ```
@@ -77,6 +78,7 @@ Always prepending `pnpm`:
 - `build:lib:watch`: Same as previous command, but it watches `/src` folder and rebuilds on changes
 
 ## Testing for dark mode in Storybook
+
 Use the sun/moon button in the toolbar to switch between light and dark mode.
 ![Screenshot 2024-03-27 at 08 24 43](https://github.com/guardian/interactive-component-library/assets/1107150/3a93adfc-56da-4c1d-b5b8-dc7ff5aedfbf)
 ![Screenshot 2024-03-27 at 08 24 32](https://github.com/guardian/interactive-component-library/assets/1107150/bad208aa-7967-446f-b658-e937aa2d114b)

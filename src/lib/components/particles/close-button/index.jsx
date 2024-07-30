@@ -4,8 +4,17 @@ import defaultStyles from "./style.module.css"
 export function CloseButton({ border = true, onClick, styles }) {
   styles = mergeStyles(defaultStyles, styles)
   return (
-    <button className={[styles.button, border && styles.buttonBorder].join(" ")} onClick={onClick}>
-      <svg className={styles.svg} viewBox="0 0 17 17" fill="none" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <button
+      className={[styles.button, border && styles.buttonBorder].join(" ")}
+      onClick={onClick}
+    >
+      <svg
+        className={styles.svg}
+        viewBox="0 0 17 17"
+        fill="none"
+        preserveAspectRatio="xMidYMid meet"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path
           className={styles.path}
           fillRule="evenodd"

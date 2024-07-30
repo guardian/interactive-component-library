@@ -4,8 +4,14 @@ export function calculateScale(mapBounds, mapWidthPixels, mapHeightPixels) {
   const north = mapBounds[1][1]
   const east = mapBounds[1][0]
 
-  const widthKilometers = distanceInKmBetweenEarthCoordinates([west, south], [east, south])
-  const heightKilometers = distanceInKmBetweenEarthCoordinates([west, south], [west, north])
+  const widthKilometers = distanceInKmBetweenEarthCoordinates(
+    [west, south],
+    [east, south],
+  )
+  const heightKilometers = distanceInKmBetweenEarthCoordinates(
+    [west, south],
+    [west, north],
+  )
 
   const scaleX = mapWidthPixels / widthKilometers
   const scaleY = mapHeightPixels / heightKilometers
@@ -15,8 +21,15 @@ export function calculateScale(mapBounds, mapWidthPixels, mapHeightPixels) {
   return scale
 }
 
-export function circleContainsCoordinates(circleCoordinates, radius, coordinates) {
-  const realWorldDistance = distanceInKmBetweenEarthCoordinates(circleCoordinates, coordinates)
+export function circleContainsCoordinates(
+  circleCoordinates,
+  radius,
+  coordinates,
+) {
+  const realWorldDistance = distanceInKmBetweenEarthCoordinates(
+    circleCoordinates,
+    coordinates,
+  )
   return realWorldDistance <= radius
 }
 
@@ -33,7 +46,9 @@ export function distanceInKmBetweenEarthCoordinates(point1, point2) {
   lat1 = degreesToRadians(lat1)
   lat2 = degreesToRadians(lat2)
 
-  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2)
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2)
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
   return earthRadiusKm * c
 }

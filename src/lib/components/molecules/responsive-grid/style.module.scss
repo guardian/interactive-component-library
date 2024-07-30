@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat($numberOfColumns, 1fr);
 
-  &>* {
+  & > * {
     border-right: var(--grid-border);
     border-bottom: var(--grid-border);
 
@@ -10,8 +10,13 @@
       border-right: 0;
     }
 
-    &:nth-child(#{$numberOfColumns}n+1):nth-last-child(-n+#{$numberOfColumns}),
-    &:nth-child(#{$numberOfColumns}n+1):nth-last-child(-n+#{$numberOfColumns})~* {
+    &:nth-child(#{$numberOfColumns}n + 1):nth-last-child(
+        -n + #{$numberOfColumns}
+      ),
+    &:nth-child(#{$numberOfColumns}n + 1):nth-last-child(
+        -n + #{$numberOfColumns}
+      )
+      ~ * {
       border-bottom: 0;
     }
   }

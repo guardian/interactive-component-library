@@ -11,7 +11,14 @@ export class TextLayer {
     return new TextLayer({ source, ...options })
   }
 
-  constructor({ source, style, minZoom = 0, opacity = 1, declutter = true, drawCollisionBoxes = false }) {
+  constructor({
+    source,
+    style,
+    minZoom = 0,
+    opacity = 1,
+    declutter = true,
+    drawCollisionBoxes = false,
+  }) {
     this.source = source
     this._style = style
     this.minZoom = minZoom

@@ -1,38 +1,38 @@
 :root {
---headline-xxxsmall: 17px;
---headline-xxsmall: 20px;
---headline-xsmall: 24px;
---headline-small: 28px;
---headline-medium: 34px;
---headline-large: 42px;
---headline-xlarge: 50px;
+  --headline-xxxsmall: 17px;
+  --headline-xxsmall: 20px;
+  --headline-xsmall: 24px;
+  --headline-small: 28px;
+  --headline-medium: 34px;
+  --headline-large: 42px;
+  --headline-xlarge: 50px;
 
---sans-xxsmall: 12px;
---sans-xsmall: 14px;
---sans-small: 15px;
---sans-medium: 17px;
---sans-large: 20px;
---sans-xlarge: 24px;
---sans-xxlarge: 28px;
---sans-xxxlarge: 34px;
+  --sans-xxsmall: 12px;
+  --sans-xsmall: 14px;
+  --sans-small: 15px;
+  --sans-medium: 17px;
+  --sans-large: 20px;
+  --sans-xlarge: 24px;
+  --sans-xxlarge: 28px;
+  --sans-xxxlarge: 34px;
 
---titlepiece-xxxsmall: 16px;
---titlepiece-xxsmall: 24px;
---titlepiece-xsmall: 36px;
---titlepiece-small: 42px;
---titlepiece-medium: 50px;
---titlepiece-large: 70px;
+  --titlepiece-xxxsmall: 16px;
+  --titlepiece-xxsmall: 24px;
+  --titlepiece-xsmall: 36px;
+  --titlepiece-small: 42px;
+  --titlepiece-medium: 50px;
+  --titlepiece-large: 70px;
 
---body-xsmall: 14px;
---body-small: 15px;
---body-medium: 17px;
+  --body-xsmall: 14px;
+  --body-small: 15px;
+  --body-medium: 17px;
 
---line-height-tight: 1.15;
---line-height-regular: 1.3;
---line-height-loose: 1.4;
+  --line-height-tight: 1.15;
+  --line-height-regular: 1.3;
+  --line-height-loose: 1.4;
 
---headline-line-height: 1.15;
---sans-line-height: 1.3;
---titlepiece-line-height: 1.15;
---body-line-height: 1.4;
+  --headline-line-height: 1.15;
+  --sans-line-height: 1.3;
+  --titlepiece-line-height: 1.15;
+  --body-line-height: 1.4;
 }

@@ -6,6 +6,8 @@ export class Text {
     this.fontWeight = options?.fontWeight || "400"
     this.lineHeight = options?.lineHeight || 1.3
     this.color = options?.color || "#121212"
-    this.textShadow = options?.textShadow || "1px 1px 0px #f6f6f6, -1px -1px 0px #f6f6f6, -1px 1px 0px #f6f6f6, 1px -1px #f6f6f6"
+    this.textShadow =
+      options?.textShadow ||
+      "1px 1px 0px #f6f6f6, -1px -1px 0px #f6f6f6, -1px 1px 0px #f6f6f6, 1px -1px #f6f6f6"
   }
 }

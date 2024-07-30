@@ -1,30 +1,45 @@
-import defaultStyles from './style.module.css'
-import { mergeStyles } from '$styles/helpers/mergeStyles'
+import defaultStyles from "./style.module.css"
+import { mergeStyles } from "$styles/helpers/mergeStyles"
 
 const DIRECTION = {
-  up: 'up',
-  down: 'down',
+  up: "up",
+  down: "down",
 }
 
 const SIZE = {
-  small: 'small',
-  large: 'large',
+  small: "small",
+  large: "large",
 }
 
-export function Chevron({ active = false, direction = DIRECTION.down, size = SIZE.small, styles }) {
+export function Chevron({
+  active = false,
+  direction = DIRECTION.down,
+  size = SIZE.small,
+  styles,
+}) {
   const defaultStylesCopy = { ...defaultStyles }
 
   if (active) {
-    defaultStylesCopy.path = mergeStyles(defaultStyles.path, defaultStyles.active)
+    defaultStylesCopy.path = mergeStyles(
+      defaultStyles.path,
+      defaultStyles.active,
+    )
   }
 
   if (direction === DIRECTION.up) {
-    defaultStylesCopy.group = mergeStyles(defaultStyles.group, defaultStyles.rotated)
+    defaultStylesCopy.group = mergeStyles(
+      defaultStyles.group,
+      defaultStyles.rotated,
+    )
   }
 
   styles = mergeStyles(defaultStylesCopy, styles)
 
-  return size === SIZE.small ? <SmallChevron styles={styles} /> : <LargeChevron styles={styles} />
+  return size === SIZE.small ? (
+    <SmallChevron styles={styles} />
+  ) : (
+    <LargeChevron styles={styles} />
+  )
 }
 
 function SmallChevron({ styles }) {

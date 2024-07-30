@@ -1,20 +1,20 @@
-import { action } from '@storybook/addon-actions'
-import { ToplineResult } from '.'
-import styles from './topline-result.stories.module.scss'
+import { action } from "@storybook/addon-actions"
+import { ToplineResult } from "."
+import styles from "./topline-result.stories.module.scss"
 
 export default {
-  title: 'Molecules/ToplineResult',
+  title: "Molecules/ToplineResult",
   component: ToplineResult,
   args: {
-    onMouseOver: action('mouse over'),
-    onInfoPress: action('info press'),
+    onMouseOver: action("mouse over"),
+    onInfoPress: action("info press"),
   },
 }
 
 export const Default = {
   args: {
-    name: 'Labour',
-    abbreviation: 'lab',
+    name: "Labour",
+    abbreviation: "lab",
     mainNumber: 300,
     secondaryNumber: 120,
   },
@@ -23,25 +23,25 @@ export const Default = {
 
 export const WithInfoButton = {
   args: {
-    name: 'Labour',
-    abbreviation: 'lab',
+    name: "Labour",
+    abbreviation: "lab",
     mainNumber: 300,
     secondaryNumber: 120,
-    showInfoButton: true
+    showInfoButton: true,
   },
   render: (args) => <ToplineResult {...args} />,
 }
 
 export const Row = {
   args: {
-    name: 'Labour',
-    abbreviation: 'lab',
+    name: "Labour",
+    abbreviation: "lab",
     mainNumber: 300,
     secondaryNumber: 120,
     displayRow: true,
     styles: {
       toplineResult: styles.rightAlignToplineResult,
-      name: styles.rightAlignName
+      name: styles.rightAlignName,
     },
   },
   render: (args) => <ToplineResult {...args} />,
@@ -49,9 +49,9 @@ export const Row = {
 
 export const Candidate = {
   args: {
-    name: 'Mike Bloke',
-    secondaryName: 'Labour',
-    abbreviation: 'lab',
+    name: "Mike Bloke",
+    secondaryName: "Labour",
+    abbreviation: "lab",
     mainNumber: "50.4",
     mainNumberSuffix: "%",
   },

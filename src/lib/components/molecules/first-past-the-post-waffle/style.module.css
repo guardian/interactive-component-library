@@ -3,13 +3,13 @@
 }
 
 .line {
-    height: calc(100% - 3px - 20px);
-    width: 1px;
-    left: calc(50% - 0.5px);
-    background-color: var(--primary-text-color);
-    position: absolute;
-    bottom: 3px;
-    z-index: 2;
+  height: calc(100% - 3px - 20px);
+  width: 1px;
+  left: calc(50% - 0.5px);
+  background-color: var(--primary-text-color);
+  position: absolute;
+  bottom: 3px;
+  z-index: 2;
 }
 
 .halfLineText {

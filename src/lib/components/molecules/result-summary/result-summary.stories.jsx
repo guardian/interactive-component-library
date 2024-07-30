@@ -1,8 +1,8 @@
-import { ResultSummary } from '.'
-import styles from './stories.module.css'
+import { ResultSummary } from "."
+import styles from "./stories.module.css"
 
 const meta = {
-  title: 'Molecules/ResultSummary',
+  title: "Molecules/ResultSummary",
   component: ResultSummary,
   decorators: [
     (Story) => {
@@ -22,10 +22,10 @@ const timestamp = Date.now() - 120000
 
 export const Default = {
   args: {
-    previous: 'lab',
-    next: 'con',
-    title: 'Con gain from Lab',
-    text: 'Camberwell and Peckham',
+    previous: "lab",
+    next: "con",
+    title: "Con gain from Lab",
+    text: "Camberwell and Peckham",
     timestamp,
   },
 }

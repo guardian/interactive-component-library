@@ -8,13 +8,19 @@ const meta = {
   argTypes: {
     url: {
       control: { type: "file", accept: ".svg" },
-      description: "URL to a prerendered SVG map (the SVG image needs to have the same aspect ratio as the map, to avoid distortion)",
+      description:
+        "URL to a prerendered SVG map (the SVG image needs to have the same aspect ratio as the map, to avoid distortion)",
     },
   },
   decorators: [
     (Story) => (
       <div style={{ width: "344px", height: "500px", margin: "0 auto" }}>
-        <SVGMap config={{ ...MapConfiguration.UKComposite, drawCompositionBorders: false }}>
+        <SVGMap
+          config={{
+            ...MapConfiguration.UKComposite,
+            drawCompositionBorders: false,
+          }}
+        >
           <Story />
         </SVGMap>
       </div>

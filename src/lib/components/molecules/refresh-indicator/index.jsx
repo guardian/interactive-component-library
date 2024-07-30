@@ -1,6 +1,6 @@
-import { CircleIcon } from '$particles'
-import { mergeStyles } from '$styles/helpers/mergeStyles'
-import defaultStyles from './style.module.scss'
+import { CircleIcon } from "$particles"
+import { mergeStyles } from "$styles/helpers/mergeStyles"
+import defaultStyles from "./style.module.scss"
 
 export function RefreshIndicator({ text, styles }) {
   styles = mergeStyles(defaultStyles, styles)

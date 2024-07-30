@@ -4,7 +4,14 @@ import { CSSTransition } from "preact-transitioning"
 import defaultStyles from "./style.module.css"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 
-export function Modal({ visible = false, blurBackground = true, alwaysMounted = false, styles, children, onClickOutside }) {
+export function Modal({
+  visible = false,
+  blurBackground = true,
+  alwaysMounted = false,
+  styles,
+  children,
+  onClickOutside,
+}) {
   styles = mergeStyles(defaultStyles, styles)
   const modalBoxRef = useRef()
   const onClick = useCallback(
@@ -30,8 +37,20 @@ export function Modal({ visible = false, blurBackground = true, alwaysMounted = 
   if (typeof document === "undefined") return
 
   return (
-    <CSSTransition in={visible} duration={300} classNames={styles} alwaysMounted={alwaysMounted}>
-      <div className={[styles.transitionContainer, blurBackground && styles.blur, visible && styles.visible].join(" ")} onClick={onClick}>
+    <CSSTransition
+      in={visible}
+      duration={300}
+      classNames={styles}
+      alwaysMounted={alwaysMounted}
+    >
+      <div
+        className={[
+          styles.transitionContainer,
+          blurBackground && styles.blur,
+          visible && styles.visible,
+        ].join(" ")}
+        onClick={onClick}
+      >
         <div ref={modalBoxRef} class={styles.modalBox}>
           {children}
         </div>
