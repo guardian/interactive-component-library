@@ -1,4 +1,3 @@
-
 // Breakpoints generated from definitions in @guardian/source-foundations
 // See: https://guardian.github.io/csnx/?path=/docs/source-foundations_media-queries--docs
 $mq-breakpoints: (
@@ -28,4 +27,4 @@ $mq-static-breakpoint: desktop;
 // to this list, ordered by width, e.g. (mobile, tablet, desktop).
 // $mq-show-breakpoints: (mobile, mobileLandscape, tablet, desktop, leftCol, wide);
 
-@import 'node_modules/sass-mq/mq';
+@import "node_modules/sass-mq/mq";

@@ -45,7 +45,11 @@ export class GeoJSON {
   readFeatureFromObject(geoJSONObject) {
     const geometries = this.readGeometriesFromObject(geoJSONObject["geometry"])
     if (geometries.length > 0) {
-      return new Feature({ id: geoJSONObject["id"], geometries, properties: geoJSONObject["properties"] })
+      return new Feature({
+        id: geoJSONObject["id"],
+        geometries,
+        properties: geoJSONObject["properties"],
+      })
     }
 
     return null
@@ -66,7 +70,9 @@ export class GeoJSON {
       geometries.push(lineString)
     } else if (geometry.type === "MultiLineString") {
       for (const lineStringCoordinates of geometry.coordinates) {
-        const lineString = this.readLineStringForCoordinates(lineStringCoordinates)
+        const lineString = this.readLineStringForCoordinates(
+          lineStringCoordinates,
+        )
         geometries.push(lineString)
       }
     } else if (geometry.type === "Point") {

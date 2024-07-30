@@ -9,7 +9,13 @@
  * @param {boolean} moveBothLabels
  * @returns
  */
-export function preventOverlap(labelPositions, iteration = 0, labelSize = 12, coordinate = "y", moveBothLabels = true) {
+export function preventOverlap(
+  labelPositions,
+  iteration = 0,
+  labelSize = 12,
+  coordinate = "y",
+  moveBothLabels = true,
+) {
   const maxIterations = 10
   let totalOverlap = 0
 
@@ -19,7 +25,8 @@ export function preventOverlap(labelPositions, iteration = 0, labelSize = 12, co
     const previousElement = labelPositions[index - 1]
     const element = labelPositions[index]
 
-    const overlap = previousElement[coordinate] - (element[coordinate] - labelSize)
+    const overlap =
+      previousElement[coordinate] - (element[coordinate] - labelSize)
     if (overlap < 0) {
       // no overlap, continue
       continue
@@ -36,7 +43,13 @@ export function preventOverlap(labelPositions, iteration = 0, labelSize = 12, co
   }
 
   if (totalOverlap > 0 && iteration < maxIterations) {
-    return preventOverlap(labelPositions, iteration + 1, labelSize, coordinate, moveBothLabels)
+    return preventOverlap(
+      labelPositions,
+      iteration + 1,
+      labelSize,
+      coordinate,
+      moveBothLabels,
+    )
   }
 
   return labelPositions
@@ -76,7 +89,12 @@ export function uniqueBy(array, key) {
  * @param {boolean} moveBothLabels
  * @returns {T[]}
  */
-export function positionLabels(labels, labelSize = 12, coordinate = "y", moveBothLabels = true) {
+export function positionLabels(
+  labels,
+  labelSize = 12,
+  coordinate = "y",
+  moveBothLabels = true,
+) {
   labels = uniqueBy(labels, "value")
   // sort by coordinate-position
   labels.sort((a, b) => a[coordinate] - b[coordinate])
@@ -115,5 +133,7 @@ export function scaleLinear(domain, range) {
  * @returns {labelPositions is Array<T & { [key in K]: number }>}
  */
 function isArrayWithCoordinates(labelPositions, coordinate) {
-  return labelPositions.every((position) => typeof position[coordinate] === "number")
+  return labelPositions.every(
+    (position) => typeof position[coordinate] === "number",
+  )
 }

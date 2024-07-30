@@ -1,8 +1,12 @@
-import styles from './search.module.css'
+import styles from "./search.module.css"
 
 export function SearchIcon() {
   return (
-    <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" className={styles.svg}>
+    <svg
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+      className={styles.svg}
+    >
       <path
         className={styles.path}
         fill-rule="evenodd"

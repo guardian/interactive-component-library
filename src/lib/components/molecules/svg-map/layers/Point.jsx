@@ -2,7 +2,16 @@ import { useContext, useEffect } from "preact/hooks"
 import { MapContext } from "../context/MapContext"
 import { dynamicPropValue } from "../helpers/dynamicPropValue"
 
-export function Point({ id, features, radius = 4, fill = null, stroke = null, strokeWidth = 1, zIndex = 0, styles }) {
+export function Point({
+  id,
+  features,
+  radius = 4,
+  fill = null,
+  stroke = null,
+  strokeWidth = 1,
+  zIndex = 0,
+  styles,
+}) {
   const context = useContext(MapContext)
 
   useEffect(() => {

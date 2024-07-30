@@ -1,4 +1,13 @@
-import { Map, Projection, GeoJSON, VectorSource, VectorLayer, Style, Fill, Stroke } from "."
+import {
+  Map,
+  Projection,
+  GeoJSON,
+  VectorSource,
+  VectorLayer,
+  Style,
+  Fill,
+  Stroke,
+} from "."
 import { feature, merge } from "topojson-client"
 // import westminsterConstituenciesTopo from "./sample-data/uk-westminster.json"
 import westminsterConstituenciesTopo from "./sample-data/uk-westminster-simplified.json"
@@ -31,14 +40,22 @@ export const Default = {
     },
   },
   render: (args) => {
-    const outline = merge(westminsterConstituenciesTopo, westminsterConstituenciesTopo.objects["uk-westminster"].geometries)
-    const outlineSource = new VectorSource({ features: new GeoJSON().readFeaturesFromObject(outline) })
+    const outline = merge(
+      westminsterConstituenciesTopo,
+      westminsterConstituenciesTopo.objects["uk-westminster"].geometries,
+    )
+    const outlineSource = new VectorSource({
+      features: new GeoJSON().readFeaturesFromObject(outline),
+    })
 
     const fillStyle = new Style({
       fill: new Fill({ color: "#f1f1f1" }),
     })
 
-    const outlineLayer = new VectorLayer({ source: outlineSource, style: fillStyle })
+    const outlineLayer = new VectorLayer({
+      source: outlineSource,
+      style: fillStyle,
+    })
 
     const strokeStyle = new Style({
       stroke: new Stroke({
@@ -46,8 +63,13 @@ export const Default = {
         width: 1,
       }),
     })
-    const constituencies = feature(westminsterConstituenciesTopo, westminsterConstituenciesTopo.objects["uk-westminster"])
-    const constituenciesSource = new VectorSource({ features: new GeoJSON().readFeaturesFromObject(constituencies) })
+    const constituencies = feature(
+      westminsterConstituenciesTopo,
+      westminsterConstituenciesTopo.objects["uk-westminster"],
+    )
+    const constituenciesSource = new VectorSource({
+      features: new GeoJSON().readFeaturesFromObject(constituencies),
+    })
 
     const constituenciesLayer = new VectorLayer({
       source: constituenciesSource,

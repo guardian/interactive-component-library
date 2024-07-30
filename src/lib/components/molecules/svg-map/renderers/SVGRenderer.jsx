@@ -20,7 +20,11 @@ export function SVGRenderer({ children }) {
     >
       <g transform={`translate(${padding.left} ${padding.top})`}>
         <g>{children}</g>
-        {config.drawCompositionBorders && Object.prototype.hasOwnProperty.call(config.projection, "getCompositionBorders") && <CompositionBorders />}
+        {config.drawCompositionBorders &&
+          Object.prototype.hasOwnProperty.call(
+            config.projection,
+            "getCompositionBorders",
+          ) && <CompositionBorders />}
       </g>
     </svg>
   )

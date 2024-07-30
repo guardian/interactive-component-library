@@ -3,7 +3,17 @@ import { Chevron } from "$particles"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 import defaultStyles from "./style.module.css"
 
-export function Dropdown({ title, hint, options, onSelect, multipleSelect = false, iconForSelectedIndexPaths, collapseOnSelect = false, expandByDefault = true, styles }) {
+export function Dropdown({
+  title,
+  hint,
+  options,
+  onSelect,
+  multipleSelect = false,
+  iconForSelectedIndexPaths,
+  collapseOnSelect = false,
+  expandByDefault = true,
+  styles,
+}) {
   styles = mergeStyles(defaultStyles, styles)
 
   const optionGroups = useMemo(() => {
@@ -29,7 +39,9 @@ export function Dropdown({ title, hint, options, onSelect, multipleSelect = fals
   }, options)
 
   const [expanded, setExpanded] = useState(expandByDefault)
-  const [selectedIndexPaths, setSelectedIndexPaths] = useState(() => createInitialIndexPaths(optionGroups, multipleSelect))
+  const [selectedIndexPaths, setSelectedIndexPaths] = useState(() =>
+    createInitialIndexPaths(optionGroups, multipleSelect),
+  )
 
   const onOptionClick = useCallback(
     (option, index) => {
@@ -53,7 +65,8 @@ export function Dropdown({ title, hint, options, onSelect, multipleSelect = fals
       return iconForSelectedIndexPaths(selectedIndexPaths)
     }
     const firstSelectedIndexPath = selectedIndexPaths[0]
-    const selectedOption = optionGroups[firstSelectedIndexPath[0]].options[firstSelectedIndexPath[1]]
+    const selectedOption =
+      optionGroups[firstSelectedIndexPath[0]].options[firstSelectedIndexPath[1]]
     return selectedOption.icon
   }, [optionGroups, selectedIndexPaths])
 
@@ -71,30 +84,62 @@ export function Dropdown({ title, hint, options, onSelect, multipleSelect = fals
 
   return (
     <div className={styles.container}>
-      <button className={styles.button} onClick={() => setExpanded((current) => !current)}>
+      <button
+        className={styles.button}
+        onClick={() => setExpanded((current) => !current)}
+      >
         <img src={iconForSelectedOption} className={styles.icon} />
         <span className={styles.title}>{title}</span>
-        <Chevron active={true} size="large" direction={expanded ? "up" : "down"} />
+        <Chevron
+          active={true}
+          size="large"
+          direction={expanded ? "up" : "down"}
+        />
       </button>
       <div className={styles.clearFix} />
-      <div className={styles.popout} style={{ visibility: expanded ? "visible" : "hidden" }}>
+      <div
+        className={styles.popout}
+        style={{ visibility: expanded ? "visible" : "hidden" }}
+      >
         {hint && <p className={styles.hint}>{hint}</p>}
         {optionGroups.map((group, index) => {
-          return <OptionGroup {...group} selectedIndex={selectedIndexForGroup(index)} onOptionClick={onOptionClick} styles={styles} />
+          return (
+            <OptionGroup
+              {...group}
+              selectedIndex={selectedIndexForGroup(index)}
+              onOptionClick={onOptionClick}
+              styles={styles}
+            />
+          )
         })}
       </div>
     </div>
   )
 }
 
-function OptionGroup({ title, className, options, selectedIndex, onOptionClick, styles }) {
+function OptionGroup({
+  title,
+  className,
+  options,
+  selectedIndex,
+  onOptionClick,
+  styles,
+}) {
   return (
     <>
       {title && <span className={styles.groupHeader}>{title}</span>}
       {options.map((option) => {
         const isSelected = option.index === selectedIndex
         return (
-          <button key={option.title} className={[styles.option, className, isSelected ? styles.selected : ""].join(" ")} onClick={() => onOptionClick(option, option.index)}>
+          <button
+            key={option.title}
+            className={[
+              styles.option,
+              className,
+              isSelected ? styles.selected : "",
+            ].join(" ")}
+            onClick={() => onOptionClick(option, option.index)}
+          >
             <img src={option.icon} className={styles.optionIcon} />
             <div className={styles.optionText}>
               <h4 className={styles.optionTitle}>{option.title}</h4>
@@ -114,7 +159,13 @@ function OptionGroup({ title, className, options, selectedIndex, onOptionClick, 
 
 function Checkmark() {
   return (
-    <svg width="11" height="9" viewBox="0 0 11 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="11"
+      height="9"
+      viewBox="0 0 11 9"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"

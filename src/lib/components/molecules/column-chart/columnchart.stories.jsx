@@ -1,7 +1,7 @@
-import { ColumnChart } from '.'
+import { ColumnChart } from "."
 
 const meta = {
-  title: 'Molecules/ColumnChart',
+  title: "Molecules/ColumnChart",
   component: ColumnChart,
 }
 
@@ -16,22 +16,22 @@ export const Default = {
     columnWidth: 50,
     columnPadding: {
       left: 0,
-      right: 6
+      right: 6,
     },
     columns: [
       {
-        value : 100,
+        value: 100,
         id: "con",
         color: "blue",
-        label: "Con"
+        label: "Con",
       },
       {
-        value : -100,
+        value: -100,
         id: "lab",
         color: "red",
-        label : "Lab"
+        label: "Lab",
       },
-    ]
+    ],
   },
   render: (args) => <ColumnChart {...args} />,
 }
@@ -45,22 +45,22 @@ export const allPositive = {
     columnWidth: 50,
     columnPadding: {
       left: 0,
-      right: 6
+      right: 6,
     },
     columns: [
       {
-        value : 100,
+        value: 100,
         id: "con",
         color: "blue",
-        label: "Con"
+        label: "Con",
       },
       {
-        value : 200,
+        value: 200,
         id: "lab",
         color: "red",
-        label : "Lab"
+        label: "Lab",
       },
-    ]
+    ],
   },
   render: (args) => <ColumnChart {...args} />,
 }

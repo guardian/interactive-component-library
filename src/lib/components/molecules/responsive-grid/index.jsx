@@ -1,11 +1,11 @@
-import { toChildArray } from 'preact'
-import defaultStyles from './style.module.scss'
-import { mergeStyles } from '$styles/helpers/mergeStyles'
+import { toChildArray } from "preact"
+import defaultStyles from "./style.module.scss"
+import { mergeStyles } from "$styles/helpers/mergeStyles"
 
 export const GridType = {
-  small: 'small',
-  medium: 'medium',
-  large: 'large',
+  small: "small",
+  medium: "medium",
+  large: "large",
 }
 
 export function ResponsiveGrid({ type = GridType.medium, children, styles }) {

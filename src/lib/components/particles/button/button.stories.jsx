@@ -1,7 +1,7 @@
-import { Button } from '.'
+import { Button } from "."
 
 const meta = {
-  title: 'Particles/Button',
+  title: "Particles/Button",
   component: Button,
   render: (args) => {
     return <Button {...args}>A basic button</Button>
@@ -14,6 +14,6 @@ export const Default = {}
 
 export const Small = {
   args: {
-    type: 'small',
+    type: "small",
   },
 }

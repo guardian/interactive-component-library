@@ -105,7 +105,12 @@ export const PartyResults = {
       {
         header: "Party",
         accessor: "partyName",
-        cell: (d) => <LegendItem text={d.partyName} styles={{ dot: `bg-color--${d.abbreviation}` }} />,
+        cell: (d) => (
+          <LegendItem
+            text={d.partyName}
+            styles={{ dot: `bg-color--${d.abbreviation}` }}
+          />
+        ),
         styles: {
           headerCell: styles["w-2/5"],
         },
@@ -207,17 +212,20 @@ export const ColumnDefinitions = {
       },
       {
         property: "header",
-        description: "The column header name. It will not show if `hideHeader` prop on Table equals `true`",
+        description:
+          "The column header name. It will not show if `hideHeader` prop on Table equals `true`",
         default: "-",
       },
       {
         property: "accessor",
-        description: "The key for accessing the value of each object in the `data` array",
+        description:
+          "The key for accessing the value of each object in the `data` array",
         default: "-",
       },
       {
         property: "cell",
-        description: "Optional function that receives a datum and returns a table cell for the current row",
+        description:
+          "Optional function that receives a datum and returns a table cell for the current row",
         default: "-",
       },
       {

@@ -11,7 +11,10 @@ export function hasArea(size) {
 export function sizeMinusPadding(size, padding) {
   let newSize = [...size]
   if (padding) {
-    newSize = [size[0] - padding.left - padding.right, size[1] - padding.top - padding.bottom]
+    newSize = [
+      size[0] - padding.left - padding.right,
+      size[1] - padding.top - padding.bottom,
+    ]
   }
   return newSize
 }
@@ -60,8 +63,17 @@ export function sizeForElement(element) {
     parseFloat(computedStyle["borderBottomWidth"])
   if (!isNaN(width) && !isNaN(height)) {
     size = [width, height]
-    if (!hasArea(size) && !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length)) {
-      console.warn("No map visible because the map container's width or height are 0.")
+    if (
+      !hasArea(size) &&
+      !!(
+        element.offsetWidth ||
+        element.offsetHeight ||
+        element.getClientRects().length
+      )
+    ) {
+      console.warn(
+        "No map visible because the map container's width or height are 0.",
+      )
     }
   }
 

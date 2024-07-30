@@ -1,7 +1,7 @@
-import { CloseButton } from '.'
+import { CloseButton } from "."
 
 const meta = {
-  title: 'Particles/CloseButton',
+  title: "Particles/CloseButton",
   component: CloseButton,
   decorators: [
     (Story) => (

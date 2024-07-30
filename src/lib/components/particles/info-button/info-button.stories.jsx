@@ -1,12 +1,12 @@
-import { withActions } from '@storybook/addon-actions/decorator'
-import { InfoButton } from '.'
+import { withActions } from "@storybook/addon-actions/decorator"
+import { InfoButton } from "."
 
 export default {
-  title: 'Particles/InfoButton',
+  title: "Particles/InfoButton",
   component: InfoButton,
   parameters: {
     actions: {
-      handles: ['click', 'clicked'],
+      handles: ["click", "clicked"],
     },
   },
   decorators: [withActions],

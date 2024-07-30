@@ -1,8 +1,8 @@
-import { StackedGrid } from '.'
-import { CircleIcon, SquareCutCornerIcon, SquareIcon } from '$particles'
+import { StackedGrid } from "."
+import { CircleIcon, SquareCutCornerIcon, SquareIcon } from "$particles"
 
 const meta = {
-  title: 'Particles/StackedGrid',
+  title: "Particles/StackedGrid",
   component: StackedGrid,
 }
 export default meta
@@ -15,17 +15,61 @@ export const Default = {
 
     children: (
       <>
-        <SquareCutCornerIcon squareSize="24" cornerColor="red" squareColor="teal" />
-        <SquareCutCornerIcon squareSize="24" cornerColor="red" squareColor="teal" />
-        <SquareCutCornerIcon squareSize="24" cornerColor="red" squareColor="teal" />
-        <SquareCutCornerIcon squareSize="24" cornerColor="red" squareColor="teal" />
-        <SquareCutCornerIcon squareSize="24" cornerColor="red" squareColor="teal" />
-        <SquareCutCornerIcon squareSize="24" cornerColor="red" squareColor="teal" />
-        <SquareCutCornerIcon squareSize="24" cornerColor="red" squareColor="teal" />
-        <SquareCutCornerIcon squareSize="24" cornerColor="red" squareColor="teal" />
-        <SquareCutCornerIcon squareSize="24" cornerColor="red" squareColor="teal" />
-        <SquareCutCornerIcon squareSize="24" cornerColor="red" squareColor="teal" />
-        <SquareCutCornerIcon squareSize="24" cornerColor="red" squareColor="teal" />
+        <SquareCutCornerIcon
+          squareSize="24"
+          cornerColor="red"
+          squareColor="teal"
+        />
+        <SquareCutCornerIcon
+          squareSize="24"
+          cornerColor="red"
+          squareColor="teal"
+        />
+        <SquareCutCornerIcon
+          squareSize="24"
+          cornerColor="red"
+          squareColor="teal"
+        />
+        <SquareCutCornerIcon
+          squareSize="24"
+          cornerColor="red"
+          squareColor="teal"
+        />
+        <SquareCutCornerIcon
+          squareSize="24"
+          cornerColor="red"
+          squareColor="teal"
+        />
+        <SquareCutCornerIcon
+          squareSize="24"
+          cornerColor="red"
+          squareColor="teal"
+        />
+        <SquareCutCornerIcon
+          squareSize="24"
+          cornerColor="red"
+          squareColor="teal"
+        />
+        <SquareCutCornerIcon
+          squareSize="24"
+          cornerColor="red"
+          squareColor="teal"
+        />
+        <SquareCutCornerIcon
+          squareSize="24"
+          cornerColor="red"
+          squareColor="teal"
+        />
+        <SquareCutCornerIcon
+          squareSize="24"
+          cornerColor="red"
+          squareColor="teal"
+        />
+        <SquareCutCornerIcon
+          squareSize="24"
+          cornerColor="red"
+          squareColor="teal"
+        />
       </>
     ),
   },
@@ -38,14 +82,14 @@ export const WithCircles = {
     containerWidth: 100,
     children: (
       <>
-        <CircleIcon styles={{ circle: 'fill-color--lab' }} />
-        <CircleIcon styles={{ circle: 'fill-color--lab' }} />
-        <CircleIcon styles={{ circle: 'fill-color--lab' }} />
-        <CircleIcon styles={{ circle: 'fill-color--sdlp' }} />
-        <CircleIcon styles={{ circle: 'fill-color--sdlp' }} />
-        <CircleIcon styles={{ circle: 'fill-color--sdlp' }} />
-        <CircleIcon styles={{ circle: 'fill-color--sdlp' }} />
-        <CircleIcon styles={{ circle: 'fill-color--sdlp' }} />
+        <CircleIcon styles={{ circle: "fill-color--lab" }} />
+        <CircleIcon styles={{ circle: "fill-color--lab" }} />
+        <CircleIcon styles={{ circle: "fill-color--lab" }} />
+        <CircleIcon styles={{ circle: "fill-color--sdlp" }} />
+        <CircleIcon styles={{ circle: "fill-color--sdlp" }} />
+        <CircleIcon styles={{ circle: "fill-color--sdlp" }} />
+        <CircleIcon styles={{ circle: "fill-color--sdlp" }} />
+        <CircleIcon styles={{ circle: "fill-color--sdlp" }} />
       </>
     ),
   },
@@ -60,19 +104,19 @@ export const WithSquares = {
 
     children: (
       <>
-        <SquareIcon size="24" styles={{ squareFill: 'fill-color--con' }} />
-        <SquareIcon size="24" styles={{ squareFill: 'fill-color--con' }} />
-        <SquareIcon size="24" styles={{ squareFill: 'fill-color--con' }} />
-        <SquareIcon size="24" styles={{ squareFill: 'fill-color--con' }} />
-        <SquareIcon size="24" styles={{ squareFill: 'fill-color--con' }} />
-        <SquareIcon size="24" styles={{ squareFill: 'fill-color--con' }} />
-        <SquareIcon size="24" styles={{ squareFill: 'fill-color--con' }} />
-        <SquareIcon size="24" styles={{ squareFill: 'fill-color--con' }} />
-        <SquareIcon size="24" styles={{ squareFill: 'fill-color--lab' }} />
-        <SquareIcon size="24" styles={{ squareFill: 'fill-color--lab' }} />
-        <SquareIcon size="24" styles={{ squareFill: 'fill-color--lab' }} />
-        <SquareIcon size="24" styles={{ squareFill: 'fill-color--snp' }} />
-        <SquareIcon size="24" styles={{ squareFill: 'fill-color--snp' }} />
+        <SquareIcon size="24" styles={{ squareFill: "fill-color--con" }} />
+        <SquareIcon size="24" styles={{ squareFill: "fill-color--con" }} />
+        <SquareIcon size="24" styles={{ squareFill: "fill-color--con" }} />
+        <SquareIcon size="24" styles={{ squareFill: "fill-color--con" }} />
+        <SquareIcon size="24" styles={{ squareFill: "fill-color--con" }} />
+        <SquareIcon size="24" styles={{ squareFill: "fill-color--con" }} />
+        <SquareIcon size="24" styles={{ squareFill: "fill-color--con" }} />
+        <SquareIcon size="24" styles={{ squareFill: "fill-color--con" }} />
+        <SquareIcon size="24" styles={{ squareFill: "fill-color--lab" }} />
+        <SquareIcon size="24" styles={{ squareFill: "fill-color--lab" }} />
+        <SquareIcon size="24" styles={{ squareFill: "fill-color--lab" }} />
+        <SquareIcon size="24" styles={{ squareFill: "fill-color--snp" }} />
+        <SquareIcon size="24" styles={{ squareFill: "fill-color--snp" }} />
       </>
     ),
   },

@@ -1,5 +1,5 @@
-import { mergeStyles } from '$styles/helpers/mergeStyles'
-import defaultStyles from './style.module.css'
+import { mergeStyles } from "$styles/helpers/mergeStyles"
+import defaultStyles from "./style.module.css"
 /**
  * Array of available breakpoints.
  * @typedef {"mobile" | "phablet" | "tablet" | "desktop"} Breakpoint
@@ -31,15 +31,26 @@ export function AdSlot({ name, sizeMapping, styles }) {
 
   styles = mergeStyles(defaultStyles, styles)
 
-  const mobileSizes = sizeMapping.mobile?.map((size) => size.join(',')).join('|')
-  const tabletSizes = sizeMapping.tablet?.map((size) => size.join(',')).join('|')
-  const desktopSizes = sizeMapping.desktop?.map((size) => size.join(',')).join('|')
+  const mobileSizes = sizeMapping.mobile
+    ?.map((size) => size.join(","))
+    .join("|")
+  const tabletSizes = sizeMapping.tablet
+    ?.map((size) => size.join(","))
+    .join("|")
+  const desktopSizes = sizeMapping.desktop
+    ?.map((size) => size.join(","))
+    .join("|")
 
   return (
-    <div className={['ad-slot-container', styles.container].join(' ')}>
+    <div className={["ad-slot-container", styles.container].join(" ")}>
       <div
         id={slotId}
-        className={['js-ad-slot', 'ad-slot', 'interactive-ad-slot', styles.slot].join(' ')}
+        className={[
+          "js-ad-slot",
+          "ad-slot",
+          "interactive-ad-slot",
+          styles.slot,
+        ].join(" ")}
         data-link-name={`ad slot ${name}`}
         data-name={`${name}`}
         data-label-show="true"

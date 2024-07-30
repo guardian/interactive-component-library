@@ -1,7 +1,7 @@
-import { ArrowButton } from '.'
+import { ArrowButton } from "."
 
 const meta = {
-  title: 'Particles/ArrowButton',
+  title: "Particles/ArrowButton",
   component: ArrowButton,
 }
 
@@ -17,13 +17,13 @@ export const RightDisabled = {
 
 export const Left = {
   args: {
-    direction: 'left',
+    direction: "left",
   },
 }
 
 export const LeftDisabled = {
   args: {
-    direction: 'left',
+    direction: "left",
     disabled: true,
   },
 }

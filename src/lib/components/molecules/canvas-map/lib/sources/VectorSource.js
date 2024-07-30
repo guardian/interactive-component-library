@@ -21,7 +21,9 @@ export class VectorSource {
 
   getFeaturesAtCoordinate(coordinate) {
     const [lon, lat] = coordinate
-    const features = knn(this._featuresRtree, lon, lat, 10, (d) => d.feature.containsCoordinate(coordinate)).map((d) => {
+    const features = knn(this._featuresRtree, lon, lat, 10, (d) =>
+      d.feature.containsCoordinate(coordinate),
+    ).map((d) => {
       const midX = d.minX + (d.minX + d.maxX) / 2
       const midY = d.minY + (d.minY + d.maxY) / 2
       d.distance = Math.hypot(midX - lon, midY - lat)
@@ -33,7 +35,9 @@ export class VectorSource {
 
   getFeaturesInExtent(extent) {
     const [minX, minY, maxX, maxY] = extent
-    return this._featuresRtree.search({ minX, minY, maxX, maxY }).map((d) => d.feature)
+    return this._featuresRtree
+      .search({ minX, minY, maxX, maxY })
+      .map((d) => d.feature)
   }
 
   setFeatures(features) {

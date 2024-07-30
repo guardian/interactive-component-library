@@ -1,12 +1,21 @@
-import defaultStyles from './style.module.css'
-import { mergeStyles } from '$styles/helpers/mergeStyles'
+import defaultStyles from "./style.module.css"
+import { mergeStyles } from "$styles/helpers/mergeStyles"
 
-export function ArrowButton({ direction = 'right', disabled = false, styles, onClick }) {
+export function ArrowButton({
+  direction = "right",
+  disabled = false,
+  styles,
+  onClick,
+}) {
   styles = mergeStyles(defaultStyles, styles)
 
   return (
     <button className={styles.button} disabled={disabled} onClick={onClick}>
-      <svg className={[styles.icon, direction].join(' ')} viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        className={[styles.icon, direction].join(" ")}
+        viewBox="0 0 28 28"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <circle cx={14} cy={14} r="13" fill-rule="nonzero" />
         <g transform="translate(6 7)">
           <path

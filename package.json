@@ -28,8 +28,8 @@
     "build": "storybook build",
     "build:lib": "vite build",
     "build:lib:watch": "vite build --watch",
-    "lint": "eslint \"src/**/*.{js,jsx}\"",
-    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,mdx}\"",
+    "lint": "eslint .",
+    "prettier": "prettier . --check",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
     "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\"",
@@ -110,6 +110,6 @@
   },
   "lint-staged": {
     "*.{js,jsx}": "eslint --fix",
-    "*.{js,jsx,json,css,scss,md}": "prettier --write"
+    "*": "prettier --write"
   }
 }

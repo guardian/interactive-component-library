@@ -4,7 +4,13 @@ import { Chevron } from "$particles/chevron"
 import defaultStyles from "./style.module.scss"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 
-export function Table({ columns, data, hideHeader = false, stickyHeader = false, styles }) {
+export function Table({
+  columns,
+  data,
+  hideHeader = false,
+  stickyHeader = false,
+  styles,
+}) {
   const [sortState, setSortState] = useState(() => {
     const columnIndex = columns.findIndex((column) => {
       if ("sort" in column) {
@@ -13,7 +19,8 @@ export function Table({ columns, data, hideHeader = false, stickyHeader = false,
       return false
     })
 
-    const ascending = columnIndex >= 0 ? columns[columnIndex].sort.ascending : false
+    const ascending =
+      columnIndex >= 0 ? columns[columnIndex].sort.ascending : false
     return {
       columnIndex,
       ascending,
@@ -25,7 +32,8 @@ export function Table({ columns, data, hideHeader = false, stickyHeader = false,
     setSortState((currentState) => {
       return {
         columnIndex: index,
-        ascending: index === currentState.columnIndex ? !currentState.ascending : false,
+        ascending:
+          index === currentState.columnIndex ? !currentState.ascending : false,
       }
     })
   }
@@ -37,13 +45,21 @@ export function Table({ columns, data, hideHeader = false, stickyHeader = false,
       <thead className={hideHeader && styles.hideHeader}>
         <tr>
           {table.columns.map((column, index) => {
-            let columnStyle = mergeStyles(styles.headerCell, column.styles?.headerCell)
+            let columnStyle = mergeStyles(
+              styles.headerCell,
+              column.styles?.headerCell,
+            )
             if (stickyHeader) {
               columnStyle = mergeStyles(columnStyle, styles.stickyHeader)
             }
             return (
               <th scope="col" key={column.id} className={columnStyle}>
-                <HeaderCell key={index} styles={mergeStyles(styles, column.styles)} onClick={() => sortByColumn(index)} {...column.headerProps} />
+                <HeaderCell
+                  key={index}
+                  styles={mergeStyles(styles, column.styles)}
+                  onClick={() => sortByColumn(index)}
+                  {...column.headerProps}
+                />
               </th>
             )
           })}
@@ -54,7 +70,13 @@ export function Table({ columns, data, hideHeader = false, stickyHeader = false,
           return (
             <tr key={row.id} className={styles.bodyRow}>
               {row.cells.map((cell) => (
-                <td key={cell.id} className={mergeStyles(styles.bodyCell, cell.column.styles?.bodyCell)}>
+                <td
+                  key={cell.id}
+                  className={mergeStyles(
+                    styles.bodyCell,
+                    cell.column.styles?.bodyCell,
+                  )}
+                >
                   {cell.displayValue}
                 </td>
               ))}

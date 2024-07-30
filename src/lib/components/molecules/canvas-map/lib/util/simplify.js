@@ -40,15 +40,40 @@ import { squaredDistance, squaredSegmentDistance } from "../../math.js"
  *     coordinates.
  * @return {Array<number>} Simplified line string.
  */
-export function simplifyLineString(flatCoordinates, offset, end, stride, squaredTolerance, highQuality, simplifiedFlatCoordinates) {
-  simplifiedFlatCoordinates = simplifiedFlatCoordinates !== undefined ? simplifiedFlatCoordinates : []
+export function simplifyLineString(
+  flatCoordinates,
+  offset,
+  end,
+  stride,
+  squaredTolerance,
+  highQuality,
+  simplifiedFlatCoordinates,
+) {
+  simplifiedFlatCoordinates =
+    simplifiedFlatCoordinates !== undefined ? simplifiedFlatCoordinates : []
   if (!highQuality) {
-    end = radialDistance(flatCoordinates, offset, end, stride, squaredTolerance, simplifiedFlatCoordinates, 0)
+    end = radialDistance(
+      flatCoordinates,
+      offset,
+      end,
+      stride,
+      squaredTolerance,
+      simplifiedFlatCoordinates,
+      0,
+    )
     flatCoordinates = simplifiedFlatCoordinates
     offset = 0
     stride = 2
   }
-  simplifiedFlatCoordinates.length = douglasPeucker(flatCoordinates, offset, end, stride, squaredTolerance, simplifiedFlatCoordinates, 0)
+  simplifiedFlatCoordinates.length = douglasPeucker(
+    flatCoordinates,
+    offset,
+    end,
+    stride,
+    squaredTolerance,
+    simplifiedFlatCoordinates,
+    0,
+  )
   return simplifiedFlatCoordinates
 }
 
@@ -63,12 +88,21 @@ export function simplifyLineString(flatCoordinates, offset, end, stride, squared
  * @param {number} simplifiedOffset Simplified offset.
  * @return {number} Simplified offset.
  */
-export function douglasPeucker(flatCoordinates, offset, end, stride, squaredTolerance, simplifiedFlatCoordinates, simplifiedOffset) {
+export function douglasPeucker(
+  flatCoordinates,
+  offset,
+  end,
+  stride,
+  squaredTolerance,
+  simplifiedFlatCoordinates,
+  simplifiedOffset,
+) {
   const n = (end - offset) / stride
   if (n < 3) {
     for (; offset < end; offset += stride) {
       simplifiedFlatCoordinates[simplifiedOffset++] = flatCoordinates[offset]
-      simplifiedFlatCoordinates[simplifiedOffset++] = flatCoordinates[offset + 1]
+      simplifiedFlatCoordinates[simplifiedOffset++] =
+        flatCoordinates[offset + 1]
     }
     return simplifiedOffset
   }
@@ -108,8 +142,10 @@ export function douglasPeucker(flatCoordinates, offset, end, stride, squaredTole
   }
   for (let i = 0; i < n; ++i) {
     if (markers[i]) {
-      simplifiedFlatCoordinates[simplifiedOffset++] = flatCoordinates[offset + i * stride]
-      simplifiedFlatCoordinates[simplifiedOffset++] = flatCoordinates[offset + i * stride + 1]
+      simplifiedFlatCoordinates[simplifiedOffset++] =
+        flatCoordinates[offset + i * stride]
+      simplifiedFlatCoordinates[simplifiedOffset++] =
+        flatCoordinates[offset + i * stride + 1]
     }
   }
   return simplifiedOffset
@@ -127,10 +163,27 @@ export function douglasPeucker(flatCoordinates, offset, end, stride, squaredTole
  * @param {Array<number>} simplifiedEnds Simplified ends.
  * @return {number} Simplified offset.
  */
-export function douglasPeuckerArray(flatCoordinates, offset, ends, stride, squaredTolerance, simplifiedFlatCoordinates, simplifiedOffset, simplifiedEnds) {
+export function douglasPeuckerArray(
+  flatCoordinates,
+  offset,
+  ends,
+  stride,
+  squaredTolerance,
+  simplifiedFlatCoordinates,
+  simplifiedOffset,
+  simplifiedEnds,
+) {
   for (let i = 0, ii = ends.length; i < ii; ++i) {
     const end = ends[i]
-    simplifiedOffset = douglasPeucker(flatCoordinates, offset, end, stride, squaredTolerance, simplifiedFlatCoordinates, simplifiedOffset)
+    simplifiedOffset = douglasPeucker(
+      flatCoordinates,
+      offset,
+      end,
+      stride,
+      squaredTolerance,
+      simplifiedFlatCoordinates,
+      simplifiedOffset,
+    )
     simplifiedEnds.push(simplifiedOffset)
     offset = end
   }
@@ -149,12 +202,30 @@ export function douglasPeuckerArray(flatCoordinates, offset, ends, stride, squar
  * @param {Array<Array<number>>} simplifiedEndss Simplified endss.
  * @return {number} Simplified offset.
  */
-export function douglasPeuckerMultiArray(flatCoordinates, offset, endss, stride, squaredTolerance, simplifiedFlatCoordinates, simplifiedOffset, simplifiedEndss) {
+export function douglasPeuckerMultiArray(
+  flatCoordinates,
+  offset,
+  endss,
+  stride,
+  squaredTolerance,
+  simplifiedFlatCoordinates,
+  simplifiedOffset,
+  simplifiedEndss,
+) {
   for (let i = 0, ii = endss.length; i < ii; ++i) {
     const ends = endss[i]
     /** @type {Array<number>} */
     const simplifiedEnds = []
-    simplifiedOffset = douglasPeuckerArray(flatCoordinates, offset, ends, stride, squaredTolerance, simplifiedFlatCoordinates, simplifiedOffset, simplifiedEnds)
+    simplifiedOffset = douglasPeuckerArray(
+      flatCoordinates,
+      offset,
+      ends,
+      stride,
+      squaredTolerance,
+      simplifiedFlatCoordinates,
+      simplifiedOffset,
+      simplifiedEnds,
+    )
     simplifiedEndss.push(simplifiedEnds)
     offset = ends[ends.length - 1]
   }
@@ -172,12 +243,21 @@ export function douglasPeuckerMultiArray(flatCoordinates, offset, endss, stride,
  * @param {number} simplifiedOffset Simplified offset.
  * @return {number} Simplified offset.
  */
-export function radialDistance(flatCoordinates, offset, end, stride, squaredTolerance, simplifiedFlatCoordinates, simplifiedOffset) {
+export function radialDistance(
+  flatCoordinates,
+  offset,
+  end,
+  stride,
+  squaredTolerance,
+  simplifiedFlatCoordinates,
+  simplifiedOffset,
+) {
   if (end <= offset + stride) {
     // zero or one point, no simplification possible, so copy and return
     for (; offset < end; offset += stride) {
       simplifiedFlatCoordinates[simplifiedOffset++] = flatCoordinates[offset]
-      simplifiedFlatCoordinates[simplifiedOffset++] = flatCoordinates[offset + 1]
+      simplifiedFlatCoordinates[simplifiedOffset++] =
+        flatCoordinates[offset + 1]
     }
     return simplifiedOffset
   }
@@ -235,7 +315,15 @@ export function snap(value, tolerance) {
  * @param {number} simplifiedOffset Simplified offset.
  * @return {number} Simplified offset.
  */
-export function quantize(flatCoordinates, offset, end, stride, tolerance, simplifiedFlatCoordinates, simplifiedOffset) {
+export function quantize(
+  flatCoordinates,
+  offset,
+  end,
+  stride,
+  tolerance,
+  simplifiedFlatCoordinates,
+  simplifiedOffset,
+) {
   // do nothing if the line is empty
   if (offset == end) {
     return simplifiedOffset
@@ -282,7 +370,11 @@ export function quantize(flatCoordinates, offset, end, stride, tolerance, simpli
     // if P1, P2, and P3 are colinear and P3 is further from P1 than P2 is from
     // P1 in the same direction then P2 is on the straight line between P1 and
     // P3
-    if (dx1 * dy2 == dy1 * dx2 && ((dx1 < 0 && dx2 < dx1) || dx1 == dx2 || (dx1 > 0 && dx2 > dx1)) && ((dy1 < 0 && dy2 < dy1) || dy1 == dy2 || (dy1 > 0 && dy2 > dy1))) {
+    if (
+      dx1 * dy2 == dy1 * dx2 &&
+      ((dx1 < 0 && dx2 < dx1) || dx1 == dx2 || (dx1 > 0 && dx2 > dx1)) &&
+      ((dy1 < 0 && dy2 < dy1) || dy1 == dy2 || (dy1 > 0 && dy2 > dy1))
+    ) {
       // discard P2 and set P2 = P3
       x2 = x3
       y2 = y3
@@ -316,10 +408,27 @@ export function quantize(flatCoordinates, offset, end, stride, tolerance, simpli
  * @param {Array<number>} simplifiedEnds Simplified ends.
  * @return {number} Simplified offset.
  */
-export function quantizeArray(flatCoordinates, offset, ends, stride, tolerance, simplifiedFlatCoordinates, simplifiedOffset, simplifiedEnds) {
+export function quantizeArray(
+  flatCoordinates,
+  offset,
+  ends,
+  stride,
+  tolerance,
+  simplifiedFlatCoordinates,
+  simplifiedOffset,
+  simplifiedEnds,
+) {
   for (let i = 0, ii = ends.length; i < ii; ++i) {
     const end = ends[i]
-    simplifiedOffset = quantize(flatCoordinates, offset, end, stride, tolerance, simplifiedFlatCoordinates, simplifiedOffset)
+    simplifiedOffset = quantize(
+      flatCoordinates,
+      offset,
+      end,
+      stride,
+      tolerance,
+      simplifiedFlatCoordinates,
+      simplifiedOffset,
+    )
     simplifiedEnds.push(simplifiedOffset)
     offset = end
   }
@@ -338,12 +447,30 @@ export function quantizeArray(flatCoordinates, offset, ends, stride, tolerance, 
  * @param {Array<Array<number>>} simplifiedEndss Simplified endss.
  * @return {number} Simplified offset.
  */
-export function quantizeMultiArray(flatCoordinates, offset, endss, stride, tolerance, simplifiedFlatCoordinates, simplifiedOffset, simplifiedEndss) {
+export function quantizeMultiArray(
+  flatCoordinates,
+  offset,
+  endss,
+  stride,
+  tolerance,
+  simplifiedFlatCoordinates,
+  simplifiedOffset,
+  simplifiedEndss,
+) {
   for (let i = 0, ii = endss.length; i < ii; ++i) {
     const ends = endss[i]
     /** @type {Array<number>} */
     const simplifiedEnds = []
-    simplifiedOffset = quantizeArray(flatCoordinates, offset, ends, stride, tolerance, simplifiedFlatCoordinates, simplifiedOffset, simplifiedEnds)
+    simplifiedOffset = quantizeArray(
+      flatCoordinates,
+      offset,
+      ends,
+      stride,
+      tolerance,
+      simplifiedFlatCoordinates,
+      simplifiedOffset,
+      simplifiedEnds,
+    )
     simplifiedEndss.push(simplifiedEnds)
     offset = ends[ends.length - 1]
   }

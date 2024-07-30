@@ -27,7 +27,8 @@ export class TextLayerRenderer {
     if (this.layer.opacity === 0) return targetElement
 
     const { declutterTree } = frameState
-    const { projection, viewPortSize, sizeInPixels, visibleExtent, transform } = frameState.viewState
+    const { projection, viewPortSize, sizeInPixels, visibleExtent, transform } =
+      frameState.viewState
 
     // set opacity
     this._element.style.opacity = this.layer.opacity
@@ -41,11 +42,14 @@ export class TextLayerRenderer {
       const geometries = feature.getProjectedGeometries(projection)
       const point = geometries.find((d) => d.type === "Point")
       if (!point) {
-        throw new Error(`Expected Point geometry for feature in TextLayer: ${feature}`)
+        throw new Error(
+          `Expected Point geometry for feature in TextLayer: ${feature}`,
+        )
       }
 
       // get style
-      const styleFunction = feature.getStyleFunction() || this.layer.getStyleFunction()
+      const styleFunction =
+        feature.getStyleFunction() || this.layer.getStyleFunction()
       const featureStyle = styleFunction(feature)
 
       // get text element
@@ -53,7 +57,9 @@ export class TextLayerRenderer {
       textElement.innerText = featureStyle.text.content
 
       // calculate relative position
-      const [relativeX, relativeY] = transform.apply(point.coordinates).map((d, i) => d / sizeInPixels[i])
+      const [relativeX, relativeY] = transform
+        .apply(point.coordinates)
+        .map((d, i) => d / sizeInPixels[i])
       const position = {
         left: `${relativeX * 100}%`,
         top: `${relativeY * 100}%`,
@@ -63,7 +69,10 @@ export class TextLayerRenderer {
       this.styleTextElement(textElement, featureStyle.text, position)
 
       // skip item if it collides with existing elements
-      const bbox = this.getElementBBox(textElement, { x: relativeX * viewPortSize[0], y: relativeY * viewPortSize[1] })
+      const bbox = this.getElementBBox(textElement, {
+        x: relativeX * viewPortSize[0],
+        y: relativeY * viewPortSize[1],
+      })
       if (declutterTree.collides(bbox)) {
         continue
       }

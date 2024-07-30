@@ -9,7 +9,8 @@ export class VectorLayerRenderer {
   renderFrame(frameState, targetElement) {
     if (this.layer.opacity === 0) return targetElement
 
-    const { projection, sizeInPixels, visibleExtent, transform } = frameState.viewState
+    const { projection, sizeInPixels, visibleExtent, transform } =
+      frameState.viewState
 
     const container = this.getOrCreateContainer(targetElement, sizeInPixels)
     const context = container.firstElementChild.getContext("2d")
@@ -30,7 +31,8 @@ export class VectorLayerRenderer {
     const features = source.getFeaturesInExtent(visibleExtent)
 
     for (const feature of features) {
-      const styleFunction = feature.getStyleFunction() || this.layer.getStyleFunction()
+      const styleFunction =
+        feature.getStyleFunction() || this.layer.getStyleFunction()
       const featureStyle = styleFunction(feature)
       if (featureStyle?.stroke || featureStyle?.fill) {
         context.save()
@@ -40,7 +42,9 @@ export class VectorLayerRenderer {
       }
     }
 
-    if (Object.prototype.hasOwnProperty.call(projection, "getCompositionBorders")) {
+    if (
+      Object.prototype.hasOwnProperty.call(projection, "getCompositionBorders")
+    ) {
       context.beginPath()
       context.lineWidth = 1 / transform.k
       context.strokeStyle = "#999"

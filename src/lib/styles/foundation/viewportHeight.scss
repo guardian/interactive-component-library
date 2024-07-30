@@ -7,7 +7,11 @@
 }
 
 @mixin dynamic-viewport-height {
-  height: calc(100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0) - var(--top-inset));
+  height: calc(
+    100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0) - var(
+        --top-inset
+      )
+  );
 
   @supports (height: 100dvh) {
     height: calc(100dvh - var(--top-inset));
@@ -19,7 +23,11 @@
 }
 
 @mixin max-dynamic-viewport-height {
-  max-height: calc(100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0) - var(--top-inset));
+  max-height: calc(
+    100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0) - var(
+        --top-inset
+      )
+  );
 
   @supports (height: 100dvh) {
     max-height: calc(100dvh - var(--top-inset));
