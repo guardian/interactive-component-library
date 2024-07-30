@@ -1,0 +1,105 @@
+@mixin default-party-colors-us {
+  --dem: #2f3192;
+  --gop: #c70000;
+  --oth: #848484;
+
+  --dem-2: #bdbeea;
+  --gop-2: #ffdbd4;
+  --oth-2: #c8c8c8;
+}
+
+@mixin dark-mode-party-colors-us {
+  --dem: #3c3eb9;
+  --gop: #dc2e1c;
+  --oth: #707070;
+
+  --dem-2: #292b7f;
+  --gop-2: #833a2b;
+  --oth-2: #333333;
+}
+
+/* BACKGROUND-COLOR -------------------------------------------- */
+
+.bg-color--con {
+  background-color: var(--con) !important;
+}
+
+/* BACKGROUND-COLOR 2 -------------------------------------------- */
+
+.bg-color--con-2 {
+  background-color: var(--con-2) !important;
+}
+
+/* FILL ----------------------------------------------------------- */
+
+.fill-color--con {
+  fill: var(--con) !important;
+}
+
+/* FILL 2 ----------------------------------------------------------- */
+
+.fill-color--con-2 {
+  fill: var(--con-2) !important;
+}
+
+/* STOP ----------------------------------------------------------- */
+
+.stop-color--con {
+  stop-color: var(--con) !important;
+}
+
+/* STROKE-COLOR --------------------------------------------------- */
+
+.stroke-color--con {
+  stroke: var(--con) !important;
+}
+
+/* COLOR ----------------------------------------------------------- */
+
+.color--con {
+  color: var(--con) !important;
+}
+
+/* BORDER-COLOR ----------------------------------------------------- */
+
+.border-color--con {
+  border-color: var(--con) !important;
+}
+
+/* BEFORE-ELEMENT-COLOR ----------------------------------------------------- */
+
+.before-color--con {
+  &:before {
+    background-color: var(--con) !important;
+  }
+}
+
+@each $color in $colors {
+  [data-party="#{nth($color, 1)}"] {
+    fill: nth($color, 2) !important;
+    background-color: nth($color, 2) !important;
+  }
+
+  .bg-color--#{nth($color, 1)} {
+    background-color: nth($color, 2) !important;
+  }
+  .fill-color--#{nth($color, 1)} {
+    fill: nth($color, 2) !important;
+  }
+  .stroke-color--#{nth($color, 1)} {
+    stroke: nth($color, 2) !important;
+  }
+  .color--#{nth($color, 1)} {
+    color: nth($color, 2) !important;
+  }
+  .border-color--#{nth($color, 1)} {
+    border-color: nth($color, 2) !important;
+  }
+  .light-border-color--#{nth($color, 1)} {
+    $lighter: lighten(nth($color, 2), 12%);
+    border-color: $lighter !important;
+  }
+  .border-triangle-color--#{nth($color, 1)} {
+    border-color: nth($color, 2) transparent transparent transparent !important;
+  }
+}
