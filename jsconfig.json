@@ -1,16 +1,17 @@
 {
-  "include": ["./src/**/*.js", "./src/**/*.jsx"],
-  "exclude": ["./src/**/*.stories.*"],
+  "include": ["*.js", "./src/**/*.jsx"],
+  "exclude": ["node_modules", "./src/**/*.stories.*"],
   "compilerOptions": {
-    "module": "es2020",
+    "module": "es2022",
     "paths": {
       "react": ["./node_modules/preact/compat/"],
       "react-dom": ["./node_modules/preact/compat/"]
     },
     "esModuleInterop": true,
-    "target": "ES2015",
+    "target": "ESNext",
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "checkJs": false
   }
 }
