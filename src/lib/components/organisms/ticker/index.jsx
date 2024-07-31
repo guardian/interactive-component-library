@@ -1,6 +1,5 @@
 import { toChildArray } from "preact"
 import { useState, useRef, useLayoutEffect, useMemo } from "preact/hooks"
-import { useWindowSize } from "$shared/hooks/useWindowSize"
 import { Gradient } from "./gradient"
 import { ArrowButton, Button } from "$particles"
 import styles from "./style.module.scss"
@@ -13,8 +12,6 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
   const offsetWidth = useMemo(() => {
     return -pageIndex * (pageWidth || 0)
   }, [pageIndex, pageWidth])
-
-  const windowSize = useWindowSize()
 
   const tickerRef = useRef()
   const tickerItemsRef = useRef()

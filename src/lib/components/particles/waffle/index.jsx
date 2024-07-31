@@ -39,7 +39,11 @@ export const Waffle = ({
   return (
     <div ref={containerRef} className={styles.container}>
       {containerSize && (
-        <svg viewBox={`0 0 ${width} ${height}`} class={styles.svg} id={svgId}>
+        <svg
+          viewBox={`0 0 ${width} ${height}`}
+          className={styles.svg}
+          id={svgId}
+        >
           <g>
             {units.map((unit, j) => {
               let attributes

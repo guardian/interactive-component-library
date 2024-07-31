@@ -41,8 +41,8 @@ export function Line({ id, features, stroke = null, strokeWidth = 1, styles }) {
             id={dynamicPropValue(id, d, index)}
             key={index}
             stroke={dynamicPropValue(stroke, d, index)}
-            stroke-line-join="round"
-            stroke-width={scaledStrokeWidth}
+            strokeLinejoin="round"
+            strokeWidth={scaledStrokeWidth}
             fill="none"
             className={dynamicPropValue(styles, d, index)}
             d={context.path(d)}

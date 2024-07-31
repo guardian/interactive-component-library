@@ -33,7 +33,7 @@ export class GeoJSON {
         const geometries = this.readGeometriesFromObject(geoJSONObject)
         const feature = new Feature({ geometries })
         features = [feature]
-      } catch (_) {
+      } catch {
         console.warn("Unable to interpret GeoJSON:", geoJSONObject)
         return
       }

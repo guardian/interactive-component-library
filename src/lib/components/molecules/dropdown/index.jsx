@@ -36,7 +36,7 @@ export function Dropdown({
     }
 
     return options
-  }, options)
+  }, [options])
 
   const [expanded, setExpanded] = useState(expandByDefault)
   const [selectedIndexPaths, setSelectedIndexPaths] = useState(() =>
@@ -68,7 +68,12 @@ export function Dropdown({
     const selectedOption =
       optionGroups[firstSelectedIndexPath[0]].options[firstSelectedIndexPath[1]]
     return selectedOption.icon
-  }, [optionGroups, selectedIndexPaths])
+  }, [
+    optionGroups,
+    selectedIndexPaths,
+    iconForSelectedIndexPaths,
+    multipleSelect,
+  ])
 
   const selectedIndexForGroup = useCallback(
     (groupIndex) => {
@@ -105,6 +110,7 @@ export function Dropdown({
         {optionGroups.map((group, index) => {
           return (
             <OptionGroup
+              key={index}
               {...group}
               selectedIndex={selectedIndexForGroup(index)}
               onOptionClick={onOptionClick}
@@ -167,8 +173,8 @@ function Checkmark() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M0.631814 4.43687L0.0839844 4.9847L2.82313 8.8195H3.08335L10.9173 0.711624L10.3695 0.17749L3.08335 6.77884L0.631814 4.43687Z"
         className={defaultStyles.checkmarkPath}
       />

@@ -6,9 +6,9 @@ export const InfoButton = forwardRef(({ onClick, styles }, ref) => {
   styles = mergeStyles({ ...defaultStyles }, styles)
 
   return (
-    <button ref={ref} class={styles.button} onClick={onClick}>
+    <button ref={ref} className={styles.button} onClick={onClick}>
       <svg
-        class={styles.svg}
+        className={styles.svg}
         viewBox="0 0 5 13"
         xmlns="http://www.w3.org/2000/svg"
       >

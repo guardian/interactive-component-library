@@ -14,7 +14,7 @@ export const CircleIcon = ({ color, pulse = false, styles }) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <rect
-        class={[styles.circle, pulse && styles.pulse].join(" ")}
+        className={[styles.circle, pulse && styles.pulse].join(" ")}
         style={{ fill: color }}
         height="11"
         rx="5.5"

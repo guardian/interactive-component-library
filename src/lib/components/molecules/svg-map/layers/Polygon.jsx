@@ -14,8 +14,6 @@ export function Polygon({
   styles,
 }) {
   const context = useContext(MapContext)
-  const { drawToCanvas } = context.config
-
   const [searchIndex, setSearchIndex] = useState()
 
   useEffect(() => {
@@ -57,7 +55,7 @@ export function Polygon({
 
       return features[found]
     },
-    [context, searchIndex],
+    [context, searchIndex, features],
   )
 
   useEffect(() => {
@@ -82,7 +80,7 @@ export function Polygon({
             className={dynamicPropValue(styles, d, index)}
             fill={dynamicPropValue(fill, d, index)}
             stroke={dynamicPropValue(stroke, d, index)}
-            stroke-width={dynamicPropValue(strokeWidth, d, index)}
+            strokeWidth={dynamicPropValue(strokeWidth, d, index)}
             d={context.path(d)}
           />
         )

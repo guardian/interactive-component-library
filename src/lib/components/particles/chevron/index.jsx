@@ -54,8 +54,8 @@ function SmallChevron({ styles }) {
     >
       <g className={styles.group} style="transform-box: fill-box;">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M7.80569 10.7123L11.6344 15H12.365L16.1938 10.7123L15.4997 10L11.9997 13L8.49976 10L7.80569 10.7123Z"
           className={styles.path}
         />
