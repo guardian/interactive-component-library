@@ -14,7 +14,7 @@ export function ResultSummary({
   styles = mergeStyles({ ...defaultStyles }, styles)
 
   return (
-    <div class={styles.container}>
+    <div className={styles.container}>
       <ControlChange previous={previous} next={next} text={title} />
       <p className={styles.paragraph}>{text}</p>
       <RelativeTimeSentence timeStamp={timestamp} />

@@ -19,7 +19,7 @@ export const PartyProfile = ({
   styles = mergeStyles({ ...defaultStyles }, styles)
 
   return (
-    <div class={styles.container}>
+    <div className={styles.container}>
       <img src={imgSrc} className={styles.img} alt={imgAltText} />
       <h3 className={styles.title}>{title}</h3>
       <div className={[styles.subtitle, styles[subtitleStyle]].join(" ")}>

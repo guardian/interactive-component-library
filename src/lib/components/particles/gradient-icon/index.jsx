@@ -10,7 +10,7 @@ export const GradientIcon = (props) => {
 
   return (
     <svg
-      class={styles.svg}
+      className={styles.svg}
       width="24"
       height="11"
       viewBox="0 0 24 11"
@@ -25,8 +25,8 @@ export const GradientIcon = (props) => {
           y2="5.5"
           gradientUnits="userSpaceOnUse"
         >
-          <stop class={`${styles?.previous} stop-color--${previous}`} />
-          <stop class={`${styles?.next} stop-color--${next}`} offset="1" />
+          <stop className={`${styles?.previous} stop-color--${previous}`} />
+          <stop className={`${styles?.next} stop-color--${next}`} offset="1" />
         </linearGradient>
       </defs>
       <path

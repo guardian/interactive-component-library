@@ -21,13 +21,8 @@ export const Map = forwardRef(
         view: new View(config.view),
         target: targetRef.current,
       })
-      map.collaborativeGesturesEnabled = !inModalState
-      map.addLayers(layers)
-
+      map.collaborativeGesturesEnabled = true
       setMap(map)
-      if (ref) ref.current = map
-
-      onLoad && onLoad(map)
 
       let zoomHelpText = ""
       if (
@@ -45,10 +40,9 @@ export const Map = forwardRef(
 
       return () => {
         map.destroy()
-        if (ref) ref.current = null
         setMap(null)
       }
-    }, [])
+    }, [config.view])
 
     useEffect(() => {
       if (!map) return
@@ -72,6 +66,20 @@ export const Map = forwardRef(
     }, [map])
 
     useEffect(() => {
+      if (map && onLoad) {
+        onLoad(map)
+      }
+
+      if (map && ref) {
+        ref.current = map
+      }
+
+      return () => {
+        ref.current = null
+      }
+    }, [map, ref, onLoad])
+
+    useEffect(() => {
       if (map && layers !== map.layers) {
         map.setLayers(layers)
       }
@@ -80,7 +88,7 @@ export const Map = forwardRef(
     useEffect(() => {
       if (!map) return
       map.collaborativeGesturesEnabled = !inModalState
-    }, [inModalState])
+    }, [map, inModalState])
 
     return (
       <figure ref={targetRef} className={styles.mapContainer}>

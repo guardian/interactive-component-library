@@ -39,7 +39,7 @@ export function StackedBar({
     <text
       key={`label-${i}`}
       ref={(element) => (textElements.current[i] = element)}
-      text-rendering="optimizeLegibility"
+      textRendering="optimizeLegibility"
       className={`${styles.label} ${
         config.hasStroke ? styles.labelStroke : ""
       }`}
@@ -75,7 +75,7 @@ export function StackedBar({
             border && "stroke-color--" + cleanBorderAbbr(d.abbreviation)
           }`}
           style={{ fill: d.fill }}
-          shape-rendering="crispEdges"
+          shapeRendering="crispEdges"
         />
         {labelType === LabelType.inline &&
           !hideLabels &&
@@ -111,7 +111,7 @@ export function StackedBar({
       "x",
       labelOverlapConfig.moveBothLabels,
     )
-  }, [stack, height, width])
+  }, [stack, height, width, labelOverlapConfig])
 
   const strokedHangingLabelConfig = useMemo(
     () => [...hangingLabelConfig].map((l) => ({ ...l, hasStroke: true })),

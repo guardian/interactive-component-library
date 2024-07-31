@@ -8,8 +8,8 @@ export function IconMinus() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M0 0.75V3.24999H21.9999V0.75H0Z"
         fill="#121212"
       />

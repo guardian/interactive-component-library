@@ -8,7 +8,7 @@ export const ControlChange = ({ previous, next, text, styles }) => {
   let hasChanged = next !== previous
 
   return (
-    <div class={styles.container}>
+    <div className={styles.container}>
       {hasChanged ? (
         <GradientIcon
           previous={previous}

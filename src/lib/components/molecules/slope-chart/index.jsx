@@ -39,7 +39,7 @@ export const SlopeChart = ({
   styles = mergeStyles({ ...defaultStyles }, styles)
 
   const chart = (
-    <svg class={styles.svg} width={width} height={height} id={svgId}>
+    <svg className={styles.svg} width={width} height={height} id={svgId}>
       <g transform={`translate(${padding.left} ${padding.top})`}>
         {/* draw axis */}
         <g transform={`translate(0 ${contentHeight})`}>
@@ -47,18 +47,18 @@ export const SlopeChart = ({
             x1={0}
             x2={contentWidth}
             className={styles.axis}
-            shape-rendering="crispEdges"
+            shapeRendering="crispEdges"
           />
           <text
-            dominant-baseline="hanging"
+            dominantBaseline="hanging"
             className={[styles.label, styles.axisLabel].join(" ")}
           >
             {axis.startLabel}
           </text>
           <text
             x={contentWidth}
-            dominant-baseline="hanging"
-            text-anchor="end"
+            dominantBaseline="hanging"
+            textAnchor="end"
             className={[styles.label, styles.axisLabel].join(" ")}
           >
             {axis.endLabel}
@@ -108,8 +108,8 @@ export const SlopeChart = ({
                 x={0}
                 y={label.y}
                 className={[styles.label, styles.y1Label].join(" ")}
-                text-anchor="end"
-                dominant-baseline="middle"
+                textAnchor="end"
+                dominantBaseline="middle"
               >
                 {label.value}
               </text>
@@ -123,8 +123,8 @@ export const SlopeChart = ({
                 x={contentWidth}
                 y={label.y}
                 className={[styles.label, styles.y2Label].join(" ")}
-                text-anchor="start"
-                dominant-baseline="middle"
+                textAnchor="start"
+                dominantBaseline="middle"
               >
                 {label.value}
               </text>
@@ -136,7 +136,7 @@ export const SlopeChart = ({
   )
 
   return (
-    <div class={styles.slopeChartContainer} ref={wrapperRef}>
+    <div className={styles.slopeChartContainer} ref={wrapperRef}>
       {show && chart}
     </div>
   )

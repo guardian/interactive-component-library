@@ -54,6 +54,7 @@ export function AdSlot({ name, sizeMapping, styles }) {
         data-link-name={`ad slot ${name}`}
         data-name={`${name}`}
         data-label-show="true"
+        // eslint-disable-next-line react/no-unknown-property
         ad-label-text="Advertisement"
         aria-hidden="true"
         data-mobile={mobileSizes}

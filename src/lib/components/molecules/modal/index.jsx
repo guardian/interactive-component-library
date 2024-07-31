@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef } from "preact/hooks"
-import { createPortal } from "preact/compat"
 import { CSSTransition } from "preact-transitioning"
 import defaultStyles from "./style.module.css"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
@@ -51,7 +50,7 @@ export function Modal({
         ].join(" ")}
         onClick={onClick}
       >
-        <div ref={modalBoxRef} class={styles.modalBox}>
+        <div ref={modalBoxRef} className={styles.modalBox}>
           {children}
         </div>
       </div>
