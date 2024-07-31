@@ -5,8 +5,9 @@
 @import "./generated/font-sizes.css";
 
 @import "./foundation/colors.scss";
-@import "./foundation/partyColors.scss";
+@import "./foundation/ukPartyColors.scss";
 @import "./foundation/euPartyColors.scss";
+@import "./foundation/usPartyColors.scss";
 @import "./generated/spacing.css";
 
 @import "./generated/mq.scss";
@@ -15,14 +16,15 @@ body {
   @include default-colors;
   @include default-party-colors-uk;
   @include default-party-colors-eu;
+  @include default-party-colors-us;
 }
 
 @media (prefers-color-scheme: dark) {
-
   body.ios,
   body.android {
     @include dark-mode-colors;
     @include dark-mode-party-colors-uk;
     @include dark-mode-party-colors-eu;
+    @include dark-mode-party-colors-us;
   }
 }

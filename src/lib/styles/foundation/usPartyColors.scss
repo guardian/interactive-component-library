@@ -1,0 +1,149 @@
+@mixin default-party-colors-us {
+  --dem: #2f3192;
+  --gop: #c70000;
+  --oth: #848484;
+
+  --dem-2: #bdbeea;
+  --gop-2: #ffdbd4;
+  --oth-2: #c8c8c8;
+}
+
+@mixin dark-mode-party-colors-us {
+  --dem: #3c3eb9;
+  --gop: #dc2e1c;
+  --oth: #707070;
+
+  --dem-2: #292b7f;
+  --gop-2: #833a2b;
+  --oth-2: #333333;
+}
+
+/* BACKGROUND-COLOR -------------------------------------------- */
+/* include secondary (-2) colors ---*/
+
+.bg-color--dem {
+  background-color: var(--dem) !important;
+}
+
+.bg-color--gop {
+  background-color: var(--gop) !important;
+}
+
+.bg-color--oth {
+  background-color: var(--oth) !important;
+}
+
+.bg-color--dem-2 {
+  background-color: var(--dem-2) !important;
+}
+
+.bg-color--gop-2 {
+  background-color: var(--gop2) !important;
+}
+
+.bg-color--oth-2 {
+  background-color: var(--oth-2) !important;
+}
+
+/* FILL ----------------------------------------------------------- */
+/* include secondary (-2) colors ---*/
+
+.fill-color--dem {
+  fill: var(--dem) !important;
+}
+
+.fill-color--gop {
+  fill: var(--gop) !important;
+}
+
+.fill-color--oth {
+  fill: var(--oth) !important;
+}
+
+.fill-color--dem-2 {
+  fill: var(--dem-2) !important;
+}
+
+.fill-color--gop-2 {
+  fill: var(--gop-2) !important;
+}
+
+.fill-color--oth-2 {
+  fill: var(--oth-2) !important;
+}
+
+/* STOP ----------------------------------------------------------- */
+
+.stop-color--dem {
+  stop-color: var(--dem) !important;
+}
+
+.stop-color--gop {
+  stop-color: var(--gop) !important;
+}
+
+.stop-color--oth {
+  stop-color: var(--oth) !important;
+}
+
+/* STROKE-COLOR --------------------------------------------------- */
+
+.stroke-color--dem {
+  stroke: var(--dem) !important;
+}
+
+.stroke-color--gop {
+  stroke: var(--gop) !important;
+}
+
+.stroke-color--oth {
+  stroke: var(--oth) !important;
+}
+
+/* COLOR ----------------------------------------------------------- */
+
+.color--dem {
+  color: var(--dem) !important;
+}
+
+.color--gop {
+  color: var(--gop) !important;
+}
+
+.color--oth {
+  color: var(--oth) !important;
+}
+
+/* BORDER-COLOR ----------------------------------------------------- */
+
+.border-color--dem {
+  border-color: var(--dem) !important;
+}
+
+.border-color--gop {
+  border-color: var(--gop) !important;
+}
+
+.border-color--oth {
+  border-color: var(--oth) !important;
+}
+
+/* BEFORE-ELEMENT-COLOR ----------------------------------------------------- */
+
+.before-color--dem {
+  &:before {
+    background-color: var(--dem) !important;
+  }
+}
+
+.before-color--gop {
+  &:before {
+    background-color: var(--gop) !important;
+  }
+}
+
+.before-color--oth {
+  &:before {
+    background-color: var(--oth) !important;
+  }
+}
