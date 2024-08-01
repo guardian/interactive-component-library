@@ -108,7 +108,7 @@
     "preact": "10.21.0"
   },
   "lint-staged": {
-    "*.{js,jsx,mjs,cjs,ts,tsx}": "eslint --fix",
-    "*": "prettier --write"
+    "*.{js,jsx,ts,tsx,svelte}": "eslint --cache --fix",
+    "*.{js,jsx,ts,tsx,svelte,css,scss,html,json}": "prettier --write"
   }
 }
