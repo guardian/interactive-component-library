@@ -6,24 +6,20 @@ import vitest from "eslint-plugin-vitest"
 import globals from "globals"
 
 export default [
+  js.configs.recommended,
   {
     ignores: ["dist/**/*", "storybook-static/", ".vscode/"],
-  },
-  {
-    ...js.configs.recommended,
-    rules: {
-      "prefer-rest-params": "error",
-      "no-unused-vars": "error",
-    },
   },
   react.configs.flat.recommended,
   react.configs.flat["jsx-runtime"],
   {
-    files: ["**/*.{js,jsx,ts,tsx}"],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
-      globals: { ...globals.browser },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
       parserOptions: {
         ecmaFeatures: {
           modules: true,
@@ -35,18 +31,33 @@ export default [
     settings: {
       react: {
         pragma: "h",
-        version: "16.0",
+        version: "17",
       },
     },
-    plugins: { "react-hooks": hooks },
     rules: {
-      ...hooks.configs.recommended.rules,
-      "react/prop-types": "off",
-      "react-hooks/exhaustive-deps": "error",
+      "prefer-rest-params": "error",
+      "no-unused-vars": "error",
     },
   },
   {
-    files: ["**/*.test.{js,jsx,ts,tsx}"],
+    ...hooks.configs.recommended,
+    files: ["src/**/*.{js,jsx,ts,tsx}"],
+    plugins: {
+      "react-hooks": hooks,
+    },
+    rules: {
+      "no-console": ["error", { allow: ["warn", "error"] }],
+      "react/prop-types": "off",
+      "react-hooks/exhaustive-deps": "error",
+      // enforce .jsx extension for files that contain jsx
+      "react/jsx-filename-extension": [
+        "error",
+        { allow: "always", extensions: [".jsx"] },
+      ],
+    },
+  },
+  {
+    files: ["**/*.test.{js,ts}"],
     plugins: {
       vitest,
     },

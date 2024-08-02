@@ -26,7 +26,6 @@ const waffleArgs = {
   units: partySeats,
   numberOfRows: 5,
   idAccessor: "party",
-  onMouseOver: (a, b) => console.log(a, b),
   type: WaffleType.circle,
 }
 
