@@ -2,12 +2,28 @@ import { themes } from "@storybook/theming"
 import "../src/lib/styles/main.scss"
 import "./preview.scss"
 
+/** @type {import('@storybook/theming').StorybookTheme} */
+const themeDefaults = {
+  brandTitle: "Guardian Visuals Component Library",
+  brandTarget: "_self",
+}
+
 const preview = {
   parameters: {
     darkMode: {
       stylePreview: true,
-      dark: { ...themes.dark, appBg: "black" },
-      light: { ...themes.light, appBg: "white" },
+      dark: {
+        ...themes.dark,
+        ...themeDefaults,
+        brandImage: "logotype-white.svg",
+        appBg: "black",
+      },
+      light: {
+        ...themes.light,
+        ...themeDefaults,
+        appBg: "white",
+        brandImage: "logotype-black.svg",
+      },
       darkClass: ["dark-mode", "ios"],
     },
     options: {
