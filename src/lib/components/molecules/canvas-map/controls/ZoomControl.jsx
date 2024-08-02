@@ -25,8 +25,16 @@ export function ZoomControl({ resetEnabled, onZoomIn, onZoomOut, onReset }) {
       <button className={styles.button} onClick={_onZoomOut}>
         <IconMinus />
       </button>
-      <button className={styles.button} onClick={_onReset} disabled={!resetEnabled}>
-        <IconReset fill={resetEnabled ? "var(--primary-text-color)" : "var(--news-grey-03)"} />
+      <button
+        className={styles.button}
+        onClick={_onReset}
+        disabled={!resetEnabled}
+      >
+        <IconReset
+          fill={
+            resetEnabled ? "var(--primary-text-color)" : "var(--news-grey-03)"
+          }
+        />
       </button>
     </div>
   )

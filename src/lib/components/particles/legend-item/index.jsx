@@ -1,12 +1,17 @@
-import defaultStyles from './style.module.css'
-import { mergeStyles } from '$styles/helpers/mergeStyles'
+import defaultStyles from "./style.module.css"
+import { mergeStyles } from "$styles/helpers/mergeStyles"
 
 const DOT_TYPE = {
-  round: 'round',
-  square: 'square',
+  round: "round",
+  square: "square",
 }
 
-export const LegendItem = ({ dotType = DOT_TYPE.round, text, styles, abbreviation }) => {
+export const LegendItem = ({
+  dotType = DOT_TYPE.round,
+  text,
+  styles,
+  abbreviation,
+}) => {
   const defaultStylesCopy = { ...defaultStyles }
 
   if (dotType === DOT_TYPE.round) {

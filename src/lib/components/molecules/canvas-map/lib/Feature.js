@@ -30,7 +30,9 @@ export class Feature {
   }
 
   getProjectedGeometries(projection) {
-    return this.geometries.map((d) => d.getProjected(projection, projection.revision))
+    return this.geometries.map((d) =>
+      d.getProjected(projection, projection.revision),
+    )
   }
 
   getStyleFunction() {

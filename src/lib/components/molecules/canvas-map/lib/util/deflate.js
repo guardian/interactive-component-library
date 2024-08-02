@@ -22,7 +22,12 @@ export function deflateCoordinate(flatCoordinates, offset, coordinate) {
  * @param {number} stride Stride.
  * @return {number} offset Offset.
  */
-export function deflateCoordinates(flatCoordinates, offset, coordinates, stride) {
+export function deflateCoordinates(
+  flatCoordinates,
+  offset,
+  coordinates,
+  stride,
+) {
   for (let i = 0, ii = coordinates.length; i < ii; ++i) {
     const coordinate = coordinates[i]
     for (let j = 0; j < stride; ++j) {
@@ -40,11 +45,22 @@ export function deflateCoordinates(flatCoordinates, offset, coordinates, stride)
  * @param {Array<number>} [ends] Ends.
  * @return {Array<number>} Ends.
  */
-export function deflateCoordinatesArray(flatCoordinates, offset, coordinatess, stride, ends) {
+export function deflateCoordinatesArray(
+  flatCoordinates,
+  offset,
+  coordinatess,
+  stride,
+  ends,
+) {
   ends = ends ? ends : []
   let i = 0
   for (let j = 0, jj = coordinatess.length; j < jj; ++j) {
-    const end = deflateCoordinates(flatCoordinates, offset, coordinatess[j], stride)
+    const end = deflateCoordinates(
+      flatCoordinates,
+      offset,
+      coordinatess[j],
+      stride,
+    )
     ends[i++] = end
     offset = end
   }
@@ -60,11 +76,23 @@ export function deflateCoordinatesArray(flatCoordinates, offset, coordinatess, s
  * @param {Array<Array<number>>} [endss] Endss.
  * @return {Array<Array<number>>} Endss.
  */
-export function deflateMultiCoordinatesArray(flatCoordinates, offset, coordinatesss, stride, endss) {
+export function deflateMultiCoordinatesArray(
+  flatCoordinates,
+  offset,
+  coordinatesss,
+  stride,
+  endss,
+) {
   endss = endss ? endss : []
   let i = 0
   for (let j = 0, jj = coordinatesss.length; j < jj; ++j) {
-    const ends = deflateCoordinatesArray(flatCoordinates, offset, coordinatesss[j], stride, endss[i])
+    const ends = deflateCoordinatesArray(
+      flatCoordinates,
+      offset,
+      coordinatesss[j],
+      stride,
+      endss[i],
+    )
     if (ends.length === 0) {
       ends[0] = offset
     }

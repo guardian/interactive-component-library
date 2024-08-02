@@ -1,43 +1,42 @@
-import { ControlChange } from '.'
+import { ControlChange } from "."
 
 export default {
-  title: 'Molecules/ControlChange',
+  title: "Molecules/ControlChange",
   component: ControlChange,
 }
 
 const hasChangedArgs = {
-  previous: 'lab',
-  next: 'con',
-  text: 'Con gain from Lab'
+  previous: "lab",
+  next: "con",
+  text: "Con gain from Lab",
 }
 
 const hasChangedAlt = {
-  previous: 'snp',
-  next: 'lab',
-  text: 'Lab gain from SNP'
+  previous: "snp",
+  next: "lab",
+  text: "Lab gain from SNP",
 }
 
 const hasChangedAlt2 = {
-  previous: 'con',
-  next: 'lab',
-  text: 'Lab gain from Con'
+  previous: "con",
+  next: "lab",
+  text: "Lab gain from Con",
 }
 
-
 const hasNotChangedArgs = {
-  previous: 'con',
-  next: 'con',
-  text: 'Con hold'
+  previous: "con",
+  next: "con",
+  text: "Con hold",
 }
 
 const withStylesArgs = {
   styles: {
     previous: `stop-color--con`,
-    next: `stop-color--lab`
+    next: `stop-color--lab`,
   },
-  text: 'Lab gain from Con',
-  previous: 'Con',
-  next: 'Lab'
+  text: "Lab gain from Con",
+  previous: "Con",
+  next: "Lab",
 }
 
 export const HasChanged = {
@@ -50,7 +49,6 @@ export const HasNotChanged = {
   render: (args) => <ControlChange {...args} />,
 }
 
-
 export const withStyles = {
   args: withStylesArgs,
   render: (args) => <ControlChange {...args} />,
@@ -58,11 +56,10 @@ export const withStyles = {
 
 export const ListOfIcons = {
   render: () => (
-    <div style={{ height: '100vh' }}>
+    <div style={{ height: "100vh" }}>
       <ControlChange {...hasChangedArgs} />
       <ControlChange {...hasChangedAlt} />
       <ControlChange {...hasChangedAlt2} />
     </div>
   ),
 }
-

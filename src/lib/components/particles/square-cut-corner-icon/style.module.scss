@@ -1,20 +1,19 @@
 .svg {
-    pointer-events: none;
+  pointer-events: none;
 
-    * {
-        pointer-events: none;
-    }
+  * {
+    pointer-events: none;
+  }
 }
 
 .dividingLineColor {
-    fill: var(--primary-bg-color);
+  fill: var(--primary-bg-color);
 }
 
-
 .square {
-    fill: 'green',
+  fill: "green";
 }
 
 .corner {
-    fill: 'blue'
+  fill: "blue";
 }

@@ -1,4 +1,4 @@
-import styles from './hint.module.css'
+import styles from "./hint.module.css"
 
 /**
  * A block that displays the story name or title from the of prop
@@ -6,7 +6,7 @@ import styles from './hint.module.css'
  * - if a meta reference is passed, it renders the stories' title
  * - if nothing is passed, it defaults to the primary story
  */
-export const Hint = ({ icon = '💡', text }) => {
+export const Hint = ({ icon = "💡", text }) => {
   return (
     <div className={styles.container}>
       <span className={styles.icon}>{icon}</span>

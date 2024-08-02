@@ -1,7 +1,7 @@
-import defaultStyles from './style.module.css'
-import { mergeStyles } from '$styles/helpers/mergeStyles'
+import defaultStyles from "./style.module.css"
+import { mergeStyles } from "$styles/helpers/mergeStyles"
 
-export function Button({ type = 'regular', onClick, styles, children }) {
+export function Button({ type = "regular", onClick, styles, children }) {
   styles = mergeStyles(defaultStyles, styles)
 
   return (

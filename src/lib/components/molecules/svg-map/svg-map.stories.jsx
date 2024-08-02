@@ -9,15 +9,28 @@ import { useEffect, useRef, useState } from "preact/hooks"
 import { Tooltip } from "$molecules"
 import styles from "./stories.module.css"
 
-const ukCountries = feature(ukCountriesTopo, ukCountriesTopo.objects["countries"])
+const ukCountries = feature(
+  ukCountriesTopo,
+  ukCountriesTopo.objects["countries"],
+)
 
-const constituencies = feature(westminsterConstituenciesTopo, westminsterConstituenciesTopo.objects["UK-constituencies"])
+const constituencies = feature(
+  westminsterConstituenciesTopo,
+  westminsterConstituenciesTopo.objects["UK-constituencies"],
+)
 
-const borders = mesh(westminsterConstituenciesTopo, westminsterConstituenciesTopo.objects["UK-constituencies"], (a, b) => {
-  return a.properties.id !== b.properties.id
-})
+const borders = mesh(
+  westminsterConstituenciesTopo,
+  westminsterConstituenciesTopo.objects["UK-constituencies"],
+  (a, b) => {
+    return a.properties.id !== b.properties.id
+  },
+)
 
-const localAuthorities = feature(englandLocalAuthoritiesTopo, englandLocalAuthoritiesTopo.objects["local-authorities"])
+const localAuthorities = feature(
+  englandLocalAuthoritiesTopo,
+  englandLocalAuthoritiesTopo.objects["local-authorities"],
+)
 
 const meta = {
   title: "Molecules/SVGMap/Maps",
@@ -41,18 +54,31 @@ const meta = {
     },
     width: {
       type: "number",
-      table: { defaultValue: { detail: "Map scales to size of parent element", summary: "auto" } },
+      table: {
+        defaultValue: {
+          detail: "Map scales to size of parent element",
+          summary: "auto",
+        },
+      },
     },
     height: {
       type: "number",
-      table: { defaultValue: { detail: "Map scales to size of parent element", summary: "auto" } },
+      table: {
+        defaultValue: {
+          detail: "Map scales to size of parent element",
+          summary: "auto",
+        },
+      },
     },
     config: {
       name: "config (required)",
       control: "select",
       description: "MapConfiguration object",
       options: ["UK Composite", "England"],
-      mapping: { "UK Composite": MapConfiguration.UKComposite, England: MapConfiguration.England },
+      mapping: {
+        "UK Composite": MapConfiguration.UKComposite,
+        England: MapConfiguration.England,
+      },
     },
     projection: {
       table: { category: "config" },
@@ -60,14 +86,18 @@ const meta = {
       description: "D3 projection function, e.g. d3.geoAlbers() (required)",
       control: "select",
       options: ["GeoAlbers UK composite", "GeoAlbers England"],
-      mapping: { "GeoAlbers UK composite": _Projection.UKComposite, "GeoAlbers England": _Projection.geoAlbersEngland },
+      mapping: {
+        "GeoAlbers UK composite": _Projection.UKComposite,
+        "GeoAlbers England": _Projection.geoAlbersEngland,
+      },
     },
     bounds: {
       table: { category: "config" },
       defaultValue: "Default value",
       name: "config.bounds",
       control: "object",
-      description: "Visible bounds. The map is scaled and translated to fit these bounds (required)",
+      description:
+        "Visible bounds. The map is scaled and translated to fit these bounds (required)",
     },
     padding: {
       type: "object",
@@ -129,7 +159,10 @@ export const UKChoropleth = {
   },
   render: (args) => (
     <SVGMap {...args}>
-      <MapLayers.Polygon features={constituencies.features} styles={(_, index) => `fill-color--${parties[index % 4]}`} />
+      <MapLayers.Polygon
+        features={constituencies.features}
+        styles={(_, index) => `fill-color--${parties[index % 4]}`}
+      />
       <MapLayers.Line features={[borders]} />
     </SVGMap>
   ),
@@ -232,7 +265,12 @@ function BubbleMapWithTooltip(props) {
           }}
           stroke="#dcdcdc"
         />
-        <MapLayers.Point features={englandCentroids.features.slice(0, 20)} radius={10} fill="none" stroke="#FF0000" />
+        <MapLayers.Point
+          features={englandCentroids.features.slice(0, 20)}
+          radius={10}
+          fill="none"
+          stroke="#FF0000"
+        />
       </SVGMap>
       {mapContainer && (
         <Tooltip for={mapContainer} renderIn="#storybook-root">

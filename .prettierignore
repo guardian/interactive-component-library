@@ -1,1 +1,4 @@
+node_modules
 *.mdx
+pnpm-lock.yaml
+**/sample-data

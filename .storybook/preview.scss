@@ -1,7 +1,8 @@
 @import "../src/lib/styles/generated/reset.css";
 @import "../src/lib/styles/foundation/colors.scss";
-@import "../src/lib/styles/foundation/partyColors.scss";
+@import "../src/lib/styles/foundation/ukPartyColors.scss";
 @import "../src/lib/styles/foundation/euPartyColors.scss";
+@import "../src/lib/styles/foundation/usPartyColors.scss";
 
 /// DARK MODE ///
 
@@ -47,8 +48,9 @@
   }
 
   pre {
-    font-family: ui-monospace, Menlo, Monaco, 'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-      'Droid Sans Mono', 'Courier New', monospace;
+    font-family: ui-monospace, Menlo, Monaco, "Roboto Mono", "Oxygen Mono",
+      "Ubuntu Monospace", "Source Code Pro", "Droid Sans Mono", "Courier New",
+      monospace;
   }
 
   .token.function {

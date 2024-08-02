@@ -16,7 +16,9 @@ export function useOrganisedChildren(children) {
         } else if (controlTypes.includes(current.type)) {
           output.controls[current.type.name] = current
         } else {
-          throw Error(`Unknown component type passed as child to Map component: ${current.type}`)
+          throw Error(
+            `Unknown component type passed as child to Map component: ${current.type}`,
+          )
         }
 
         return output

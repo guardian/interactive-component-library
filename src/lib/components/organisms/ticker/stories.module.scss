@@ -31,7 +31,6 @@ h2 {
     grid-template-areas: "body";
   }
 
-
   @include mq($from: leftCol) {
     grid-template-columns: 140px 1px calc(100% - 161px);
     grid-column-gap: 10px;

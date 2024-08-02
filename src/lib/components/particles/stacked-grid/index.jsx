@@ -1,15 +1,15 @@
-import defaultStyles from './style.module.css'
-import { mergeStyles } from '$styles/helpers/mergeStyles'
+import defaultStyles from "./style.module.css"
+import { mergeStyles } from "$styles/helpers/mergeStyles"
 
 const getItemRotate = (fromBottom, fromLeft) => {
   if (fromBottom && fromLeft) {
-    return 'stackedGridRotateItems270'
+    return "stackedGridRotateItems270"
   } else if (fromBottom && !fromLeft) {
-    return 'stackedGridRotateItems180'
+    return "stackedGridRotateItems180"
   } else if (!fromBottom && !fromLeft) {
-    return 'stackedGridRotateItems90'
+    return "stackedGridRotateItems90"
   } else if (!fromBottom && fromLeft) {
-    return 'stackedGridRotateItems0' // the css default
+    return "stackedGridRotateItems0" // the css default
   }
 }
 
@@ -30,7 +30,10 @@ export const StackedGrid = ({ fromLeft, fromBottom, children, styles }) => {
   styles = mergeStyles(defaultStyles, styles)
 
   return (
-    <div style={{ transform: containerFlip }} className={`${styles.stackedGridContainer} ${styles[itemRotateClass]}`}>
+    <div
+      style={{ transform: containerFlip }}
+      className={`${styles.stackedGridContainer} ${styles[itemRotateClass]}`}
+    >
       {children}
     </div>
   )

@@ -1,16 +1,16 @@
-import { AdSlot } from '.'
-import { useEffect, useState, useRef } from 'preact/hooks'
-import { cloneElement } from 'preact'
+import { AdSlot } from "."
+import { useEffect, useState, useRef } from "preact/hooks"
+import { cloneElement } from "preact"
 
-import styles from './stories.module.scss'
+import styles from "./stories.module.scss"
 
 const meta = {
-  title: 'Particles/AdSlot',
+  title: "Particles/AdSlot",
   component: AdSlot,
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
     viewport: {
-      defaultViewport: 'mobile',
+      defaultViewport: "mobile",
     },
   },
   decorators: [
@@ -26,7 +26,7 @@ export default meta
 
 export const MPU = {
   args: {
-    name: 'mpu',
+    name: "mpu",
     sizeMapping: {
       mobile: [[300, 250]],
     },
@@ -36,11 +36,11 @@ export const MPU = {
 export const MPULeaderboardBillboard = {
   parameters: {
     viewport: {
-      defaultViewport: 'wide',
+      defaultViewport: "wide",
     },
   },
   args: {
-    name: 'mpu_leaderboard_billboard',
+    name: "mpu_leaderboard_billboard",
     sizeMapping: {
       mobile: [[300, 250]],
       tablet: [[728, 90]],
@@ -63,9 +63,15 @@ function CommercialContainer({ children }) {
       const desktopSizes = slot.dataset.desktop
 
       const sizeMapping = {
-        mobile: mobileSizes ? mobileSizes.split('|').map((size) => size.split(',').map(Number)) : undefined,
-        tablet: tabletSizes ? tabletSizes.split('|').map((size) => size.split(',').map(Number)) : undefined,
-        desktop: desktopSizes ? desktopSizes.split('|').map((size) => size.split(',').map(Number)) : undefined,
+        mobile: mobileSizes
+          ? mobileSizes.split("|").map((size) => size.split(",").map(Number))
+          : undefined,
+        tablet: tabletSizes
+          ? tabletSizes.split("|").map((size) => size.split(",").map(Number))
+          : undefined,
+        desktop: desktopSizes
+          ? desktopSizes.split("|").map((size) => size.split(",").map(Number))
+          : undefined,
       }
 
       const viewportWidth = window.innerWidth
@@ -82,7 +88,10 @@ function CommercialContainer({ children }) {
 
   return (
     <>
-      <div style={{ width: size[0], height: size[1] }} className={styles.adSlotContainer}>
+      <div
+        style={{ width: size[0], height: size[1] }}
+        className={styles.adSlotContainer}
+      >
         {cloneElement(children, { ref: adSlotRef })}
       </div>
     </>

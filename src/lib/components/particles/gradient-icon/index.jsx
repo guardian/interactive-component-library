@@ -9,11 +9,24 @@ export const GradientIcon = (props) => {
   const gradientId = useId()
 
   return (
-    <svg class={styles.svg} width="24" height="11" viewBox="0 0 24 11" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      className={styles.svg}
+      width="24"
+      height="11"
+      viewBox="0 0 24 11"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <defs>
-        <linearGradient id={gradientId} x1="5.5" y1="5.5" x2="12" y2="5.5" gradientUnits="userSpaceOnUse">
-          <stop class={`${styles?.previous} stop-color--${previous}`} />
-          <stop class={`${styles?.next} stop-color--${next}`} offset="1" />
+        <linearGradient
+          id={gradientId}
+          x1="5.5"
+          y1="5.5"
+          x2="12"
+          y2="5.5"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop className={`${styles?.previous} stop-color--${previous}`} />
+          <stop className={`${styles?.next} stop-color--${next}`} offset="1" />
         </linearGradient>
       </defs>
       <path

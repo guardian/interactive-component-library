@@ -4,7 +4,12 @@ import { useZoom } from "../hooks/useZoom"
 
 export function ZoomProvider({ config, zoomTo, children }) {
   const context = useContext(MapContext)
-  const { ref, transform } = useZoom({ context, config, extent: context.extent, zoomTo })
+  const { ref, transform } = useZoom({
+    context,
+    config,
+    extent: context.extent,
+    zoomTo,
+  })
 
   return (
     <MapContext.Provider value={{ ...context, zoomScale: transform.k }}>

@@ -29,7 +29,8 @@ export function StackedBar({
   const textElements = useRef([])
 
   styles = mergeStyles({ ...defaultStyles }, styles)
-  const svgHeight = labelType === LabelType.hanging && !hideLabels ? height + 20 : height
+  const svgHeight =
+    labelType === LabelType.hanging && !hideLabels ? height + 20 : height
 
   // no secondary colors used for borders, so eg: 'lab-2' should be converted to 'lab'
   const cleanBorderAbbr = (abbrText) => abbrText.split("-")[0]
@@ -38,8 +39,10 @@ export function StackedBar({
     <text
       key={`label-${i}`}
       ref={(element) => (textElements.current[i] = element)}
-      text-rendering="optimizeLegibility"
-      className={`${styles.label} ${config.hasStroke ? styles.labelStroke : ""}`}
+      textRendering="optimizeLegibility"
+      className={`${styles.label} ${
+        config.hasStroke ? styles.labelStroke : ""
+      }`}
       style={{ display: "visible" }} // using visibility rather than display makes sure the text width is always calculated correctly
       x={config.x}
       y={config.y}
@@ -68,11 +71,15 @@ export function StackedBar({
           ref={(element) => (rectElements.current[index] = element)}
           width={itemWidth}
           height={height}
-          className={`${styles.bar} fill-color--${d.abbreviation} ${border && "stroke-color--" + cleanBorderAbbr(d.abbreviation)}`}
+          className={`${styles.bar} fill-color--${d.abbreviation} ${
+            border && "stroke-color--" + cleanBorderAbbr(d.abbreviation)
+          }`}
           style={{ fill: d.fill }}
-          shape-rendering="crispEdges"
+          shapeRendering="crispEdges"
         />
-        {labelType === LabelType.inline && !hideLabels && renderLabel(labelConfig, index)}
+        {labelType === LabelType.inline &&
+          !hideLabels &&
+          renderLabel(labelConfig, index)}
       </g>
     )
 
@@ -85,31 +92,64 @@ export function StackedBar({
     let labels = stack.map((d) => {
       const itemWidth = d.fraction * width
 
-      const labelConfig = { x: itemWidth + totalW, y: height + 4, value: d.label, textAnchor: "end", dominantBaseline: "hanging" }
+      const labelConfig = {
+        x: itemWidth + totalW,
+        y: height + 4,
+        value: d.label,
+        textAnchor: "end",
+        dominantBaseline: "hanging",
+      }
 
       totalW += itemWidth
       return labelConfig
     })
 
-    return preventOverlap(labels, 0, labelOverlapConfig.labelSize, "x", labelOverlapConfig.moveBothLabels)
-  }, [stack, height, width])
+    return preventOverlap(
+      labels,
+      0,
+      labelOverlapConfig.labelSize,
+      "x",
+      labelOverlapConfig.moveBothLabels,
+    )
+  }, [stack, height, width, labelOverlapConfig])
 
-  const strokedHangingLabelConfig = useMemo(() => [...hangingLabelConfig].map((l) => ({ ...l, hasStroke: true })), [hangingLabelConfig])
+  const strokedHangingLabelConfig = useMemo(
+    () => [...hangingLabelConfig].map((l) => ({ ...l, hasStroke: true })),
+    [hangingLabelConfig],
+  )
 
   const backgroundRect = (
     <g>
-      <rect x="0" y="0" height={height} width={width} className={styles.backgroundRect} />
+      <rect
+        x="0"
+        y="0"
+        height={height}
+        width={width}
+        className={styles.backgroundRect}
+      />
     </g>
   )
 
   if (createSVG) {
     return (
-      <svg overflow="hidden" width={width} height={svgHeight} viewBox={`0 0 ${width} ${svgHeight}`} xmlns="http://www.w3.org/2000/svg">
+      <svg
+        overflow="hidden"
+        width={width}
+        height={svgHeight}
+        viewBox={`0 0 ${width} ${svgHeight}`}
+        xmlns="http://www.w3.org/2000/svg"
+      >
         {showBackgroundRect && backgroundRect}
         <g>
           {content}
-          {labelType === LabelType.hanging && !hideLabels && strokedHangingLabelConfig.map((config, i) => renderLabel(config, i))}
-          {labelType === LabelType.hanging && !hideLabels && hangingLabelConfig.map((config, i) => renderLabel(config, i))}
+          {labelType === LabelType.hanging &&
+            !hideLabels &&
+            strokedHangingLabelConfig.map((config, i) =>
+              renderLabel(config, i),
+            )}
+          {labelType === LabelType.hanging &&
+            !hideLabels &&
+            hangingLabelConfig.map((config, i) => renderLabel(config, i))}
         </g>
       </svg>
     )
@@ -118,7 +158,9 @@ export function StackedBar({
   return (
     <g>
       {content}
-      {labelType === LabelType.hanging && !hideLabels && hangingLabelConfig.map((config, i) => renderLabel(config, i))}
+      {labelType === LabelType.hanging &&
+        !hideLabels &&
+        hangingLabelConfig.map((config, i) => renderLabel(config, i))}
     </g>
   )
 }

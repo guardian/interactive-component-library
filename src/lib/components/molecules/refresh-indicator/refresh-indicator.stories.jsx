@@ -1,7 +1,7 @@
-import { RefreshIndicator } from '.'
+import { RefreshIndicator } from "."
 
 const meta = {
-  title: 'Molecules/RefreshIndicator',
+  title: "Molecules/RefreshIndicator",
   component: RefreshIndicator,
 }
 
@@ -9,6 +9,6 @@ export default meta
 
 export const Default = {
   args: {
-    text: 'next refresh in 59s',
+    text: "next refresh in 59s",
   },
 }

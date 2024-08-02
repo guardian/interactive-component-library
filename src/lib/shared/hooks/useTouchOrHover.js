@@ -1,5 +1,5 @@
-import { useRef, useEffect, useState } from 'preact/hooks'
-import { pointInsideRect } from '$shared/helpers/geometry'
+import { useRef, useEffect, useState } from "preact/hooks"
+import { pointInsideRect } from "$shared/helpers/geometry"
 
 export function useTouchOrHover() {
   const ref = useRef()
@@ -94,24 +94,24 @@ export function useTouchOrHover() {
       setPosition(null)
     }
 
-    element.addEventListener('touchstart', touchStarted)
-    element.addEventListener('touchmove', touchMoved)
-    element.addEventListener('touchend', touchEnded)
-    element.addEventListener('touchcancel', touchEnded)
+    element.addEventListener("touchstart", touchStarted)
+    element.addEventListener("touchmove", touchMoved)
+    element.addEventListener("touchend", touchEnded)
+    element.addEventListener("touchcancel", touchEnded)
 
-    element.addEventListener('mouseover', mouseOver)
-    element.addEventListener('mousemove', mouseMoved)
-    element.addEventListener('mouseout', mouseOut)
+    element.addEventListener("mouseover", mouseOver)
+    element.addEventListener("mousemove", mouseMoved)
+    element.addEventListener("mouseout", mouseOut)
 
     return () => {
-      element.removeEventListener('touchstart', touchStarted)
-      element.removeEventListener('touchmove', touchMoved)
-      element.removeEventListener('touchend', mouseOut)
-      element.removeEventListener('touchcancel', mouseOut)
+      element.removeEventListener("touchstart", touchStarted)
+      element.removeEventListener("touchmove", touchMoved)
+      element.removeEventListener("touchend", mouseOut)
+      element.removeEventListener("touchcancel", mouseOut)
 
-      element.removeEventListener('mouseover', touchStarted)
-      element.removeEventListener('mousemove', mouseMoved)
-      element.removeEventListener('mouseout', mouseOut)
+      element.removeEventListener("mouseover", touchStarted)
+      element.removeEventListener("mousemove", mouseMoved)
+      element.removeEventListener("mouseout", mouseOut)
     }
   }, [])
 
@@ -122,4 +122,3 @@ export function useTouchOrHover() {
     positionInTarget: position,
   }
 }
-

@@ -1,39 +1,39 @@
 .pageContainer {
-	margin: 0 auto;
-	width: 100%;
-	box-sizing: border-box;
-	padding: 0 var(--space-3);
-	border-color: var(--border-divider-color);
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 var(--space-3);
+  border-color: var(--border-divider-color);
 
-	@include mq($from: mobileLandscape) {
-		padding: 0 var(--space-5);
-	}
+  @include mq($from: mobileLandscape) {
+    padding: 0 var(--space-5);
+  }
 
-	@include mq($from: tablet) {
-		max-width: map.get($mq-breakpoints, "tablet");
-	}
+  @include mq($from: tablet) {
+    max-width: map.get($mq-breakpoints, "tablet");
+  }
 
-	@include mq($from: desktop) {
-		max-width: map.get($mq-breakpoints, "desktop");
-	}
+  @include mq($from: desktop) {
+    max-width: map.get($mq-breakpoints, "desktop");
+  }
 
-	@include mq($from: leftCol) {
-		max-width: map.get($mq-breakpoints, "leftCol");
-	}
+  @include mq($from: leftCol) {
+    max-width: map.get($mq-breakpoints, "leftCol");
+  }
 
-	@include mq($from: wide) {
-		max-width: map.get($mq-breakpoints, "wide");
-	}
+  @include mq($from: wide) {
+    max-width: map.get($mq-breakpoints, "wide");
+  }
 }
 
 .sideBorders {
-	border-left-style: solid;
-	border-right-style: solid;
-	border-left-width: 0;
-	border-right-width: 0;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-left-width: 0;
+  border-right-width: 0;
 
-	@include mq($from: tablet) {
-		border-left-width: 1px;
-		border-right-width: 1px;
-	}
+  @include mq($from: tablet) {
+    border-left-width: 1px;
+    border-right-width: 1px;
+  }
 }

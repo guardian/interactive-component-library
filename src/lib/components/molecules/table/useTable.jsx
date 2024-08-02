@@ -41,7 +41,9 @@ export function useTable({ columns, data, sortState }) {
     }
     const dataCopy = new Array(...data)
     const column = columns[sortState.columnIndex]
-    const sortFunction = sortState.ascending ? sortAscending(column.accessor) : sortDescending(column.accessor)
+    const sortFunction = sortState.ascending
+      ? sortAscending(column.accessor)
+      : sortDescending(column.accessor)
     dataCopy.sort(sortFunction)
     return dataCopy
   }, [columns, data, sortState])
@@ -140,9 +142,13 @@ class CellModel {
       }
 
       const rowData = JSON.stringify(this.row, null, 2)
-      throw new Error(`Missing value for key ${this.column.accessor} in ${rowData}`)
+      throw new Error(
+        `Missing value for key ${this.column.accessor} in ${rowData}`,
+      )
     }
 
-    return this.row[this.column.accessor] !== null ? this.row[this.column.accessor].toString() : "null"
+    return this.row[this.column.accessor] !== null
+      ? this.row[this.column.accessor].toString()
+      : "null"
   }
 }

@@ -4,10 +4,16 @@ import { dynamicPropValue } from "../helpers/dynamicPropValue"
 import { geoContains } from "d3-geo"
 import Flatbush from "flatbush"
 
-export function Polygon({ id, features, fill = null, stroke = null, strokeWidth = 1, zIndex = 0, styles }) {
+export function Polygon({
+  id,
+  features,
+  fill = null,
+  stroke = null,
+  strokeWidth = 1,
+  zIndex = 0,
+  styles,
+}) {
   const context = useContext(MapContext)
-  const { drawToCanvas } = context.config
-
   const [searchIndex, setSearchIndex] = useState()
 
   useEffect(() => {
@@ -18,7 +24,12 @@ export function Polygon({ id, features, fill = null, stroke = null, strokeWidth 
     for (const feature of features) {
       const bounds = context.path.bounds(feature)
 
-      index.add(Math.floor(bounds[0][0]), Math.floor(bounds[0][1]), Math.ceil(bounds[1][0]), Math.ceil(bounds[1][1]))
+      index.add(
+        Math.floor(bounds[0][0]),
+        Math.floor(bounds[0][1]),
+        Math.ceil(bounds[1][0]),
+        Math.ceil(bounds[1][1]),
+      )
     }
 
     index.finish()
@@ -44,7 +55,7 @@ export function Polygon({ id, features, fill = null, stroke = null, strokeWidth 
 
       return features[found]
     },
-    [context, searchIndex],
+    [context, searchIndex, features],
   )
 
   useEffect(() => {
@@ -69,7 +80,7 @@ export function Polygon({ id, features, fill = null, stroke = null, strokeWidth 
             className={dynamicPropValue(styles, d, index)}
             fill={dynamicPropValue(fill, d, index)}
             stroke={dynamicPropValue(stroke, d, index)}
-            stroke-width={dynamicPropValue(strokeWidth, d, index)}
+            strokeWidth={dynamicPropValue(strokeWidth, d, index)}
             d={context.path(d)}
           />
         )

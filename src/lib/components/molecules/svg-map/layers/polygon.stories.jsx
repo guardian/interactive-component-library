@@ -5,7 +5,10 @@ import { saveSVG } from "../helpers/saveSVG"
 import ukCountriesTopo from "../sample-data/UK-countries-topo.json"
 import styles from "../stories.module.css"
 
-const ukCountries = feature(ukCountriesTopo, ukCountriesTopo.objects["countries"])
+const ukCountries = feature(
+  ukCountriesTopo,
+  ukCountriesTopo.objects["countries"],
+)
 
 const meta = {
   title: "Molecules/SVGMap/Layers",

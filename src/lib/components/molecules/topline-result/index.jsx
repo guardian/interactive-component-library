@@ -27,26 +27,40 @@ export const ToplineResult = forwardRef(
     const displayStyle = displayRow ? styles.displayRow : styles.displayColumn
 
     return (
-      <div class={styles.toplineResult} onMouseOver={onMouseOver} onClick={onClick} onMouseOut={onMouseOut} ref={ref}>
-        <div class={styles.topRow}>
-          <span class={`${styles.primaryname} before-color--${abbreviation}`}>{name}</span>
+      <div
+        className={styles.toplineResult}
+        onMouseOver={onMouseOver}
+        onClick={onClick}
+        onMouseOut={onMouseOut}
+        ref={ref}
+      >
+        <div className={styles.topRow}>
+          <span
+            className={`${styles.primaryname} before-color--${abbreviation}`}
+          >
+            {name}
+          </span>
           {showInfoButton && (
-            <span class={styles.infoButton}>
+            <span className={styles.infoButton}>
               <InfoButton onClick={onInfoPress} ref={infoButtonRef} />
             </span>
           )}
         </div>
         {secondaryName && (
-          <div class={styles.subhead}>
-            <span class={styles.secondaryname}>{secondaryName}</span>
+          <div className={styles.subhead}>
+            <span className={styles.secondaryname}>{secondaryName}</span>
           </div>
         )}
-        <div class={`${styles.displayNumbers} ${displayStyle}`}>
-          <div class={styles.mainNumber}>
+        <div className={`${styles.displayNumbers} ${displayStyle}`}>
+          <div className={styles.mainNumber}>
             {mainNumber}
-            {mainNumberSuffix && <span className={styles.mainNumberSuffix}>{mainNumberSuffix}</span>}
+            {mainNumberSuffix && (
+              <span className={styles.mainNumberSuffix}>
+                {mainNumberSuffix}
+              </span>
+            )}
           </div>
-          <div class={styles.secondaryNumber}>{secondaryNumber}</div>
+          <div className={styles.secondaryNumber}>{secondaryNumber}</div>
         </div>
       </div>
     )

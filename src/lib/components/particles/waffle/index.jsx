@@ -8,9 +8,23 @@ export const WaffleType = {
   square: "square",
 }
 
-const WaffleUnit = ({ type, attributes }) => (type === WaffleType.square ? <rect {...attributes} /> : <circle {...attributes} />)
+const WaffleUnit = ({ type, attributes }) =>
+  type === WaffleType.square ? (
+    <rect {...attributes} />
+  ) : (
+    <circle {...attributes} />
+  )
 
-export const Waffle = ({ units, numberOfRows, type = WaffleType.circle, idAccessor, onMouseOver = () => {}, onClick = () => {}, styles, svgId }) => {
+export const Waffle = ({
+  units,
+  numberOfRows,
+  type = WaffleType.circle,
+  idAccessor,
+  onMouseOver = () => {},
+  onClick = () => {},
+  styles,
+  svgId,
+}) => {
   const containerRef = useRef()
   const containerSize = useContainerSize(containerRef)
   const width = containerSize ? containerSize.width : 0
@@ -25,7 +39,11 @@ export const Waffle = ({ units, numberOfRows, type = WaffleType.circle, idAccess
   return (
     <div ref={containerRef} className={styles.container}>
       {containerSize && (
-        <svg viewBox={`0 0 ${width} ${height}`} class={styles.svg} id={svgId}>
+        <svg
+          viewBox={`0 0 ${width} ${height}`}
+          className={styles.svg}
+          id={svgId}
+        >
           <g>
             {units.map((unit, j) => {
               let attributes
@@ -48,11 +66,19 @@ export const Waffle = ({ units, numberOfRows, type = WaffleType.circle, idAccess
                   onClick: (e) => onClick(unit, e),
                   class: `${styles.unit} ${unit.class}`,
                   r: unitWidth / 2,
-                  transform: `translate(${unitWidth * Math.floor(j / numberOfRows) + unitWidth / 2}, ${unitHeight * (j % numberOfRows) + unitHeight / 2})`,
+                  transform: `translate(${
+                    unitWidth * Math.floor(j / numberOfRows) + unitWidth / 2
+                  }, ${unitHeight * (j % numberOfRows) + unitHeight / 2})`,
                 }
               }
 
-              return <WaffleUnit key={`wu-${j}`} type={type} attributes={attributes} />
+              return (
+                <WaffleUnit
+                  key={`wu-${j}`}
+                  type={type}
+                  attributes={attributes}
+                />
+              )
             })}
           </g>
         </svg>

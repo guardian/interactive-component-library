@@ -3,7 +3,13 @@ import { geoAlbersUk } from "d3-composite-projections"
 import { SVGMapProvider } from "./context/SVGMapProvider"
 import { SVGRenderer } from "./renderers/SVGRenderer"
 import { cloneElement } from "preact"
-import { useRef, useMemo, useLayoutEffect, useState, useImperativeHandle } from "preact/hooks"
+import {
+  useRef,
+  useMemo,
+  useLayoutEffect,
+  useState,
+  useImperativeHandle,
+} from "preact/hooks"
 import { forwardRef } from "preact/compat"
 import { useContainerSize } from "$shared/hooks/useContainerSize"
 import { useOrganisedChildren } from "./hooks/useOrganisedChildren"
@@ -13,7 +19,10 @@ export * as Controls from "./controls"
 
 export const _Projection = {
   geoAlbersUKComposite: geoAlbersUk(),
-  geoAlbersEngland: geoAlbers().center([0, 52.7]).rotate([1.1743, 0]).parallels([50, 54]),
+  geoAlbersEngland: geoAlbers()
+    .center([0, 52.7])
+    .rotate([1.1743, 0])
+    .parallels([50, 54]),
   geoMercator: geoMercator(),
 }
 
@@ -54,69 +63,100 @@ const DEFAULT_ZOOM = {
   maxZoom: 8,
 }
 
-export const SVGMap = forwardRef(({ id, width, height, config, children, padding = { top: 20, right: 20, bottom: 20, left: 20 }, zoom, selectedFeature }, ref) => {
-  padding = padding || ZERO_PADDING
-  zoom = Object.assign(DEFAULT_ZOOM, zoom)
-
-  const containerRef = useRef()
-  const rendererRef = useRef()
-  const [isReady, setIsReady] = useState(false)
-
-  useLayoutEffect(() => {
-    if (!isReady) {
-      setIsReady(true)
-    }
-
-    return () => {
-      if (isReady) {
-        setIsReady(false)
-      }
-    }
-  }, [isReady])
-
-  const mapRef = useRef()
-
-  useImperativeHandle(
+export const SVGMap = forwardRef(
+  (
+    {
+      id,
+      width,
+      height,
+      config,
+      children,
+      padding = { top: 20, right: 20, bottom: 20, left: 20 },
+      zoom,
+      selectedFeature,
+    },
     ref,
-    () => ({
-      isReady,
-      getContainer: () => containerRef.current,
-      getContext: () => mapRef.current,
-    }),
-    [isReady],
-  )
+  ) => {
+    padding = padding || ZERO_PADDING
+    zoom = Object.assign(DEFAULT_ZOOM, zoom)
 
-  const containerSize = useContainerSize(containerRef)
-  const containerStyle = useMemo(() => {
-    const style = {}
-    if (width > 0) style["width"] = width
-    if (height > 0) style["height"] = height
-    return style
-  }, [width, height])
+    const containerRef = useRef()
+    const rendererRef = useRef()
+    const [isReady, setIsReady] = useState(false)
 
-  const organisedChildren = useOrganisedChildren(children)
+    useLayoutEffect(() => {
+      if (!isReady) {
+        setIsReady(true)
+      }
 
-  const renderSVG = containerSize && !config.drawToCanvas
-  const zoomControl = organisedChildren.controls["ZoomControl"]
-  const renderZoomControl = zoomControl && zoom.enabled
+      return () => {
+        if (isReady) {
+          setIsReady(false)
+        }
+      }
+    }, [isReady])
 
-  return (
-    <figure ref={containerRef} className={styles.container} style={containerStyle}>
-      {renderSVG && (
-        <SVGMapProvider id={id} width={containerSize.width} height={containerSize.height} padding={padding} config={config} mapRef={mapRef} selectedFeature={selectedFeature} zoom={zoom}>
-          <SVGRenderer>{organisedChildren.layers.map((child, index) => cloneElement(child, { zIndex: index }))}</SVGRenderer>
-        </SVGMapProvider>
-      )}
-      <div className={styles.controls}>
-        {renderZoomControl && (
-          <div className={styles.zoomControl}>
-            {cloneElement(zoomControl, {
-              onZoomIn: () => rendererRef.current.zoomIn(),
-              onZoomOut: () => rendererRef.current.zoomOut(),
-            })}
-          </div>
+    const mapRef = useRef()
+
+    useImperativeHandle(
+      ref,
+      () => ({
+        isReady,
+        getContainer: () => containerRef.current,
+        getContext: () => mapRef.current,
+      }),
+      [isReady],
+    )
+
+    const containerSize = useContainerSize(containerRef)
+    const containerStyle = useMemo(() => {
+      const style = {}
+      if (width > 0) style["width"] = width
+      if (height > 0) style["height"] = height
+      return style
+    }, [width, height])
+
+    const organisedChildren = useOrganisedChildren(children)
+
+    const renderSVG = containerSize && !config.drawToCanvas
+    const zoomControl = organisedChildren.controls["ZoomControl"]
+    const renderZoomControl = zoomControl && zoom.enabled
+
+    return (
+      <figure
+        ref={containerRef}
+        className={styles.container}
+        style={containerStyle}
+      >
+        {renderSVG && (
+          <SVGMapProvider
+            id={id}
+            width={containerSize.width}
+            height={containerSize.height}
+            padding={padding}
+            config={config}
+            mapRef={mapRef}
+            selectedFeature={selectedFeature}
+            zoom={zoom}
+          >
+            <SVGRenderer>
+              {organisedChildren.layers.map((child, index) =>
+                cloneElement(child, { zIndex: index }),
+              )}
+            </SVGRenderer>
+          </SVGMapProvider>
         )}
-      </div>
-    </figure>
-  )
-})
+        <div className={styles.controls}>
+          {renderZoomControl && (
+            <div className={styles.zoomControl}>
+              {cloneElement(zoomControl, {
+                onZoomIn: () => rendererRef.current.zoomIn(),
+                onZoomOut: () => rendererRef.current.zoomOut(),
+              })}
+            </div>
+          )}
+        </div>
+      </figure>
+    )
+  },
+)

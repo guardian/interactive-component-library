@@ -4,7 +4,16 @@ import { useContainerSize } from "$shared/hooks/useContainerSize"
 import defaultStyles from "./style.module.css"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 
-export const SlopeChart = ({ domain, lines, y1Label = (d) => d.y1, y2Label = (d) => d.y2, axis, styles, padding = { left: 24, right: 24, top: 20, bottom: 20 }, svgId }) => {
+export const SlopeChart = ({
+  domain,
+  lines,
+  y1Label = (d) => d.y1,
+  y2Label = (d) => d.y2,
+  axis,
+  styles,
+  padding = { left: 24, right: 24, top: 20, bottom: 20 },
+  svgId,
+}) => {
   const wrapperRef = useRef(null)
   const containerSize = useContainerSize(wrapperRef)
   const width = containerSize ? containerSize.width : 0
@@ -30,15 +39,28 @@ export const SlopeChart = ({ domain, lines, y1Label = (d) => d.y1, y2Label = (d)
   styles = mergeStyles({ ...defaultStyles }, styles)
 
   const chart = (
-    <svg class={styles.svg} width={width} height={height} id={svgId}>
+    <svg className={styles.svg} width={width} height={height} id={svgId}>
       <g transform={`translate(${padding.left} ${padding.top})`}>
         {/* draw axis */}
         <g transform={`translate(0 ${contentHeight})`}>
-          <line x1={0} x2={contentWidth} className={styles.axis} shape-rendering="crispEdges" />
-          <text dominant-baseline="hanging" className={[styles.label, styles.axisLabel].join(" ")}>
+          <line
+            x1={0}
+            x2={contentWidth}
+            className={styles.axis}
+            shapeRendering="crispEdges"
+          />
+          <text
+            dominantBaseline="hanging"
+            className={[styles.label, styles.axisLabel].join(" ")}
+          >
             {axis.startLabel}
           </text>
-          <text x={contentWidth} dominant-baseline="hanging" text-anchor="end" className={[styles.label, styles.axisLabel].join(" ")}>
+          <text
+            x={contentWidth}
+            dominantBaseline="hanging"
+            textAnchor="end"
+            className={[styles.label, styles.axisLabel].join(" ")}
+          >
             {axis.endLabel}
           </text>
         </g>
@@ -48,10 +70,32 @@ export const SlopeChart = ({ domain, lines, y1Label = (d) => d.y1, y2Label = (d)
           const itemStyles = mergeStyles({ ...styles }, line.styles)
           return (
             <g key={index}>
-              <line x1={0} y1={yScale(line.y1)} x2={contentWidth} y2={yScale(line.y2)} className={`${itemStyles.lineWhite}`} />
-              <line x1={0} y1={yScale(line.y1)} x2={contentWidth} y2={yScale(line.y2)} className={`${itemStyles.line} stroke-color--${line.abbreviation}`} />
-              <circle cx={0} cy={yScale(line.y1)} r={4} className={`${itemStyles.circle} fill-color--${line.abbreviation}`} />
-              <circle cx={contentWidth} cy={yScale(line.y2)} r={4} className={`${itemStyles.circle} fill-color--${line.abbreviation}`} />
+              <line
+                x1={0}
+                y1={yScale(line.y1)}
+                x2={contentWidth}
+                y2={yScale(line.y2)}
+                className={`${itemStyles.lineWhite}`}
+              />
+              <line
+                x1={0}
+                y1={yScale(line.y1)}
+                x2={contentWidth}
+                y2={yScale(line.y2)}
+                className={`${itemStyles.line} stroke-color--${line.abbreviation}`}
+              />
+              <circle
+                cx={0}
+                cy={yScale(line.y1)}
+                r={4}
+                className={`${itemStyles.circle} fill-color--${line.abbreviation}`}
+              />
+              <circle
+                cx={contentWidth}
+                cy={yScale(line.y2)}
+                r={4}
+                className={`${itemStyles.circle} fill-color--${line.abbreviation}`}
+              />
             </g>
           )
         })}
@@ -60,7 +104,13 @@ export const SlopeChart = ({ domain, lines, y1Label = (d) => d.y1, y2Label = (d)
         {y1Labels.map((label, index) => {
           return (
             <g key={index}>
-              <text x={0} y={label.y} className={[styles.label, styles.y1Label].join(" ")} text-anchor="end" dominant-baseline="middle">
+              <text
+                x={0}
+                y={label.y}
+                className={[styles.label, styles.y1Label].join(" ")}
+                textAnchor="end"
+                dominantBaseline="middle"
+              >
                 {label.value}
               </text>
             </g>
@@ -69,7 +119,13 @@ export const SlopeChart = ({ domain, lines, y1Label = (d) => d.y1, y2Label = (d)
         {y2Labels.map((label, index) => {
           return (
             <g key={index}>
-              <text x={contentWidth} y={label.y} className={[styles.label, styles.y2Label].join(" ")} text-anchor="start" dominant-baseline="middle">
+              <text
+                x={contentWidth}
+                y={label.y}
+                className={[styles.label, styles.y2Label].join(" ")}
+                textAnchor="start"
+                dominantBaseline="middle"
+              >
                 {label.value}
               </text>
             </g>
@@ -80,7 +136,7 @@ export const SlopeChart = ({ domain, lines, y1Label = (d) => d.y1, y2Label = (d)
   )
 
   return (
-    <div class={styles.slopeChartContainer} ref={wrapperRef}>
+    <div className={styles.slopeChartContainer} ref={wrapperRef}>
       {show && chart}
     </div>
   )

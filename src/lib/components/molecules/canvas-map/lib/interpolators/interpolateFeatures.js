@@ -1,6 +1,12 @@
-export function interpolateFeatures(currentFeatures, newFeatures, { interpolate, separate, combine }) {
+export function interpolateFeatures(
+  currentFeatures,
+  newFeatures,
+  { interpolate, separate, combine },
+) {
   if (currentFeatures.length !== newFeatures.length) {
-    throw new Error("interpolateFeatures expects an equal number of features for start and end")
+    throw new Error(
+      "interpolateFeatures expects an equal number of features for start and end",
+    )
   }
 
   const featureInterpolators = []
@@ -14,12 +20,22 @@ export function interpolateFeatures(currentFeatures, newFeatures, { interpolate,
       for (let e = 0; e < currentGeometries.length; e++) {
         const currentGeometry = currentGeometries[e]
         const newGeometry = newGeometries[e]
-        if (currentGeometry.type !== "Polygon" || newGeometry.type !== "Polygon") {
+        if (
+          currentGeometry.type !== "Polygon" ||
+          newGeometry.type !== "Polygon"
+        ) {
           throw new Error("interpolateFeatures expects only Polygon geometry")
         }
 
-        const shapeInterpolator = interpolate(currentGeometries[e].getOuterRing(), newGeometries[e].getOuterRing(), { string: false })
-        geometryInterpolators.push({ type: "default", interpolator: shapeInterpolator })
+        const shapeInterpolator = interpolate(
+          currentGeometries[e].getOuterRing(),
+          newGeometries[e].getOuterRing(),
+          { string: false },
+        )
+        geometryInterpolators.push({
+          type: "default",
+          interpolator: shapeInterpolator,
+        })
       }
     } else if (currentGeometries.length === 1 && newGeometries.length > 1) {
       const separationInterpolator = separate(
@@ -27,16 +43,24 @@ export function interpolateFeatures(currentFeatures, newFeatures, { interpolate,
         newGeometries.map((geometry) => geometry.getOuterRing()),
         { string: false, single: true },
       )
-      geometryInterpolators.push({ type: "separate", interpolator: separationInterpolator })
+      geometryInterpolators.push({
+        type: "separate",
+        interpolator: separationInterpolator,
+      })
     } else if (currentGeometries.length > 1 && newGeometries.length === 1) {
       const combinationInterpolator = combine(
         currentGeometries.map((geometry) => geometry.getOuterRing()),
         newGeometries[0].getOuterRing(),
         { string: false, single: true },
       )
-      geometryInterpolators.push({ type: "combine", interpolator: combinationInterpolator })
+      geometryInterpolators.push({
+        type: "combine",
+        interpolator: combinationInterpolator,
+      })
     } else {
-      throw new Error(`Encountered an unexpected number of geometries: ${currentGeometries.length} and ${newGeometries.length}`)
+      throw new Error(
+        `Encountered an unexpected number of geometries: ${currentGeometries.length} and ${newGeometries.length}`,
+      )
     }
 
     featureInterpolators.push(geometryInterpolators)
@@ -52,7 +76,10 @@ export function interpolateFeatures(currentFeatures, newFeatures, { interpolate,
       const feature = newFeatures[i].clone()
       const geometries = []
       const geometryInterpolators = featureInterpolators[i]
-      for (const [index, { type, interpolator }] of geometryInterpolators.entries()) {
+      for (const [
+        index,
+        { type, interpolator },
+      ] of geometryInterpolators.entries()) {
         let geometry = feature.geometries[index].clone()
         let interpolated
         switch (type) {

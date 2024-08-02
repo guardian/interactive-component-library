@@ -4,7 +4,17 @@ import { SearchIcon } from "./icons/search"
 import { CloseButton } from "$particles"
 import defaultStyles from "./style.module.css"
 
-export function SearchInput({ placeholder, inputValue, maxSuggestions = 5, onInputChange, onSubmit, onSelect, onClear, onFocus, styles }) {
+export function SearchInput({
+  placeholder,
+  inputValue,
+  maxSuggestions = 5,
+  onInputChange,
+  onSubmit,
+  onSelect,
+  onClear,
+  onFocus,
+  styles,
+}) {
   styles = mergeStyles(defaultStyles, styles)
 
   const inputRef = useRef(null)
@@ -14,7 +24,10 @@ export function SearchInput({ placeholder, inputValue, maxSuggestions = 5, onInp
 
   async function updateSelectedIndex(diff) {
     setSelectedIndex((currentIndex) => {
-      const newIndex = Math.max(Math.min(currentIndex + diff, suggestions.length - 1), -1)
+      const newIndex = Math.max(
+        Math.min(currentIndex + diff, suggestions.length - 1),
+        -1,
+      )
       if (newIndex >= 0 && suggestions[newIndex].disabled) {
         return currentIndex
       }
@@ -60,7 +73,9 @@ export function SearchInput({ placeholder, inputValue, maxSuggestions = 5, onInp
     inputRef.current.blur()
   }
 
-  const showClearButton = (inputRef.current?.value && inputRef.current?.value !== "") || (inputValue && inputValue !== "")
+  const showClearButton =
+    (inputRef.current?.value && inputRef.current?.value !== "") ||
+    (inputValue && inputValue !== "")
 
   return (
     <div className={styles.searchContainer}>
@@ -118,7 +133,14 @@ export function SearchInput({ placeholder, inputValue, maxSuggestions = 5, onInp
   )
 }
 
-function SuggestionList({ suggestions, highlightText, selectedIndex, styles, onMouseOver, onSelect }) {
+function SuggestionList({
+  suggestions,
+  highlightText,
+  selectedIndex,
+  styles,
+  onMouseOver,
+  onSelect,
+}) {
   if (!suggestions || suggestions.length === 0) return
   return (
     <ul className={styles.suggestions} aria-label="Search suggestions">
@@ -128,7 +150,11 @@ function SuggestionList({ suggestions, highlightText, selectedIndex, styles, onM
           <li
             key={index}
             aria-label={d.text}
-            className={[styles.suggestion, index === selectedIndex && styles.selected, d.disabled && styles.disabled].join(" ")}
+            className={[
+              styles.suggestion,
+              index === selectedIndex && styles.selected,
+              d.disabled && styles.disabled,
+            ].join(" ")}
             onMouseDown={(e) => e.preventDefault()}
             onMouseOver={() => onMouseOver(d, index)}
             onClick={() => {
@@ -136,15 +162,17 @@ function SuggestionList({ suggestions, highlightText, selectedIndex, styles, onM
             }}
           >
             {shouldHighlight &&
-              d.text.split(new RegExp(`(${highlightText})`, "ig")).map((part, i) =>
-                i % 2 === 1 ? (
-                  <span className={styles.highlighted} key={i}>
-                    {part}
-                  </span>
-                ) : (
-                  part
-                ),
-              )}
+              d.text
+                .split(new RegExp(`(${highlightText})`, "ig"))
+                .map((part, i) =>
+                  i % 2 === 1 ? (
+                    <span className={styles.highlighted} key={i}>
+                      {part}
+                    </span>
+                  ) : (
+                    part
+                  ),
+                )}
             {!shouldHighlight && d.text}
           </li>
         )

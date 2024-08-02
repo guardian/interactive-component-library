@@ -1,4 +1,3 @@
-/* eslint-disable prefer-rest-params */
 import { arrayEquals } from "./array"
 
 /**
@@ -17,13 +16,13 @@ export function memoise(fn) {
 
   let lastThis
 
-  return function () {
-    const nextArgs = Array.prototype.slice.call(arguments)
+  return function (...args) {
+    const nextArgs = Array.prototype.slice.call(args)
     if (!called || this !== lastThis || !arrayEquals(nextArgs, lastArgs)) {
       called = true
       lastThis = this
       lastArgs = nextArgs
-      lastResult = fn.apply(this, arguments)
+      lastResult = fn.apply(this, args)
     }
     return lastResult
   }
