@@ -3,14 +3,11 @@
   "exclude": ["node_modules", "./src/**/*.stories.*"],
   "compilerOptions": {
     "module": "es2022",
-    "paths": {
-      "react": ["./node_modules/preact/compat/"],
-      "react-dom": ["./node_modules/preact/compat/"]
-    },
     "esModuleInterop": true,
     "target": "ESNext",
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
+    "jsxFactory": "createElement",
     "skipLibCheck": true,
     "checkJs": false
   }
