@@ -15,6 +15,8 @@ export const ToplineResult = forwardRef(
       displayRow = false,
       abbreviation,
       onMouseOver,
+      onClick,
+      onMouseOut,
       onInfoPress,
       showInfoButton = false,
       infoButtonRef,
@@ -25,7 +27,13 @@ export const ToplineResult = forwardRef(
     const displayStyle = displayRow ? styles.displayRow : styles.displayColumn
 
     return (
-      <div className={styles.toplineResult} onMouseOver={onMouseOver} ref={ref}>
+      <div
+        className={styles.toplineResult}
+        onMouseOver={onMouseOver}
+        onClick={onClick}
+        onMouseOut={onMouseOut}
+        ref={ref}
+      >
         <div className={styles.topRow}>
           <span
             className={`${styles.primaryname} before-color--${abbreviation}`}
