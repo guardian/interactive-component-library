@@ -45,8 +45,8 @@
     "dayjs": "^1.11.10",
     "flatbush": "^4.4.0",
     "preact-transitioning": "^1.4.1",
-    "rbush": "^3.0.1",
-    "rbush-knn": "^3.0.1"
+    "rbush": "^4.0.0",
+    "rbush-knn": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "7.22.10",
