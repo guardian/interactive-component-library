@@ -38,6 +38,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@guardian/source": "^6.1.0",
     "d3-composite-projections": "^1.4.0",
     "d3-timer": "^3.0.1",
     "d3-transition": "^3.0.1",
@@ -52,7 +53,6 @@
     "@babel/plugin-syntax-class-properties": "^7.12.13",
     "@babel/plugin-syntax-decorators": "^7.24.0",
     "@babel/plugin-syntax-jsx": "^7.23.3",
-    "@guardian/source-foundations": "^14.2.2",
     "@preact/preset-vite": "^2.8.0",
     "@preact/signals": "^1.2.2",
     "@storybook/addon-actions": "^7.6.17",
