@@ -97,8 +97,8 @@
     "storybook-dark-mode": "^4.0.2",
     "topojson-client": "^3.1.0",
     "typescript": "5.3.3",
-    "vite": "^4.5.3",
-    "vitest": "0.34.1"
+    "vite": "^5.3.5",
+    "vitest": "2.0.5"
   },
   "peerDependencies": {
     "d3-geo": "^3.1.1",
