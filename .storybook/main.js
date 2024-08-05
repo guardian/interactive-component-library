@@ -34,7 +34,6 @@ const config = {
     options: {},
   },
   docs: {
-    autodocs: "tag",
     defaultName: "Documentation",
   },
   viteFinal: async (config) => {
