@@ -1,4 +1,4 @@
-import * as source from "@guardian/source-foundations"
+import * as source from "@guardian/source/foundations"
 
 export default {
   resets: source.resets.resetCSS,
