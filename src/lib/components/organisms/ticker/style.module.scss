@@ -106,13 +106,12 @@
 .ticker[data-expanded="true"] .controls {
   position: sticky;
   margin-top: -40px;
-  // background-color: aqua;
+}
 
-  .button {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-    padding-bottom: 8px;
-  }
+.ticker[data-expanded="true"] .button {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  padding-bottom: 8px;
 }
