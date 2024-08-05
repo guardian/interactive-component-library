@@ -31,3 +31,6 @@ coverage
 
 # Vite
 vite.config.*.timestamp-*
+
+# ESLint
+.eslintcache
