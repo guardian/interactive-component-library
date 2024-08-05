@@ -39,11 +39,11 @@ importers:
         specifier: ^1.4.1
         version: 1.4.1(preact@10.21.0)
       rbush:
-        specifier: ^3.0.1
-        version: 3.0.1
+        specifier: ^4.0.0
+        version: 4.0.0
       rbush-knn:
-        specifier: ^3.0.1
-        version: 3.0.1
+        specifier: ^4.0.0
+        version: 4.0.0
     devDependencies:
       '@babel/core':
         specifier: 7.22.10
@@ -3896,11 +3896,11 @@ packages:
     resolution: {integrity: sha512-8zGqypfENjCIqGhgXToC8aB2r7YrBX+AQAfIPs/Mlk+BtPTztOvTS01NRW/3Eh60J+a48lt8qsCzirQ6loCVfA==}
     engines: {node: '>= 0.8'}
 
-  rbush-knn@3.0.1:
-    resolution: {integrity: sha512-nuehTm0Q8yR6nvu3XjoWnZVGK5QqqRHNWogRIjBEBcPgsq3pbiuvWuq0/e/1uL43fXNtDUv93kYZDStZonBetQ==}
+  rbush-knn@4.0.0:
+    resolution: {integrity: sha512-1FN0H0zc75607hVSx2NbiiS/TTaSMOg6y7HfOwEmBEc1LEkaIK91n6bPltnJov1XgE2Caeex7EWZip2aiGmA0Q==}
 
-  rbush@3.0.1:
-    resolution: {integrity: sha512-XRaVO0YecOpEuIvbhbpTrZgoiI6xBlz6hnlr6EHhd+0x9ase6EmeN+hdwwUaJvLcsFFQ8iWVF1GAK1yB0BWi0w==}
+  rbush@4.0.0:
+    resolution: {integrity: sha512-F5xw+166FYDZI6jEcz+sWEHL5/J+du3kQWkwqWrPKb6iVoLPZh+2KhTS4OoYqrw1v/RO1xQe6WsLwBvrUAlvXw==}
 
   react-colorful@5.6.1:
     resolution: {integrity: sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==}
@@ -8944,11 +8944,11 @@ snapshots:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
 
-  rbush-knn@3.0.1:
+  rbush-knn@4.0.0:
     dependencies:
       tinyqueue: 2.0.3
 
-  rbush@3.0.1:
+  rbush@4.0.0:
     dependencies:
       quickselect: 2.0.0
 
