@@ -10,6 +10,8 @@ export function useTouchOrHover() {
   useEffect(() => {
     const element = ref.current
 
+    if (!element) return
+
     let touchCancelled = false
 
     const touchStarted = (event) => {
