@@ -31,7 +31,6 @@ const preview = {
         order: ["Particles", "Molecules", "Organisms"],
       },
     },
-    actions: { argTypesRegex: "^on[A-Z].*" },
     viewport: {
       viewports: {
         mobilesmall: {
