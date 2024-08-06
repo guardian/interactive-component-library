@@ -75,7 +75,9 @@ export const Map = forwardRef(
       }
 
       return () => {
-        ref.current = null
+        if (ref) {
+          ref.current = null
+        }
       }
     }, [map, ref, onLoad])
 
