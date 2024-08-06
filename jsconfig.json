@@ -9,6 +9,6 @@
     "jsxImportSource": "preact",
     "jsxFactory": "createElement",
     "skipLibCheck": true,
-    "checkJs": false
+    "checkJs": true
   }
 }
