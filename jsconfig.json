@@ -17,7 +17,6 @@
     "target": "ESNext",
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
-    "jsxFactory": "createElement",
     "skipLibCheck": true,
     "checkJs": true,
     "moduleResolution": "Bundler"
