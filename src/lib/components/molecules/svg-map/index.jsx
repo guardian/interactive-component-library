@@ -111,6 +111,7 @@ export const SVGMap = forwardRef(
     }, [width, height])
 
     const renderSVG = containerSize && !config.drawToCanvas
+    const childrenArray = Array.isArray(children) ? children : [children]
 
     return (
       <figure
@@ -129,7 +130,7 @@ export const SVGMap = forwardRef(
             selectedFeature={selectedFeature}
           >
             <SVGRenderer>
-              {children.map((child, index) =>
+              {childrenArray.map((child, index) =>
                 cloneElement(child, { zIndex: index }),
               )}
             </SVGRenderer>

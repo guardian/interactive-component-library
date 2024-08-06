@@ -10,6 +10,7 @@ const localAuthorities = feature(
   englandLocalAuthoritiesTopo.objects["local-authorities"],
 )
 
+/** @type {import('@storybook/preact').Meta} */
 const meta = {
   title: "Molecules/SVGMap/Layers",
   component: Layer,
@@ -24,18 +25,21 @@ const meta = {
   decorators: [
     (Story) => (
       <div style={{ width: "100%", height: "500px" }}>
-        <SVGMap config={MapConfiguration.England}>
-          <Polygon
-            features={localAuthorities.features}
-            fill="none"
-            stroke="#dcdcdc"
-            strokeWidth={1}
-          />
-          <Story />
-        </SVGMap>
+        <Story />
       </div>
     ),
   ],
+  render: (args) => (
+    <SVGMap config={MapConfiguration.England}>
+      <Polygon
+        features={localAuthorities.features}
+        fill="none"
+        stroke="#dcdcdc"
+        strokeWidth={1}
+      />
+      <Layer {...args} />
+    </SVGMap>
+  ),
 }
 
 export default meta
