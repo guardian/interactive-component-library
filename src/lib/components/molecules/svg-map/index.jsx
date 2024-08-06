@@ -11,11 +11,11 @@ import {
   useImperativeHandle,
 } from "preact/hooks"
 import { forwardRef } from "preact/compat"
+import { useThrowIfNonLayerChildren } from "./hooks/useThrowIfNonLayerChildren"
 import { useContainerSize } from "$shared/hooks/useContainerSize"
-import { useOrganisedChildren } from "./hooks/useOrganisedChildren"
+
 import styles from "./style.module.css"
 export * as MapLayers from "./layers"
-export * as Controls from "./controls"
 
 export const _Projection = {
   geoAlbersUKComposite: geoAlbersUk(),
@@ -57,11 +57,6 @@ export const MapConfiguration = {
 }
 
 const ZERO_PADDING = { top: 0, right: 0, bottom: 0, left: 0 }
-const DEFAULT_ZOOM = {
-  enabled: false,
-  minZoom: 1,
-  maxZoom: 8,
-}
 
 export const SVGMap = forwardRef(
   (
@@ -72,16 +67,15 @@ export const SVGMap = forwardRef(
       config,
       children,
       padding = { top: 20, right: 20, bottom: 20, left: 20 },
-      zoom,
       selectedFeature,
     },
     ref,
   ) => {
+    useThrowIfNonLayerChildren(children)
+
     padding = padding || ZERO_PADDING
-    zoom = Object.assign(DEFAULT_ZOOM, zoom)
 
     const containerRef = useRef()
-    const rendererRef = useRef()
     const [isReady, setIsReady] = useState(false)
 
     useLayoutEffect(() => {
@@ -116,11 +110,7 @@ export const SVGMap = forwardRef(
       return style
     }, [width, height])
 
-    const organisedChildren = useOrganisedChildren(children)
-
     const renderSVG = containerSize && !config.drawToCanvas
-    const zoomControl = organisedChildren.controls["ZoomControl"]
-    const renderZoomControl = zoomControl && zoom.enabled
 
     return (
       <figure
@@ -137,25 +127,14 @@ export const SVGMap = forwardRef(
             config={config}
             mapRef={mapRef}
             selectedFeature={selectedFeature}
-            zoom={zoom}
           >
             <SVGRenderer>
-              {organisedChildren.layers.map((child, index) =>
+              {children.map((child, index) =>
                 cloneElement(child, { zIndex: index }),
               )}
             </SVGRenderer>
           </SVGMapProvider>
         )}
-        <div className={styles.controls}>
-          {renderZoomControl && (
-            <div className={styles.zoomControl}>
-              {cloneElement(zoomControl, {
-                onZoomIn: () => rendererRef.current.zoomIn(),
-                onZoomOut: () => rendererRef.current.zoomOut(),
-              })}
-            </div>
-          )}
-        </div>
       </figure>
     )
   },
