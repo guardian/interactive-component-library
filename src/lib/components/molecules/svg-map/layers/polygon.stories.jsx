@@ -10,6 +10,7 @@ const ukCountries = feature(
   ukCountriesTopo.objects["countries"],
 )
 
+/** @type {import('@storybook/preact').Meta} */
 const meta = {
   title: "Molecules/SVGMap/Layers",
   component: Layer,
@@ -25,9 +26,7 @@ const meta = {
     (Story) => (
       <>
         <div style={{ width: "100%", height: "500px" }}>
-          <SVGMap id="map" config={MapConfiguration.UKComposite}>
-            <Story />
-          </SVGMap>
+          <Story />
         </div>
         <button className={styles.button} onClick={() => saveSVG("map")}>
           Download SVG
@@ -35,6 +34,11 @@ const meta = {
       </>
     ),
   ],
+  render: (args) => (
+    <SVGMap id="map" config={MapConfiguration.UKComposite}>
+      <Layer {...args} />
+    </SVGMap>
+  ),
 }
 
 export default meta

@@ -17,6 +17,7 @@ const borders = mesh(
   },
 )
 
+/** @type {import('@storybook/preact').Meta} */
 const meta = {
   title: "Molecules/SVGMap/Layers",
   component: Layer,
@@ -25,18 +26,21 @@ const meta = {
       control: "color",
     },
   },
+  render: (args) => (
+    <SVGMap config={MapConfiguration.UKComposite}>
+      <Polygon
+        features={constituencies.features}
+        fill="none"
+        stroke="#dcdcdc"
+        strokeWidth={1}
+      />
+      <Layer {...args} />
+    </SVGMap>
+  ),
   decorators: [
     (Story) => (
       <div style={{ width: "100%", height: "500px" }}>
-        <SVGMap config={MapConfiguration.UKComposite}>
-          <Polygon
-            features={constituencies.features}
-            fill="none"
-            stroke="#dcdcdc"
-            strokeWidth={1}
-          />
-          <Story />
-        </SVGMap>
+        <Story />
       </div>
     ),
   ],
