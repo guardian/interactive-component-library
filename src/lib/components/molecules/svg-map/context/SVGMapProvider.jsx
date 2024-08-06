@@ -2,7 +2,6 @@ import { useMemo, useRef, useCallback } from "preact/hooks"
 import { geoPath } from "d3-geo"
 import { bboxFeature } from "../helpers/bboxFeature"
 import { MapContext } from "./MapContext"
-import { calculateScale } from "../helpers/geoMath"
 
 export function SVGMapProvider({
   id,
@@ -11,7 +10,6 @@ export function SVGMapProvider({
   height,
   padding,
   config,
-  zoom,
   selectedFeature,
   children,
 }) {
@@ -75,23 +73,6 @@ export function SVGMapProvider({
     [padding],
   )
 
-  const getVisibleBounds = useCallback(() => {
-    const projectedSW = projection.invert([padding.left, contentSize.height])
-    const projectedNE = projection.invert([
-      padding.left + contentSize.width,
-      padding.top,
-    ])
-    return [projectedSW, projectedNE]
-  }, [projection, contentSize, padding])
-
-  const getZoomScale = useCallback(() => {
-    return calculateScale(
-      getVisibleBounds(),
-      contentSize.width,
-      contentSize.height,
-    )
-  }, [getVisibleBounds, contentSize])
-
   const context = {
     id,
     projection,
@@ -100,13 +81,11 @@ export function SVGMapProvider({
     size: { width, height },
     contentSize,
     padding,
-    zoom,
     extent: [
       [0, 0],
       [width, height],
     ],
     selectedFeature,
-    getZoomScale,
     registerLayer,
     unregisterLayer,
     findFeatureAtPoint,
