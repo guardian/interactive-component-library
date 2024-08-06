@@ -1,7 +1,17 @@
 {
-  "include": ["*.js", "./src/**/*.jsx"],
-  "exclude": ["node_modules", "./src/**/*.stories.*"],
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "include": ["*.js", "./src/**/*", "./.storybook/**/*"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
+    "paths": {
+      "$particles": ["./src/lib/components/particles"],
+      "$particles/*": ["./src/lib/components/particles/*"],
+      "$molecules": ["./src/lib/components/molecules"],
+      "$molecules/*": ["./src/lib/components/molecules/*"],
+      "$shared/*": ["./src/lib/shared/*"],
+      "$styles/*": ["./src/lib/styles/*"],
+      "$storybook/*": ["./.storybook/*"]
+    },
     "module": "es2022",
     "esModuleInterop": true,
     "target": "ESNext",
