@@ -3,6 +3,7 @@ import { defineConfig } from "vitest/config"
 import { name } from "./package.json"
 import preact from "@preact/preset-vite"
 import peerDepsExternal from "rollup-plugin-peer-deps-external"
+import tsconfigPaths from "vite-tsconfig-paths"
 
 const app = async () => {
   /**
@@ -13,16 +14,11 @@ const app = async () => {
   const formattedName = name.match(/[^/]+$/)?.[0] ?? name
 
   return defineConfig({
-    resolve: {
-      alias: {
-        $particles: path.resolve(__dirname, "src/lib/components/particles"),
-        $molecules: path.resolve(__dirname, "src/lib/components/molecules"),
-        $shared: path.resolve(__dirname, "src/lib/shared"),
-        $styles: path.resolve(__dirname, "src/lib/styles"),
-        $storybook: path.resolve(__dirname, ".storybook"),
-      },
-    },
-    plugins: [peerDepsExternal(), preact({ prefreshEnabled: false })],
+    plugins: [
+      tsconfigPaths(),
+      peerDepsExternal(),
+      preact({ prefreshEnabled: false }),
+    ],
     css: {
       preprocessorOptions: {
         scss: {
