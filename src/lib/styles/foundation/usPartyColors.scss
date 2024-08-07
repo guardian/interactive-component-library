@@ -6,6 +6,8 @@
   --dem-2: #bdbeea;
   --gop-2: #ffdbd4;
   --oth-2: #c8c8c8;
+
+  --undeclared: #e7e7e7;
 }
 
 @mixin dark-mode-party-colors-us {
@@ -16,6 +18,8 @@
   --dem-2: #292b7f;
   --gop-2: #833a2b;
   --oth-2: #333333;
+
+  --undeclared: #494949;
 }
 
 /* BACKGROUND-COLOR -------------------------------------------- */
@@ -45,6 +49,10 @@
   background-color: var(--oth-2) !important;
 }
 
+.bg-color--undeclared {
+  background-color: var(--undeclared) !important;
+}
+
 /* FILL ----------------------------------------------------------- */
 /* include secondary (-2) colors ---*/
 
@@ -72,6 +80,10 @@
   fill: var(--oth-2) !important;
 }
 
+.fill-color--undeclared {
+  fill: var(--undeclared) !important;
+}
+
 /* STOP ----------------------------------------------------------- */
 
 .stop-color--dem {
@@ -84,6 +96,10 @@
 
 .stop-color--oth {
   stop-color: var(--oth) !important;
+}
+
+.stop-color--undeclared {
+  stop-color: var(--undeclared) !important;
 }
 
 /* STROKE-COLOR --------------------------------------------------- */
@@ -100,6 +116,10 @@
   stroke: var(--oth) !important;
 }
 
+.stroke-color--undeclared {
+  stroke: var(--undeclared) !important;
+}
+
 /* COLOR ----------------------------------------------------------- */
 
 .color--dem {
@@ -114,6 +134,10 @@
   color: var(--oth) !important;
 }
 
+.color--undeclared {
+  color: var(--undeclared) !important;
+}
+
 /* BORDER-COLOR ----------------------------------------------------- */
 
 .border-color--dem {
@@ -126,6 +150,10 @@
 
 .border-color--oth {
   border-color: var(--oth) !important;
+}
+
+.border-color--undeclared {
+  border-color: var(--undeclared) !important;
 }
 
 /* BEFORE-ELEMENT-COLOR ----------------------------------------------------- */
@@ -145,5 +173,11 @@
 .before-color--oth {
   &:before {
     background-color: var(--oth) !important;
+  }
+}
+
+.before-color--undeclared {
+  &:before {
+    background-color: var(--undeclared) !important;
   }
 }
