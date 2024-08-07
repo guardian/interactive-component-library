@@ -10,6 +10,8 @@ import {
   Text,
 } from "."
 import { feature, merge } from "topojson-client"
+import states10mTopo from "./sample-data/states-10m.json"
+import statesAlbers10mTopo from "./sample-data/states-albers-10m.json"
 import westminsterConstituenciesTopo from "./sample-data/uk-westminster-simplified.json"
 import ukCitiesGeo from "./sample-data/uk-cities.json"
 import { VectorLayer } from "./lib/layers/VectorLayer"
@@ -22,12 +24,109 @@ const meta = {
     viewport: {
       defaultViewport: "reset",
     },
+    layout: "fullscreen",
   },
+  decorators: [
+    (Story) => {
+      return (
+        <div style={{ height: "100vh", backgroundColor: "#f6f6f6" }}>
+          <Story />
+        </div>
+      )
+    },
+  ],
 }
 
 export default meta
 
-export const Default = {
+export const USMap = {
+  args: {
+    config: {
+      view: {
+        projection: Projection.geoAlbersUS,
+        extent: [
+          [-118.48492172282955, 18.385813300223205],
+          [-65.502406, 50.164814],
+        ],
+        minZoom: 1,
+        maxZoom: 17,
+        padding: { top: 20, right: 20, bottom: 20, left: 20 },
+      },
+    },
+  },
+  render: (args) => {
+    const strokeStyle = new Style({
+      stroke: new Stroke({
+        color: "#999",
+        width: 1,
+      }),
+    })
+    const states = feature(states10mTopo, states10mTopo.objects["states"])
+    const statesSource = new VectorSource({
+      features: new GeoJSON().readFeaturesFromObject(states),
+    })
+
+    const statesLayer = new VectorLayer({
+      source: statesSource,
+      style: strokeStyle,
+    })
+
+    return (
+      <Map {...args}>
+        {{
+          layers: [statesLayer],
+        }}
+      </Map>
+    )
+  },
+}
+
+export const USPreprojected = {
+  args: {
+    config: {
+      view: {
+        projection: Projection.geoIdentity,
+        extent: [
+          [0, 0],
+          [975, 610],
+        ],
+        minZoom: 1,
+        maxZoom: 17,
+        padding: { top: 20, right: 20, bottom: 20, left: 20 },
+      },
+    },
+  },
+  render: (args) => {
+    const strokeStyle = new Style({
+      stroke: new Stroke({
+        color: "#999",
+        width: 1,
+      }),
+    })
+    const states = feature(
+      statesAlbers10mTopo,
+      statesAlbers10mTopo.objects["states"],
+    )
+    const statesSource = new VectorSource({
+      features: new GeoJSON().readFeaturesFromObject(states),
+    })
+
+    const statesLayer = new VectorLayer({
+      source: statesSource,
+      style: strokeStyle,
+    })
+
+    return (
+      <Map {...args}>
+        {{
+          layers: [statesLayer],
+        }}
+      </Map>
+    )
+  },
+}
+
+export const UKMap = {
   args: {
     config: {
       view: {
