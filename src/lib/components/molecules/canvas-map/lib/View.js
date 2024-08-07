@@ -3,9 +3,16 @@ import { bboxFeature } from "./util/bboxFeature"
 import { ZoomTransform, zoomIdentity } from "d3-zoom"
 import { zoomLevelToZoomScale, zoomLevelForResolution } from "./util/zoomLevel"
 import { resolutionForExtent } from "./util/resolution"
+import { Projection } from "./projection"
 
 export class View {
-  constructor({ projection, extent, minZoom, maxZoom, padding }) {
+  constructor({
+    projection = Projection.geoIdentity,
+    extent,
+    minZoom,
+    maxZoom,
+    padding,
+  }) {
     projection.revision = 0
     this.projection = projection
     // extent in projection coordinates
@@ -23,9 +30,10 @@ export class View {
     this._viewPortSize = size
 
     if (previousSize !== size) {
-      this.fitObject(bboxFeature(this.extent))
-      const initialExtent = this.getVisibleExtent(zoomIdentity, this.projection)
-      this.initialResolution = resolutionForExtent(initialExtent, size)
+      if (this.extent) {
+        // fit projection to extent
+        this.fitObject(bboxFeature(this.extent))
+      }
     }
   }
 
@@ -60,9 +68,15 @@ export class View {
     return scalePadding(scaledPadding, this.pixelRatio)
   }
 
+  get baseResolution() {
+    const baseExtent = this.getVisibleExtent(zoomIdentity, this.projection)
+    const baseResolution = resolutionForExtent(baseExtent, this.viewPortSize)
+    return baseResolution
+  }
+
   // calculates the upper and lower zoom scales
   get scaleExtent() {
-    const maxScale = zoomLevelToZoomScale(this.maxZoom, this.initialResolution)
+    const maxScale = zoomLevelToZoomScale(this.maxZoom, this.baseResolution)
     return [1, maxScale]
   }
 
@@ -152,6 +166,11 @@ export class View {
 
   // visible extent in map coordinates
   getVisibleExtent(transform, projection) {
+    if (this.projection === Projection.geoIdentity) {
+      const [width, height] = this.mapSize
+      return [0, 0, width, height]
+    }
+
     const [width, height] = this.mapSize
     const southWest = projection.invert(transform.invert([0, height]))
     const northEast = projection.invert(transform.invert([width, 0]))
