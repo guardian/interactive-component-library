@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect } from "preact/hooks"
 import { toChildArray } from "preact"
 
 import * as MapLayers from "../layers"
