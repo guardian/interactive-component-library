@@ -1,0 +1,78 @@
+import { Meta, Canvas, Controls, DocsContainer, Source } from '@storybook/blocks'
+import { Hint } from '$storybook/blocks/Hint.jsx'
+import * as MapStories from '../map.stories'
+
+<Meta title="Molecules/CanvasMap/docs/Using preprojected geography" name="Using preprojected geography" parameters={{
+    docs: {
+      container: ({ children, context }) => (
+        <DocsContainer context={context}>
+          <div style={{ border: '5px solid red' }}>{children}</div>
+        </DocsContainer>
+      ),
+    },
+  }} />
+
+# How to create a map with preprojected geography
+
+To create a map with preprojected geography, we need some preprojected TopoJSON or GeoJSON. For this example, we'll use [states-albers-10m.json](https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json) from this [TopoJSON U.S. atlas](https://github.com/topojson/us-atlas).
+
+The most basic configuration looks like this:
+
+<Source dark={true} code={`
+const config = {
+  view: {
+    projection: Projection.geoIdentity, // optional
+    extent: [
+      [0, 0],
+      [975, 610],
+    ],
+  },
+}
+`} />
+
+The determine the extent you need to know the size of the viewport the geography is configured for, in this case it's a `975x610` viewport. You can find this information in the README for [TopoJSON U.S. atlas](https://github.com/topojson/us-atlas).
+
+<Hint text="Notice that setting the projection is optional, because the default projection is `Projection.geoIdentity`" />
+
+To draw the map, we need to load the TopoJSON and instantiate the Map component with the configuration we just defined.
+
+<Source dark={true} code={`
+import { feature } from "topojson-client"
+import statesAlbers10mTopo from "path-to-geodata/states-albers-10m.json"
+
+export default function USMap() {
+
+  const config = // ...config shown above
+
+  const strokeStyle = new Style({
+    stroke: new Stroke({
+      color: "#999",
+      width: 1,
+    }),
+  })
+  const states = feature(
+    statesAlbers10mTopo,
+    statesAlbers10mTopo.objects["states"],
+  )
+  const statesSource = new VectorSource({
+    features: new GeoJSON().readFeaturesFromObject(states),
+  })
+
+  const statesLayer = new VectorLayer({
+    source: statesSource,
+    style: strokeStyle,
+  })
+
+ return (
+    <Map config={config}>
+      {{
+        layers: [statesLayer],
+      }}
+    </Map>
+  )
+}
+`} />
+
+And voilà...
+
+<Canvas of={MapStories.USPreprojected} />
