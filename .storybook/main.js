@@ -12,12 +12,8 @@ const config = {
   ],
   staticDirs: ["./assets"],
   addons: [
-    "@storybook/addon-controls",
+    "@storybook/addon-essentials",
     "@storybook/addon-links",
-    "@storybook/addon-measure",
-    "@storybook/addon-viewport",
-    "@storybook/addon-docs",
-    "@storybook/addon-actions",
     "@storybook/addon-interactions",
     "storybook-dark-mode",
     {
