@@ -9,9 +9,9 @@ export class View {
   constructor({
     projection = Projection.geoIdentity,
     extent,
-    minZoom,
-    maxZoom,
-    padding,
+    minZoom = 1,
+    maxZoom = 10,
+    padding = { top: 0, right: 0, bottom: 0, left: 0 },
   }) {
     projection.revision = 0
     this.projection = projection
