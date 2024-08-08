@@ -10,6 +10,11 @@ const themeDefaults = {
 
 const preview = {
   parameters: {
+    backgrounds: {
+      // Background colours are disabled, because we only want
+      // the grid functionality from @storybook/addon-backgrounds
+      disable: true,
+    },
     darkMode: {
       stylePreview: true,
       dark: {
