@@ -35,6 +35,14 @@
 /// DOCS STYLING ///
 
 .sbdocs {
+  p,
+  ol,
+  ul,
+  li {
+    font-size: var(--body-medium);
+    line-height: var(--body-line-height);
+  }
+
   ol {
     list-style-type: decimal;
   }
@@ -47,10 +55,12 @@
     margin: 8px 0;
   }
 
-  pre {
+  pre,
+  code {
     font-family: ui-monospace, Menlo, Monaco, "Roboto Mono", "Oxygen Mono",
       "Ubuntu Monospace", "Source Code Pro", "Droid Sans Mono", "Courier New",
       monospace;
+    font-size: var(--sans-small);
   }
 
   .token.function {
