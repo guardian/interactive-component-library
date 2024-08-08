@@ -21,7 +21,8 @@
     "./dist/style.css": "./dist/style.css"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=18",
+    "pnpm": "^8.4.0"
   },
   "scripts": {
     "dev": "storybook dev -p 6006",
