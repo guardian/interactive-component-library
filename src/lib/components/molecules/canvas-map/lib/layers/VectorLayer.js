@@ -3,13 +3,48 @@ import { Style, Stroke } from "../styles"
 import { combineExtents } from "../util/extent"
 import { Dispatcher, MapEvent } from "../events"
 import { VectorSource } from "../sources/VectorSource"
+import { useEffect, useContext } from "preact/hooks"
+import { MapContext } from "$molecules/canvas-map/context/MapContext"
+
+/** @typedef {Omit<ConstructorParameters<typeof VectorLayer>[0], "source">} VectorLayerOptions */
+/** @typedef {VectorLayerOptions & { features: import("../Feature").Feature[] }} VectorLayerComponentProps */
 
 export class VectorLayer {
+  /** @param {VectorLayerComponentProps} props */
+  static Component({ features, ...options }) {
+    const { map } = useContext(MapContext)
+
+    useEffect(() => {
+      if (!map) return
+
+      const controller = VectorLayer.with(features, options)
+      map.addLayer(controller)
+
+      return () => {
+        map.removeLayer(controller)
+      }
+    }, [map, features, options])
+
+    return null
+  }
+
+  /**
+   * @param {import("../Feature").Feature[]} features
+   * @param {VectorLayerOptions} options
+   */
   static with(features, options) {
     const source = new VectorSource({ features })
     return new VectorLayer({ source, ...options })
   }
 
+  /**
+   * @param {Object} params
+   * @param {VectorSource} params.source
+   * @param {Style} [params.style=undefined]
+   * @param {number} [params.minZoom=0]
+   * @param {number} [params.opacity=1]
+   * @param {boolean} [params.hitDetectionEnabled=false]
+   */
   constructor({
     source,
     style,

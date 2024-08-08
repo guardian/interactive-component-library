@@ -4,13 +4,47 @@ import { Dispatcher } from "../events/Dispatcher"
 import { combineExtents } from "../util/extent"
 import { MapEvent } from "../events"
 import { VectorSource } from "../sources/VectorSource"
+import { MapContext } from "$molecules/canvas-map/context/MapContext"
+import { useEffect, useContext } from "preact/hooks"
+
+/** @typedef {Omit<ConstructorParameters<typeof TextLayer>[0], "source">} TextLayerOptions */
+/** @typedef {TextLayerOptions & { features: import("../Feature").Feature[]}} TextLayerComponentProps */
 
 export class TextLayer {
+  /** @param {TextLayerComponentProps} props */
+  static Component({ features, ...options }) {
+    const { map } = useContext(MapContext)
+
+    useEffect(() => {
+      if (!map) return
+
+      const model = TextLayer.with(features, options)
+      map.addLayer(model)
+
+      return () => {
+        map.removeLayer(model)
+      }
+    })
+  }
+
+  /**
+   * @param {import("../Feature").Feature[]} features
+   * @param {TextLayerOptions} options
+   */
   static with(features, options) {
     const source = new VectorSource({ features })
     return new TextLayer({ source, ...options })
   }
 
+  /**
+   * @param {Object} params
+   * @param {VectorSource} params.source
+   * @param {Style} [params.style=undefined]
+   * @param {number} [params.minZoom=0]
+   * @param {number} [params.opacity=1]
+   * @param {boolean} [params.declutter=true]
+   * @param {boolean} [params.drawCollisionBoxes=false]
+   */
   constructor({
     source,
     style,

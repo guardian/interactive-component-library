@@ -3,16 +3,26 @@ import { forwardRef } from "preact/compat"
 import { Map as _Map } from "./lib/Map"
 import { View } from "./lib/View"
 import styles from "./style.module.scss"
+import { MapProvider } from "./context/MapContext"
 
 const mobileHelpText = "Use two fingers to zoom"
 
-export const Map = forwardRef(
-  ({ config, inModalState = false, onLoad, children }, ref) => {
-    const { layers } = children
+/** @typedef {{
+ *    config: Object,
+ *    inModalState?: boolean,
+ *    onLoad?: (map: _Map) => void,
+ *    children: import('preact').ComponentChildren,
+ * }} MapProps
+ */
 
+export const Map = forwardRef(
+  (
+    /** @type {MapProps} */ { config, inModalState = false, onLoad, children },
+    ref,
+  ) => {
     const targetRef = useRef()
 
-    const [map, setMap] = useState()
+    const [map, setMap] = useState(/** @type {_Map | null} */ (null))
     const [zoomHelpText, setZoomHelpText] = useState("")
     const [showHelpText, setShowHelpText] = useState(false)
 
@@ -21,6 +31,7 @@ export const Map = forwardRef(
         view: new View(config.view),
         target: targetRef.current,
       })
+
       map.collaborativeGesturesEnabled = true
       setMap(map)
 
@@ -82,31 +93,28 @@ export const Map = forwardRef(
     }, [map, ref, onLoad])
 
     useEffect(() => {
-      if (map && layers !== map.layers) {
-        map.setLayers(layers)
-      }
-    }, [map, layers])
-
-    useEffect(() => {
       if (!map) return
       map.collaborativeGesturesEnabled = !inModalState
     }, [map, inModalState])
 
     return (
-      <figure ref={targetRef} className={styles.mapContainer}>
-        <div
-          className={styles.helpTextContainer}
-          style={{ opacity: showHelpText ? 1 : 0 }}
-          aria-hidden
-        >
-          <p className={[styles.helpText, styles.desktopHelpText].join(" ")}>
-            {zoomHelpText}
-          </p>
-          <p className={[styles.helpText, styles.mobileHelpText].join(" ")}>
-            {mobileHelpText}
-          </p>
-        </div>
-      </figure>
+      <MapProvider map={map}>
+        <figure ref={targetRef} className={styles.mapContainer}>
+          <div
+            className={styles.helpTextContainer}
+            style={{ opacity: showHelpText ? 1 : 0 }}
+            aria-hidden
+          >
+            <p className={[styles.helpText, styles.desktopHelpText].join(" ")}>
+              {zoomHelpText}
+            </p>
+            <p className={[styles.helpText, styles.mobileHelpText].join(" ")}>
+              {mobileHelpText}
+            </p>
+          </div>
+          {children}
+        </figure>
+      </MapProvider>
     )
   },
 )
