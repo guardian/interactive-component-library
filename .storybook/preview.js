@@ -84,7 +84,7 @@ const preview = {
           name: "Left Column",
           styles: {
             width: "1140px",
-            height: "680px",
+            height: "800px",
           },
         },
         wide: {
