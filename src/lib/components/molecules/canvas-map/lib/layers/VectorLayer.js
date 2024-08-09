@@ -3,27 +3,40 @@ import { Style, Stroke } from "../styles"
 import { combineExtents } from "../util/extent"
 import { Dispatcher, MapEvent } from "../events"
 import { VectorSource } from "../sources/VectorSource"
-import { useEffect, useContext } from "preact/hooks"
-import { MapContext } from "$molecules/canvas-map/context/MapContext"
+import { useEffect, useContext, useMemo } from "preact/hooks"
+import { MapContext } from "../../context/MapContext"
 
 /** @typedef {Omit<ConstructorParameters<typeof VectorLayer>[0], "source">} VectorLayerOptions */
-/** @typedef {VectorLayerOptions & { features: import("../Feature").Feature[] }} VectorLayerComponentProps */
+/** @typedef {VectorLayerOptions & { features: import("../Feature").Feature[], name: string }} VectorLayerComponentProps */
 
 export class VectorLayer {
   /** @param {VectorLayerComponentProps} props */
-  static Component({ features, ...options }) {
-    const { map } = useContext(MapContext)
+  static Component({ features, style, minZoom, opacity, hitDetectionEnabled }) {
+    const { registerLayer } = useContext(MapContext)
+
+    // We recreate layer whenever these properties change, which cannot be changed on the fly
+    // and require recreation
+    const layer = useMemo(
+      () =>
+        VectorLayer.with(features, {
+          style,
+          minZoom,
+          opacity,
+          hitDetectionEnabled,
+        }),
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [features, minZoom, opacity, hitDetectionEnabled],
+    )
+
+    // Register layer with map context. If `layer` is not present in map, it will be added.
+    registerLayer(layer)
 
     useEffect(() => {
-      if (!map) return
-
-      const controller = VectorLayer.with(features, options)
-      map.addLayer(controller)
-
-      return () => {
-        map.removeLayer(controller)
-      }
-    }, [map, features, options])
+      // If the style prop changes, just update the layer, style can be changed without creating a
+      // new layer
+      layer.style = style
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [style])
 
     return null
   }
@@ -40,7 +53,7 @@ export class VectorLayer {
   /**
    * @param {Object} params
    * @param {VectorSource} params.source
-   * @param {Style} [params.style=undefined]
+   * @param {Style | (() => Style)} [params.style=undefined]
    * @param {number} [params.minZoom=0]
    * @param {number} [params.opacity=1]
    * @param {boolean} [params.hitDetectionEnabled=false]
