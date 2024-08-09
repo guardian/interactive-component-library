@@ -1,3 +1,7 @@
+/**
+ * TODO: is this meant to be a subset of the style attr?
+ * @type {import("preact/compat").CSSProperties}
+ */
 export class Style {
   constructor(options) {
     this.stroke = options?.stroke
