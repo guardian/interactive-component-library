@@ -98,23 +98,21 @@ export const Map = forwardRef(
     }, [map, inModalState])
 
     return (
-      <MapProvider map={map}>
-        <figure ref={targetRef} className={styles.mapContainer}>
-          <div
-            className={styles.helpTextContainer}
-            style={{ opacity: showHelpText ? 1 : 0 }}
-            aria-hidden
-          >
-            <p className={[styles.helpText, styles.desktopHelpText].join(" ")}>
-              {zoomHelpText}
-            </p>
-            <p className={[styles.helpText, styles.mobileHelpText].join(" ")}>
-              {mobileHelpText}
-            </p>
-          </div>
-          {children}
-        </figure>
-      </MapProvider>
+      <figure ref={targetRef} className={styles.mapContainer}>
+        <div
+          className={styles.helpTextContainer}
+          style={{ opacity: showHelpText ? 1 : 0 }}
+          aria-hidden
+        >
+          <p className={[styles.helpText, styles.desktopHelpText].join(" ")}>
+            {zoomHelpText}
+          </p>
+          <p className={[styles.helpText, styles.mobileHelpText].join(" ")}>
+            {mobileHelpText}
+          </p>
+        </div>
+        <MapProvider map={map}>{children}</MapProvider>
+      </figure>
     )
   },
 )

@@ -182,6 +182,21 @@ export class Map {
       .call(this._zoomBehaviour.transform, newTransform, focalPoint)
   }
 
+  /** @param {import("./layers").Layer[]} layers */
+  hasLayers(layers) {
+    if (layers.length !== this.layers.length) {
+      return false
+    }
+
+    for (let i = 0; i < layers.length; i++) {
+      if (layers[i] !== this.layers[i]) {
+        return false
+      }
+    }
+
+    return true
+  }
+
   async resetZoom(options) {
     return this.zoomTo(1, options)
   }
