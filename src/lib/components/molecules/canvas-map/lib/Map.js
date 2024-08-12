@@ -1,3 +1,4 @@
+import { View } from "./View"
 import { sizeForElement } from "./util/size"
 import { arrayEquals } from "./util/array"
 import { containsCoordinate } from "./util/extent"
@@ -8,11 +9,26 @@ import { timer } from "d3-timer"
 import { MapEvent, Dispatcher } from "./events"
 import "d3-transition"
 
+/**
+ * Map component that renders into a canvas
+ * It has built-in support for zooming and panning, as well as support for vector layers
+ * @constructor
+ * @param {Object} config - The configuration for the map.
+ * @param {Object} config.view - The view configuration for the map.
+ * @param {boolean} config.debug - Whether to enable debug mode or not.
+ * @param {HTMLElement} config.target - The target element to render the map into.
+ */
 export class Map {
-  constructor(options) {
-    this.options = options
-    this.view = options.view
-    this.target = options.target
+  constructor(config) {
+    if (config.debug) {
+      // eslint-disable-next-line no-console
+      console.log("Map config", config)
+    }
+
+    this.options = config
+    this.view = new View(config.view, config.debug)
+
+    this.target = config.target
     this.layers = []
 
     // Create event dispatcher
@@ -23,8 +39,6 @@ export class Map {
     this._viewport.className = "gv-map"
     this._viewport.style.position = "relative"
     this._viewport.style.overflow = "hidden"
-    this._viewport.style.top = 0
-    this._viewport.style.left = 0
     this._viewport.style.width = "100%"
     this._viewport.style.height = "100%"
     this.target.appendChild(this._viewport)
@@ -41,7 +55,10 @@ export class Map {
 
     // Show help text when single touch moved
     this._viewport.addEventListener("touchmove", (event) => {
-      if (event.targetTouches.length < 2 && this.collaborativeGesturesEnabled) {
+      if (
+        event.targetTouches.length < 2 &&
+        this._collaborativeGesturesEnabled
+      ) {
         this._filterEventCallback(true)
       }
     })
@@ -71,6 +88,11 @@ export class Map {
   }
 
   /** PUBLIC METHODS */
+
+  collaborativeGesturesEnabled(enabled) {
+    if (enabled === undefined) return this._collaborativeGesturesEnabled
+    this._collaborativeGesturesEnabled = enabled
+  }
 
   onFilterEvent(callback) {
     this._filterEventCallback = callback
@@ -334,6 +356,7 @@ export class Map {
     const frameState = {
       size: this.size,
       viewState: this.view.getState(),
+      debug: this.options.debug || false,
     }
 
     this._renderer.renderFrame(frameState)

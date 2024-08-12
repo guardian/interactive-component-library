@@ -4,7 +4,7 @@ import { geoAlbersUk } from "d3-composite-projections"
 export const Projection = {
   geoIdentity: geoIdentity(),
   geoMercator: geoMercator(),
-  geoAlbersUS: geoAlbersUsa().scale(1300).translate([487.5, 305]),
+  geoAlbersUS: geoAlbersUsa().scale(1070).translate([487.5, 305]),
   geoAlbersUKComposite: geoAlbersUk(),
   geoAlbersEngland: geoAlbers()
     .center([0, 52.7])

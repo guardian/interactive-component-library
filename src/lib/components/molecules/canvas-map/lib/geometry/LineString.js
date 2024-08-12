@@ -1,12 +1,8 @@
-import { memoise } from "../util/memoise"
+import { Geometry } from "./Geometry"
 
-export class LineString {
+export class LineString extends Geometry {
   constructor({ type = "LineString", extent, coordinates }) {
-    this.type = type
-    this.extent = extent
-    this.coordinates = coordinates
-
-    this.getProjected = memoise(this._getProjected).bind(this)
+    super({ type, extent, coordinates })
   }
 
   _getProjected(projection) {

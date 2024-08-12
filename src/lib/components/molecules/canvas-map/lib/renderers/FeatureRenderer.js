@@ -1,4 +1,5 @@
 import { geoPath } from "d3-geo"
+import { generateDebugUrl, validateGeometries } from "../util/debug"
 
 export class FeatureRenderer {
   constructor() {
@@ -22,6 +23,16 @@ export class FeatureRenderer {
     context.beginPath()
 
     const geometries = feature.getProjectedGeometries(projection)
+    if (frameState.debug) {
+      try {
+        validateGeometries(geometries)
+      } catch {
+        console.error(
+          `Invalid geometry. Feature skipped during rendering. Click here to inspect geometry: ${generateDebugUrl(feature)} \n`,
+          feature,
+        )
+      }
+    }
     for (const geometry of geometries) {
       this.drawingFunction(geometry)
     }
