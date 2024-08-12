@@ -59,10 +59,14 @@ export const USMap = {
     config: {
       debug: true,
       view: {
+        extent: [
+          [-171.79, 18.92],
+          [-66.96, 71.36],
+        ],
         projection: Projection.geoAlbersUS,
         minZoom: 1,
         maxZoom: 17,
-        padding: { top: 20, right: 20, bottom: 20, left: 20 },
+        padding: { top: 20, right: 0, bottom: 20, left: 0 },
       },
     },
   },
@@ -74,10 +78,14 @@ export const USMap = {
       }),
     })
     const states = feature(states10mTopo, states10mTopo.objects["states"])
+    const filteredFeatures = ["Puerto Rico", "United States Virgin Islands"]
+
     const statesSource = new VectorSource({
       features: new GeoJSON().readFeaturesFromObject(
         // @ts-ignore
-        states.features.filter((d) => d.properties.name !== "Puerto Rico"),
+        states.features.filter(
+          (d) => !filteredFeatures.includes(d.properties.name),
+        ),
       ),
     })
 
@@ -105,7 +113,6 @@ export const USPreprojected = {
           [975, 610],
         ],
         padding: { top: 20, right: 20, bottom: 20, left: 20 },
-        // padding: { top: 20, right: 100, bottom: 100, left: 60 },
       },
     },
   },

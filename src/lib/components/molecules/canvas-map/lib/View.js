@@ -29,6 +29,7 @@ export class View {
     debug = false,
   ) {
     this.debug = debug
+    // @ts-ignore
     projection.revision = 0
     this.projection = projection
     // extent in projection coordinates
@@ -112,13 +113,14 @@ export class View {
 
     if (this.debug) {
       // eslint-disable-next-line no-console
-      console.log("Fit extent", generateDebugUrl(extentFeature))
+      console.log("Fit extent", extent, generateDebugUrl(extentFeature, false))
     }
   }
 
   fitObject(geoJSON) {
     this.projection.fitExtent(this.getMapExtent(), geoJSON)
 
+    // @ts-ignore
     ++this.projection.revision
   }
 
@@ -142,6 +144,7 @@ export class View {
     const { projection, pixelRatio, transform } = this.getState()
 
     // scale for device pixel ratio
+    /** @type {[number, number]} */
     const scaledPoint = [point[0] * pixelRatio, point[1] * pixelRatio]
 
     // invert zoom transformation
@@ -176,7 +179,13 @@ export class View {
     return zoomLevelForResolution(this.getResolution())
   }
 
-  // get extent for drawn map
+  //
+  /**
+   * Function that returns the extent of the view in screen coordinates
+   * The extent is defined as [[minX, minY], [maxX, maxY]]
+   * @function getMapExtent
+   * @returns {[[number, number], [number, number]]}
+   */
   getMapExtent() {
     const mapSizeInPixels = this.mapSize
     const paddingInPixels = this.scaledPadding
