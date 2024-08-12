@@ -7,8 +7,14 @@ export function hasArea(size) {
 
 /**
  * Calculate size minus padding
+ *
+ * @function sizeMinusPadding
+ * @param {[number, number]} size
+ * @param {{top: number, right: number, bottom: number, left: number}} padding
+ * @returns {[number, number]} size after subtracting padding
  */
 export function sizeMinusPadding(size, padding) {
+  /** @type {[number, number]} */
   let newSize = [...size]
   if (padding) {
     newSize = [
