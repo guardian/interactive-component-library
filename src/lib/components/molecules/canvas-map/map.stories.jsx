@@ -76,6 +76,7 @@ export const USMap = {
     const states = feature(states10mTopo, states10mTopo.objects["states"])
     const statesSource = new VectorSource({
       features: new GeoJSON().readFeaturesFromObject(
+        // @ts-ignore
         states.features.filter((d) => d.properties.name !== "Puerto Rico"),
       ),
     })

@@ -3,7 +3,10 @@
   "include": ["*.js", "./src/**/*", "./.storybook/**/*"],
   "exclude": ["node_modules"],
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
+      "react": ["node_modules/preact/compat"],
+      "react-dom": ["node_modules/preact/compat"],
       "$particles": ["./src/lib/components/particles"],
       "$particles/*": ["./src/lib/components/particles/*"],
       "$molecules": ["./src/lib/components/molecules"],
@@ -12,13 +15,15 @@
       "$styles/*": ["./src/lib/styles/*"],
       "$storybook/*": ["./.storybook/*"]
     },
-    "module": "es2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "target": "ESNext",
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
     "skipLibCheck": true,
     "checkJs": true,
-    "moduleResolution": "Bundler"
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
   }
 }
