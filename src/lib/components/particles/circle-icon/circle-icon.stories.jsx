@@ -8,6 +8,7 @@ export default {
 export const Default = {
   args: {
     color: "var(--news-core-03)",
+    diameter: 20,
   },
 }
 
