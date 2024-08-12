@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "preact/hooks"
 import { forwardRef } from "preact/compat"
 import { Map as _Map } from "./lib/Map"
-import { View } from "./lib/View"
 import styles from "./style.module.scss"
 import { MapProvider } from "./context/MapContext"
 
@@ -28,7 +27,7 @@ export const Map = forwardRef(
 
     useEffect(() => {
       const map = new _Map({
-        view: new View(config.view),
+        ...config,
         target: targetRef.current,
       })
 
@@ -53,7 +52,7 @@ export const Map = forwardRef(
         map.destroy()
         setMap(null)
       }
-    }, [config.view])
+    }, [config])
 
     useEffect(() => {
       if (!map) return

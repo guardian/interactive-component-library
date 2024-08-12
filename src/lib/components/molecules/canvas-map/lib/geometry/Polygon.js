@@ -1,24 +1,26 @@
-import { memoise } from "../util/memoise"
+import { Geometry } from "./Geometry"
 
-export class Polygon {
+export class Polygon extends Geometry {
   constructor({ type = "Polygon", extent, coordinates }) {
-    this.type = type
-    this.extent = extent
-    this.coordinates = coordinates
-
-    this.getProjected = memoise(this._getProjected).bind(this)
+    super({ type, extent, coordinates })
   }
 
-  // eslint-disable-next-line no-unused-vars
-  _getProjected(projection, _revision) {
+  _getProjected(projection) {
     const projected = []
     const rings = this.coordinates
     for (const ring of rings) {
       const projectedRing = []
       for (const point of ring) {
-        projectedRing.push(projection(point))
+        const projectedPoint = projection(point)
+        if (projectedPoint) {
+          projectedRing.push(projectedPoint)
+        } else {
+          break
+        }
       }
-      projected.push(projectedRing)
+      if (projectedRing.length > 0) {
+        projected.push(projectedRing)
+      }
     }
 
     return {
@@ -37,13 +39,6 @@ export class Polygon {
 
   setCoordinates(coordinates) {
     this.coordinates = coordinates
-  }
-
-  getGeoJSON() {
-    return {
-      type: this.type,
-      coordinates: this.coordinates,
-    }
   }
 
   clone() {

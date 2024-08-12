@@ -10,7 +10,9 @@ import {
   Text,
 } from "."
 import { feature, merge } from "topojson-client"
+import { AspectRatioBox } from "$particles/aspect-ratio-box"
 import states10mTopo from "./sample-data/states-10m.json"
+import statesElectoralCollegeCartogram from "./sample-data/2024-ecv-hex-cartogram.json"
 import statesAlbers10mTopo from "./sample-data/states-albers-10m.json"
 import westminsterConstituenciesTopo from "./sample-data/uk-westminster-simplified.json"
 import ukCitiesGeo from "./sample-data/uk-cities.json"
@@ -22,15 +24,28 @@ const meta = {
   component: Map,
   parameters: {
     viewport: {
-      defaultViewport: "reset",
+      defaultViewport: "desktop",
     },
     layout: "fullscreen",
+    aspectRatio: 0.68,
   },
   decorators: [
-    (Story) => {
+    (Story, { parameters }) => {
       return (
-        <div style={{ height: "100vh", backgroundColor: "#f6f6f6" }}>
-          <Story />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "stretch",
+            height: "100vh",
+          }}
+        >
+          <div style={{ border: "1px solid #CCC", margin: "0 1rem" }}>
+            <AspectRatioBox heightAsProportionOfWidth={parameters.aspectRatio}>
+              <Story />
+            </AspectRatioBox>
+          </div>
         </div>
       )
     },
@@ -42,12 +57,9 @@ export default meta
 export const USMap = {
   args: {
     config: {
+      debug: true,
       view: {
         projection: Projection.geoAlbersUS,
-        extent: [
-          [-118.48492172282955, 18.385813300223205],
-          [-65.502406, 50.164814],
-        ],
         minZoom: 1,
         maxZoom: 17,
         padding: { top: 20, right: 20, bottom: 20, left: 20 },
@@ -63,7 +75,9 @@ export const USMap = {
     })
     const states = feature(states10mTopo, states10mTopo.objects["states"])
     const statesSource = new VectorSource({
-      features: new GeoJSON().readFeaturesFromObject(states),
+      features: new GeoJSON().readFeaturesFromObject(
+        states.features.filter((d) => d.properties.name !== "Puerto Rico"),
+      ),
     })
 
     const statesLayer = new VectorLayer({
@@ -85,14 +99,12 @@ export const USPreprojected = {
   args: {
     config: {
       view: {
-        projection: Projection.geoIdentity,
         extent: [
           [0, 0],
           [975, 610],
         ],
-        minZoom: 1,
-        maxZoom: 17,
         padding: { top: 20, right: 20, bottom: 20, left: 20 },
+        // padding: { top: 20, right: 100, bottom: 100, left: 60 },
       },
     },
   },
@@ -120,6 +132,47 @@ export const USPreprojected = {
       <Map {...args}>
         {{
           layers: [statesLayer],
+        }}
+      </Map>
+    )
+  },
+}
+
+export const USElectoralCartogram = {
+  args: {
+    config: {
+      view: {
+        extent: [
+          [0, 0],
+          [637, 610],
+        ],
+        padding: { top: 20, right: 20, bottom: 20, left: 20 },
+      },
+    },
+  },
+  render: (args) => {
+    const strokeStyle = new Style({
+      stroke: new Stroke({
+        color: "#999",
+        width: 1,
+      }),
+    })
+
+    const cartogramSource = new VectorSource({
+      features: new GeoJSON().readFeaturesFromObject(
+        statesElectoralCollegeCartogram,
+      ),
+    })
+
+    const cartogramLayer = new VectorLayer({
+      source: cartogramSource,
+      style: strokeStyle,
+    })
+
+    return (
+      <Map {...args}>
+        {{
+          layers: [cartogramLayer],
         }}
       </Map>
     )

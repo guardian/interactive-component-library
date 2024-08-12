@@ -98,7 +98,7 @@ export function interpolateFeatures(
             break
         }
       }
-      feature.setGeometries(geometries)
+      feature.setGeometry(geometries)
       features.push(feature)
     }
     return features

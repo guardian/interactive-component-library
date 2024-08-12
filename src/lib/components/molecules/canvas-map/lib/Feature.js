@@ -2,7 +2,24 @@ import { createUid } from "./util/uid"
 import { combineExtents, containsCoordinate } from "./util/extent"
 import { geoContains } from "d3-geo"
 
+/**
+ * Class representing a map Feature.
+ * @class
+ * @property {string} id - The unique identifier of the feature
+ * @property {Array} geometries - The geometries of the feature
+ * @property {Object} properties - The properties of the feature
+ * @property {Style} style - The style of the feature
+ */
 export class Feature {
+  /**
+   * Represents a feature on the map
+   * @constructor
+   * @param {Object} props - The properties for the feature.
+   * @property {string} id - The unique identifier of the feature
+   * @property {Array} geometries - The geometries of the feature
+   * @property {Object} properties - The properties of the feature
+   * @property {import("./styles").Style | import("./styles").StyleFunction} style - The style of the feature
+   */
   constructor({ id, geometries, properties, style }) {
     this.id = id
     this.geometries = geometries
@@ -16,15 +33,15 @@ export class Feature {
   getExtent() {
     if (this._extent) return this._extent
 
-    const extent = this.geometries.reduce((combinedExtent, geometry) => {
-      if (!combinedExtent) return geometry.extent
-      return combineExtents(geometry.extent, combinedExtent)
+    const extent = this.geometries.reduce((combinedExtent, geometries) => {
+      if (!combinedExtent) return geometries.extent
+      return combineExtents(geometries.extent, combinedExtent)
     }, null)
     this._extent = extent
     return extent
   }
 
-  setGeometries(geometries) {
+  setgeometries(geometries) {
     this.geometries = geometries
     this._extent = undefined
   }
@@ -49,8 +66,8 @@ export class Feature {
       return false
     }
 
-    for (const geometry of this.geometries) {
-      if (geoContains(geometry.getGeoJSON(), coordinate)) {
+    for (const geometries of this.geometries) {
+      if (geoContains(geometries.getGeoJSON(), coordinate)) {
         return true
       }
     }
@@ -65,5 +82,45 @@ export class Feature {
       properties: this.properties,
       style: this.style,
     })
+  }
+
+  /**
+   * Returns the geometries as a GeoJSON object
+   * @returns {Object} The GeoJSON representation of the geometries
+   */
+  getGeoJSON() {
+    const geometries = this.geometries.map((d) => d.getGeoJSON())
+    if (geometries.length === 1) return geometries[0]
+
+    return {
+      type: "Feature",
+      geometry: this._getGeometryGeoJSON(),
+      properties: this.properties,
+    }
+  }
+
+  _getGeometryGeoJSON() {
+    const geometries = this.geometries.map((d) => d.getGeoJSON())
+    if (geometries.length === 0) throw new Error("Feature has no geometries")
+    if (geometries.length === 1) return geometries[0]
+
+    if (geometries[0].type === "Polygon") {
+      return {
+        type: "MultiPolygon",
+        coordinates: geometries.map((d) => d.coordinates),
+      }
+    } else if (geometries[0].type === "LineString") {
+      return {
+        type: "MultiLineString",
+        coordinates: geometries.map((d) => d.coordinates),
+      }
+    } else if (geometries[0].type === "Point") {
+      return {
+        type: "MultiPoint",
+        coordinates: geometries.map((d) => d.coordinates),
+      }
+    }
+
+    throw new Error("Could not determine geometry type")
   }
 }

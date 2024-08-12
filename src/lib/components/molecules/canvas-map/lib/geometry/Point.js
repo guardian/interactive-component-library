@@ -1,12 +1,8 @@
-import { memoise } from "../util/memoise"
+import { Geometry } from "./Geometry"
 
-export class Point {
-  constructor({ type = "Point", coordinates }) {
-    this.type = type
-    this.extent = [...coordinates, ...coordinates]
-    this.coordinates = coordinates
-
-    this.getProjected = memoise(this._getProjected).bind(this)
+export class Point extends Geometry {
+  constructor({ type = "Point", extent, coordinates }) {
+    super({ type, extent, coordinates })
   }
 
   _getProjected(projection) {

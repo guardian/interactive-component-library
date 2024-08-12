@@ -4,15 +4,31 @@ import { ZoomTransform, zoomIdentity } from "d3-zoom"
 import { zoomLevelToZoomScale, zoomLevelForResolution } from "./util/zoomLevel"
 import { resolutionForExtent } from "./util/resolution"
 import { Projection } from "./projection"
+import { generateDebugUrl } from "./util/debug"
 
+/**
+ * Represents how the map is viewed.
+ * @constructor
+ * @param {Object} options - The options for the view.
+ * @param {Projection} options.projection - The projection to use for the view.
+ * @param {Array} options.extent - The extent of the view in projection coordinates.
+ * @param {number} options.minZoom - The minimum zoom level for the view.
+ * @param {number} options.maxZoom - The maximum zoom level for the view.
+ * @param {Object} options.padding - The padding for the view in pixels.
+ * @param {boolean} debug - Whether to enable debug mode or not.
+ */
 export class View {
-  constructor({
-    projection = Projection.geoIdentity,
-    extent,
-    minZoom = 1,
-    maxZoom = 10,
-    padding = { top: 0, right: 0, bottom: 0, left: 0 },
-  }) {
+  constructor(
+    {
+      projection = Projection.geoIdentity,
+      extent,
+      minZoom = 1,
+      maxZoom = 10,
+      padding = { top: 0, right: 0, bottom: 0, left: 0 },
+    },
+    debug = false,
+  ) {
+    this.debug = debug
     projection.revision = 0
     this.projection = projection
     // extent in projection coordinates
@@ -32,7 +48,7 @@ export class View {
     if (previousSize !== size) {
       if (this.extent) {
         // fit projection to extent
-        this.fitObject(bboxFeature(this.extent))
+        this.fitExtent(this.extent)
       }
     }
   }
@@ -88,6 +104,16 @@ export class View {
   // only set the raw projection when it has already been configured with projection.fitExtent()
   setRawProjection(projection) {
     this.projection = projection
+  }
+
+  fitExtent(extent) {
+    const extentFeature = bboxFeature(extent)
+    this.fitObject(extentFeature)
+
+    if (this.debug) {
+      // eslint-disable-next-line no-console
+      console.log("Fit extent", generateDebugUrl(extentFeature))
+    }
   }
 
   fitObject(geoJSON) {
