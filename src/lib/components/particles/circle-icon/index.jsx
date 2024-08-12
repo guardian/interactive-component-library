@@ -1,24 +1,24 @@
 import defaultStyles from "./style.module.css"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 
-export const CircleIcon = ({ color, pulse = false, styles }) => {
+export const CircleIcon = ({ color, pulse = false, diameter = 11, styles }) => {
   styles = mergeStyles(defaultStyles, styles)
 
   return (
     <svg
       style={styles.svg}
       fill="none"
-      height="11"
-      viewBox="0 0 11 11"
-      width="11"
+      height={diameter}
+      viewBox={`0 0 ${diameter} ${diameter}`}
+      width={diameter}
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect
+      <circle
         className={[styles.circle, pulse && styles.pulse].join(" ")}
         style={{ fill: color }}
-        height="11"
-        rx="5.5"
-        width="11"
+        r={diameter / 2}
+        cx={diameter / 2}
+        cy={diameter / 2}
       />
     </svg>
   )
