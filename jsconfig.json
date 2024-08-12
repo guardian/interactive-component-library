@@ -19,6 +19,7 @@
     "jsxImportSource": "preact",
     "jsxFactory": "createElement",
     "skipLibCheck": true,
-    "checkJs": true
+    "checkJs": true,
+    "moduleResolution": "Bundler"
   }
 }

@@ -3,16 +3,26 @@ import { forwardRef } from "preact/compat"
 import { Map as _Map } from "./lib/Map"
 import { View } from "./lib/View"
 import styles from "./style.module.scss"
+import { MapProvider } from "./context/MapContext"
 
 const mobileHelpText = "Use two fingers to zoom"
 
-export const Map = forwardRef(
-  ({ config, inModalState = false, onLoad, children }, ref) => {
-    const { layers } = children
+/** @typedef {{
+ *    config: Object,
+ *    inModalState?: boolean,
+ *    onLoad?: (map: _Map) => void,
+ *    children: import('preact').ComponentChildren,
+ * }} MapProps
+ */
 
+export const Map = forwardRef(
+  (
+    /** @type {MapProps} */ { config, inModalState = false, onLoad, children },
+    ref,
+  ) => {
     const targetRef = useRef()
 
-    const [map, setMap] = useState()
+    const [map, setMap] = useState(/** @type {_Map | null} */ (null))
     const [zoomHelpText, setZoomHelpText] = useState("")
     const [showHelpText, setShowHelpText] = useState(false)
 
@@ -21,6 +31,7 @@ export const Map = forwardRef(
         view: new View(config.view),
         target: targetRef.current,
       })
+
       map.collaborativeGesturesEnabled = true
       setMap(map)
 
@@ -82,12 +93,6 @@ export const Map = forwardRef(
     }, [map, ref, onLoad])
 
     useEffect(() => {
-      if (map && layers !== map.layers) {
-        map.setLayers(layers)
-      }
-    }, [map, layers])
-
-    useEffect(() => {
       if (!map) return
       map.collaborativeGesturesEnabled = !inModalState
     }, [map, inModalState])
@@ -106,6 +111,7 @@ export const Map = forwardRef(
             {mobileHelpText}
           </p>
         </div>
+        <MapProvider map={map}>{children}</MapProvider>
       </figure>
     )
   },

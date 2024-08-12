@@ -1,16 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Map,
   Projection,
   GeoJSON,
-  VectorSource,
-  VectorLayer,
   Style,
   Fill,
   Stroke,
+  TextLayer,
+  Text,
 } from "."
 import { feature, merge } from "topojson-client"
-// import westminsterConstituenciesTopo from "./sample-data/uk-westminster.json"
 import westminsterConstituenciesTopo from "./sample-data/uk-westminster-simplified.json"
+import ukCitiesGeo from "./sample-data/uk-cities.json"
+import { VectorLayer } from "./lib/layers/VectorLayer"
+import { useMemo } from "preact/hooks"
 
 const meta = {
   title: "Molecules/CanvasMap",
@@ -44,52 +47,52 @@ export const Default = {
       westminsterConstituenciesTopo,
       westminsterConstituenciesTopo.objects["uk-westminster"].geometries,
     )
-    const outlineSource = new VectorSource({
-      features: new GeoJSON().readFeaturesFromObject(outline),
-    })
 
-    const fillStyle = new Style({
-      fill: new Fill({ color: "#f1f1f1" }),
-    })
-
-    const outlineLayer = new VectorLayer({
-      source: outlineSource,
-      style: fillStyle,
-    })
-
-    const strokeStyle = new Style({
-      stroke: new Stroke({
-        color: "#999",
-        width: 1,
-      }),
-    })
     const constituencies = feature(
       westminsterConstituenciesTopo,
       westminsterConstituenciesTopo.objects["uk-westminster"],
     )
-    const constituenciesSource = new VectorSource({
-      features: new GeoJSON().readFeaturesFromObject(constituencies),
-    })
 
-    const constituenciesLayer = new VectorLayer({
-      source: constituenciesSource,
-      style: (feature) => {
-        if (feature.properties.name === "North East Hertfordshire") {
-          return new Style({
-            fill: new Fill({ color: "#FF0000" }),
-          })
-        }
-        return strokeStyle
-      },
+    const outlineFeatures = useMemo(
+      () => new GeoJSON().readFeaturesFromObject(outline),
+      [],
+    )
+    const constituencyFeatures = useMemo(
+      () => new GeoJSON().readFeaturesFromObject(constituencies),
+      [],
+    )
+    const citiesFeatures = useMemo(
+      () => new GeoJSON().readFeaturesFromObject(ukCitiesGeo),
+      [],
+    )
+
+    const fillStyle = new Style({
+      fill: new Fill({ color: "#f1f1f1" }),
+    })
+    const strokeStyle = new Style({
+      stroke: new Stroke({ color: "#999", width: 1 }),
     })
 
     return (
       <div style={{ height: "80vh" }}>
         <Map {...args}>
-          {{
-            controls: [],
-            layers: [outlineLayer, constituenciesLayer],
-          }}
+          <VectorLayer.Component features={outlineFeatures} style={fillStyle} />
+          <VectorLayer.Component
+            features={constituencyFeatures}
+            style={(feature) =>
+              feature.properties.name === "North East Hertfordshire"
+                ? new Style({ fill: new Fill({ color: "#FF0000" }) })
+                : strokeStyle
+            }
+          />
+          <TextLayer.Component
+            features={citiesFeatures}
+            style={(feature) =>
+              new Style({
+                text: new Text({ content: feature.properties.name }),
+              })
+            }
+          />
         </Map>
       </div>
     )
