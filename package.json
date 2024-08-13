@@ -47,7 +47,8 @@
     "flatbush": "^4.4.0",
     "preact-transitioning": "^1.4.1",
     "rbush": "^4.0.0",
-    "rbush-knn": "^4.0.0"
+    "rbush-knn": "^4.0.0",
+    "remark-gfm": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "7.25.2",
