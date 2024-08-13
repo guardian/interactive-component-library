@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Map,
   Projection,
@@ -6,6 +5,7 @@ import {
   Style,
   Fill,
   Stroke,
+  VectorLayer,
   TextLayer,
   Text,
 } from "."
@@ -16,8 +16,6 @@ import statesElectoralCollegeCartogram from "./sample-data/2024-ecv-hex-cartogra
 import statesAlbers10mTopo from "./sample-data/states-albers-10m.json"
 import westminsterConstituenciesTopo from "./sample-data/uk-westminster-simplified.json"
 import ukCitiesGeo from "./sample-data/uk-cities.json"
-import { VectorLayer } from "./lib/layers/VectorLayer"
-import { useMemo } from "preact/hooks"
 
 const meta = {
   title: "Molecules/CanvasMap",
@@ -78,27 +76,17 @@ export const USMap = {
       }),
     })
     const states = feature(states10mTopo, states10mTopo.objects["states"])
-    const filteredFeatures = ["Puerto Rico", "United States Virgin Islands"]
-
-    const statesSource = new VectorSource({
-      features: new GeoJSON().readFeaturesFromObject(
-        // @ts-ignore
-        states.features.filter(
-          (d) => !filteredFeatures.includes(d.properties.name),
-        ),
-      ),
-    })
-
-    const statesLayer = new VectorLayer({
-      source: statesSource,
-      style: strokeStyle,
-    })
+    const statesToFilter = ["Puerto Rico", "United States Virgin Islands"]
+    const filteredStates = states.features.filter(
+      (d) => !statesToFilter.includes(d.properties.name),
+    )
 
     return (
       <Map {...args}>
-        {{
-          layers: [statesLayer],
-        }}
+        <VectorLayer.Component
+          features={new GeoJSON().readFeaturesFromObject(filteredStates)}
+          style={strokeStyle}
+        />
       </Map>
     )
   },
@@ -127,20 +115,13 @@ export const USPreprojected = {
       statesAlbers10mTopo,
       statesAlbers10mTopo.objects["states"],
     )
-    const statesSource = new VectorSource({
-      features: new GeoJSON().readFeaturesFromObject(states),
-    })
-
-    const statesLayer = new VectorLayer({
-      source: statesSource,
-      style: strokeStyle,
-    })
 
     return (
       <Map {...args}>
-        {{
-          layers: [statesLayer],
-        }}
+        <VectorLayer.Component
+          features={new GeoJSON().readFeaturesFromObject(states)}
+          style={strokeStyle}
+        />
       </Map>
     )
   },
@@ -166,22 +147,14 @@ export const USElectoralCartogram = {
       }),
     })
 
-    const cartogramSource = new VectorSource({
-      features: new GeoJSON().readFeaturesFromObject(
-        statesElectoralCollegeCartogram,
-      ),
-    })
-
-    const cartogramLayer = new VectorLayer({
-      source: cartogramSource,
-      style: strokeStyle,
-    })
-
     return (
       <Map {...args}>
-        {{
-          layers: [cartogramLayer],
-        }}
+        <VectorLayer.Component
+          features={new GeoJSON().readFeaturesFromObject(
+            statesElectoralCollegeCartogram,
+          )}
+          style={strokeStyle}
+        />
       </Map>
     )
   },
@@ -213,18 +186,11 @@ export const UKMap = {
       westminsterConstituenciesTopo.objects["uk-westminster"],
     )
 
-    const outlineFeatures = useMemo(
-      () => new GeoJSON().readFeaturesFromObject(outline),
-      [],
+    const outlineFeatures = new GeoJSON().readFeaturesFromObject(outline)
+    const constituenciesFeatures = new GeoJSON().readFeaturesFromObject(
+      constituencies,
     )
-    const constituencyFeatures = useMemo(
-      () => new GeoJSON().readFeaturesFromObject(constituencies),
-      [],
-    )
-    const citiesFeatures = useMemo(
-      () => new GeoJSON().readFeaturesFromObject(ukCitiesGeo),
-      [],
-    )
+    const citiesFeatures = new GeoJSON().readFeaturesFromObject(ukCitiesGeo)
 
     const fillStyle = new Style({
       fill: new Fill({ color: "#f1f1f1" }),
@@ -234,27 +200,25 @@ export const UKMap = {
     })
 
     return (
-      <div style={{ height: "80vh" }}>
-        <Map {...args}>
-          <VectorLayer.Component features={outlineFeatures} style={fillStyle} />
-          <VectorLayer.Component
-            features={constituencyFeatures}
-            style={(feature) =>
-              feature.properties.name === "North East Hertfordshire"
-                ? new Style({ fill: new Fill({ color: "#FF0000" }) })
-                : strokeStyle
-            }
-          />
-          <TextLayer.Component
-            features={citiesFeatures}
-            style={(feature) =>
-              new Style({
-                text: new Text({ content: feature.properties.name }),
-              })
-            }
-          />
-        </Map>
-      </div>
+      <Map {...args}>
+        <VectorLayer.Component features={outlineFeatures} style={fillStyle} />
+        <VectorLayer.Component
+          features={constituenciesFeatures}
+          style={(feature) =>
+            feature.properties.name === "North East Hertfordshire"
+              ? new Style({ fill: new Fill({ color: "#FF0000" }) })
+              : strokeStyle
+          }
+        />
+        <TextLayer.Component
+          features={citiesFeatures}
+          style={(feature) =>
+            new Style({
+              text: new Text({ content: feature.properties.name }),
+            })
+          }
+        />
+      </Map>
     )
   },
 }

@@ -1,8 +1,9 @@
 import { Geometry } from "./Geometry"
 
 export class Point extends Geometry {
-  constructor({ type = "Point", extent, coordinates }) {
-    super({ type, extent, coordinates })
+  constructor({ type = "Point", coordinates }) {
+    super({ type, extent: null, coordinates })
+    this.extent = [...coordinates, ...coordinates]
   }
 
   _getProjected(projection) {
