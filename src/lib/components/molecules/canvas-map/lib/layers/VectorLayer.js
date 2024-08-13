@@ -7,7 +7,7 @@ import { useEffect, useContext, useMemo } from "preact/hooks"
 import { MapContext } from "../../context/MapContext"
 
 /** @typedef {Omit<ConstructorParameters<typeof VectorLayer>[0], "source">} VectorLayerOptions */
-/** @typedef {VectorLayerOptions & { features: import("../Feature").Feature[], name: string }} VectorLayerComponentProps */
+/** @typedef {VectorLayerOptions & { features: import("../Feature").Feature[] }} VectorLayerComponentProps */
 
 export class VectorLayer {
   /** @param {VectorLayerComponentProps} props */
