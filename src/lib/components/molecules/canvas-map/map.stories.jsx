@@ -5,6 +5,7 @@ import {
   Style,
   Fill,
   Stroke,
+  FeatureCollection,
   VectorLayer,
   TextLayer,
   Text,
@@ -75,8 +76,10 @@ export const USMap = {
         width: 1,
       }),
     })
+    // @ts-ignore
     const states = feature(states10mTopo, states10mTopo.objects["states"])
     const statesToFilter = ["Puerto Rico", "United States Virgin Islands"]
+    // @ts-ignore
     const filteredStates = states.features.filter(
       (d) => !statesToFilter.includes(d.properties.name),
     )
@@ -111,15 +114,20 @@ export const USPreprojected = {
         width: 1,
       }),
     })
+
     const states = feature(
+      // @ts-ignore
       statesAlbers10mTopo,
       statesAlbers10mTopo.objects["states"],
     )
 
+    // @ts-ignore
+    const featureCollection = FeatureCollection.fromGeoJSON(states)
+
     return (
       <Map {...args}>
         <VectorLayer.Component
-          features={new GeoJSON().readFeaturesFromObject(states)}
+          features={featureCollection}
           style={strokeStyle}
         />
       </Map>
@@ -177,11 +185,13 @@ export const UKMap = {
   },
   render: (args) => {
     const outline = merge(
+      // @ts-ignore
       westminsterConstituenciesTopo,
       westminsterConstituenciesTopo.objects["uk-westminster"].geometries,
     )
 
     const constituencies = feature(
+      // @ts-ignore
       westminsterConstituenciesTopo,
       westminsterConstituenciesTopo.objects["uk-westminster"],
     )
