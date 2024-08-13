@@ -1,0 +1,19 @@
+name: Preview PR Storybook and package
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  teardown-package:
+    if: contains(github.event.pull_request.labels.*.name, 'Preview')
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Hello
+        run: echo "hello world"

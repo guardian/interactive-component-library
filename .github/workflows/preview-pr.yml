@@ -1,0 +1,91 @@
+name: Preview PR Storybook and package
+
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  deploy-previews:
+    if: github.event.label.name == 'Preview'
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pages: write
+      packages: write
+      pull-requests: write
+      id-token: write
+
+    environment:
+      name: github-pages-preview
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    outputs:
+      version: ${{ steps.publish.outputs.version }}
+
+    steps:
+      - name: Show labels
+        run: |
+          echo '${{ toJSON(github.event.label.name) }}'
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+          registry-url: "https://registry.npmjs.org"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Create short SHA for latest commit
+        run: |
+          # GITHUB_ENV vars can only be used in subsequent steps, so do this here
+          echo "short_sha=$(git rev-parse --short '${{github.event.pull_request.head.sha}}')" >> "$GITHUB_ENV"
+
+      # Create minor prerelease version (e.g. v1.1.0-rc.0, from current version v1.0.0)
+      - id: publish
+        name: Update package.json version
+        run: |
+          git config --global user.email "<41898282+github-actions[bot]@users.noreply.github.com>"
+          git config --global user.name "github-actions[bot]"
+          echo "version=$(npm version preminor --preid rc-${short_sha})" >> "$GITHUB_OUTPUT"
+
+      - name: Build
+        run: pnpm build:lib
+
+      - name: Publish to NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Print new version (TEMP)
+        run: echo '${{steps.publish.outputs.version}} (PR ${{github.event.pull_request.number}})'
+
+      - name: Build Storybook
+        run: |
+          STORYBOOK_VERSION='${{steps.publish.outputs.version}}' \
+          STORYBOOK_PR_URL='${{github.event.pull_request.html_url}}' \
+          pnpm build
+
+      # GitHub pages only supports deploying from one artifact or branch, so we'd have to find a way
+      # of deploying to a kind of '/preview' root while re-using the existing '/main' root
+
+      # - name: Upload artifact
+      #   uses: actions/upload-pages-artifact@v3
+      #   with:
+      #     path: "./storybook-static"
+      #     name: github-pages-preview
+
+      # - name: Deploy to GitHub Pages
+      #   id: deployment
+      #   uses: actions/deploy-pages@v4
+      #   with:
+      #     artifact_name: github-pages-preview
