@@ -1,4 +1,5 @@
 import { withoutVitePlugins } from "@storybook/builder-vite"
+import remarkGfm from "remark-gfm"
 
 /** @type {import('@storybook/preact-vite').StorybookConfig} */
 const config = {
@@ -12,8 +13,21 @@ const config = {
   ],
   staticDirs: ["./assets"],
   addons: [
-    "@storybook/addon-essentials",
+    "@storybook/addon-controls",
     "@storybook/addon-links",
+    "@storybook/addon-measure",
+    "@storybook/addon-viewport",
+    "@storybook/addon-actions",
+    {
+      name: "@storybook/addon-docs",
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
     "@storybook/addon-interactions",
     "storybook-dark-mode",
     {
