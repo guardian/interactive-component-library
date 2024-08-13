@@ -36,3 +36,130 @@ Here's how our solution stacks up against popular mapping libraries MapLibre and
 
 ## 🛫 Getting started
 
+In this example we'll create a preact component called `MyElectionMap`, which renders a basic election map for the US based on [geometry that's already projected](https://github.com/topojson/us-atlas?tab=readme-ov-file#counties-albers-10m.json).
+
+First, import the classes that you need from the component library. For this example you'll need the following:
+
+<Source dark={true} code={`
+// MyElectionMap.jsx
+import {
+  Map,
+  Style,
+  Stroke,
+  VectorLayer,
+  FeatureCollection,
+} from "@guardian/interactive-component-library"
+`} />
+
+To draw the map, we need some geography:
+
+<Source dark={true} code={`
+import { feature } from "topojson-client"
+
+// 🚨 In a real app you'd probably want to load TopoJSON file asynchronously
+import statesAlbers10mTopo from "$assets/states-albers-10m.json"
+
+// Convert topo to GeoJSON
+const states = feature(
+  statesAlbers10mTopo,
+  statesAlbers10mTopo.objects["states"],
+)
+
+// Create collection of map features
+const statesFeatures = FeatureCollection.fromGeoJSON(states)
+`} />
+
+Define a configuration object for the map, and a style for drawing your geography.
+
+<Hint text="Map extent is usually defined in geographic (WGS84) coordinates, but because we're using geometry already projected to fit a 975x610 viewport, we set the extent to match that size:  `[[0,0],[975, 610]]`" />
+
+<Source dark={true} code={`
+const mapConfig = {
+  view: {
+    extent: [
+      [0, 0],
+      [975, 610],
+    ],
+  },
+}
+
+const strokeStyle = new Style({
+  stroke: new Stroke({
+    color: "#999",
+    width: 1
+  })
+});
+`} />
+
+And finally, we define the actual component:
+
+<Source dark={true} code={`
+export function MyElectionMap({ usStates }) {
+  return (
+    <Map config={mapConfig}>
+      <VectorLayer.Component
+        features={statesFeatures}
+        style={strokeStyle}
+      />
+    </Map>
+  )
+}
+`} />
+
+The result should look like this:
+
+<Canvas of={MapStories.USPreprojected} />
+
+Here's the source code for `MyElectionMap.jsx` when it's all put together:
+
+<Source dark={true} code={`
+// MyElectionMap.jsx
+import {
+  Map,
+  Style,
+  Stroke,
+  VectorLayer,
+  FeatureCollection,
+} from "@guardian/interactive-component-library"
+import { feature } from "topojson-client"
+
+// 🚨 In a real app you'd probably want to load TopoJSON file asynchronously
+import statesAlbers10mTopo from "$assets/states-albers-10m.json"
+
+// Convert topo to GeoJSON
+const states = feature(
+  statesAlbers10mTopo,
+  statesAlbers10mTopo.objects["states"],
+)
+
+// Create collection of map features
+const statesFeatures = FeatureCollection.fromGeoJSON(states)
+
+const mapConfig = {
+  view: {
+    extent: [
+      [0, 0],
+      [975, 610],
+    ],
+  },
+}
+
+const strokeStyle = new Style({
+  stroke: new Stroke({
+    color: "#999",
+    width: 1
+  })
+});
+
+export function MyElectionMap() {
+  return (
+    <Map config={mapConfig}>
+      <VectorLayer.Component
+        features={statesFeatures}
+        style={strokeStyle}
+      />
+    </Map>
+  )
+}
+`} />
+
