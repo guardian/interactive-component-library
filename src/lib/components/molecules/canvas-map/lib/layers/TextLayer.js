@@ -60,9 +60,10 @@ export class TextLayer {
   }
 
   /**
+   * @constructor
    * @param {Object} params
    * @param {VectorSource} params.source
-   * @param {Style} [params.style=undefined]
+   * @param {Style | (() => Style)} [params.style=undefined]
    * @param {number} [params.minZoom=0]
    * @param {number} [params.opacity=1]
    * @param {boolean} [params.declutter=true]
