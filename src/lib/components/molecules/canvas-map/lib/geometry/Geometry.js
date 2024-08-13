@@ -19,11 +19,13 @@ export class Geometry {
 
   /**
    * Returns the geometry as a GeoJSON object
-   * @param {Projection} projection - The projection to use for the geometry
+   * @function
+   * @param {import("../projection").Projection} projection - The projection to use for the geometry
    * @returns {Object} A GeoJSON representation of the projected geometry
    * @private
    */
-  _getProjected() {
+  // eslint-disable-next-line no-unused-vars
+  _getProjected(projection) {
     // Should be implemented by subclasses. This is just a placeholder.
     throw new Error("Not implemented")
   }
