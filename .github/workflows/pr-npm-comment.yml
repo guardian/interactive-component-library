@@ -1,0 +1,29 @@
+name: NPM install PR comment
+
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  post-comment:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `You can install this version of the component library into your projects with the following command 🚀
+
+              \`\`\`bash
+              npm install ${{}}
+              `
+            })
