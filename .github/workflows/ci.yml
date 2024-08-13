@@ -1,5 +1,8 @@
 name: CI
-on: pull_request
+on:
+  pull_request:
+    branches-ignore:
+      - "auto-version-*"
 jobs:
   ci:
     name: Run linter and formatter
