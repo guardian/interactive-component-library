@@ -5,27 +5,40 @@ import { Dispatcher, MapEvent } from "../events"
 import { VectorSource } from "../sources/VectorSource"
 import { useEffect, useContext, useMemo } from "preact/hooks"
 import { MapContext } from "../../context/MapContext"
+import { FeatureCollection } from "../FeatureCollection"
 
 /** @typedef {Omit<ConstructorParameters<typeof VectorLayer>[0], "source">} VectorLayerOptions */
-/** @typedef {VectorLayerOptions & { features: import("../Feature").Feature[] }} VectorLayerComponentProps */
+/** @typedef {VectorLayerOptions & { features: import("../Feature").Feature[] | import("../FeatureCollection").FeatureCollection }} VectorLayerComponentProps */
 
 export class VectorLayer {
   /** @param {VectorLayerComponentProps} props */
-  static Component({ features, style, minZoom, opacity, hitDetectionEnabled }) {
+  static Component({
+    features: featureCollection,
+    style,
+    minZoom,
+    opacity,
+    hitDetectionEnabled,
+  }) {
     const { registerLayer } = useContext(MapContext)
 
     // We recreate layer whenever these properties change, which cannot be changed on the fly
     // and require recreation
     const layer = useMemo(
-      () =>
-        VectorLayer.with(features, {
+      () => {
+        const features =
+          featureCollection instanceof FeatureCollection
+            ? featureCollection.features
+            : /** @type {import("../Feature").Feature[]} */ (featureCollection)
+
+        return VectorLayer.with(features, {
           style,
           minZoom,
           opacity,
           hitDetectionEnabled,
-        }),
+        })
+      },
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      [features, minZoom, opacity, hitDetectionEnabled],
+      [featureCollection, minZoom, opacity, hitDetectionEnabled],
     )
 
     // Register layer with map context. If `layer` is not present in map, it will be added.

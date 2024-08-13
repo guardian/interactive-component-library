@@ -1,5 +1,7 @@
 export * from "./Map"
 export * from "./controls"
+export * from "./lib/Feature"
+export * from "./lib/FeatureCollection"
 export * from "./lib/events"
 export * from "./lib/projection"
 export * from "./lib/layers"
