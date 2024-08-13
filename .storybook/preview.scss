@@ -70,6 +70,12 @@
   h2 {
     margin-top: 40px !important;
   }
+
+  sup {
+    vertical-align: super;
+    font-family: var(--text-sans);
+    font-size: var(--sans-xxsmall);
+  }
 }
 
 // Code blocks
