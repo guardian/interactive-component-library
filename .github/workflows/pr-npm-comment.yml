@@ -1,0 +1,31 @@
+name: NPM install PR comment
+
+on:
+  pull_request:
+    types: [opened]
+    branches-ignore:
+      - "auto-version-*"
+
+jobs:
+  post-comment:
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `You can test this version of the component library in your project with the following command 🚀
+
+              \`\`\`bash
+              npm i '${{ github.repositoryUrl}}#${{ github.head_ref }}'
+              \`\`\`
+
+              If you make changes to this branch, simply re-run the above command to pull them.`
+            })
