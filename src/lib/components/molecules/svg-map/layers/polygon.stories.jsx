@@ -3,12 +3,15 @@ import { Polygon as Layer } from "./Polygon"
 import { feature } from "topojson-client"
 import { saveSVG } from "../helpers/saveSVG"
 import ukCountriesTopo from "../sample-data/UK-countries-topo.json"
+import usStatesTopo from "../sample-data/US-states-topo.json"
 import styles from "../stories.module.css"
 
 const ukCountries = feature(
   ukCountriesTopo,
   ukCountriesTopo.objects["countries"],
 )
+
+const usStates = feature(usStatesTopo, usStatesTopo.objects["states"])
 
 /** @type {import('@storybook/preact').Meta} */
 const meta = {
@@ -35,7 +38,7 @@ const meta = {
     ),
   ],
   render: (args) => (
-    <SVGMap id="map" config={MapConfiguration.UKComposite}>
+    <SVGMap id="map" config={args.config}>
       <Layer {...args} />
     </SVGMap>
   ),
@@ -46,6 +49,17 @@ export default meta
 export const Polygon = {
   args: {
     features: ukCountries.features,
+    config: MapConfiguration.UKComposite,
+    fill: "#dcdcdc",
+    stroke: "#707070",
+    strokeWidth: 1,
+  },
+}
+
+export const UsStatePolygon = {
+  args: {
+    features: usStates.features,
+    config: MapConfiguration.UsStates,
     fill: "#dcdcdc",
     stroke: "#707070",
     strokeWidth: 1,

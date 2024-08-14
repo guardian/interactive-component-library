@@ -1,6 +1,7 @@
 import { SVGMap, MapConfiguration } from "../"
 import { Prerendered as Layer } from "./Prerendered"
 import ukAlbersMap from "../sample-data/uk-outline-composite.svg"
+import usAlbersMap from "../sample-data/us-states.svg"
 
 /** @type {import('@storybook/preact').Meta} */
 const meta = {
@@ -23,7 +24,7 @@ const meta = {
   render: (args) => (
     <SVGMap
       config={{
-        ...MapConfiguration.UKComposite,
+        ...args.mapConfig,
         drawCompositionBorders: false,
       }}
     >
@@ -37,5 +38,13 @@ export default meta
 export const Prerendered = {
   args: {
     url: ukAlbersMap,
+    mapConfig: MapConfiguration.UKComposite,
+  },
+}
+
+export const PreRenderedUs = {
+  args: {
+    url: usAlbersMap,
+    mapConfig: MapConfiguration.UsStates,
   },
 }

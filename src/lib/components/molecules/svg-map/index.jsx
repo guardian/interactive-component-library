@@ -1,5 +1,5 @@
 import { geoAlbers, geoMercator } from "d3-geo"
-import { geoAlbersUk } from "d3-composite-projections"
+import { geoAlbersUk, geoAlbersUsa } from "d3-composite-projections"
 import { SVGMapProvider } from "./context/SVGMapProvider"
 import { SVGRenderer } from "./renderers/SVGRenderer"
 import { cloneElement } from "preact"
@@ -24,6 +24,7 @@ export const _Projection = {
     .rotate([1.1743, 0])
     .parallels([50, 54]),
   geoMercator: geoMercator(),
+  geoAlbersUSA: geoAlbersUsa(),
 }
 
 export const MapConfiguration = {
@@ -52,6 +53,15 @@ export const MapConfiguration = {
       [0.334043866981608, 51.6918768002741],
     ],
     drawCompositionBorders: false,
+    drawToCanvas: false,
+  },
+  UsStates: {
+    projection: _Projection.geoAlbersUSA,
+    bounds: [
+      [49.547111, -127.029375],
+      [24.696899, -76.330325], // 24.696899, -76.330325
+    ],
+    drawCompositionBorders: true,
     drawToCanvas: false,
   },
 }
