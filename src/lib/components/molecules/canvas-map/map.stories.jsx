@@ -19,7 +19,7 @@ import westminsterConstituenciesTopo from "./sample-data/uk-westminster-simplifi
 import ukCitiesGeo from "./sample-data/uk-cities.json"
 
 const meta = {
-  title: "Molecules/CanvasMap",
+  title: "Molecules/Map",
   component: Map,
   parameters: {
     viewport: {
