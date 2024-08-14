@@ -2,7 +2,7 @@ import { Meta, Canvas, Controls, DocsContainer, Source } from '@storybook/blocks
 import { Hint } from '$storybook/blocks/Hint.jsx'
 import * as MapStories from '../map.stories'
 
-<Meta title="Molecules/CanvasMap/docs/Introduction" parameters={{
+<Meta title="Molecules/Map/docs/Getting started" parameters={{
     docs: {
       container: ({ children, context }) => (
         <DocsContainer context={context}>
@@ -12,31 +12,9 @@ import * as MapStories from '../map.stories'
     },
   }} />
 
-# Introduction
+# 🛫 Getting started
 
-## 🧭 Why does this component exist?
-
-For election result pages we require a particular kind of map. It's not as simple as a basic [SVG map](?path=/docs/molecules-svgmap-getting-started--documentation), because we want readers to be able to zoom and pan. But it also doesn't warrant a fully-fledged WebGL-rendered [slippy map](https://www.theguardian.com/football/ng-interactive/2022/sep/21/liverpool-real-madrid-paris-stade-de-france-champions-league).
-
-What we need is something in between. A solution that can render election-style maps efficiently (including pan and zoom functionality), without slowing down page load, which can affect how our election results pages are ranked in search engines.
-
-In the past we would build every election map from scratch using d3, which was both time-consuming and error-prone. The aim here is to make that process easier.
-
-### Bundle size
-
-Here's how our solution stacks up against popular mapping libraries MapLibre and OpenLayers in terms of bundle size (and therefore page load).
-
-| Mapping solution | bundle size[^1]  | gzipped | relative size |
-| :- | -: | -: | -: |
-| Map component | 253.45 kB   | 62.54 kB  | 1x |
-| OpenLayers    | 881.72 kB   | 185.51 kB | 3x |
-| MapLibre      | 1,391.17 kB | 308.69 kB | 5x |
-
-[^1]: Measured on August 13, 2024
-
-## 🛫 Getting started
-
-In this example we'll create a preact component called `MyElectionMap`, which renders a basic election map for the US based on [geometry that's already projected](https://github.com/topojson/us-atlas?tab=readme-ov-file#counties-albers-10m.json).
+In this example we'll create a preact component called `MyElectionMap`, which renders a basic election map for the US based on .
 
 First, import the classes that you need from the component library. For this example you'll need the following:
 
@@ -51,7 +29,9 @@ import {
 } from "@guardian/interactive-component-library"
 `} />
 
-To draw the map, we need some geography:
+To draw the map, we need some geography. We'll use [this TopoJSON file](https://github.com/topojson/us-atlas?tab=readme-ov-file#counties-albers-10m.json) representing US states, which comes preprojected in [d3.geoAlbersUsa()](https://d3js.org/d3-geo/conic#geoAlbersUsa) and is optimised for a 975x610 viewport.
+
+Save the file in your assets folder. From there you can import the file and extract GeoJSON features:
 
 <Source dark={true} code={`
 import { feature } from "topojson-client"
@@ -69,7 +49,7 @@ const states = feature(
 const statesFeatures = FeatureCollection.fromGeoJSON(states)
 `} />
 
-Define a configuration object for the map, and a style for drawing your geography.
+Next, define a configuration object for the map, and a style for drawing your geography.
 
 <Hint text="Map extent is usually defined in geographic (WGS84) coordinates, but because we're using geometry already projected to fit a 975x610 viewport, we set the extent to match that size:  `[[0,0],[975, 610]]`" />
 
@@ -91,7 +71,7 @@ const strokeStyle = new Style({
 });
 `} />
 
-And finally, we define the actual component:
+And finally, we write the JSX for rendering the map:
 
 <Source dark={true} code={`
 export function MyElectionMap({ usStates }) {

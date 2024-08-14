@@ -1,0 +1,46 @@
+import { Meta, Canvas, Controls, DocsContainer, Source } from '@storybook/blocks'
+import { Hint } from '$storybook/blocks/Hint.jsx'
+import * as MapStories from '../map.stories'
+
+<Meta title="Molecules/Map/docs/Introduction" parameters={{
+    docs: {
+      container: ({ children, context }) => (
+        <DocsContainer context={context}>
+          <div style={{ border: '5px solid red' }}>{children}</div>
+        </DocsContainer>
+      ),
+    },
+  }} />
+
+# 🗺️ Map
+
+> A map component for interactive data viz
+
+
+The Map component makes it easy to create fast and efficient maps for data viz.
+
+* 👋 Built-in pan and zoom gestures
+* ⚡️  Fast rendering on HTML Canvas
+* 📦 Keeps bundle size small
+* 🔧 VanillaJS with optional Preact wrapper
+
+
+## 💡 The why
+
+For election result pages we require a particular kind of map. It's not as simple as a basic [SVG map](?path=/docs/molecules-svgmap-getting-started--documentation), because we want readers to be able to zoom and pan. But it also doesn't warrant a fully-fledged WebGL-rendered [slippy map](https://www.theguardian.com/football/ng-interactive/2022/sep/21/liverpool-real-madrid-paris-stade-de-france-champions-league).
+
+What we need is something in between. A solution that can render election-style maps efficiently (including pan and zoom functionality), without slowing down page load, which can affect how our election results pages are ranked in search engines.
+
+In the past we would build every election map from scratch using d3, which was both time-consuming and error-prone. The aim with this component is to make that process easier by laying down a reusable foundation that takes care of most of the complexity behind these maps.
+
+### Bundle size
+
+Here's how our solution stacks up against popular mapping libraries MapLibre and OpenLayers in terms of bundle size (and therefore page load).
+
+| Mapping solution | bundle size[^1]  | gzipped | relative size |
+| :- | -: | -: | -: |
+| Map component | 253.45 kB   | 62.54 kB  | 1x |
+| OpenLayers    | 881.72 kB   | 185.51 kB | 3x |
+| MapLibre      | 1,391.17 kB | 308.69 kB | 5x |
+
+[^1]: Measured on August 13, 2024
