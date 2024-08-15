@@ -1,0 +1,177 @@
+import { Meta, Canvas, Controls, DocsContainer, Source } from '@storybook/blocks'
+import { Hint } from '$storybook/blocks/Hint.jsx'
+import * as MapStories from '../map.stories'
+
+<Meta title="Molecules/Map/docs/Choropleth maps" parameters={{
+    docs: {
+      container: ({ children, context }) => (
+        <DocsContainer context={context}>
+          <div style={{ border: '5px solid red' }}>{children}</div>
+        </DocsContainer>
+      ),
+    },
+  }} />
+
+# 🌈 Choropleth maps
+
+To create a choropleth map we'll build on the `MyElectionMap` component from the [“Getting started”](?path=/docs/molecules-map-docs-getting-started--documentation) tutorial.
+
+First off, we need to import the `Fill` style class:
+
+<Source dark={true} code={`
+// MyElectionMap.jsx
+import {
+  Map,
+  Style,
+  Stroke,
+  Fill, // class to define a fill style
+  VectorLayer,
+  FeatureCollection,
+} from "@guardian/interactive-component-library"
+`} />
+
+Let's assume that `MyElectionMap` has a prop called `electionResultsByState` which contains the results we want to display on the map. To render the choropleth we need to change the style of the `VectorLayer` to be a function.
+
+<Source dark={true} code={`
+export function MyElectionMap({ electionResultsByState }) {
+  return (
+    <Map config={mapConfig}>
+      <VectorLayer.Component
+        features={statesFeatures}
+        style={(feature) => {
+          const result = electionResultsByState[feature.properties.name]
+          return styleForResult(result)
+        }}
+      />
+    </Map>
+  )
+}
+`} />
+
+And finally, we need to implement `styleForResult()`:
+
+<Source dark={true} code={`
+function styleForResult(result) {
+  const computedStyle = getComputedStyle(document.body)
+  const stroke = new Stroke({
+    color: "#999",
+    width: 1,
+  })
+
+  if (!result) {
+    return new Style({
+      stroke,
+      fill: new Fill({
+        color: "#d7d7d7",
+      }),
+    })
+  }
+  const winningParty = result.winner.party
+  let partyColor
+  switch (winningParty) {
+    case "Dem":
+      partyColor = computedStyle.getPropertyValue('--dem')
+      break
+    case "GOP":
+      partyColor = computedStyle.getPropertyValue('--gop')
+      break
+    default:
+      partyColor = computedStyle.getPropertyValue('--oth')
+  }
+  return new Style({
+    stroke,
+    fill: new Fill({
+      color: partyColor,
+    }),
+  })
+}
+`} />
+
+## Preview 
+
+<Canvas of={MapStories.USChoropleth} />
+
+## Source
+
+<Source dark={true} code={`
+// MyElectionMap.jsx
+import {
+  Map,
+  Style,
+  Stroke,
+  VectorLayer,
+  FeatureCollection,
+} from "@guardian/interactive-component-library"
+import { feature } from "topojson-client"
+
+// 🚨 In a real app you'd probably want to load TopoJSON file asynchronously
+import statesAlbers10mTopo from "$assets/states-albers-10m.json"
+
+// Convert topo to GeoJSON
+const states = feature(
+  statesAlbers10mTopo,
+  statesAlbers10mTopo.objects["states"],
+)
+
+// Create collection of map features
+const statesFeatures = FeatureCollection.fromGeoJSON(states)
+
+const mapConfig = {
+  view: {
+    extent: [
+      [0, 0],
+      [975, 610],
+    ],
+  },
+}
+
+export function MyElectionMap({ electionResultsByState }) {
+  return (
+    <Map config={mapConfig}>
+      <VectorLayer.Component
+        features={statesFeatures}
+        style={(feature) => {
+          const result = electionResultsByState[feature.properties.name]
+          return styleForResult(result)
+        }}
+      />
+    </Map>
+  )
+}
+
+function styleForResult(result) {
+  const computedStyle = getComputedStyle(document.body)
+  const stroke = new Stroke({
+    color: "#999",
+    width: 1,
+  })
+
+  if (!result) {
+    return new Style({
+      stroke,
+      fill: new Fill({
+        color: "#d7d7d7",
+      }),
+    })
+  }
+  const winningParty = result.winner.party
+  let partyColor
+  switch (winningParty) {
+    case "Dem":
+      partyColor = computedStyle.getPropertyValue('--dem')
+      break
+    case "GOP":
+      partyColor = computedStyle.getPropertyValue('--gop')
+      break
+    default:
+      partyColor = computedStyle.getPropertyValue('--oth')
+  }
+  return new Style({
+    stroke,
+    fill: new Fill({
+      color: partyColor,
+    }),
+  })
+}
+`} />
+

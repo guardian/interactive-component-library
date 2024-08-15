@@ -14,7 +14,7 @@ import * as MapStories from '../map.stories'
 
 # 🛫 Getting started
 
-In this example we'll create a preact component called `MyElectionMap`, which renders a basic election map for the US based on .
+In this example we'll create a preact component called `MyElectionMap`, which renders a basic election map for the US.
 
 First, import the classes that you need from the component library. For this example you'll need the following:
 
@@ -74,7 +74,7 @@ const strokeStyle = new Style({
 And finally, we write the JSX for rendering the map:
 
 <Source dark={true} code={`
-export function MyElectionMap({ usStates }) {
+export function MyElectionMap() {
   return (
     <Map config={mapConfig}>
       <VectorLayer.Component
