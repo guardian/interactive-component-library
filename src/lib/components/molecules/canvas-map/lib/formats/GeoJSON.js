@@ -23,14 +23,14 @@ import { extentForCoordinates } from "../util/extent"
 export class GeoJSON {
   /**
    * @constructor
-   * @param {GeoJSONParseOptions} parseOptions
+   * @param {GeoJSONParseOptions} [parseOptions]
    */
-  constructor({ isProjected = false }) {
-    this.isProjected = isProjected
+  constructor(parseOptions = {}) {
+    this.isProjected = parseOptions?.isProjected
   }
 
   /**
-   * Convert GeoJSON object(s) to array of {@link Feature} objects
+   * Convert GeoJSON object(s) to array of {@link Feature} objects.
    *
    * @function
    * @param {GeoJSONFeature | GeoJSONFeatureCollection | GeoJSONFeature[]} object GeoJSON object
@@ -80,7 +80,7 @@ export class GeoJSON {
   }
 
   /**
-   * Convert single GeoJSON feature to {@link Feature} object
+   * Convert single GeoJSON feature to {@link Feature} object.
    *
    * @function
    * @param {GeoJSONFeature} geoJSONObject GeoJSON object
