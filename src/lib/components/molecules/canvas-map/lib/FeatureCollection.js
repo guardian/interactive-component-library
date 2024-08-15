@@ -9,10 +9,11 @@ export class FeatureCollection {
   /**
    * Create a feature collection from GeoJSON features.
    * @param {Object[]} geoJSON - The GeoJSON object
+   * @param {import("./formats/GeoJSON").GeoJSONParseOptions} [parseOptions] - Options for parsing the GeoJSON object
    * @returns {FeatureCollection} The feature collection
    */
-  static fromGeoJSON(geoJSON) {
-    const features = new GeoJSON().readFeaturesFromObject(geoJSON)
+  static fromGeoJSON(geoJSON, parseOptions) {
+    const features = new GeoJSON(parseOptions).readFeaturesFromObject(geoJSON)
     return new FeatureCollection(features)
   }
 
