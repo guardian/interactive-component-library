@@ -14,6 +14,7 @@ import { AspectRatioBox } from "$particles"
 import { feature, merge } from "topojson-client"
 import states10mTopo from "./sample-data/states-10m.json"
 import statesElectoralCollegeCartogram from "./sample-data/2024-ecv-hex-cartogram.json"
+import statesSenateCartogram from "./sample-data/senate-cartogram.json"
 import statesAlbers10mTopo from "./sample-data/states-albers-10m.json"
 import westminsterConstituenciesTopo from "./sample-data/uk-westminster-simplified.json"
 import usPresidentialResults from "./sample-data/us-presidential-results.json"
@@ -193,6 +194,7 @@ export const USChoropleth = {
     )
   },
 }
+
 export const USElectoralCartogram = {
   args: {
     config: {
@@ -219,6 +221,51 @@ export const USElectoralCartogram = {
           features={new GeoJSON().readFeaturesFromObject(
             statesElectoralCollegeCartogram,
           )}
+          style={strokeStyle}
+        />
+      </Map>
+    )
+  },
+}
+
+export const USSenateCartogram = {
+  args: {
+    config: {
+      view: {
+        extent: [
+          [0, 0],
+          [900, 562],
+        ],
+        padding: { top: 20, right: 20, bottom: 20, left: 20 },
+      },
+    },
+  },
+  render: (args) => {
+    const strokeStyle = new Style({
+      stroke: new Stroke({
+        color: "#999",
+        width: 1,
+      }),
+    })
+
+    const states = feature(
+      // @ts-ignore
+      statesAlbers10mTopo,
+      statesAlbers10mTopo.objects["states"],
+    )
+    // @ts-ignore
+    const stateFeatures = FeatureCollection.fromGeoJSON(states)
+
+    const cartogramFeatures = FeatureCollection.fromGeoJSON(
+      // @ts-ignore
+      statesSenateCartogram,
+    )
+
+    return (
+      <Map {...args}>
+        <VectorLayer.Component features={stateFeatures} style={strokeStyle} />
+        <VectorLayer.Component
+          features={cartogramFeatures}
           style={strokeStyle}
         />
       </Map>
