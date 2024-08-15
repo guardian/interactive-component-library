@@ -10,12 +10,13 @@ import {
   TextLayer,
   Text,
 } from "."
+import { AspectRatioBox } from "$particles"
 import { feature, merge } from "topojson-client"
-import { AspectRatioBox } from "$particles/aspect-ratio-box"
 import states10mTopo from "./sample-data/states-10m.json"
 import statesElectoralCollegeCartogram from "./sample-data/2024-ecv-hex-cartogram.json"
 import statesAlbers10mTopo from "./sample-data/states-albers-10m.json"
 import westminsterConstituenciesTopo from "./sample-data/uk-westminster-simplified.json"
+import usPresidentialResults from "./sample-data/us-presidential-results.json"
 import ukCitiesGeo from "./sample-data/uk-cities.json"
 
 const meta = {
@@ -23,6 +24,15 @@ const meta = {
   component: Map,
   parameters: {
     viewport: {
+      viewports: {
+        desktop: {
+          name: "Desktop",
+          styles: {
+            width: "980px",
+            height: "668px",
+          },
+        },
+      },
       defaultViewport: "desktop",
     },
     layout: "fullscreen",
@@ -37,10 +47,9 @@ const meta = {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "stretch",
-            height: "100vh",
           }}
         >
-          <div style={{ border: "1px solid #CCC", margin: "0 1rem" }}>
+          <div style={{ borderBottom: "1px solid #CCC" }}>
             <AspectRatioBox heightAsProportionOfWidth={parameters.aspectRatio}>
               <Story />
             </AspectRatioBox>
@@ -49,6 +58,21 @@ const meta = {
       )
     },
   ],
+  args: {
+    electionResultsByState: usPresidentialResults.reduce((results, current) => {
+      const state = current.reportingUnits[0].stateName
+      const winner = current.reportingUnits[0].candidates.find((c) => c.winner)
+      return {
+        ...results,
+        [state]: {
+          winner: {
+            name: `${winner.first} ${winner.last}`,
+            party: winner.party,
+          },
+        },
+      }
+    }, {}),
+  },
 }
 
 export default meta
@@ -135,6 +159,40 @@ export const USPreprojected = {
   },
 }
 
+export const USChoropleth = {
+  args: {
+    config: {
+      view: {
+        extent: [
+          [0, 0],
+          [975, 610],
+        ],
+        padding: { top: 20, right: 20, bottom: 20, left: 20 },
+      },
+    },
+  },
+  render: ({ config, electionResultsByState }) => {
+    const states = feature(
+      // @ts-ignore
+      statesAlbers10mTopo,
+      statesAlbers10mTopo.objects["states"],
+    )
+    // @ts-ignore
+    const featureCollection = FeatureCollection.fromGeoJSON(states)
+
+    return (
+      <Map config={config}>
+        <VectorLayer.Component
+          features={featureCollection}
+          style={(feature) => {
+            const result = electionResultsByState[feature.properties.name]
+            return styleForResult(result)
+          }}
+        />
+      </Map>
+    )
+  },
+}
 export const USElectoralCartogram = {
   args: {
     config: {
@@ -231,4 +289,35 @@ export const UKMap = {
       </Map>
     )
   },
+}
+
+function styleForResult(result) {
+  const style = new Style({
+    stroke: new Stroke({
+      color: "#999",
+      width: 1,
+    }),
+    fill: new Fill({
+      color: "#d7d7d7",
+    }),
+  })
+  if (!result) return style
+
+  const fill = new Fill()
+  const computedStyle = getComputedStyle(document.body)
+
+  const winningParty = result.winner.party
+  switch (winningParty) {
+    case "Dem":
+      fill.color = computedStyle.getPropertyValue("--dem")
+      break
+    case "GOP":
+      fill.color = computedStyle.getPropertyValue("--gop")
+      break
+    default:
+      fill.color = computedStyle.getPropertyValue("--oth")
+  }
+
+  style.fill = fill
+  return style
 }

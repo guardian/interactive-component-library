@@ -8,9 +8,9 @@
  * Class representing a style.
  * @class
  * @property {Object} properties - The properties of the style
- * @property {string} properties.stroke - The stroke color of the style
- * @property {string} properties.fill - The fill color of the style
- * @property {string} properties.text - The text color of the style
+ * @property {Object} properties.stroke - The stroke color of the style
+ * @property {Object} properties.fill - The fill color of the style
+ * @property {Object} properties.text - The text color of the style
  */
 export class Style {
   constructor(properties) {

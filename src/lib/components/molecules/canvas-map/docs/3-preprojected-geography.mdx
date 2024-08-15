@@ -12,7 +12,7 @@ import * as MapStories from '../map.stories'
     },
   }} />
 
-# How to create a map with preprojected geography
+# 🇺🇸 How to create a map with preprojected geography
 
 To create a map with preprojected geography, we need some preprojected TopoJSON or GeoJSON. For this example, we'll use [states-albers-10m.json](https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json) from this [TopoJSON U.S. atlas](https://github.com/topojson/us-atlas).
 
@@ -37,37 +37,50 @@ The determine the extent you need to know the size of the viewport the geography
 To draw the map, we need to load the TopoJSON and instantiate the Map component with the configuration we just defined.
 
 <Source dark={true} code={`
+import {
+  Map,
+  Style,
+  Stroke,
+  VectorLayer,
+  FeatureCollection,
+} from "@guardian/interactive-component-library"
 import { feature } from "topojson-client"
-import statesAlbers10mTopo from "path-to-geodata/states-albers-10m.json"
+
+// 🚨 In a real app you'd probably want to load TopoJSON file asynchronously
+import statesAlbers10mTopo from "$assets/states-albers-10m.json"
+
+// Convert topo to GeoJSON
+const states = feature(
+  statesAlbers10mTopo,
+  statesAlbers10mTopo.objects["states"],
+)
+
+// Create collection of map features
+const statesFeatures = FeatureCollection.fromGeoJSON(states)
+
+const mapConfig = {
+  view: {
+    extent: [
+      [0, 0],
+      [975, 610],
+    ],
+  },
+}
+
+const strokeStyle = new Style({
+  stroke: new Stroke({
+    color: "#999",
+    width: 1
+  })
+});
 
 export default function USMap() {
-
-  const config = // ...config shown above
-
-  const strokeStyle = new Style({
-    stroke: new Stroke({
-      color: "#999",
-      width: 1,
-    }),
-  })
-  const states = feature(
-    statesAlbers10mTopo,
-    statesAlbers10mTopo.objects["states"],
-  )
-  const statesSource = new VectorSource({
-    features: new GeoJSON().readFeaturesFromObject(states),
-  })
-
-  const statesLayer = new VectorLayer({
-    source: statesSource,
-    style: strokeStyle,
-  })
-
- return (
-    <Map config={config}>
-      {{
-        layers: [statesLayer],
-      }}
+  return (
+    <Map config={mapConfig}>
+      <VectorLayer.Component
+        features={statesFeatures}
+        style={strokeStyle}
+      />
     </Map>
   )
 }

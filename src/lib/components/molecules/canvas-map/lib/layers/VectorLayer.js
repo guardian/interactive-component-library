@@ -17,7 +17,7 @@ export class VectorLayer {
     style,
     minZoom,
     opacity,
-    hitDetectionEnabled,
+    hitDetectionEnabled = true,
   }) {
     const { registerLayer } = useContext(MapContext)
 
@@ -69,7 +69,7 @@ export class VectorLayer {
    * @param {Style | (() => Style)} [params.style=undefined]
    * @param {number} [params.minZoom=0]
    * @param {number} [params.opacity=1]
-   * @param {boolean} [params.hitDetectionEnabled=false]
+   * @param {boolean} [params.hitDetectionEnabled=true]
    */
   constructor({
     source,

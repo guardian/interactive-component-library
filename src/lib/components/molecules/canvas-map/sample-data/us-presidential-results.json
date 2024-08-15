@@ -1,0 +1,2152 @@
+[
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "1",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "keyRace": true,
+    "reportingUnits": [
+      {
+        "statePostal": "AL",
+        "stateName": "Alabama",
+        "reportingunitID": "1",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:07.387000Z",
+        "precinctsReporting": 2028,
+        "eevp": 99,
+        "precinctsTotal": 2028,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 1238000,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:53:05.773Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 3,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 628894
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "4",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "AR",
+        "stateName": "Arkansas",
+        "reportingunitID": "4",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:08.015000Z",
+        "precinctsReporting": 2790,
+        "eevp": 99,
+        "precinctsTotal": 2790,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 600780,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:54:06.355Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 298809
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "5",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "CA",
+        "stateName": "California",
+        "reportingunitID": "5",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:54:58.850000Z",
+        "precinctsReporting": 20855,
+        "eevp": 99,
+        "precinctsTotal": 20855,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 7119196,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:53:55.984Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 3919484
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "6",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "CO",
+        "stateName": "Colorado",
+        "reportingunitID": "6",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:54:03.857000Z",
+        "precinctsReporting": 2567,
+        "eevp": 99,
+        "precinctsTotal": 2567,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 1418329,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:54:01.259Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 546439
+          },
+          {
+            "first": "Robert",
+            "last": "Kennedy",
+            "party": "Una",
+            "candidateID": "71841",
+            "ballotOrder": 3,
+            "polID": "71841",
+            "polNum": "71841",
+            "voteCount": 248092
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "11",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "GA",
+        "stateName": "Georgia",
+        "reportingunitID": "11",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:54:16.325000Z",
+        "precinctsReporting": 2716,
+        "eevp": 99,
+        "precinctsTotal": 2716,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 1,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 2331221,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:54:11.247Z"
+          },
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 3,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 1322048
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "16",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "keyRace": true,
+    "reportingUnits": [
+      {
+        "statePostal": "IA",
+        "stateName": "Iowa",
+        "reportingunitID": "16",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:13.375000Z",
+        "precinctsReporting": 1680,
+        "eevp": 99,
+        "precinctsTotal": 1680,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 712626,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:54:11.800Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 394409
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "13",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "ID",
+        "stateName": "Idaho",
+        "reportingunitID": "13",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:54:52.229000Z",
+        "precinctsReporting": 975,
+        "eevp": 99,
+        "precinctsTotal": 975,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 313704,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:52:52.731Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 3,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 187019
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "14",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "keyRace": true,
+    "reportingUnits": [
+      {
+        "statePostal": "IL",
+        "stateName": "Illinois",
+        "reportingunitID": "14",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:08.744000Z",
+        "precinctsReporting": 8616,
+        "eevp": 99,
+        "precinctsTotal": 8616,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 2575573,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:55:06.446Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 1698024
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "15",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "IN",
+        "stateName": "Indiana",
+        "reportingunitID": "15",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:15.829000Z",
+        "precinctsReporting": 5147,
+        "eevp": 99,
+        "precinctsTotal": 5147,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 1539323,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:54:13.869Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 450513
+          },
+          {
+            "first": "Robert",
+            "last": "Kennedy",
+            "party": "WTP",
+            "candidateID": "71841",
+            "ballotOrder": 4,
+            "polID": "71841",
+            "polNum": "71841",
+            "voteCount": 222229
+          },
+          {
+            "first": "Chase",
+            "last": "Oliver",
+            "party": "Lib",
+            "candidateID": "69459",
+            "ballotOrder": 5,
+            "polID": "69459",
+            "polNum": "69459",
+            "voteCount": 157486
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "18",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "KY",
+        "stateName": "Kentucky",
+        "reportingunitID": "18",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:01.604000Z",
+        "precinctsReporting": 3233,
+        "eevp": 99,
+        "precinctsTotal": 3233,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 1,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 1141520,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:54:00.170Z"
+          },
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 3,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 603994
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "20",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "keyRace": true,
+    "reportingUnits": [
+      {
+        "statePostal": "ME",
+        "stateName": "Maine",
+        "reportingunitID": "20",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:54:13.378000Z",
+        "precinctsReporting": 575,
+        "eevp": 99,
+        "precinctsTotal": 575,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 377869,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:53:10.295Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 199328
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "20",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "82970",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "seatName": "District 1",
+    "seatNum": "1",
+    "reportingUnits": [
+      {
+        "statePostal": "ME",
+        "stateName": "Maine",
+        "reportingunitID": "20",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:54:11.350000Z",
+        "precinctsReporting": 154,
+        "eevp": 99,
+        "precinctsTotal": 154,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 192464,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:53:10.295Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 97540
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "20",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "82971",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "seatName": "District 2",
+    "seatNum": "2",
+    "reportingUnits": [
+      {
+        "statePostal": "ME",
+        "stateName": "Maine",
+        "reportingunitID": "20",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:54:15.362000Z",
+        "precinctsReporting": 421,
+        "eevp": 99,
+        "precinctsTotal": 421,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 181243,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:54:10.673Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 99253
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "25",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "MS",
+        "stateName": "Mississippi",
+        "reportingunitID": "25",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:53.716000Z",
+        "precinctsReporting": 1761,
+        "eevp": 99,
+        "precinctsTotal": 1761,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 672918,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:53:52.686Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 370434
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "27",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "MT",
+        "stateName": "Montana",
+        "reportingunitID": "27",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:54:59.308000Z",
+        "precinctsReporting": 728,
+        "eevp": 99,
+        "precinctsTotal": 728,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 232751,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:54:56.726Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 143458
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "34",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "NC",
+        "stateName": "North Carolina",
+        "reportingunitID": "34",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:25.842000Z",
+        "precinctsReporting": 2662,
+        "eevp": 99,
+        "precinctsTotal": 2662,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 2325961,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:55:22.129Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 663719
+          },
+          {
+            "first": "Chase",
+            "last": "Oliver",
+            "party": "Lib",
+            "candidateID": "69459",
+            "ballotOrder": 3,
+            "polID": "69459",
+            "polNum": "69459",
+            "voteCount": 308582
+          },
+          {
+            "first": "Robert",
+            "last": "Kennedy",
+            "party": "WTP",
+            "candidateID": "71841",
+            "ballotOrder": 4,
+            "polID": "71841",
+            "polNum": "71841",
+            "voteCount": 240227
+          },
+          {
+            "first": "Randall",
+            "last": "Terry",
+            "party": "CST",
+            "candidateID": "61513",
+            "ballotOrder": 5,
+            "polID": "61513",
+            "polNum": "61513",
+            "voteCount": 196988
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "35",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "ND",
+        "stateName": "North Dakota",
+        "reportingunitID": "35",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:54:58.002000Z",
+        "precinctsReporting": 385,
+        "eevp": 99,
+        "precinctsTotal": 385,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 194583,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:52:56.361Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 96610
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "28",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "NE",
+        "stateName": "Nebraska",
+        "reportingunitID": "28",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:03.711000Z",
+        "precinctsReporting": 1326,
+        "eevp": 99,
+        "precinctsTotal": 1326,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 1,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 406001,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:54:01.796Z"
+          },
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 4,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 134775
+          },
+          {
+            "first": "Robert",
+            "last": "Kennedy",
+            "party": "NP",
+            "candidateID": "71841",
+            "ballotOrder": 4,
+            "polID": "71841",
+            "polNum": "71841",
+            "voteCount": 74028
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "28",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "82966",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "seatName": "District 1",
+    "seatNum": "1",
+    "reportingUnits": [
+      {
+        "statePostal": "NE",
+        "stateName": "Nebraska",
+        "reportingunitID": "28",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:02.464000Z",
+        "precinctsReporting": 414,
+        "eevp": 99,
+        "precinctsTotal": 414,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 1,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 136587,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:48:59.240Z"
+          },
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 2,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 32362
+          },
+          {
+            "first": "Robert",
+            "last": "Kennedy",
+            "party": "NP",
+            "candidateID": "71841",
+            "ballotOrder": 3,
+            "polID": "71841",
+            "polNum": "71841",
+            "voteCount": 23756
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "28",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "82967",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "seatName": "District 2",
+    "seatNum": "2",
+    "reportingUnits": [
+      {
+        "statePostal": "NE",
+        "stateName": "Nebraska",
+        "reportingunitID": "28",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:02.386000Z",
+        "precinctsReporting": 276,
+        "eevp": 99,
+        "precinctsTotal": 276,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 1,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 113323,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:55:01.917Z"
+          },
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 4,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 42295
+          },
+          {
+            "first": "Robert",
+            "last": "Kennedy",
+            "party": "NP",
+            "candidateID": "71841",
+            "ballotOrder": 4,
+            "polID": "71841",
+            "polNum": "71841",
+            "voteCount": 37246
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "28",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "82968",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "seatName": "District 3",
+    "seatNum": "3",
+    "reportingUnits": [
+      {
+        "statePostal": "NE",
+        "stateName": "Nebraska",
+        "reportingunitID": "28",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:03.445000Z",
+        "precinctsReporting": 636,
+        "eevp": 99,
+        "precinctsTotal": 636,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 1,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 134683,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:54:01.796Z"
+          },
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 4,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 45176
+          },
+          {
+            "first": "Robert",
+            "last": "Kennedy",
+            "party": "NP",
+            "candidateID": "71841",
+            "ballotOrder": 5,
+            "polID": "71841",
+            "polNum": "71841",
+            "voteCount": 27558
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "29",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "NV",
+        "stateName": "Nevada",
+        "reportingunitID": "29",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:54:58.512000Z",
+        "precinctsReporting": 1642,
+        "eevp": 99,
+        "precinctsTotal": 1642,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 793152,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:54:57.670Z"
+          },
+          {
+            "first": "Robert",
+            "last": "Kennedy",
+            "party": "Ind",
+            "candidateID": "71841",
+            "ballotOrder": 2,
+            "polID": "71841",
+            "polNum": "71841",
+            "voteCount": 246366
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 3,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 127547
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "33",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "keyRace": true,
+    "reportingUnits": [
+      {
+        "statePostal": "NY",
+        "stateName": "New York",
+        "reportingunitID": "33",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:06.330000Z",
+        "precinctsReporting": 13848,
+        "eevp": 99,
+        "precinctsTotal": 13848,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 4295037,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:54:04.015Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 2369563
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "37",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "Primary",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "OK",
+        "stateName": "Oklahoma",
+        "reportingunitID": "37",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:17.573000Z",
+        "precinctsReporting": 1984,
+        "eevp": 99,
+        "precinctsTotal": 1984,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 731929,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:55:16.603Z"
+          },
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 3,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 418686
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "38",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "OR",
+        "stateName": "Oregon",
+        "reportingunitID": "38",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:54:58.177000Z",
+        "precinctsReporting": 1314,
+        "eevp": 99,
+        "precinctsTotal": 1314,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 1014945,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:53:57.348Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 505029
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "39",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 85.77,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "PA",
+        "stateName": "Pennsylvania",
+        "reportingunitID": "39",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:58.063000Z",
+        "precinctsReporting": 8274,
+        "eevp": 85.77,
+        "precinctsTotal": 9198,
+        "precinctsReportingPct": 89.95,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 2518359,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:53:56.141Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 1431738
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "41",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "SC",
+        "stateName": "South Carolina",
+        "reportingunitID": "41",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:15.518000Z",
+        "precinctsReporting": 2296,
+        "eevp": 99,
+        "precinctsTotal": 2296,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 2,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 1031865,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:55:14.737Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 3,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 610346
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "42",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "SD",
+        "stateName": "South Dakota",
+        "reportingunitID": "42",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:05.703000Z",
+        "precinctsReporting": 690,
+        "eevp": 99,
+        "precinctsTotal": 690,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 203408,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:54:05.240Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 3,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 119301
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "44",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "TX",
+        "stateName": "Texas",
+        "reportingunitID": "44",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:55:01.969000Z",
+        "precinctsReporting": 9817,
+        "eevp": 99,
+        "precinctsTotal": 9817,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 5786308,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:53:53.838Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 3159030
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eventID": "20241105_CT20240808B",
+    "stateID": "45",
+    "test": true,
+    "resultsType": "test",
+    "raceID": "0",
+    "raceType": "General",
+    "raceTypeID": "G",
+    "tabulationStatus": "End of AP Tabulation",
+    "raceCallStatus": "Called",
+    "officeID": "P",
+    "officeName": "President",
+    "incumbents": [
+      {
+        "first": "Joe",
+        "last": "Biden",
+        "party": "Dem",
+        "candidateID": "1036",
+        "polID": "1036",
+        "polNum": "1036"
+      }
+    ],
+    "eevp": 99,
+    "national": true,
+    "state": true,
+    "reportingUnits": [
+      {
+        "statePostal": "UT",
+        "stateName": "Utah",
+        "reportingunitID": "45",
+        "reportingunitLevel": 1,
+        "pollClosingTime": "2024-08-08T17:04:00.000000Z",
+        "level": "state",
+        "electTotal": 0,
+        "lastUpdated": "2024-08-08T17:54:55.808000Z",
+        "precinctsReporting": 3084,
+        "eevp": 99,
+        "precinctsTotal": 3084,
+        "precinctsReportingPct": 100,
+        "candidates": [
+          {
+            "first": "Kamala",
+            "last": "Harris",
+            "party": "Dem",
+            "candidateID": "64984",
+            "ballotOrder": 1,
+            "polID": "64984",
+            "polNum": "64984",
+            "voteCount": 643034,
+            "winner": "X",
+            "winnerDateTime": "2024-08-08T17:54:54.797Z"
+          },
+          {
+            "first": "Donald",
+            "last": "Trump",
+            "party": "GOP",
+            "candidateID": "8639",
+            "ballotOrder": 2,
+            "polID": "8639",
+            "polNum": "8639",
+            "voteCount": 144456
+          },
+          {
+            "first": "Shiva",
+            "last": "Ayyadurai",
+            "party": "Una",
+            "candidateID": "166843",
+            "ballotOrder": 3,
+            "polID": "166843",
+            "polNum": "166843",
+            "voteCount": 53137
+          },
+          {
+            "first": "Claudia",
+            "last": "De la Cruz",
+            "party": "Una",
+            "candidateID": "166844",
+            "ballotOrder": 4,
+            "polID": "166844",
+            "polNum": "166844",
+            "voteCount": 43487
+          },
+          {
+            "first": "Lucifer",
+            "last": "Everylove",
+            "party": "Una",
+            "candidateID": "167488",
+            "ballotOrder": 5,
+            "polID": "167488",
+            "polNum": "167488",
+            "voteCount": 38892
+          },
+          {
+            "first": "Robert",
+            "last": "Kennedy",
+            "party": "Una",
+            "candidateID": "71841",
+            "ballotOrder": 6,
+            "polID": "71841",
+            "polNum": "71841",
+            "voteCount": 32723
+          },
+          {
+            "first": "Cornel",
+            "last": "West",
+            "party": "Una",
+            "candidateID": "71845",
+            "ballotOrder": 7,
+            "polID": "71845",
+            "polNum": "71845",
+            "voteCount": 29218
+          }
+        ]
+      }
+    ]
+  }
+]
