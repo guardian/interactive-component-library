@@ -2,7 +2,40 @@ import { Feature } from "../Feature"
 import { Polygon, LineString, Point } from "../geometry"
 import { extentForCoordinates } from "../util/extent"
 
+/**
+ * @typedef {Object} GeoJSONFeature
+ * @property {string} type
+ * @property {Object} geometry
+ * @property {Record<string, any>} properties
+ */
+
+/**
+ * @typedef {Object} GeoJSONFeatureCollection
+ * @property {string} type
+ * @property {GeoJSONFeature[]} features
+ */
+
+/**
+ * @typedef GeoJSONParseOptions
+ * @property {boolean} [isProjected=false] - Tells the parser whether the geometry is already projected or not
+ */
+
 export class GeoJSON {
+  /**
+   * @constructor
+   * @param {GeoJSONParseOptions} parseOptions
+   */
+  constructor({ isProjected = false }) {
+    this.isProjected = isProjected
+  }
+
+  /**
+   * Convert GeoJSON object(s) to array of {@link Feature} objects
+   *
+   * @function
+   * @param {GeoJSONFeature | GeoJSONFeatureCollection | GeoJSONFeature[]} object GeoJSON object
+   * @returns {Feature[]}
+   */
   readFeaturesFromObject(object) {
     const geoJSONObject = object
     let features = null
@@ -18,7 +51,11 @@ export class GeoJSON {
         features.push(featureObject)
       }
     } else if (geoJSONObject["type"] === "Feature") {
-      features = [this.readFeatureFromObject(geoJSONObject)]
+      features = [
+        this.readFeatureFromObject(
+          /** @type {GeoJSONFeature} */ (geoJSONObject),
+        ),
+      ]
     } else if (Array.isArray(geoJSONObject)) {
       features = []
       for (let i = 0, ii = geoJSONObject.length; i < ii; ++i) {
@@ -42,6 +79,13 @@ export class GeoJSON {
     return features.flat()
   }
 
+  /**
+   * Convert single GeoJSON feature to {@link Feature} object
+   *
+   * @function
+   * @param {GeoJSONFeature} geoJSONObject GeoJSON object
+   * @returns {Feature | null}
+   */
   readFeatureFromObject(geoJSONObject) {
     const geometries = this.readGeometriesFromObject(geoJSONObject["geometry"])
     if (geometries.length > 0) {

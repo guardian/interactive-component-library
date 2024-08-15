@@ -1,8 +1,10 @@
+// @ts-nocheck
 import { useRef, useEffect, useState } from "preact/hooks"
 import { pointInsideRect } from "$shared/helpers/geometry"
 
 export function useTouchOrHover() {
   const ref = useRef()
+  const [activeEvent, setActiveEvent] = useState()
   const [position, setPosition] = useState()
   const [isActive, setIsActive] = useState(false)
   const [touchRect, setTouchRect] = useState()
@@ -31,7 +33,7 @@ export function useTouchOrHover() {
         height: touch.radiusY * 2,
       }
       setTouchRect(touchRect)
-
+      setActiveEvent(event)
       setIsActive(true)
 
       event.stopPropagation()
@@ -39,6 +41,7 @@ export function useTouchOrHover() {
 
     const touchMoved = (event) => {
       if (touchCancelled || event.targetTouches.length !== 1) return
+      setActiveEvent(event)
 
       const touch = event.targetTouches[0]
 
@@ -64,6 +67,7 @@ export function useTouchOrHover() {
         // prevent simulated click events
         event.preventDefault()
       }
+      setActiveEvent(null)
       setIsActive(false)
       setPosition(null)
     }
@@ -76,6 +80,7 @@ export function useTouchOrHover() {
       const y = clientY - rect.top
 
       setPosition({ x, y })
+      setActiveEvent(event)
       setIsActive(true)
     }
 
@@ -86,12 +91,14 @@ export function useTouchOrHover() {
       const x = clientX - rect.left
       const y = clientY - rect.top
 
+      setActiveEvent(event)
       setPosition({ x, y })
     }
 
     const mouseOut = () => {
-      setIsActive(false)
       setPosition(null)
+      setActiveEvent(null)
+      setIsActive(false)
     }
 
     element.addEventListener("touchstart", touchStarted)
@@ -120,5 +127,6 @@ export function useTouchOrHover() {
     touchOrHoverIsActive: isActive,
     touchRect,
     positionInTarget: position,
+    activeEvent,
   }
 }
