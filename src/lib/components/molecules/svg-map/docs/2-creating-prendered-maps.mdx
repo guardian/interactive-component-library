@@ -1,0 +1,145 @@
+import { Meta, Canvas, Source, Controls } from '@storybook/blocks'
+import { Hint } from '$storybook/blocks/Hint.jsx'
+import * as StaticMapStories from './svg-map.stories.jsx'
+import * as PolygonStories from './layers/polygon.stories.jsx'
+import * as PointStories from './layers/point.stories.jsx'
+import * as LineStories from './layers/line.stories.jsx'
+import * as PrerenderedStories from './layers/prerendered.stories.jsx'
+import styles from './stories.module.css'
+import ukCountriesTopoJSON from './sample-data/UK-countries-topo.json?url'
+
+<Meta title="Molecules/SVGMap/Creating Prerendered maps" />
+
+# SVGMap
+
+> When to prerendering an SVG map
+
+Pre-rendering maps can be a good solution when you have lots of identical maps in a page and don't want your page to have to re-render the topojson each time. 
+For example, locator maps - if you are locating 12 different US states on the same underlying map. 
+
+If you just need one or two maps, on a page, then this pre-rendering step is less likely to be useful and the performance gain you'll get from pre-rendering 
+is less significant. 
+
+## Getting started
+
+1. First you want to create a simple Polygon map, of the correct area, with the right bounds and projections. 
+See Getting Started for how to do this.
+Load some geography from a [TopoJSON](https://github.com/topojson/topojson) file. To follow along with this example you can download <a href={https://github.com/topojson/us-atlas?tab=readme-ov-file#states-albers-10m.json} download>us-states-topo.json</a>
+
+<Source dark={true} code={`
+// UKMap.jsx
+import { feature } from 'topojson-client'
+import usStatesTopo from './path-to-topo.json'
+
+const ukCountries = feature(usStatesTopo, usStatesTopo.objects['states'])
+
+`} />
+
+NB: bounds can normally be found in the topjson file. 
+
+
+2. Then, download the SVG using the download button.
+
+3. Upload the SVG to the assets file of the project where you want to use the map. 
+The prerendered map will 
+
+NB: in the map config, the [projection](https://github.com/topojson/us-atlas?tab=readme-ov-file#us-atlas-topojson) is specified by the maker of the topojson.
+And the bounds also come from the bbox property in the topojson file.
+
+The usAsset variable is the path pointing to the file in the assets folder.
+
+
+<Source dark={true} code={`
+// LocatorMap.jsx
+import { SVGMap, MapLayers } from "@guardian/interactive-component-library"
+import { geoAlbersUsa } from "d3-geo"
+
+export const LocatorMap = ({ state, centroid = "test" }) => {
+
+  let mapArgs = {
+    name: "US locator",
+    id: "map",
+    config: { 
+      projection: geoAlbersUsa().scale(1300).translate([487.5, 305]), 
+      drawCompositionBorders: false,
+      bounds: [
+        [-57.66491068874468, 12.97635452036684],
+        [957.5235629133763, 606.5694262668667]
+      ]
+    },
+    padding: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    drawToCanvas: false,
+    width: 100,
+    height: 61,
+  }
+
+  const usAsset = "__assetsPath__/geo/us-states.svg"
+
+  return (
+    <SVGMap {...mapArgs}>
+      <MapLayers.Prerendered url={usAsset} />
+    </SVGMap>
+  )
+}
+
+`} />
+
+
+4. Adding a point layer. To pinpoint eg a state on this pre-rendered map, get the co-ordinates of the point you wish to highlight. 
+Bear in mind that conventionally location coordinates are given as lat-lons, but in d3, coordinates are written as lon-lats, so you will need switch the 
+numbers around. 
+NB: the property given to features must be an array. 
+
+
+<Source dark={true} code={`
+
+ const pointFeature = {
+    type: "Feature",
+    properties: {},
+    geometry: {
+      coordinates: [-83.441162, 33.247875],
+      type: "Point",
+    },
+  }
+
+  const usAsset = "__assetsPath__/geo/us-states.svg"
+
+  return (
+    <SVGMap {...mapArgs}>
+      <MapLayers.Prerendered url={usAsset} styles={styles} />
+      <MapLayers.Point features={[pointFeature]} fill={'red'} stroke-width={2} radius={10}/>
+    </SVGMap>
+  )
+
+  `} />
+
+
+## API
+
+### Map
+
+<Controls of={StaticMapStories.UKMap} />
+
+### MapLayers.Polygon
+
+<Canvas of={PolygonStories.Polygon} />
+
+<Controls of={PolygonStories.Polygon} />
+
+### MapLayers.Point
+
+<Canvas of={PointStories.Point} />
+
+<Controls of={PointStories.Point} />
+
+
+### MapLayers.Prerendered
+
+<Canvas of={PrerenderedStories.Prerendered} />
+
+<Controls of={PrerenderedStories.Prerendered} />
