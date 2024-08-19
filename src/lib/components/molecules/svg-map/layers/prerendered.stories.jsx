@@ -1,3 +1,4 @@
+import { geoIdentity } from "d3-geo"
 import { SVGMap, MapConfiguration } from "../"
 import { Prerendered as Layer } from "./Prerendered"
 import ukAlbersMap from "../sample-data/uk-outline-composite.svg"
@@ -16,7 +17,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: "344px", height: "500px", margin: "0 auto" }}>
+      <div style={{ width: "100%", height: "215px", margin: "0 auto" }}>
         <Story />
       </div>
     ),
@@ -45,6 +46,26 @@ export const Prerendered = {
 export const PreRenderedUs = {
   args: {
     url: usAlbersMap,
-    mapConfig: MapConfiguration.UsStates,
+    mapConfig: {
+      projection: geoIdentity(),
+
+      bounds: [
+        [-57.66491068874468, 12.97635452036684],
+        [957.5235629133763, 606.5694262668667],
+      ],
+      drawCompositionBorders: true,
+      drawToCanvas: false,
+    },
   },
+  render: (args) => (
+    <SVGMap
+      padding={{ top: 0, right: 0, bottom: 0, left: 0 }}
+      config={{
+        ...args.mapConfig,
+        drawCompositionBorders: false,
+      }}
+    >
+      <Layer {...args} />
+    </SVGMap>
+  ),
 }
