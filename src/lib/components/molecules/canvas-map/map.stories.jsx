@@ -234,9 +234,9 @@ export const USSenateCartogram = {
       view: {
         extent: [
           [0, 0],
-          [900, 562],
+          [975, 610],
         ],
-        padding: { top: 20, right: 20, bottom: 20, left: 20 },
+        padding: { top: 0, right: 0, bottom: 0, left: 0 },
       },
     },
   },
@@ -258,17 +258,48 @@ export const USSenateCartogram = {
 
     const cartogramFeatures = FeatureCollection.fromGeoJSON(
       // @ts-ignore
-      statesSenateCartogram,
+      statesSenateCartogram.features.filter(
+        (d) => d.geometry.type === "Polygon",
+      ),
     )
 
+    const labelFeatures = FeatureCollection.fromGeoJSON(
+      // @ts-ignore
+
+      statesSenateCartogram.features.filter((d) => d.geometry.type === "Point"),
+    )
+
+    function exportCanvasToPNG() {
+      const canvas = document.querySelector(".gv-map canvas")
+      const context = canvas.getContext("2d")
+
+      context.save()
+      context.globalCompositeOperation = "destination-over" // Draw the background behind existing content
+      context.fillStyle = "white"
+      context.fillRect(0, 0, 1950, 1220)
+      context.restore() // Restore the previous drawing state
+
+      const img = canvas.toDataURL("image/png")
+      document.getElementById("existing-image-id").src = img
+    }
+
     return (
-      <Map {...args}>
-        <VectorLayer.Component features={stateFeatures} style={strokeStyle} />
-        <VectorLayer.Component
-          features={cartogramFeatures}
-          style={strokeStyle}
+      <div style={{ width: 975, height: 610 }}>
+        <Map {...args}>
+          <VectorLayer.Component features={stateFeatures} style={strokeStyle} />
+          <VectorLayer.Component
+            features={cartogramFeatures}
+            style={strokeStyle}
+          />
+          <TextLayer.Component features={labelFeatures} />
+        </Map>
+        <a onClick={exportCanvasToPNG}>Export to PNG</a>
+        <img
+          id="existing-image-id"
+          src=""
+          style={{ width: 1950, height: 1220 }}
         />
-      </Map>
+      </div>
     )
   },
 }
