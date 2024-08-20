@@ -1,52 +1,45 @@
-import { Meta, Canvas, Source, Controls } from '@storybook/blocks'
-import { Hint } from '$storybook/blocks/Hint.jsx'
-import * as StaticMapStories from './svg-map.stories.jsx'
-import * as PolygonStories from './layers/polygon.stories.jsx'
-import * as PointStories from './layers/point.stories.jsx'
-import * as LineStories from './layers/line.stories.jsx'
-import * as PrerenderedStories from './layers/prerendered.stories.jsx'
-import styles from './stories.module.css'
-import ukCountriesTopoJSON from './sample-data/UK-countries-topo.json?url'
+import { Meta, Source, DocsContainer } from '@storybook/blocks'
+import * as PrerenderedStories from '../layers/prerendered.stories.jsx'
+import styles from '../stories.module.css'
 
-<Meta title="Molecules/SVGMap/Creating Prerendered maps" />
+<Meta title="Molecules/SVGMap/Creating prerendered maps" parameters={{
+    docs: {
+      container: ({ children, context }) => (
+        <DocsContainer context={context}>
+          <div style={{ border: '5px solid red' }}>{children}</div>
+        </DocsContainer>
+      ),
+    },
+  }} />
 
 # SVGMap
 
-> When to prerendering an SVG map
+## When to prerender an SVG map
 
-Pre-rendering maps can be a good solution when you have lots of identical maps in a page and don't want your page to have to re-render the topojson each time. 
-For example, locator maps - if you are locating 12 different US states on the same underlying map. 
+Pre-rendering maps can be a good solution when you have lots of identical maps in a page and want to reduce the rendering 
+work your page is doing, ie avoiding re-rendering the same topojson file several times over. An example use case is locator maps: eg locating different states on the same underlying map of the US 12 times over. 
 
-If you just need one or two maps, on a page, then this pre-rendering step is less likely to be useful and the performance gain you'll get from pre-rendering 
-is less significant. 
+If you just need one or two maps on a page the performance gain you'll get from pre-rendering is less significant. 
 
 ## Getting started
 
-1. First you want to create a simple Polygon map, of the correct area, with the right bounds and projections. 
-See Getting Started for how to do this.
-Load some geography from a [TopoJSON](https://github.com/topojson/topojson) file. To follow along with this example you can download <a href={https://github.com/topojson/us-atlas?tab=readme-ov-file#states-albers-10m.json} download>us-states-topo.json</a>
+1. First create a simple Polygon map of the correct area, with the right bounds and projections. If you do this in the `polygon.stories.jsx` file, 
+you can use the interface in the components library that allows you to download an SVG. But this can also be done in a client repo. 
 
-<Source dark={true} code={`
-// UKMap.jsx
-import { feature } from 'topojson-client'
-import usStatesTopo from './path-to-topo.json'
+See Getting Started for how to create a simple Polygon Map. You will need to load some geography from a [TopoJSON](https://github.com/topojson/topojson) file. And add configuration 
 
-const ukCountries = feature(usStatesTopo, usStatesTopo.objects['states'])
-
-`} />
-
-NB: bounds can normally be found in the topjson file. 
+** QUESTION: when should you use geoIdentity() vs a standard projection eg Albers? 
 
 
-2. Then, download the SVG using the download button.
+2. Check the resulting SVG looks how you want. If so, you can use the Download SVG button in the component library, or else inspect and download the 
+resulting SVG from the repo where you have created it. You could just use a pre-created SVG, but it is helpful to do this step so
+the underlying map will be compatible with other layers from the component library. 
 
-3. Upload the SVG to the assets file of the project where you want to use the map. 
-The prerendered map will 
 
-NB: in the map config, the [projection](https://github.com/topojson/us-atlas?tab=readme-ov-file#us-atlas-topojson) is specified by the maker of the topojson.
-And the bounds also come from the bbox property in the topojson file.
-
-The usAsset variable is the path pointing to the file in the assets folder.
+3. Upload the SVG file to the assets directory of the project where you want to use the map. 
+Use the Prerendered Layer and point its url attribute to the SVG map you have just created. `<MapLayers.Prerendered url={usAsset} />` 
+The layer should be a child of the `<SVGMap>` component.
+See below:
 
 
 <Source dark={true} code={`
@@ -89,10 +82,13 @@ export const LocatorMap = ({ state, centroid = "test" }) => {
 
 `} />
 
+NB: in the mapArgs, the [projection](https://github.com/topojson/us-atlas?tab=readme-ov-file#us-atlas-topojson) is specified by the maker of the topojson.
+The bounds come from the bbox property in the original topojson.
+
 
 4. Adding a point layer. To pinpoint eg a state on this pre-rendered map, get the co-ordinates of the point you wish to highlight. 
-Bear in mind that conventionally location coordinates are given as lat-lons, but in d3, coordinates are written as lon-lats, so you will need switch the 
-numbers around. 
+Bear in mind that location coordinates are conventionally given as lat-lons, but in d3, coordinates are written as lon-lats, 
+so you will need switch the numbers around. 
 NB: the property given to features must be an array. 
 
 
@@ -117,29 +113,3 @@ NB: the property given to features must be an array.
   )
 
   `} />
-
-
-## API
-
-### Map
-
-<Controls of={StaticMapStories.UKMap} />
-
-### MapLayers.Polygon
-
-<Canvas of={PolygonStories.Polygon} />
-
-<Controls of={PolygonStories.Polygon} />
-
-### MapLayers.Point
-
-<Canvas of={PointStories.Point} />
-
-<Controls of={PointStories.Point} />
-
-
-### MapLayers.Prerendered
-
-<Canvas of={PrerenderedStories.Prerendered} />
-
-<Controls of={PrerenderedStories.Prerendered} />
