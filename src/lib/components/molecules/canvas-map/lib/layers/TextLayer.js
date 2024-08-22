@@ -6,14 +6,15 @@ import { MapEvent } from "../events"
 import { VectorSource } from "../sources/VectorSource"
 import { MapContext } from "../../context/MapContext"
 import { useEffect, useContext, useMemo } from "preact/hooks"
+import { FeatureCollection } from "../FeatureCollection"
 
 /** @typedef {Omit<ConstructorParameters<typeof TextLayer>[0], "source">} TextLayerOptions */
-/** @typedef {TextLayerOptions & { features: import("../Feature").Feature[]}} TextLayerComponentProps */
+/** @typedef {TextLayerOptions & { features: import("../Feature").Feature[] | import("../FeatureCollection").FeatureCollection }} TextLayerComponentProps */
 
 export class TextLayer {
   /** @param {TextLayerComponentProps} props */
   static Component({
-    features,
+    features: featureCollection,
     style,
     minZoom,
     opacity,
@@ -25,16 +26,22 @@ export class TextLayer {
     // We recreate layer whenever these properties change, which cannot be changed on the fly
     // and require recreation
     const layer = useMemo(
-      () =>
-        TextLayer.with(features, {
+      () => {
+        const features =
+          featureCollection instanceof FeatureCollection
+            ? featureCollection.features
+            : /** @type {import("../Feature").Feature[]} */ (featureCollection)
+
+        return TextLayer.with(features, {
           style,
           minZoom,
           opacity,
           declutter,
           drawCollisionBoxes,
-        }),
+        })
+      },
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      [features, minZoom, opacity, declutter, drawCollisionBoxes],
+      [featureCollection, minZoom, opacity, declutter, drawCollisionBoxes],
     )
 
     // Register layer with map context. If `layer` is not present in map, it will be added.

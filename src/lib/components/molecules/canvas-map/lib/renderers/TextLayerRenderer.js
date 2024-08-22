@@ -1,13 +1,6 @@
 import { FeatureRenderer } from "./FeatureRenderer"
 import { replaceChildren } from "../util/dom"
 
-const textPadding = {
-  top: 20,
-  right: 20,
-  bottom: 20,
-  left: 20,
-}
-
 export class TextLayerRenderer {
   constructor(layer) {
     this.layer = layer
@@ -69,7 +62,7 @@ export class TextLayerRenderer {
       this.styleTextElement(textElement, featureStyle.text, position)
 
       // skip item if it collides with existing elements
-      const bbox = this.getElementBBox(textElement, {
+      const bbox = this.getElementBBox(textElement, featureStyle.text, {
         x: relativeX * viewPortSize[0],
         y: relativeY * viewPortSize[1],
       })
@@ -106,7 +99,6 @@ export class TextLayerRenderer {
   styleTextElement(element, textStyle, position) {
     const style = element.style
     style.position = "absolute"
-    style.transform = `translate(-50%, -50%)`
     style.left = position.left
     style.top = position.top
     style.textAlign = "center"
@@ -119,10 +111,11 @@ export class TextLayerRenderer {
     style.color = textStyle.color
     style.textShadow = textStyle.textShadow
 
-    style.padding = `${textPadding.top}px ${textPadding.right}px ${textPadding.bottom}px ${textPadding.left}px`
+    const { width, height } = this.getElementSize(element)
+    style.transform = textStyle.getTransform(width, height)
   }
 
-  getElementBBox(element, position) {
+  getElementSize(element) {
     if (!element.parentElement) {
       document.body.appendChild(element)
     }
@@ -133,11 +126,35 @@ export class TextLayerRenderer {
       element.remove()
     }
 
+    return { width, height }
+  }
+
+  getElementBBox(element, textStyle, position) {
+    const collissionPadding = {
+      top: 2,
+      right: 2,
+      bottom: 2,
+      left: 2,
+    }
+
+    const { width, height } = this.getElementSize(element)
+    const { x: translateX, y: translateY } = textStyle.getTranslation(
+      width,
+      height,
+    )
+
+    const minX = Math.floor(position.x + translateX - collissionPadding.left)
+    const minY = Math.floor(position.y + translateY - collissionPadding.top)
+
     return {
-      minX: Math.floor(position.x) - width / 2,
-      minY: Math.floor(position.y) - height / 2,
-      maxX: Math.ceil(position.x + width / 2),
-      maxY: Math.ceil(position.y + height / 2),
+      minX,
+      minY,
+      maxX: Math.ceil(
+        minX + width + collissionPadding.left + collissionPadding.right,
+      ),
+      maxY: Math.ceil(
+        minY + height + collissionPadding.top + collissionPadding.bottom,
+      ),
     }
   }
 
@@ -150,7 +167,7 @@ export class TextLayerRenderer {
     style.top = `${bbox.minY}px`
     style.width = `${bbox.maxX - bbox.minX}px`
     style.height = `${bbox.maxY - bbox.minY}px`
-    style.border = "2px solid black"
+    style.border = "1px solid red"
 
     return element
   }

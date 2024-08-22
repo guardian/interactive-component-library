@@ -241,6 +241,27 @@ export const USSenateCartogram = {
     },
   },
   render: (args) => {
+    const states = feature(
+      // @ts-ignore
+      statesAlbers10mTopo,
+      statesAlbers10mTopo.objects["states"],
+    )
+
+    // @ts-ignore
+    const stateFeatures = FeatureCollection.fromGeoJSON(states)
+
+    const cartogramFeatures = FeatureCollection.fromGeoJSON(
+      // @ts-ignore
+      statesSenateCartogram.features.filter((d) =>
+        ["Polygon", "LineString"].includes(d.geometry.type),
+      ),
+    )
+
+    const labelFeatures = FeatureCollection.fromGeoJSON(
+      // @ts-ignore
+      statesSenateCartogram.features.filter((d) => d.geometry.type === "Point"),
+    )
+
     const strokeStyle = new Style({
       stroke: new Stroke({
         color: "#999",
@@ -248,57 +269,38 @@ export const USSenateCartogram = {
       }),
     })
 
-    const states = feature(
-      // @ts-ignore
-      statesAlbers10mTopo,
-      statesAlbers10mTopo.objects["states"],
-    )
-    // @ts-ignore
-    const stateFeatures = FeatureCollection.fromGeoJSON(states)
-
-    const cartogramFeatures = FeatureCollection.fromGeoJSON(
-      // @ts-ignore
-      statesSenateCartogram.features.filter(
-        (d) => d.geometry.type === "Polygon",
-      ),
-    )
-
-    const labelFeatures = FeatureCollection.fromGeoJSON(
-      // @ts-ignore
-
-      statesSenateCartogram.features.filter((d) => d.geometry.type === "Point"),
-    )
-
-    function exportCanvasToPNG() {
-      const canvas = document.querySelector(".gv-map canvas")
-      const context = canvas.getContext("2d")
-
-      context.save()
-      context.globalCompositeOperation = "destination-over" // Draw the background behind existing content
-      context.fillStyle = "white"
-      context.fillRect(0, 0, 1950, 1220)
-      context.restore() // Restore the previous drawing state
-
-      const img = canvas.toDataURL("image/png")
-      document.getElementById("existing-image-id").src = img
+    const textStyle = (feature) => {
+      return new Style({
+        text: new Text({
+          content: feature.properties.text,
+          anchor: feature.properties.anchor,
+          fontSize: "16px",
+          radialOffset: 0.25,
+        }),
+      })
     }
 
     return (
-      <div style={{ width: 975, height: 610 }}>
+      <div style={{ position: "absolute", width: "100%", height: "100%" }}>
         <Map {...args}>
           <VectorLayer.Component features={stateFeatures} style={strokeStyle} />
           <VectorLayer.Component
             features={cartogramFeatures}
-            style={strokeStyle}
+            style={
+              new Style({
+                stroke: new Stroke({
+                  color: "#121212",
+                  width: 1,
+                }),
+              })
+            }
           />
-          <TextLayer.Component features={labelFeatures} />
+          <TextLayer.Component
+            features={labelFeatures}
+            drawCollisionBoxes={false}
+            style={textStyle}
+          />
         </Map>
-        <a onClick={exportCanvasToPNG}>Export to PNG</a>
-        <img
-          id="existing-image-id"
-          src=""
-          style={{ width: 1950, height: 1220 }}
-        />
       </div>
     )
   },
