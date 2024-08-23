@@ -33,9 +33,12 @@ export function preventOverlap(
     }
 
     if (moveBothLabels) {
+      // @ts-ignore
       previousElement[coordinate] -= overlap / 2
+      // @ts-ignore
       element[coordinate] += overlap / 2
     } else {
+      // @ts-ignore
       previousElement[coordinate] -= overlap
     }
 

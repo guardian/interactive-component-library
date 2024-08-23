@@ -1,23 +1,30 @@
 import path from "node:path"
 import { defineConfig } from "vitest/config"
-import { name } from "./package.json"
 import preact from "@preact/preset-vite"
 import peerDepsExternal from "rollup-plugin-peer-deps-external"
 import tsconfigPaths from "vite-tsconfig-paths"
+import dts from "vite-plugin-dts"
 
-const app = async () => {
-  /**
-   * Removes everything before the last path segment
-   * @octocat/library-repo -> library-repo
-   * vite-component-library-template -> vite-component-library-template
-   */
-  const formattedName = name.match(/[^/]+$/)?.[0] ?? name
+const trimSrcLibDirFromPath = (path) => path.replace(/^(src\/)?lib\//, "")
 
-  return defineConfig({
+export default defineConfig(({ mode }) => {
+  const isLibraryMode = mode === "lib"
+
+  /** @type {import('vitest/config').UserConfig} */
+  return {
     plugins: [
-      tsconfigPaths(),
       peerDepsExternal(),
+      tsconfigPaths(),
       preact({ prefreshEnabled: false }),
+
+      isLibraryMode &&
+        dts({
+          tsconfigPath: "./jsconfig.lib.json",
+          beforeWriteFile: (filePath, content) => ({
+            filePath: trimSrcLibDirFromPath(filePath),
+            content,
+          }),
+        }),
     ],
     css: {
       preprocessorOptions: {
@@ -36,14 +43,17 @@ const app = async () => {
       jsxFragment: "Fragment",
     },
     build: {
-      sourcemap: true,
       minify: false,
       lib: {
+        formats: ["es"],
         entry: path.resolve(__dirname, "src/lib/index.js"),
-        name: formattedName,
+        // Move files from /src/lib to /dist
+        fileName: (format, name) => `${trimSrcLibDirFromPath(name)}.js`,
       },
       rollupOptions: {
         output: {
+          // Preserve source directory structure in dist
+          preserveModules: true,
           globals: {
             preact: "preact",
             "preact/jsx-runtime": "preact/jsx-runtime",
@@ -62,7 +72,5 @@ const app = async () => {
       globals: true,
       environment: "jsdom",
     },
-  })
-}
-// https://vitejs.dev/config/
-export default app
+  }
+})
