@@ -13,7 +13,7 @@ import {
 import { AspectRatioBox } from "$particles"
 import { feature, merge } from "topojson-client"
 import states10mTopo from "./sample-data/states-10m.json"
-import statesElectoralCollegeCartogram from "./sample-data/2024-ecv-hex-cartogram.json"
+import statesElectoralCollegeCartogram from "./sample-data/ecv-cartogram.json"
 import statesSenateCartogram from "./sample-data/senate-cartogram.json"
 import statesAlbers10mTopo from "./sample-data/states-albers-10m.json"
 import westminsterConstituenciesTopo from "./sample-data/uk-westminster-simplified.json"
@@ -201,7 +201,7 @@ export const USElectoralCartogram = {
       view: {
         extent: [
           [0, 0],
-          [637, 610],
+          [975, 610],
         ],
         padding: { top: 20, right: 20, bottom: 20, left: 20 },
       },
@@ -215,13 +215,38 @@ export const USElectoralCartogram = {
       }),
     })
 
+    const cartogramFeatures = FeatureCollection.fromGeoJSON(
+      // @ts-ignore
+      statesElectoralCollegeCartogram.features.filter(
+        (d) => d.geometry.type === "Polygon",
+      ),
+    )
+    const labelFeatures = FeatureCollection.fromGeoJSON(
+      // @ts-ignore
+      statesElectoralCollegeCartogram.features.filter(
+        (d) => d.geometry.type === "Point",
+      ),
+    )
+
     return (
       <Map {...args}>
         <VectorLayer.Component
-          features={new GeoJSON().readFeaturesFromObject(
-            statesElectoralCollegeCartogram,
-          )}
+          features={cartogramFeatures}
           style={strokeStyle}
+        />
+        <TextLayer.Component
+          features={labelFeatures}
+          drawCollisionBoxes={false}
+          style={(feature) => {
+            return new Style({
+              text: new Text({
+                content: feature.properties.text,
+                anchor: feature.properties.anchor,
+                fontSize: "16px",
+                radialOffset: 0.25,
+              }),
+            })
+          }}
         />
       </Map>
     )
