@@ -86,9 +86,9 @@ export class Text {
       case TextAnchor.TOP_LEFT:
         return { x: 0, y: 0 }
       case TextAnchor.TOP_RIGHT:
-        return { x: 100, y: 0 }
+        return { x: -100, y: 0 }
       case TextAnchor.BOTTOM_LEFT:
-        return { x: 0, y: 100 }
+        return { x: 0, y: -100 }
       case TextAnchor.BOTTOM_RIGHT:
         return { x: -100, y: -100 }
       default:
