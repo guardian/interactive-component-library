@@ -15,6 +15,7 @@ import { feature, merge } from "topojson-client"
 import states10mTopo from "./sample-data/states-10m.json"
 import statesElectoralCollegeCartogram from "./sample-data/ecv-cartogram.json"
 import statesSenateCartogram from "./sample-data/senate-cartogram.json"
+import statesHouseCartogram from "./sample-data/house-cartogram.json"
 import statesAlbers10mTopo from "./sample-data/states-albers-10m.json"
 import westminsterConstituenciesTopo from "./sample-data/uk-westminster-simplified.json"
 import usPresidentialResults from "./sample-data/us-presidential-results.json"
@@ -332,6 +333,62 @@ export const USSenateCartogram = {
           />
         </Map>
       </div>
+    )
+  },
+}
+
+export const USHouseCartogram = {
+  args: {
+    config: {
+      view: {
+        extent: [
+          [0, 0],
+          [975, 610],
+        ],
+        padding: { top: 20, right: 20, bottom: 20, left: 20 },
+      },
+    },
+  },
+  render: (args) => {
+    const strokeStyle = new Style({
+      stroke: new Stroke({
+        color: "#999",
+        width: 1,
+      }),
+    })
+
+    const cartogramFeatures = FeatureCollection.fromGeoJSON(
+      // @ts-ignore
+      statesHouseCartogram.features.filter(
+        (d) => d.geometry.type === "Polygon",
+      ),
+    )
+    const labelFeatures = FeatureCollection.fromGeoJSON(
+      // @ts-ignore
+      statesHouseCartogram.features.filter((d) => d.geometry.type === "Point"),
+    )
+
+    return (
+      <Map {...args}>
+        <VectorLayer.Component
+          features={cartogramFeatures}
+          style={strokeStyle}
+        />
+        <TextLayer.Component
+          features={labelFeatures}
+          drawCollisionBoxes={false}
+          style={(feature) => {
+            return new Style({
+              text: new Text({
+                content: feature.properties.text,
+                anchor: feature.properties.anchor,
+                fontSize: "16px",
+                radialOffset: 0.25,
+              }),
+            })
+          }}
+        />
+      </Map>
     )
   },
 }
