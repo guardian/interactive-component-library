@@ -6,7 +6,6 @@ import { toRgba } from "../util/toRgba"
  * @memberof Stroke
  * @property {string} CENTER - Center the stroke
  * @property {string} INSIDE - Stroke is rendered inside the shape
- * @property {string} OUTSIDE - Stroke is rendered outside the shape
  * @readonly
  * @static
  * @default "center"
@@ -14,7 +13,6 @@ import { toRgba } from "../util/toRgba"
 export const StrokePosition = {
   CENTER: "center",
   INSIDE: "inside",
-  OUTSIDE: "outside",
 }
 
 /**
