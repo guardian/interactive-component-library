@@ -16,6 +16,7 @@ import states10mTopo from "./sample-data/states-10m.json"
 import statesElectoralCollegeCartogram from "./sample-data/ecv-cartogram.json"
 import statesSenateCartogram from "./sample-data/senate-cartogram.json"
 import statesHouseCartogram from "./sample-data/house-cartogram.json"
+import statesGovernorsCartogram from "./sample-data/governors-cartogram.json"
 import statesAlbers10mTopo from "./sample-data/states-albers-10m.json"
 import westminsterConstituenciesTopo from "./sample-data/uk-westminster-simplified.json"
 import usPresidentialResults from "./sample-data/us-presidential-results.json"
@@ -389,6 +390,90 @@ export const USHouseCartogram = {
           }}
         />
       </Map>
+    )
+  },
+}
+
+export const USGovernorsCartogram = {
+  args: {
+    config: {
+      view: {
+        extent: [
+          [0, 0],
+          [975, 610],
+        ],
+        padding: { top: 0, right: 0, bottom: 0, left: 0 },
+      },
+    },
+  },
+  render: (args) => {
+    const states = feature(
+      // @ts-ignore
+      statesAlbers10mTopo,
+      statesAlbers10mTopo.objects["states"],
+    )
+
+    // @ts-ignore
+    const stateFeatures = FeatureCollection.fromGeoJSON(states)
+
+    const cartogramFeatures = FeatureCollection.fromGeoJSON(
+      // @ts-ignore
+      statesGovernorsCartogram.features.filter((d) =>
+        ["Polygon", "LineString"].includes(d.geometry.type),
+      ),
+    )
+
+    const labelFeatures = FeatureCollection.fromGeoJSON(
+      // @ts-ignore
+      statesGovernorsCartogram.features.filter(
+        (d) => d.geometry.type === "Point",
+      ),
+    )
+
+    const strokeStyle = new Style({
+      stroke: new Stroke({
+        color: "#999",
+        width: 1,
+      }),
+    })
+
+    const textStyle = (feature) => {
+      return new Style({
+        text: new Text({
+          content: feature.properties.text,
+          anchor: feature.properties.anchor,
+          fontSize: "16px",
+          radialOffset: 0.25,
+        }),
+      })
+    }
+
+    return (
+      <div style={{ position: "absolute", width: "100%", height: "100%" }}>
+        <Map {...args}>
+          <VectorLayer.Component features={stateFeatures} style={strokeStyle} />
+          <VectorLayer.Component
+            features={cartogramFeatures}
+            style={(feature) => {
+              const strokeColor =
+                feature.properties?.id === "CO01" ? "#FF0000" : "#707070"
+              return new Style({
+                fill: new Fill({ color: strokeColor, opacity: 0.2 }),
+                stroke: new Stroke({
+                  color: strokeColor,
+                  width: 2,
+                  position: "inside",
+                }),
+              })
+            }}
+          />
+          <TextLayer.Component
+            features={labelFeatures}
+            drawCollisionBoxes={false}
+            style={textStyle}
+          />
+        </Map>
+      </div>
     )
   },
 }
