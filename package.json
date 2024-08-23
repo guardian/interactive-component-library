@@ -11,13 +11,10 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/interactive-component-library.umd.cjs",
-  "module": "./dist/interactive-component-library.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": {
-      "import": "./dist/interactive-component-library.js",
-      "require": "./dist/interactive-component-library.umd.cjs"
-    },
+    ".": "./dist/index.js",
     "./dist/style.css": "./dist/style.css"
   },
   "engines": {
@@ -27,8 +24,8 @@
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
-    "build:lib": "vite build",
-    "build:lib:watch": "vite build --watch",
+    "build:lib": "vite build --mode lib",
+    "build:lib:watch": "vite build --mode lib --watch",
     "lint": "eslint .",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
@@ -100,6 +97,7 @@
     "topojson-client": "^3.1.0",
     "typescript": "5.5.4",
     "vite": "^5.3.5",
+    "vite-plugin-dts": "^4.0.3",
     "vite-tsconfig-paths": "^4.3.2",
     "vitest": "2.0.5"
   },
