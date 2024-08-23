@@ -13,11 +13,11 @@ env:
   TAG_NAME: ${{ inputs.tag || github.ref_name }}
 jobs:
   bump-version:
-    name: Bump version in package.json
+    name: Bump version in package.json and publish
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,29 +29,6 @@ jobs:
 
       - name: Show version bump diff
         run: git diff
-
-      - name: Create Pull Request for new version
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Bump version to ${{ env.TAG_NAME }}"
-          branch: "auto-version-${{ env.TAG_NAME }}"
-          base: main
-          title: "Bump version to ${{ env.TAG_NAME }}"
-          body: "Automated pull requested created because a tag with the name ${{ env.TAG_NAME }} was pushed to the repo."
-
-  build:
-    needs: bump-version
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      # Checkout branch that was created in previous job
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: "auto-version-${{ env.TAG_NAME }}"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
