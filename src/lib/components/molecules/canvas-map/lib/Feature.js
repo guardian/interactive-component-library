@@ -1,6 +1,7 @@
 import { createUid } from "./util/uid"
 import { combineExtents, containsCoordinate } from "./util/extent"
 import { geoContains } from "d3-geo"
+import { memoise } from "./util/memoise"
 
 /**
  * Class representing a map Feature.
@@ -28,28 +29,32 @@ export class Feature {
 
     // create a unique ID for this feature
     this.uid = createUid()
+
+    this._getProjectedGeometries = memoise((projection) => {
+      return this.geometries.map((d) =>
+        d.getProjected(projection, projection.revision),
+      )
+    }).bind(this)
+  }
+
+  setGeometries(geometries) {
+    this.geometries = geometries
+    this._extent = undefined
   }
 
   getExtent() {
     if (this._extent) return this._extent
 
-    const extent = this.geometries.reduce((combinedExtent, geometries) => {
-      if (!combinedExtent) return geometries.extent
-      return combineExtents(geometries.extent, combinedExtent)
+    const extent = this.geometries.reduce((combinedExtent, geometry) => {
+      if (!combinedExtent) return geometry.extent
+      return combineExtents(geometry.extent, combinedExtent)
     }, null)
     this._extent = extent
     return extent
   }
 
-  setgeometries(geometries) {
-    this.geometries = geometries
-    this._extent = undefined
-  }
-
   getProjectedGeometries(projection) {
-    return this.geometries.map((d) =>
-      d.getProjected(projection, projection.revision),
-    )
+    return this._getProjectedGeometries(projection, projection.revision)
   }
 
   getStyleFunction() {
