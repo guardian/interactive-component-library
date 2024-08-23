@@ -286,16 +286,19 @@ export const USSenateCartogram = {
           <VectorLayer.Component features={stateFeatures} style={strokeStyle} />
           <VectorLayer.Component
             features={cartogramFeatures}
-            style={
-              new Style({
-                fill: new Fill({ color: "#dcdcdc" }),
+            style={(feature) => {
+              const strokeColor = feature.properties?.id.endsWith("01")
+                ? "#FF0000"
+                : "#2F3192"
+              return new Style({
+                fill: new Fill({ color: strokeColor, opacity: 0.2 }),
                 stroke: new Stroke({
-                  color: "#121212",
+                  color: strokeColor,
                   width: 2,
                   position: "inside",
                 }),
               })
-            }
+            }}
           />
           <TextLayer.Component
             features={labelFeatures}
