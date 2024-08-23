@@ -73,22 +73,19 @@ export class FeatureRenderer {
   drawStroke(frameState, context, { style, width: strokeWidth, position }) {
     const { projection } = frameState.viewState
 
-    if (position === StrokePosition.CENTER) {
-      context.lineWidth = strokeWidth
-      context.strokeStyle = style
-      context.stroke()
-      return
+    context.lineWidth = strokeWidth
+    context.strokeStyle = style
+
+    if (position === StrokePosition.INSIDE) {
+      // Double stroke width for inside stroke
+      context.lineWidth = strokeWidth * 2
+
+      // Draw clip path to mask the part of the stroke outside of the shape
+      const geometries = this.feature.getProjectedGeometries(projection)
+      this.drawPath(geometries, context, true)
     }
 
-    // draw clip path
-    const geometries = this.feature.getProjectedGeometries(projection)
-    this.drawPath(geometries, context, true)
-
-    context.lineWidth = strokeWidth * 1.5
-    context.strokeStyle = style
     context.stroke()
-
-    return
   }
 
   createCanvas(width, height) {
