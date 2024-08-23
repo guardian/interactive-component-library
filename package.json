@@ -31,7 +31,7 @@
     "format:check": "prettier . --check",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
-    "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\"",
+    "prepack": "json -f package.json -I -e \"delete this.devDependencies\"",
     "generate:styles": "node scripts/generateStyles.js",
     "prepare": "husky"
   },
