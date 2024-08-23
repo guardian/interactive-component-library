@@ -37,7 +37,8 @@ export class VectorLayerRenderer {
       if (featureStyle?.stroke || featureStyle?.fill) {
         context.save()
         this.featureRenderer.setStyle(featureStyle)
-        this.featureRenderer.render(frameState, feature, context)
+        this.featureRenderer.setFeature(feature)
+        this.featureRenderer.render(frameState, context)
         context.restore()
       }
     }

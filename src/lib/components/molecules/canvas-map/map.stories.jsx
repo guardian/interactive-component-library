@@ -288,9 +288,11 @@ export const USSenateCartogram = {
             features={cartogramFeatures}
             style={
               new Style({
+                fill: new Fill({ color: "#dcdcdc" }),
                 stroke: new Stroke({
                   color: "#121212",
-                  width: 1,
+                  width: 2,
+                  position: "inside",
                 }),
               })
             }
