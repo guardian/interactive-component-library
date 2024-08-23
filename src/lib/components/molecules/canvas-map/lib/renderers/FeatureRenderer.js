@@ -23,7 +23,7 @@ export class FeatureRenderer {
 
     const feature = this.feature
 
-    const { projection } = frameState.viewState
+    const { projection, transform, pixelRatio } = frameState.viewState
     const { stroke, fill } = this.style
 
     const geometries = feature.getProjectedGeometries(projection)
@@ -48,74 +48,47 @@ export class FeatureRenderer {
       context.save()
       this.drawStroke(frameState, context, {
         style: stroke.getRgba(),
-        width: stroke.width,
+        width: (stroke.width / transform.k) * pixelRatio,
         position: stroke.position,
       })
       context.restore()
     }
   }
 
-  drawPath(geometries, context) {
+  drawPath(geometries, context, clipPath = false) {
     this.drawingFunction.context(context)
 
     context.beginPath()
     for (const geometry of geometries) {
       this.drawingFunction(geometry)
     }
-    context.closePath()
+
+    if (clipPath) {
+      context.clip()
+    } else {
+      context.closePath()
+    }
   }
 
   drawStroke(frameState, context, { style, width: strokeWidth, position }) {
-    const { projection, transform, pixelRatio } = frameState.viewState
-    const scale = transform.k
+    const { projection } = frameState.viewState
 
     if (position === StrokePosition.CENTER) {
-      context.lineWidth = (strokeWidth / scale) * pixelRatio
+      context.lineWidth = strokeWidth
       context.strokeStyle = style
       context.stroke()
       return
     }
 
-    const feature = this.feature
-    const [[minX, minY], [maxX, maxY]] = this.getProjectedExtent(projection)
-    const x = minX
-    const y = minY
-    const width = maxX - minX
-    const height = maxY - minY
+    // draw clip path
+    const geometries = this.feature.getProjectedGeometries(projection)
+    this.drawPath(geometries, context, true)
 
-    const strokeContext = this.createCanvas(
-      width * scale,
-      height * scale,
-    ).getContext("2d")
+    context.lineWidth = strokeWidth * 1.5
+    context.strokeStyle = style
+    context.stroke()
 
-    strokeContext.scale(scale, scale)
-    strokeContext.translate(-x, -y)
-
-    strokeContext.lineWidth = Math.round((strokeWidth / scale) * pixelRatio * 2)
-    strokeContext.strokeStyle = style
-
-    const geometries = feature.getProjectedGeometries(projection)
-    this.drawPath(geometries, strokeContext)
-
-    strokeContext.stroke()
-
-    if (position === StrokePosition.INSIDE) {
-      // The existing canvas content is kept where both the new shape and existing canvas content overlap.
-      // Everything else is made transparent.
-      strokeContext.globalCompositeOperation = "destination-in"
-    } else if (position === StrokePosition.OUTSIDE) {
-      // The existing content is kept where it doesn't overlap the new shape.
-      strokeContext.globalCompositeOperation = "destination-out"
-    }
-
-    strokeContext.fill()
-
-    // console.log("line width", (strokeWidth / scale) * pixelRatio * 2)
-    // console.log(strokeContext.canvas.toDataURL())
-
-    context.scale(1 / scale, 1 / scale)
-
-    context.drawImage(strokeContext.canvas, x * scale, y * scale)
+    return
   }
 
   createCanvas(width, height) {
