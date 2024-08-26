@@ -1,26 +1,34 @@
 import { sizeMinusPadding, scaleSize, scalePadding } from "./util/size"
-import { bboxFeature } from "./util/bboxFeature"
 import { ZoomTransform, zoomIdentity } from "d3-zoom"
 import { zoomLevelToZoomScale, zoomLevelForResolution } from "./util/zoomLevel"
-import { resolutionForExtent } from "./util/resolution"
+import { Extent, GeoBounds, resolutionForExtent, bboxFeature } from "./util"
 import { Projection } from "./projection"
 import { generateDebugUrl } from "./util/debug"
 
 /**
+ * @typedef ViewConfig
+ * @property {import("./projection").ProjectionFunction} projection - The projection to use for the view.
+ * @property {import("./util/bounds").GeoBounds} [bounds] - The bounds of the map view in projection coordinates.
+ * @property {import("./util/extent").Extent} [extent] - The extent of the map view in screen coordinates (for preprojected geometry).
+ * @property {number} minZoom - The minimum zoom level for the view.
+ * @property {number} maxZoom - The maximum zoom level for the view.
+ * @property {Object} padding - The padding for the view in pixels.
+ * @property {boolean} [debug="false"] - Enable/disable debug mode.
+ */
+
+/**
  * Represents how the map is viewed.
- * @constructor
- * @param {Object} options - The options for the view.
- * @param {Projection} options.projection - The projection to use for the view.
- * @param {Array} options.extent - The extent of the view in projection coordinates.
- * @param {number} options.minZoom - The minimum zoom level for the view.
- * @param {number} options.maxZoom - The maximum zoom level for the view.
- * @param {Object} options.padding - The padding for the view in pixels.
- * @param {boolean} debug - Whether to enable debug mode or not.
+ * @class
  */
 export class View {
+  /**
+   * @constructor
+   * @property {ViewConfig} config - A view configuration object
+   */
   constructor(
     {
       projection = Projection.geoIdentity,
+      bounds,
       extent,
       minZoom = 1,
       maxZoom = 10,
@@ -33,7 +41,7 @@ export class View {
     projection.revision = 0
     this.projection = projection
     // extent in projection coordinates
-    this.extent = extent
+    this.bounds = bounds || GeoBounds.fromExtent(Extent.convert(extent))
     this.minZoom = minZoom
     this.maxZoom = maxZoom
     this._transform = zoomIdentity
@@ -47,9 +55,9 @@ export class View {
     this._viewPortSize = size
 
     if (previousSize !== size) {
-      if (this.extent) {
+      if (this.bounds) {
         // fit projection to extent
-        this.fitExtent(this.extent)
+        this.fitBounds(this.bounds)
       }
     }
   }
@@ -86,7 +94,7 @@ export class View {
   }
 
   get baseResolution() {
-    const baseExtent = this.getVisibleExtent(zoomIdentity, this.projection)
+    const baseExtent = this.getVisibleBounds(zoomIdentity, this.projection)
     const baseResolution = resolutionForExtent(baseExtent, this.viewPortSize)
     return baseResolution
   }
@@ -99,7 +107,7 @@ export class View {
 
   setProjection(projection) {
     this.projection = projection
-    this.fitObject(bboxFeature(this.extent))
+    this.fitObject(bboxFeature(this.bounds))
   }
 
   // only set the raw projection when it has already been configured with projection.fitExtent()
@@ -107,17 +115,22 @@ export class View {
     this.projection = projection
   }
 
-  fitExtent(extent) {
-    const extentFeature = bboxFeature(extent)
-    this.fitObject(extentFeature)
+  fitBounds(bounds) {
+    const boundsFeature = bboxFeature(bounds)
+    this.fitObject(boundsFeature)
 
     if (this.debug) {
       // eslint-disable-next-line no-console
-      console.log("Fit extent", extent, generateDebugUrl(extentFeature, false))
+      console.log("Fit extent", bounds, generateDebugUrl(boundsFeature, false))
     }
   }
 
+  /**
+   *
+   * @param {import("./formats/GeoJSON").GeoJSONFeature} geoJSON
+   */
   fitObject(geoJSON) {
+    // @ts-ignore
     this.projection.fitExtent(this.getMapExtent(), geoJSON)
 
     // @ts-ignore
@@ -169,7 +182,7 @@ export class View {
   // map resolution (meters per pixel)
   getResolution() {
     return resolutionForExtent(
-      this.getVisibleExtent(this.transform, this.projection),
+      this.getVisibleBounds(this.transform, this.projection),
       this.viewPortSize,
     )
   }
@@ -199,17 +212,27 @@ export class View {
     ]
   }
 
-  // visible extent in map coordinates
-  getVisibleExtent(transform, projection) {
-    if (this.projection === Projection.geoIdentity) {
-      const [width, height] = this.mapSize
-      return [0, 0, width, height]
-    }
-
+  /**
+   * Get map bounds for current view
+   *
+   * @function getBounds
+   * @param {ZoomTransform} transform
+   * @param {*} projection
+   * @returns {import("./util").GeoBoundsLike}
+   */
+  getVisibleBounds(transform, projection) {
     const [width, height] = this.mapSize
     const southWest = projection.invert(transform.invert([0, height]))
     const northEast = projection.invert(transform.invert([width, 0]))
-    return [southWest[0], southWest[1], northEast[0], northEast[1]]
+
+    const southWestLatitude = southWest[1]
+    const northEastLatitude = northEast[1]
+    const flippedY = southWestLatitude < northEastLatitude
+    if (flippedY) {
+      return [southWest[0], southWest[1], northEast[0], northEast[1]]
+    } else {
+      return [southWest[0], northEast[1], northEast[0], southWest[1]]
+    }
   }
 
   getState() {
@@ -224,7 +247,7 @@ export class View {
       padding: this.padding,
       viewPortSize: this.viewPortSize,
       sizeInPixels: scaleSize(this.viewPortSize, this.pixelRatio),
-      visibleExtent: this.getVisibleExtent(transform, projection),
+      visibleExtent: this.getVisibleBounds(transform, projection),
     }
   }
 }

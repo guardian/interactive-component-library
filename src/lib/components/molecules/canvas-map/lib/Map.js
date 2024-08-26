@@ -12,13 +12,15 @@ import "d3-transition"
 /**
  * Map component that renders into a canvas
  * It has built-in support for zooming and panning, as well as support for vector layers
- * @constructor
- * @param {Object} config - The configuration for the map.
- * @param {Object} config.view - The view configuration for the map.
- * @param {boolean} config.debug - Whether to enable debug mode or not.
- * @param {HTMLElement} config.target - The target element to render the map into.
  */
 export class Map {
+  /**
+   * @constructor
+   * @param {Object} config - The configuration for the map.
+   * @param {Object} config.view - The view configuration for the map.
+   * @param {boolean} config.debug - Whether to enable debug mode or not.
+   * @param {HTMLElement} config.target - The target element to render the map into.
+   */
   constructor(config) {
     if (config.debug) {
       // eslint-disable-next-line no-console
@@ -363,3 +365,5 @@ export class Map {
     this._animationFrameRequestID = null
   }
 }
+
+Map.Component = undefined

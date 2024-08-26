@@ -1,41 +1,60 @@
 import { useState, useEffect, useRef } from "preact/hooks"
 import { forwardRef } from "preact/compat"
-import { Map as _Map } from "./lib/Map"
-import styles from "./style.module.scss"
+import { Map } from "./lib/Map"
 import { MapProvider } from "./context/MapContext"
+// @ts-ignore
+import styles from "./style.module.scss"
 
 const mobileHelpText = "Use two fingers to zoom"
 
-/** @typedef {{
+/**
+ * @typedef {{
  *    config: Object,
  *    inModalState?: boolean,
- *    onLoad?: (map: _Map) => void,
+ *    onLoad?: (map: Map) => void,
  *    children: import('preact').ComponentChildren,
- * }} MapProps
+ * }} MapComponentProps
  */
 
-export const Map = forwardRef(
+Map.Component = forwardRef(
   (
-    /** @type {MapProps} */ { config, inModalState = false, onLoad, children },
+    /** @type {MapComponentProps} */ {
+      config,
+      inModalState = false,
+      onLoad,
+      children,
+    },
     ref,
   ) => {
     const targetRef = useRef()
 
-    const [map, setMap] = useState(/** @type {_Map | null} */ (null))
+    const [map, setMap] = useState(/** @type {Map | null} */ (null))
     const [zoomHelpText, setZoomHelpText] = useState("")
     const [showHelpText, setShowHelpText] = useState(false)
 
     useEffect(() => {
-      const map = new _Map({
+      if (!targetRef.current) return
+
+      const map = new Map({
         ...config,
         target: targetRef.current,
       })
 
-      map.collaborativeGesturesEnabled = true
+      map.collaborativeGesturesEnabled(true)
       setMap(map)
+
+      if (ref) {
+        // @ts-ignore
+        ref.current = map
+      }
+
+      if (onLoad) {
+        onLoad(map)
+      }
 
       let zoomHelpText = ""
       if (
+        // @ts-ignore
         navigator.userAgentData?.mobile ||
         navigator.userAgent.indexOf("Mobile") !== -1
       ) {
@@ -51,8 +70,13 @@ export const Map = forwardRef(
       return () => {
         map.destroy()
         setMap(null)
+
+        if (ref) {
+          // @ts-ignore
+          ref.current = null
+        }
       }
-    }, [config])
+    }, [config, onLoad, ref])
 
     useEffect(() => {
       if (!map) return
@@ -76,24 +100,8 @@ export const Map = forwardRef(
     }, [map])
 
     useEffect(() => {
-      if (map && onLoad) {
-        onLoad(map)
-      }
-
-      if (map && ref) {
-        ref.current = map
-      }
-
-      return () => {
-        if (ref) {
-          ref.current = null
-        }
-      }
-    }, [map, ref, onLoad])
-
-    useEffect(() => {
       if (!map) return
-      map.collaborativeGesturesEnabled = !inModalState
+      map.collaborativeGesturesEnabled(!inModalState)
     }, [map, inModalState])
 
     return (
