@@ -1,6 +1,13 @@
 import { geoAlbers, geoMercator, geoIdentity, geoAlbersUsa } from "d3-geo"
 import { geoAlbersUk } from "d3-composite-projections"
 
+/** @typedef {(point: [number, number]) => [number, number] | null} ProjectionFunction */
+
+/**
+ * Projection functions for different map projections.
+ * @readonly
+ * @enum {ProjectionFunction}
+ */
 export const Projection = {
   geoIdentity: geoIdentity(),
   geoMercator: geoMercator(),
