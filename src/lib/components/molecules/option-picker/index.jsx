@@ -2,9 +2,12 @@ import { useState, useCallback } from "preact/hooks"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 import defaultStyles from "./style.module.css"
 
+/** @typedef {  "vertical" | "horizontal" } OptionLayoutDirection */
+
 export function OptionPicker({
   title,
   options,
+  layoutDirection = "horizontal",
   onSelect,
   styles,
 }) {
@@ -15,7 +18,7 @@ export function OptionPicker({
   const onOptionClick = useCallback(
     (option, index) => {
       if (index === selectedIndex) return
-      
+
       setSelectedIndex(index)
       if (onSelect) onSelect(index, option)
     },
@@ -25,34 +28,37 @@ export function OptionPicker({
   return (
     <div className={styles.optionPicker}>
       {title && <span className={styles.title}>{title}</span>}
-      <div className={styles.options}>
-      {options.map((option, index) => {
-        const isSelected = index === selectedIndex
-        return (
-          <button
-            key={option.title}
-            className={[
-              styles.option,
-              isSelected ? styles.selected : "",
-            ].join(" ")}
-            onClick={() => onOptionClick(option, index)}
-          >
-            <div className={styles.optionIconContainer}>
-              { typeof option.icon === "string" ? <img src={option.icon} className={styles.optionIcon} /> : option.icon }
-              {isSelected && (
-              <div className={styles.checkmark}>
-                <Checkmark />
+      <div className={[styles.options, layoutDirection].join(" ")}>
+        {options.map((option, index) => {
+          const isSelected = index === selectedIndex
+          return (
+            <button
+              key={option.title}
+              className={[
+                styles.option,
+                isSelected ? styles.selected : "",
+              ].join(" ")}
+              onClick={() => onOptionClick(option, index)}
+            >
+              <div className={styles.optionIconContainer}>
+                {typeof option.icon === "string" ? (
+                  <img src={option.icon} className={styles.optionIcon} />
+                ) : (
+                  option.icon
+                )}
+                {isSelected && (
+                  <div className={styles.checkmark}>
+                    <Checkmark />
+                  </div>
+                )}
               </div>
-            )}
-            </div>
-            <div className={styles.optionText}>
-              <h4 className={styles.optionTitle}>{option.title}</h4>
-              <p className={styles.optionDescription}>{option.description}</p>
-            </div>
-            
-          </button>
-        )
-      })}
+              <div className={styles.optionText}>
+                <h4 className={styles.optionTitle}>{option.title}</h4>
+                <p className={styles.optionDescription}>{option.description}</p>
+              </div>
+            </button>
+          )
+        })}
       </div>
     </div>
   )
