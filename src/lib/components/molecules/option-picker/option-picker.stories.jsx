@@ -4,12 +4,28 @@ import choropleth from "./sample-images/choropleth.png"
 import cartogram from "./sample-images/hex-cartogram.svg"
 import styles from "./stories.module.css"
 
+const layoutDirectionForViewport = {
+  mobile: "horizontal",
+  tablet: "vertical",
+  desktop: "vertical",
+  leftcol: "vertical",
+  wide: "vertical",
+}
+
 const meta = {
   title: "Molecules/OptionPicker",
   component: OptionPicker,
   args: {
     onSelect: action("select"),
     styles,
+  },
+  render: (args, { globals: { viewport } }) => {
+    return (
+      <OptionPicker
+        {...args}
+        layoutDirection={layoutDirectionForViewport[viewport]}
+      />
+    )
   },
 }
 
