@@ -85,6 +85,7 @@ export function SearchInput({
         ref={inputRef}
         type="text"
         aria-label="Search input"
+        autoComplete="off"
         value={inputValue}
         onKeyDown={onKeyDown}
         onInput={(e) => {
