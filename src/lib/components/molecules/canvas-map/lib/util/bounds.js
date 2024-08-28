@@ -1,4 +1,5 @@
 import { GeoCoordinate } from "./coordinate"
+import { Extent } from "./extent"
 
 /**
  * @typedef {import("./coordinate").GeoCoordinateLike} Coordinate
@@ -35,6 +36,15 @@ export class GeoBounds {
     ]
   }
 
+  toExtent() {
+    return new Extent(
+      this.southWest.lng,
+      this.southWest.lat,
+      this.northEast.lng,
+      this.northEast.lat,
+    )
+  }
+
   /**
    * Converts an array to a `GeoBounds` object.
    *
@@ -61,13 +71,5 @@ export class GeoBounds {
     }
 
     throw new Error("`input` argument must be of type `GeoBoundsLike`")
-  }
-
-  static fromExtent(extent) {
-    const { minX, minY, maxX, maxY } = extent
-    return new GeoBounds({
-      southWest: new GeoCoordinate(minX, maxY),
-      northEast: new GeoCoordinate(maxX, minY),
-    })
   }
 }

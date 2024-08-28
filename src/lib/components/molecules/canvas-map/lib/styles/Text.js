@@ -50,7 +50,7 @@ export class Text {
   /**
    * Create a text element style
    * @constructor
-   * @param {TextStyle} options - Style options
+   * @param {TextStyle} [options] - Style options
    */
   constructor(options) {
     this.content = options?.content

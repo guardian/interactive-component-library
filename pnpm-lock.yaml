@@ -7,6 +7,9 @@ dependencies:
   d3-composite-projections:
     specifier: ^1.4.0
     version: 1.4.0
+  d3-polygon:
+    specifier: ^3.0.1
+    version: 3.0.1
   d3-selection:
     specifier: ^3.0.0
     version: 3.0.0
@@ -3892,6 +3895,11 @@ packages:
 
   /d3-path@2.0.0:
     resolution: {integrity: sha512-ZwZQxKhBnv9yHaiWd6ZU4x5BtCQ7pXszEV9CU6kRgwIQVQGLMv1oiL4M+MK/n79sYzsj+gcgpPQSctJUsLN7fA==}
+    dev: false
+
+  /d3-polygon@3.0.1:
+    resolution: {integrity: sha512-3vbA7vXYwfe1SYhED++fPUQlWSYTTGmFmQiany/gdbiWgU/iEyQzyymwL9SkJjFFuCS4902BSzewVGsHHmHtXg==}
+    engines: {node: '>=12'}
     dev: false
 
   /d3-scale@4.0.2:

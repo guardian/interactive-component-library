@@ -21,6 +21,9 @@ import statesAlbers10mTopo from "./sample-data/states-albers-10m.json"
 import westminsterConstituenciesTopo from "./sample-data/uk-westminster-simplified.json"
 import usPresidentialResults from "./sample-data/us-presidential-results.json"
 import ukCitiesGeo from "./sample-data/uk-cities.json"
+import { useState, useCallback } from "preact/hooks"
+import { pointer } from "d3-selection"
+import { fn } from "@storybook/test"
 
 const meta = {
   title: "Molecules/Map",
@@ -112,12 +115,12 @@ export const USMap = {
     )
 
     return (
-      <Map {...args}>
+      <Map.Component {...args}>
         <VectorLayer.Component
           features={new GeoJSON().readFeaturesFromObject(filteredStates)}
           style={strokeStyle}
         />
-      </Map>
+      </Map.Component>
     )
   },
 }
@@ -152,12 +155,92 @@ export const USPreprojected = {
     const featureCollection = FeatureCollection.fromGeoJSON(states)
 
     return (
-      <Map {...args}>
+      <Map.Component {...args}>
         <VectorLayer.Component
           features={featureCollection}
           style={strokeStyle}
         />
-      </Map>
+      </Map.Component>
+    )
+  },
+}
+
+export const USInteractive = {
+  args: {
+    config: {
+      debug: true,
+      view: {
+        extent: [
+          [0, 0],
+          [975, 610],
+        ],
+        padding: { top: 0, right: 0, bottom: 0, left: 0 },
+      },
+    },
+    onHighlight: fn(),
+  },
+  render: ({ config, onHighlight }) => {
+    /** @type {[Map, function]} */
+    const [map, setMap] = useState()
+    const [highlightedFeature, setHiglightedFeature] = useState()
+
+    const states = feature(
+      // @ts-ignore
+      statesAlbers10mTopo,
+      statesAlbers10mTopo.objects["states"],
+    )
+
+    // @ts-ignore
+    const featureCollection = FeatureCollection.fromGeoJSON(states)
+
+    const onMouseMove = useCallback(
+      (event) => {
+        if (!map) return
+
+        // find feature under pointer
+        const features = map.findFeatures(pointer(event))
+
+        if (features.length > 0) {
+          setHiglightedFeature(features[0])
+          onHighlight(features[0].properties?.name)
+        }
+      },
+      [map, onHighlight],
+    )
+
+    const styleFeatures = useCallback(
+      (feature) => {
+        const stroke = new Stroke({
+          color: "#999",
+          width: 1,
+        })
+
+        if (feature === highlightedFeature) {
+          return new Style({
+            stroke,
+            fill: new Fill({ color: "#ededed" }),
+          })
+        }
+
+        return new Style({
+          stroke,
+        })
+      },
+      [highlightedFeature],
+    )
+
+    return (
+      <div
+        onMouseMove={onMouseMove}
+        style={{ position: "absolute", width: "100%", height: "100%" }}
+      >
+        <Map.Component config={config} onLoad={setMap}>
+          <VectorLayer.Component
+            features={featureCollection}
+            style={styleFeatures}
+          />
+        </Map.Component>
+      </div>
     )
   },
 }
@@ -184,7 +267,7 @@ export const USChoropleth = {
     const featureCollection = FeatureCollection.fromGeoJSON(states)
 
     return (
-      <Map config={config}>
+      <Map.Component config={config}>
         <VectorLayer.Component
           features={featureCollection}
           style={(feature) => {
@@ -192,7 +275,7 @@ export const USChoropleth = {
             return styleForResult(result)
           }}
         />
-      </Map>
+      </Map.Component>
     )
   },
 }
@@ -231,7 +314,7 @@ export const USElectoralCartogram = {
     )
 
     return (
-      <Map {...args}>
+      <Map.Component {...args}>
         <VectorLayer.Component
           features={cartogramFeatures}
           style={strokeStyle}
@@ -250,7 +333,7 @@ export const USElectoralCartogram = {
             })
           }}
         />
-      </Map>
+      </Map.Component>
     )
   },
 }
@@ -309,7 +392,7 @@ export const USSenateCartogram = {
 
     return (
       <div style={{ position: "absolute", width: "100%", height: "100%" }}>
-        <Map {...args}>
+        <Map.Component {...args}>
           <VectorLayer.Component features={stateFeatures} style={strokeStyle} />
           <VectorLayer.Component
             features={cartogramFeatures}
@@ -332,7 +415,7 @@ export const USSenateCartogram = {
             drawCollisionBoxes={false}
             style={textStyle}
           />
-        </Map>
+        </Map.Component>
       </div>
     )
   },
@@ -370,7 +453,7 @@ export const USHouseCartogram = {
     )
 
     return (
-      <Map {...args}>
+      <Map.Component {...args}>
         <VectorLayer.Component
           features={cartogramFeatures}
           style={strokeStyle}
@@ -389,7 +472,7 @@ export const USHouseCartogram = {
             })
           }}
         />
-      </Map>
+      </Map.Component>
     )
   },
 }
@@ -450,7 +533,7 @@ export const USGovernorsCartogram = {
 
     return (
       <div style={{ position: "absolute", width: "100%", height: "100%" }}>
-        <Map {...args}>
+        <Map.Component {...args}>
           <VectorLayer.Component features={stateFeatures} style={strokeStyle} />
           <VectorLayer.Component
             features={cartogramFeatures}
@@ -472,7 +555,7 @@ export const USGovernorsCartogram = {
             drawCollisionBoxes={false}
             style={textStyle}
           />
-        </Map>
+        </Map.Component>
       </div>
     )
   },
@@ -520,7 +603,7 @@ export const UKMap = {
     })
 
     return (
-      <Map {...args}>
+      <Map.Component {...args}>
         <VectorLayer.Component features={outlineFeatures} style={fillStyle} />
         <VectorLayer.Component
           features={constituenciesFeatures}
@@ -538,7 +621,7 @@ export const UKMap = {
             })
           }
         />
-      </Map>
+      </Map.Component>
     )
   },
 }
