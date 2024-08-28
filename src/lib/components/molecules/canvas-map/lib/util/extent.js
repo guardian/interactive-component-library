@@ -22,8 +22,34 @@ export class Extent {
     this.maxY = maxY
   }
 
+  get width() {
+    return this.maxX - this.minX
+  }
+
+  get height() {
+    return this.maxY - this.minY
+  }
+
+  /**
+   * Turn extent into a flat array of numbers: [minX, minY, maxX, maxY].
+   *
+   * @returns {[number, number, number, number]} - The extent as a flat array
+   */
   flat() {
     return [this.minX, this.minY, this.maxX, this.maxY]
+  }
+
+  /**
+   * Create a new extent where the coordinates are multiplied by scaleFactor.
+   *
+   * @param {number} scaleFactor
+   * @returns {Extent} - The scaled
+   */
+  scale(scaleFactor) {
+    const scaled = /** @type {ExtentLike} */ (
+      [this.minX, this.minY, this.maxX, this.maxY].map((d) => d * scaleFactor)
+    )
+    return Extent.convert(scaled)
   }
 
   /**

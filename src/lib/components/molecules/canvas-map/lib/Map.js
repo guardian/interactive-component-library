@@ -165,8 +165,13 @@ export class Map {
     padding = { top: 40, right: 40, bottom: 40, left: 40 },
   ) {
     const extent = feature.getExtent()
-    const [[featureX, featureY], [featureWidth, featureHeight]] =
-      this.view.boundsForExtent(extent)
+
+    const {
+      minX: featureX,
+      minY: featureY,
+      width: featureWidth,
+      height: featureHeight,
+    } = this.view.projectExtent(extent)
     const [viewPortWidth, viewPortHeight] = this.view.viewPortSize
 
     const paddedViewPortWidth = viewPortWidth - padding.left - padding.right
