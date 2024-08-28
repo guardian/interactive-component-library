@@ -1,6 +1,6 @@
 import { createUid } from "./util/uid"
 import { combineExtents, containsCoordinate } from "./util/extent"
-import { geoContains } from "d3-geo"
+import { polygonContains } from "d3-polygon"
 import { memoise } from "./util/memoise"
 
 /**
@@ -42,6 +42,11 @@ export class Feature {
     this._extent = undefined
   }
 
+  /**
+   * Get the extent of the geometries in the feature.
+
+   * @returns {import("./util").Extent}
+   */
   getExtent() {
     if (this._extent) return this._extent
 
@@ -67,27 +72,13 @@ export class Feature {
   }
 
   containsCoordinate(coordinate) {
-      // console.log("containsCoordinate", coordinate)
-    if (this.properties.name === "Oregon") {
-      console.log("Oregon contains coordinate?", coordinate)
-    }
     if (!containsCoordinate(this.getExtent(), coordinate)) {
-        if (this.properties.name === "Oregon") {
-                console.log(
-                  "Oregon extent does not contain coordinate",
-                  coordinate,
-                  this.getExtent(),
-                )
-
-        }
       return false
     }
 
     for (const geometry of this.geometries) {
-          if (this.properties.name === "Oregon") {
-            console.log("Oregon geometry", geometry.getGeoJSON())
-          }
-      if (geoContains(geometry.getGeoJSON(), coordinate)) {
+      // Only the outer ring of the geometry is considered, because we don't care about holes in the shape
+      if (polygonContains(geometry.getOuterRing(), coordinate)) {
         return true
       }
     }

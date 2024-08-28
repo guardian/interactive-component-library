@@ -6,7 +6,7 @@ export class Geometry {
    * @constructor
    * @param {Object} options
    * @param {string} options.type - The type of geometry (e.g., 'Point', 'LineString', 'Polygon')
-   * @param {Array} options.extent - The extent of the geometry (e.g., [xmin, ymin, xmax, ymax])
+   * @param {import("../util").Extent} options.extent - The extent of the geometry (e.g., [xmin, ymin, xmax, ymax])
    * @param {Array} options.coordinates - The coordinates of the geometry (e.g., [[x1, y1], [x2, y2], ...])
    */
   constructor({ type, extent, coordinates }) {

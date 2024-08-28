@@ -9,7 +9,7 @@ import { generateDebugUrl } from "./util/debug"
  * @typedef ViewConfig
  * @property {import("./projection").ProjectionFunction} projection - The projection to use for the view.
  * @property {import("./util/bounds").GeoBounds} [bounds] - The bounds of the map view in projection coordinates.
- * @property {import("./util/extent").Extent} [extent] - The extent of the map view in screen coordinates (for preprojected geometry).
+ * @property {import("./util/extent").ExtentLike} [extent] - The extent of the map view in screen coordinates (for preprojected geometry).
  * @property {number} minZoom - The minimum zoom level for the view.
  * @property {number} maxZoom - The maximum zoom level for the view.
  * @property {Object} padding - The padding for the view in pixels.
@@ -41,7 +41,8 @@ export class View {
     projection.revision = 0
     this.projection = projection
     // extent in projection coordinates
-    this.bounds = bounds || GeoBounds.fromExtent(Extent.convert(extent))
+    this.bounds = this.extent =
+      Extent.convert(extent) || GeoBounds.convert(bounds).toExtent()
     this.minZoom = minZoom
     this.maxZoom = maxZoom
     this._transform = zoomIdentity
@@ -55,9 +56,9 @@ export class View {
     this._viewPortSize = size
 
     if (previousSize !== size) {
-      if (this.bounds) {
+      if (this.extent) {
         // fit projection to extent
-        this.fitBounds(this.bounds)
+        this.fitBounds(this.extent)
       }
     }
   }
@@ -107,12 +108,25 @@ export class View {
 
   setProjection(projection) {
     this.projection = projection
-    this.fitObject(bboxFeature(this.bounds))
+    this.fitObject(bboxFeature(this.extent))
   }
 
   // only set the raw projection when it has already been configured with projection.fitExtent()
   setRawProjection(projection) {
     this.projection = projection
+  }
+
+  /**
+   * @param {import("./util").Extent} extent
+   */
+  fitExtent(extent) {
+    const boundsFeature = bboxFeature(extent)
+    this.fitObject(boundsFeature)
+
+    if (this.debug) {
+      // eslint-disable-next-line no-console
+      console.log("Fit extent", extent, generateDebugUrl(boundsFeature, false))
+    }
   }
 
   fitBounds(bounds) {

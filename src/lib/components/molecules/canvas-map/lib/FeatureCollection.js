@@ -8,7 +8,7 @@ import { GeoJSON } from "./formats/GeoJSON"
 export class FeatureCollection {
   /**
    * Create a feature collection from GeoJSON features.
-   * @param {Object[]} geoJSON - The GeoJSON object
+   * @param {Object | Object[]} geoJSON - The GeoJSON object
    * @param {import("./formats/GeoJSON").GeoJSONParseOptions} [parseOptions] - Options for parsing the GeoJSON object
    * @returns {FeatureCollection} The feature collection
    */

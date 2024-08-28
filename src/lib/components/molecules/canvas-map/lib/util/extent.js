@@ -27,17 +27,37 @@ export class Extent {
   }
 
   /**
+   * Check if the passed coordinate is contained or on the edge of the extent.
+   *
+   * @param {[number, number]} coordinate Coordinate.
+   * @return {boolean} The coordinate is contained in the extent.
+   */
+  containsCoordinate(coordinate) {
+    return containsXY(this, coordinate[0], coordinate[1])
+  }
+
+  /**
+   * Combine with another extent
+   *
+   * @param {ExtentLike} extent
+   * @returns {Extent} A new extent that fits both this extent add the added one
+   */
+  combineWith(extent) {
+    return combineExtents(this, extent)
+  }
+
+  /**
    * Converts {@link ExtentLike} to an {@link Extent} object.
    *
    * If an {@link Extent} object is passed in, the function returns it unchanged.
    *
    *
    * @param {ExtentLike} input - Extent defined as {@link ExtentLike}.
-   * @returns A new `Extent` object, if a conversion occurred, or the original `Extent` object.
+   * @returns {Extent} A new `Extent` object, if a conversion occurred, or the original `Extent` object.
    */
   static convert(input) {
     if (input instanceof Extent) return input
-    if (!input) return input
+    if (!input) return null
 
     if (Array.isArray(input) && input.length === 4) {
       const [minX, minY, maxX, maxY] = input
@@ -54,6 +74,11 @@ export class Extent {
   }
 }
 
+/**
+ * Get extent for array of coordinates
+ * @param {[[number, number]]} coordinates
+ * @returns {Extent}
+ */
 export function extentForCoordinates(coordinates) {
   let minX = Infinity,
     minY = Infinity
@@ -75,26 +100,35 @@ export function extentForCoordinates(coordinates) {
     }
   }
 
-  return [minX, minY, maxX, maxY]
+  return new Extent(minX, minY, maxX, maxY)
 }
 
+/**
+ * Combine two extents into a single extent that contains both.
+ *
+ * @param {ExtentLike} extent1
+ * @param {ExtentLike} extent2
+ * @returns {Extent} The combined extent.
+ */
 export function combineExtents(extent1, extent2) {
-  const minX = Math.min(extent1[0], extent2[0])
-  const minY = Math.min(extent1[1], extent2[1])
-  const maxX = Math.max(extent1[2], extent2[2])
-  const maxY = Math.max(extent1[3], extent2[3])
-  return [minX, minY, maxX, maxY]
+  const e1 = Extent.convert(extent1)
+  const e2 = Extent.convert(extent2)
+
+  const minX = Math.min(e1.minX, e2.minX)
+  const minY = Math.min(e1.minY, e2.minY)
+  const maxX = Math.max(e1.maxX, e2.maxX)
+  const maxY = Math.max(e1.maxY, e2.maxY)
+
+  return new Extent(minX, minY, maxX, maxY)
 }
 
 /**
  * Check if the passed coordinate is contained or on the edge of the extent.
  *
  * @param {Extent} extent Extent.
- * @param {import("./coordinate").GeoCoordinateLike} coordinate Coordinate.
+ * @param {[number, number]} coordinate Coordinate.
  * @return {boolean} The coordinate is contained in the extent.
- * @api
  */
-
 export function containsCoordinate(extent, coordinate) {
   return containsXY(extent, coordinate[0], coordinate[1])
 }
@@ -106,8 +140,9 @@ export function containsCoordinate(extent, coordinate) {
  * @param {number} x X coordinate.
  * @param {number} y Y coordinate.
  * @return {boolean} The x, y values are contained in the extent.
- * @api
  */
 export function containsXY(extent, x, y) {
-  return extent[0] <= x && x <= extent[2] && extent[1] <= y && y <= extent[3]
+  return (
+    x >= extent.minX && x <= extent.maxX && y >= extent.minY && y <= extent.maxY
+  )
 }

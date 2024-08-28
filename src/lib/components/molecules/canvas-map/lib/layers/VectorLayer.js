@@ -134,6 +134,10 @@ export class VectorLayer {
     }
   }
 
+  /**
+   * Get the extent of the features in the layer.
+   * @returns {import("../util").Extent | null} The extent of the features in the layer, or null if the layer is empty.
+   */
   getExtent() {
     if (this._extent) return this._extent
 
