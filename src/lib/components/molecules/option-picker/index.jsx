@@ -2,18 +2,31 @@ import { useState, useCallback } from "preact/hooks"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 import defaultStyles from "./style.module.css"
 
-/** @typedef {  "vertical" | "horizontal" } OptionLayoutDirection */
+/** @typedef { ("vertical" | "horizontal") } OptionLayoutDirection */
 
+/**
+ * OptionPicker component
+ *
+ * @param {Object} props
+ * @param {string} props.title
+ * @param {Array<{ title: string, description: string, icon: string | JSX.Element }>} props.options
+ * @param {OptionLayoutDirection} [props.layoutDirection="horizontal"]
+ * @param {number} [props.initialSelectedIndex=0]
+ * @param {(index: number, option: Object) => void} [props.onSelect]
+ * @param {Object} [props.styles]
+ * @returns
+ */
 export function OptionPicker({
   title,
   options,
   layoutDirection = "horizontal",
+  initialSelectedIndex = 0,
   onSelect,
   styles,
 }) {
   styles = mergeStyles(defaultStyles, styles)
 
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex)
 
   const onOptionClick = useCallback(
     (option, index) => {
@@ -28,21 +41,34 @@ export function OptionPicker({
   return (
     <div className={styles.optionPicker}>
       {title && <span className={styles.title}>{title}</span>}
-      <div className={[styles.options, layoutDirection].join(" ")}>
+      <div
+        className={[styles.options, layoutDirection].join(" ")}
+        role="listbox"
+        aria-orientation={layoutDirection}
+        aria-activedescendant={`option-${selectedIndex}`}
+      >
         {options.map((option, index) => {
           const isSelected = index === selectedIndex
+          const optionId = `option-${index}`
           return (
             <button
-              key={option.title}
+              id={optionId}
+              key={optionId}
               className={[
                 styles.option,
                 isSelected ? styles.selected : "",
               ].join(" ")}
               onClick={() => onOptionClick(option, index)}
+              role="option"
+              aria-selected={isSelected}
             >
               <div className={styles.optionIconContainer}>
                 {typeof option.icon === "string" ? (
-                  <img src={option.icon} className={styles.optionIcon} />
+                  <img
+                    src={option.icon}
+                    className={styles.optionIcon}
+                    role="presentation"
+                  />
                 ) : (
                   option.icon
                 )}
