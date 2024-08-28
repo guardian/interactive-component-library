@@ -140,7 +140,6 @@ export class View {
   }
 
   /**
-   *
    * @param {import("./formats/GeoJSON").GeoJSONFeature} geoJSON
    */
   fitObject(geoJSON) {
@@ -151,10 +150,14 @@ export class View {
     ++this.projection.revision
   }
 
-  // returns bounds relative to the viewport
+  /**
+   * Returns bounds relative to the viewport
+   *
+   * @param {import("./util/extent").Extent} extent
+   */
   boundsForExtent(extent) {
-    const SW = this.projection([extent[0], extent[1]])
-    const NE = this.projection([extent[2], extent[3]])
+    const SW = this.projection([extent.minX, extent.minY])
+    const NE = this.projection([extent.maxX, extent.maxY])
     const minX = SW[0] / this.pixelRatio
     const minY = NE[1] / this.pixelRatio
     const maxX = NE[0] / this.pixelRatio
