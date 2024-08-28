@@ -31,7 +31,7 @@ const meta = {
 
 export default meta
 
-export const Default = {
+export const FirstOptionSelected = {
   args: {
     title: "Change map view",
     options: [
@@ -48,5 +48,26 @@ export const Default = {
         icon: cartogram,
       },
     ],
+  },
+}
+
+export const SecondOptionSelected = {
+  args: {
+    title: "Change map view",
+    options: [
+      {
+        title: "State & county results",
+        icon: choropleth,
+      },
+      {
+        title: "Electoral college votes",
+        icon: cartogram,
+      },
+      {
+        title: "Popular vote margin",
+        icon: cartogram,
+      },
+    ],
+    initialSelectedIndex: 1,
   },
 }
