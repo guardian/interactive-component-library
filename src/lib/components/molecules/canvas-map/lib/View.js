@@ -100,7 +100,10 @@ export class View {
     return baseResolution
   }
 
-  // calculates the upper and lower zoom scales
+  /**
+   * Get the lower and upper zoom scales
+   * @returns {[number, number]} - The lower and upper zoom scales
+   */
   get scaleExtent() {
     const maxScale = zoomLevelToZoomScale(this.maxZoom, this.baseResolution)
     return [1, maxScale]
@@ -151,23 +154,16 @@ export class View {
   }
 
   /**
-   * Returns bounds relative to the viewport
+   * Returns extent in projection coordinates
    *
-   * @param {import("./util/extent").Extent} extent
+   * @param {Extent} extent
+   * @returns {Extent} - The extent relative to the current viewport
    */
-  boundsForExtent(extent) {
-    const SW = this.projection([extent.minX, extent.minY])
-    const NE = this.projection([extent.maxX, extent.maxY])
-    const minX = SW[0] / this.pixelRatio
-    const minY = NE[1] / this.pixelRatio
-    const maxX = NE[0] / this.pixelRatio
-    const maxY = SW[1] / this.pixelRatio
-    const width = maxX - minX
-    const height = maxY - minY
-    return [
-      [minX, minY],
-      [width, height],
-    ]
+
+  projectExtent(extent) {
+    const [minX, minY] = this.projection([extent.minX, extent.minY])
+    const [maxX, maxY] = this.projection([extent.maxX, extent.maxY])
+    return new Extent(minX, minY, maxX, maxY).scale(1 / this.pixelRatio)
   }
 
   invert(point) {

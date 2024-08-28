@@ -208,6 +208,18 @@ export const USInteractiveMap = {
       [map, onHighlight],
     )
 
+    const onClick = useCallback(
+      (event) => {
+        if (!map) return
+
+        const features = map.findFeatures(pointer(event))
+        if (features.length > 0) {
+          map.zoomToFeature(features[0])
+        }
+      },
+      [map],
+    )
+
     const styleFeatures = useCallback(
       (featureToStyle) => {
         const stroke = new Stroke({
@@ -232,6 +244,7 @@ export const USInteractiveMap = {
     return (
       <div
         onMouseMove={onMouseMove}
+        onClick={onClick}
         style={{ position: "absolute", width: "100%", height: "100%" }}
       >
         <Map.Component config={config} onLoad={setMap}>
