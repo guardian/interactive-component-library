@@ -21,7 +21,7 @@ import statesAlbers10mTopo from "./sample-data/states-albers-10m.json"
 import westminsterConstituenciesTopo from "./sample-data/uk-westminster-simplified.json"
 import usPresidentialResults from "./sample-data/us-presidential-results.json"
 import ukCitiesGeo from "./sample-data/uk-cities.json"
-import { useState, useCallback } from "preact/hooks"
+import { useState, useCallback, useMemo } from "preact/hooks"
 import { pointer } from "d3-selection"
 import { fn } from "@storybook/test"
 
@@ -165,10 +165,9 @@ export const USPreprojected = {
   },
 }
 
-export const USInteractive = {
+export const USInteractiveMap = {
   args: {
     config: {
-      debug: true,
       view: {
         extent: [
           [0, 0],
@@ -182,16 +181,18 @@ export const USInteractive = {
   render: ({ config, onHighlight }) => {
     /** @type {[Map, function]} */
     const [map, setMap] = useState()
-    const [highlightedFeature, setHiglightedFeature] = useState()
+    const [highlightedFeature, setHiglightedFeature] = useState(null)
+    const featureCollection = useMemo(() => {
+      const states = feature(
+        // @ts-ignore
+        statesAlbers10mTopo,
+        statesAlbers10mTopo.objects["states"],
+      )
 
-    const states = feature(
       // @ts-ignore
-      statesAlbers10mTopo,
-      statesAlbers10mTopo.objects["states"],
-    )
-
-    // @ts-ignore
-    const featureCollection = FeatureCollection.fromGeoJSON(states)
+      const featureCollection = FeatureCollection.fromGeoJSON(states)
+      return featureCollection
+    }, [])
 
     const onMouseMove = useCallback(
       (event) => {
@@ -199,7 +200,6 @@ export const USInteractive = {
 
         // find feature under pointer
         const features = map.findFeatures(pointer(event))
-
         if (features.length > 0) {
           setHiglightedFeature(features[0])
           onHighlight(features[0].properties?.name)
@@ -209,13 +209,13 @@ export const USInteractive = {
     )
 
     const styleFeatures = useCallback(
-      (feature) => {
+      (featureToStyle) => {
         const stroke = new Stroke({
           color: "#999",
           width: 1,
         })
 
-        if (feature === highlightedFeature) {
+        if (featureToStyle.uid === highlightedFeature?.uid) {
           return new Style({
             stroke,
             fill: new Fill({ color: "#ededed" }),
