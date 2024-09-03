@@ -9,7 +9,7 @@
  * @class
  * @property {Object} properties - The properties of the style
  * @property {Object} properties.stroke - The stroke color of the style
- * @property {Object} properties.fill - The fill color of the style
+ * @property {Fill} properties.fill - The fill color of the style
  * @property {Object} properties.text - The text color of the style
  */
 export class Style {

@@ -9,6 +9,7 @@ import {
   VectorLayer,
   TextLayer,
   Text,
+  HashPattern,
 } from "."
 import { AspectRatioBox } from "$particles"
 import { feature, merge } from "topojson-client"
@@ -279,11 +280,22 @@ export const USChoropleth = {
     // @ts-ignore
     const featureCollection = FeatureCollection.fromGeoJSON(states)
 
+    const pattern = new HashPattern({
+      stripeColor: "#A8B4D2",
+      gapColor: "#2f3192",
+    })
+
     return (
       <Map.Component config={config}>
         <VectorLayer.Component
           features={featureCollection}
           style={(feature) => {
+            if (feature.properties.name === "California") {
+              return new Style({
+                fill: new Fill({ pattern }),
+              })
+            }
+
             const result = electionResultsByState[feature.properties.name]
             return styleForResult(result)
           }}
