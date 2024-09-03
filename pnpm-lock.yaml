@@ -32,8 +32,8 @@ dependencies:
     specifier: 10.21.0
     version: 10.21.0
   preact-transitioning:
-    specifier: ^1.4.1
-    version: 1.4.1(preact@10.21.0)
+    specifier: ^1.4.2
+    version: 1.4.2(preact@10.21.0)
   rbush:
     specifier: ^4.0.0
     version: 4.0.0
@@ -7096,21 +7096,21 @@ packages:
       source-map-js: 1.2.0
     dev: true
 
-  /preact-merge-refs@1.0.2(preact@10.21.0):
-    resolution: {integrity: sha512-e0P9XELyn1/L/mNsZfyGXks3TIt35aqaAZw6QPxlKa2UUwWOMNmSdgjW4VDbWtP61wjgsLywscOK6w3PUgdp4w==}
+  /preact-merge-refs@1.0.3(preact@10.21.0):
+    resolution: {integrity: sha512-oFidP5dShQGgsItLvDVCKuRa2lRtUG8KELwf1IsrJUl2Bwaxd9M72ktODyI1VCAYDCc55CEx2rG1TUwxW+cm6w==}
     peerDependencies:
       preact: '>=10.0.0'
     dependencies:
       preact: 10.21.0
     dev: false
 
-  /preact-transitioning@1.4.1(preact@10.21.0):
-    resolution: {integrity: sha512-zWmus0IcBpiqA/kN7dj6RoZ54/KYH10lN6ckARX1VDTLPdtPd2UhtBa3sWTV+eCKINz3R7kIcfznRSxAc5QuOA==}
+  /preact-transitioning@1.4.2(preact@10.21.0):
+    resolution: {integrity: sha512-EuMK7Wc/bXKkSEd+ggSKA01nQ2Z5aYgUwNcnO4ceOy33dP1UtJk9BO6A6myRHArSYQ4zJDWGn1i26BCkzNls9Q==}
     peerDependencies:
       preact: '>=10.0.0'
     dependencies:
       preact: 10.21.0
-      preact-merge-refs: 1.0.2(preact@10.21.0)
+      preact-merge-refs: 1.0.3(preact@10.21.0)
     dev: false
 
   /preact@10.21.0:
