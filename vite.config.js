@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
   /** @type {import('vitest/config').UserConfig} */
   return {
     plugins: [
-      peerDepsExternal(),
+      peerDepsExternal({ includeDependencies: true }),
       tsconfigPaths(),
       preact({ prefreshEnabled: false }),
 
