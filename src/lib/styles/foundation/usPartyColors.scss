@@ -1,23 +1,39 @@
 @mixin default-party-colors-us {
-  --dem: #2f3192;
+  --dem: #093ca3;
   --gop: #c70000;
-  --oth: #848484;
+  --oth: #707070;
+  --ind-dem: #7378d8;
+  --lib: #c6b716;
+  --grn: #0da498;
+  --ken: #ef6f07;
 
-  --dem-2: #bdbeea;
+  --dem-2: #dad7f5;
   --gop-2: #ffdbd4;
-  --oth-2: #c8c8c8;
+  --oth-2: #e7e7e7;
+  --ind-dem-2: #dad7f5;
+  --lib-2: #f4eac2;
+  --grn-2: #cfedea;
+  --ken-2: #ffe2cd;
 
   --undeclared: #e7e7e7;
 }
 
 @mixin dark-mode-party-colors-us {
-  --dem: #3c3eb9;
-  --gop: #dc2e1c;
+  --dem: #3261db;
+  --gop: #c70000;
   --oth: #707070;
+  --ind-dem: #7389d8;
+  --lib: #c6b716;
+  --grn: #23b4a9;
+  --ken: #ef6f07;
 
-  --dem-2: #292b7f;
-  --gop-2: #833a2b;
+  --dem-2: #20366d;
+  --gop-2: #5a0b0b;
   --oth-2: #333333;
+  --ind-dem-2: #394261;
+  --lib-2: #524d13;
+  --grn-2: #19524e;
+  --ken-2: #6a370e;
 
   --undeclared: #494949;
 }
@@ -37,6 +53,22 @@
   background-color: var(--oth) !important;
 }
 
+.bg-color--ind-dem {
+  background-color: var(--ind-dem) !important;
+}
+
+.bg-color--lib {
+  background-color: var(--lib) !important;
+}
+
+.bg-color--grn {
+  background-color: var(--grn) !important;
+}
+
+.bg-color--ken {
+  background-color: var(--ken) !important;
+}
+
 .bg-color--dem-2 {
   background-color: var(--dem-2) !important;
 }
@@ -47,6 +79,22 @@
 
 .bg-color--oth-2 {
   background-color: var(--oth-2) !important;
+}
+
+.bg-color--ind-dem-2 {
+  background-color: var(--ind-dem-2) !important;
+}
+
+.bg-color--lib-2 {
+  background-color: var(--lib-2) !important;
+}
+
+.bg-color--grn-2 {
+  background-color: var(--grn-2) !important;
+}
+
+.bg-color--ken-2 {
+  background-color: var(--ken-2) !important;
 }
 
 .bg-color--undeclared {
@@ -68,6 +116,22 @@
   fill: var(--oth) !important;
 }
 
+.fill-color--ind-dem {
+  fill: var(--ind-dem) !important;
+}
+
+.fill-color--lib {
+  fill: var(--lib) !important;
+}
+
+.fill-color--grn {
+  fill: var(--grn) !important;
+}
+
+.fill-color--ken {
+  fill: var(--ken) !important;
+}
+
 .fill-color--dem-2 {
   fill: var(--dem-2) !important;
 }
@@ -78,6 +142,22 @@
 
 .fill-color--oth-2 {
   fill: var(--oth-2) !important;
+}
+
+.fill-color--ind-dem-2 {
+  fill: var(--ind-dem-2) !important;
+}
+
+.fill-color--lib-2 {
+  fill: var(--lib-2) !important;
+}
+
+.fill-color--grn-2 {
+  fill: var(--grn-2) !important;
+}
+
+.fill-color--ken-2 {
+  fill: var(--ken-2) !important;
 }
 
 .fill-color--undeclared {
@@ -98,6 +178,22 @@
   stop-color: var(--oth) !important;
 }
 
+.stop-color--ind-dem {
+  stop-color: var(--ind-dem) !important;
+}
+
+.stop-color--lib {
+  stop-color: var(--lib) !important;
+}
+
+.stop-color--grn {
+  stop-color: var(--grn) !important;
+}
+
+.stop-color--ken {
+  stop-color: var(--ken) !important;
+}
+
 .stop-color--undeclared {
   stop-color: var(--undeclared) !important;
 }
@@ -114,6 +210,22 @@
 
 .stroke-color--oth {
   stroke: var(--oth) !important;
+}
+
+.stroke-color--ind-dem {
+  stroke: var(--ind-dem) !important;
+}
+
+.stroke-color--lib {
+  stroke: var(--lib) !important;
+}
+
+.stroke-color--grn {
+  stroke: var(--grn) !important;
+}
+
+.stroke-color--ken {
+  stroke: var(--ken) !important;
 }
 
 .stroke-color--undeclared {
