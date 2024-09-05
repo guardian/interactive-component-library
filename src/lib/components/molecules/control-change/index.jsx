@@ -21,7 +21,10 @@ export const ControlChange = ({ previous, next, text, styles }) => {
       ) : (
         <CircleIcon styles={{ circle: `fill-color--${next}` }} />
       )}
-      <strong className={styles.text}>{text}</strong>
+      <span
+        className={styles.text}
+        dangerouslySetInnerHTML={{ __html: text }}
+      ></span>
     </div>
   )
 }
