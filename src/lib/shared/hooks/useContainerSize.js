@@ -12,6 +12,10 @@ export function useContainerSize(containerRef) {
         setContainerSize({
           width: entry.contentRect.width,
           height: entry.contentRect.height,
+          left: entry.contentRect.left,
+          right: entry.contentRect.right,
+          bottom: entry.contentRect.bottom,
+          top: entry.contentRect.top,
         })
       }
     })
