@@ -40,8 +40,7 @@ export class FeatureRenderer {
     this.drawPath(geometries, context)
 
     if (fill) {
-      context.fillStyle = fill.getRgba()
-      context.fill()
+      fill.drawInContext(context, transform.k)
     }
 
     if (stroke) {

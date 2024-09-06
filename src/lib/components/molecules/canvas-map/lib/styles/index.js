@@ -1,4 +1,5 @@
-export * from "./Style"
 export * from "./Stroke"
+export * from "./HashPattern"
 export * from "./Fill"
 export * from "./Text"
+export * from "./Style"
