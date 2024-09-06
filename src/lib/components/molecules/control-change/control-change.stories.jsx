@@ -14,7 +14,11 @@ const hasChangedArgs = {
 const hasChangedAlt = {
   previous: "snp",
   next: "lab",
-  text: `Lab gain from SNP, <span style='font-weight: 500'>a key seat</span>`,
+  text: (
+    <>
+      Lab gain from SNP, <span style="font-weight: 500">a key seat</span>
+    </>
+  ),
 }
 
 const hasChangedAlt2 = {
