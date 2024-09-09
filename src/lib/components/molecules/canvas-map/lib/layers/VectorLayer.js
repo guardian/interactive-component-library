@@ -19,7 +19,7 @@ export class VectorLayer {
     opacity,
     hitDetectionEnabled = true,
   }) {
-    const { registerLayer } = useContext(MapContext)
+    const { registerLayer, unregisterLayer } = useContext(MapContext)
 
     // We recreate layer whenever these properties change, which cannot be changed on the fly
     // and require recreation
@@ -41,8 +41,14 @@ export class VectorLayer {
       [featureCollection, minZoom, opacity, hitDetectionEnabled],
     )
 
-    // Register layer with map context. If `layer` is not present in map, it will be added.
-    registerLayer(layer)
+    useEffect(() => {
+      registerLayer(layer, this)
+
+      return () => {
+        unregisterLayer(layer)
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [layer])
 
     useEffect(() => {
       // If the style prop changes, just update the layer, style can be changed without creating a
@@ -51,7 +57,7 @@ export class VectorLayer {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [style])
 
-    return null
+    return false
   }
 
   /**
