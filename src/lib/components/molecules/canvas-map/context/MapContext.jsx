@@ -1,8 +1,16 @@
 import { createContext } from "preact"
-import { useEffect } from "preact/hooks"
+import { useEffect, useState } from "preact/hooks"
 
 /**
- * @typedef {{ registerLayer: ((layer: import("../lib/layers").Layer) => void) | null }} MapContext
+ * @import { Layer } from "../lib/layers"
+ * @import { ReactNode } from "preact/compat"
+ */
+
+/**
+ * @typedef {{
+ *   registerLayer: ((layer: Layer, comp: ReactNode) => void) | null,
+ *   unregisterLayer: ((layer: Layer) => void) | null
+ * }} MapContext
  */
 
 /**
@@ -16,27 +24,75 @@ export const MapContext = createContext(null)
  * @param {import('preact').ComponentChildren} params.children
  */
 export function MapProvider({ map, children }) {
-  const registeredLayers = []
+  const [layers, setLayers] = useState([])
 
-  // This function is called by child layers to register themselves with the map, every time a layer
-  // is rendered
-  const registerLayer = (layer) => {
-    registeredLayers.push(layer)
+  const registerLayer = (layer, comp) => {
+    if (!layers.includes(layer)) {
+      const position = getCompTreePosition(comp, children)
+
+      if (position === null) return
+
+      setLayers((prevLayers) => {
+        // Insert the new layer at the correct position in the layers list
+        const newLayers = [...prevLayers]
+        newLayers.splice(position, 0, layer)
+        return newLayers
+      })
+    }
   }
 
-  // If the registered layers for this render don't match the layers in the map, then reset the
-  // map layers to the new set. If the map's layers perfectly match this render's layers, then
-  // there were no changes to the set and order of layers passed as children to Map.
+  const unregisterLayer = (layerToRemove) => {
+    setLayers((prevLayers) =>
+      prevLayers.filter((layer) => layer !== layerToRemove),
+    )
+  }
+
   useEffect(() => {
-    if (map && !map.hasLayers(registeredLayers)) {
-      map.setLayers(registeredLayers)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [map, children])
+    if (!map) return
+    map.setLayers(layers)
+  }, [map, layers])
 
   return (
-    <MapContext.Provider value={{ registerLayer }}>
+    <MapContext.Provider value={{ registerLayer, unregisterLayer }}>
       {children}
     </MapContext.Provider>
   )
+}
+
+/**
+ * Given a React component's children, find the in-order position of the target component in the
+ * component tree.
+ *
+ * @param {import('preact/compat').ReactNode} targetComponent
+ * @param {import('preact').ComponentChildren} children
+ */
+function getCompTreePosition(targetComponent, children) {
+  let index = 0
+
+  function traverse(nodes) {
+    for (const node of nodes) {
+      // Preact mangles property names, read as: node.component.vnode.children
+      const childNodes = node?.__c?.__v?.__k
+
+      if (childNodes && childNodes.length > 1 && childNodes[0] !== null) {
+        // If node has children, traverse them. Nodes with no children have a .__k property of "[null]".
+        const result = traverse(childNodes)
+
+        if (result !== null) {
+          return result
+        }
+      } else {
+        // This __c property of a ReactNode returns the instance that's given by "this" in the component constructor
+        if (node?.__c === targetComponent) {
+          return index
+        }
+
+        index++
+      }
+    }
+
+    return null
+  }
+
+  return traverse(Array.isArray(children) ? children : [children])
 }
