@@ -10,6 +10,12 @@
   }
 }
 
+.tickerHorizontalAtMobile {
+  position: relative;
+  --ticker-item-width: 200px;
+  padding: 0;
+}
+
 .tickerItems {
   width: 100%;
   overflow: clip;
@@ -30,6 +36,18 @@
     transform: translateX(var(--ticker-offset));
     transition: transform 0.5s ease-in-out;
   }
+}
+
+.tickerScrollHorizontalAtMobile {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: auto;
+  column-gap: var(--space-2);
+  align-items: stretch;
+  max-height: 80px;
+  transform: translateX(var(--ticker-offset));
+  transition: transform 0.5s ease-in-out;
 }
 
 .tickerItem {
@@ -62,6 +80,15 @@
     right: 0;
   }
 }
+.gradientHorizontalAtMobile {
+  width: 50px;
+  height: 100%;
+  right: 0;
+  position: absolute;
+  @include mq($from: mobileLandscape) {
+    width: auto;
+  }
+}
 
 .buttons {
   display: none;
@@ -78,6 +105,17 @@
   }
 }
 
+.buttonsHorizontalAtMobile {
+  position: absolute;
+  top: 0;
+  right: var(--space-5);
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .button {
   min-height: 40px;
   background-color: var(--tertiary-bg-color);
@@ -86,6 +124,10 @@
   @include mq($from: mobileLandscape) {
     display: none;
   }
+}
+
+.buttonHorizontalAtMobile {
+  display: none;
 }
 
 .buttonInner {

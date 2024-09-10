@@ -4,7 +4,12 @@ import { Gradient } from "./gradient"
 import { ArrowButton, Button } from "$particles"
 import styles from "./style.module.scss"
 
-export function Ticker({ maxItems = 20, onStateChange, children }) {
+export function Ticker({
+  maxItems = 20,
+  onStateChange,
+  horizontalAtMobile = false,
+  children,
+}) {
   const [pageIndex, setPageIndex] = useState(0)
   const [pageWidth, setPageWidth] = useState(0)
   const [numberOfPages, setNumberOfPages] = useState(0)
@@ -55,12 +60,21 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
   return (
     <div
       ref={tickerRef}
-      className={styles.ticker}
+      className={
+        horizontalAtMobile ? styles.tickerHorizontalAtMobile : styles.ticker
+      }
       style={`--ticker-offset: ${offsetWidth}px;`}
       data-expanded={expanded}
     >
       <div ref={tickerItemsRef} className={styles.tickerItems}>
-        <div ref={tickerScrollRef} className={styles.tickerScroll}>
+        <div
+          ref={tickerScrollRef}
+          className={
+            horizontalAtMobile
+              ? styles.tickerScrollHorizontalAtMobile
+              : styles.tickerScroll
+          }
+        >
           {childArray.map((child, index) => (
             <div className={styles.tickerItem} key={child?.props?.id ?? index}>
               {child}
@@ -73,10 +87,23 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
         className={styles.controls}
         style={hideButtons && { display: "none" }}
       >
-        <div className={styles.gradient}>
+        <div
+          className={
+            horizontalAtMobile
+              ? styles.gradientHorizontalAtMobile
+              : styles.gradient
+          }
+        >
           <Gradient />
         </div>
-        <div className={styles.buttons}>
+
+        <div
+          className={
+            horizontalAtMobile
+              ? styles.buttons
+              : styles.buttonsHorizontalAtMobile
+          }
+        >
           <ArrowButton
             onClick={() => setPageIndex((d) => d + 1)}
             disabled={pageIndex >= numberOfPages - 2}
@@ -87,7 +114,11 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
             disabled={pageIndex <= 0}
           />
         </div>
-        <div className={styles.button}>
+        <div
+          className={
+            horizontalAtMobile ? styles.buttonHorizontalAtMobile : styles.button
+          }
+        >
           <Button
             type="regular"
             styles={{ buttonInner: styles.buttonInner }}
