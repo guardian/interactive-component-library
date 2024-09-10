@@ -29,6 +29,8 @@ export function Ticker({
 
   const childArray = toChildArray(children)
 
+  const mobLandscapeW = 480
+
   useLayoutEffect(() => {
     const tickerItemsContainer = tickerItemsRef.current
     const pageWidth = tickerItemsContainer.clientWidth * 0.75
@@ -41,10 +43,11 @@ export function Ticker({
   }, [childArray])
 
   useLayoutEffect(() => {
-    const hideButtons = childArray.length < 4
+    const hideButtons =
+      childArray.length < 4 || (horizontalAtMobile && pageWidth < mobLandscapeW)
 
     setHideButtons(hideButtons)
-  }, [childArray])
+  }, [childArray, horizontalAtMobile, pageWidth])
 
   function toggleExpandedState() {
     if (expanded) {
@@ -60,9 +63,7 @@ export function Ticker({
   return (
     <div
       ref={tickerRef}
-      className={
-        horizontalAtMobile ? styles.tickerHorizontalAtMobile : styles.ticker
-      }
+      className={horizontalAtMobile ? styles.tickerHorizontal : styles.ticker}
       style={`--ticker-offset: ${offsetWidth}px;`}
       data-expanded={expanded}
     >
@@ -71,7 +72,7 @@ export function Ticker({
           ref={tickerScrollRef}
           className={
             horizontalAtMobile
-              ? styles.tickerScrollHorizontalAtMobile
+              ? styles.tickerScrollHorizontal
               : styles.tickerScroll
           }
         >
@@ -87,21 +88,13 @@ export function Ticker({
         className={styles.controls}
         style={hideButtons && { display: "none" }}
       >
-        <div
-          className={
-            horizontalAtMobile
-              ? styles.gradientHorizontalAtMobile
-              : styles.gradient
-          }
-        >
+        <div className={styles.gradient}>
           <Gradient />
         </div>
 
         <div
           className={
-            horizontalAtMobile
-              ? styles.buttons
-              : styles.buttonsHorizontalAtMobile
+            horizontalAtMobile ? styles.buttonsHorizontal : styles.buttons
           }
         >
           <ArrowButton
@@ -114,9 +107,10 @@ export function Ticker({
             disabled={pageIndex <= 0}
           />
         </div>
+
         <div
           className={
-            horizontalAtMobile ? styles.buttonHorizontalAtMobile : styles.button
+            horizontalAtMobile ? styles.buttonHorizontal : styles.button
           }
         >
           <Button
@@ -127,6 +121,12 @@ export function Ticker({
             {expanded ? "Show fewer" : `Show ${maxItems} most recent`}
           </Button>
         </div>
+
+        {horizontalAtMobile && (
+          <div className={styles.gradient}>
+            <Gradient />
+          </div>
+        )}
       </div>
     </div>
   )
