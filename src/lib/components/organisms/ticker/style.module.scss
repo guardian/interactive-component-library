@@ -1,4 +1,4 @@
-.ticker {
+.tickerVertical {
   position: relative;
   padding-bottom: 44px;
 
@@ -10,7 +10,7 @@
   }
 }
 
-.tickerHorizontal {
+.ticker {
   position: relative;
   --ticker-item-width: 200px;
   padding: 0;
@@ -21,7 +21,7 @@
   overflow: clip;
 }
 
-.tickerScroll {
+.tickerScrollVertical {
   display: flex;
   flex-direction: column;
   row-gap: var(--space-2);
@@ -38,7 +38,7 @@
   }
 }
 
-.tickerScrollHorizontal {
+.tickerScroll {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -135,7 +135,7 @@
   padding-bottom: 0;
 }
 
-.ticker[data-expanded="true"] .tickerScroll {
+.ticker[data-expanded="true"] .tickerScrollVertical {
   max-height: fit-content;
   margin-bottom: -40px;
 }

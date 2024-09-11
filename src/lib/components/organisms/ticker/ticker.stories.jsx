@@ -147,7 +147,7 @@ export const VerticalAtMobile = {
 
 export const HorizontalAtMobile = {
   args: {
-    verticalAtMobile: true,
+    verticalAtMobile: false,
     maxItems: 11,
     items: [...items, ...items, ...items, ...items],
   },
