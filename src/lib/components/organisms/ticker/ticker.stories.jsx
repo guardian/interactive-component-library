@@ -78,6 +78,7 @@ export const ThreeResults = {
 
 export const SixResults = {
   args: {
+    verticalAtMobile: true,
     items: [...items, ...items],
   },
 }
@@ -85,6 +86,7 @@ export const SixResults = {
 export const TwelveResults = {
   args: {
     maxItems: 12,
+    verticalAtMobile: true,
     items: [...items, ...items, ...items, ...items],
   },
 }
@@ -115,10 +117,38 @@ export const LongTitleAndText = {
   },
 }
 
-export const HorizontalTicker = {
+export const VerticalAtMobile = {
   args: {
-    horizontalAtMobile: true,
+    verticalAtMobile: true,
     maxItems: 12,
+    items: [...items, ...items, ...items, ...items],
+  },
+  render: ({ items, ...args }) => {
+    return (
+      <Ticker
+        {...args}
+        onStateChange={({ expanded }) => {
+          if (!expanded) {
+            tickerSection?.scrollIntoView({ behavior: "instant" })
+          }
+        }}
+      >
+        {items.map((d, index) => (
+          <ResultSummary
+            {...d}
+            timestamp={now - minuteInMilliseconds * index}
+            key={index}
+          />
+        ))}
+      </Ticker>
+    )
+  },
+}
+
+export const HorizontalAtMobile = {
+  args: {
+    verticalAtMobile: true,
+    maxItems: 11,
     items: [...items, ...items, ...items, ...items],
   },
   render: ({ items, ...args }) => {

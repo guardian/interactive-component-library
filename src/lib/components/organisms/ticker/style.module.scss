@@ -45,7 +45,6 @@
   scrollbar-width: none;
   overflow-x: scroll;
   column-gap: var(--space-2);
-  align-items: stretch;
   max-height: 100px;
   transform: translateX(var(--ticker-offset));
   transition: transform 0.5s ease-in-out;
@@ -89,7 +88,13 @@
   width: 50px;
   height: 100%;
   right: 0;
+  top: 0;
   position: absolute;
+  background: linear-gradient(
+    to right,
+    transparent 10%,
+    var(--primary-bg-color)
+  );
   @include mq($from: mobileLandscape) {
     width: auto;
   }
@@ -110,17 +115,6 @@
   }
 }
 
-.buttonsHorizontal {
-  position: absolute;
-  top: 0;
-  right: var(--space-5);
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .button {
   min-height: 40px;
   background-color: var(--tertiary-bg-color);
@@ -129,10 +123,6 @@
   @include mq($from: mobileLandscape) {
     display: none;
   }
-}
-
-.buttonHorizontal {
-  display: none;
 }
 
 .buttonInner {

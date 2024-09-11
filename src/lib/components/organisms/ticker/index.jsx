@@ -1,5 +1,12 @@
 import { toChildArray } from "preact"
-import { useState, useRef, useLayoutEffect, useMemo } from "preact/hooks"
+import {
+  useState,
+  useRef,
+  useLayoutEffect,
+  useMemo,
+  useEffect,
+} from "preact/hooks"
+import { useContainerSize } from "$shared/hooks/useContainerSize"
 import { Gradient } from "./gradient"
 import { ArrowButton, Button } from "$particles"
 import styles from "./style.module.scss"
@@ -7,7 +14,7 @@ import styles from "./style.module.scss"
 export function Ticker({
   maxItems = 20,
   onStateChange,
-  horizontalAtMobile = false,
+  verticalAtMobile = false,
   children,
 }) {
   const [pageIndex, setPageIndex] = useState(0)
@@ -24,12 +31,20 @@ export function Ticker({
   const controlsRef = useRef()
 
   const [hideButtons, setHideButtons] = useState(false)
-
   const [expanded, setExpanded] = useState(false)
+  const [verticalMobileLayout, setVerticalMobileLayout] =
+    useState(verticalAtMobile)
 
   const childArray = toChildArray(children)
 
+  const containerSize = useContainerSize(tickerRef)
   const mobLandscapeW = 480
+  const containerWidth = containerSize ? containerSize.width : 600
+  const isMobile = containerWidth < mobLandscapeW
+
+  useEffect(() => {
+    setVerticalMobileLayout(verticalAtMobile && isMobile)
+  }, [isMobile, verticalAtMobile])
 
   useLayoutEffect(() => {
     const tickerItemsContainer = tickerItemsRef.current
@@ -42,12 +57,10 @@ export function Ticker({
     setNumberOfPages(numberOfPages)
   }, [childArray])
 
-  useLayoutEffect(() => {
-    const hideButtons =
-      childArray.length < 4 || (horizontalAtMobile && pageWidth < mobLandscapeW)
-
+  useEffect(() => {
+    const hideButtons = childArray.length < 4
     setHideButtons(hideButtons)
-  }, [childArray, horizontalAtMobile, pageWidth])
+  }, [childArray])
 
   function toggleExpandedState() {
     if (expanded) {
@@ -63,7 +76,7 @@ export function Ticker({
   return (
     <div
       ref={tickerRef}
-      className={horizontalAtMobile ? styles.tickerHorizontal : styles.ticker}
+      className={verticalAtMobile ? styles.ticker : styles.tickerHorizontal}
       style={`--ticker-offset: ${offsetWidth}px;`}
       data-expanded={expanded}
     >
@@ -71,9 +84,9 @@ export function Ticker({
         <div
           ref={tickerScrollRef}
           className={
-            horizontalAtMobile
-              ? styles.tickerScrollHorizontal
-              : styles.tickerScroll
+            verticalAtMobile
+              ? styles.tickerScroll
+              : styles.tickerScrollHorizontal
           }
         >
           {childArray.map((child, index) => (
@@ -83,6 +96,7 @@ export function Ticker({
           ))}
         </div>
       </div>
+
       <div
         ref={controlsRef}
         className={styles.controls}
@@ -92,39 +106,28 @@ export function Ticker({
           <Gradient />
         </div>
 
-        <div
-          className={
-            horizontalAtMobile ? styles.buttonsHorizontal : styles.buttons
-          }
-        >
-          <ArrowButton
-            onClick={() => setPageIndex((d) => d + 1)}
-            disabled={pageIndex >= numberOfPages - 2}
-          />
-          <ArrowButton
-            direction="left"
-            onClick={() => setPageIndex((d) => d - 1)}
-            disabled={pageIndex <= 0}
-          />
-        </div>
-
-        <div
-          className={
-            horizontalAtMobile ? styles.buttonHorizontal : styles.button
-          }
-        >
-          <Button
-            type="regular"
-            styles={{ buttonInner: styles.buttonInner }}
-            onClick={toggleExpandedState}
-          >
-            {expanded ? "Show fewer" : `Show ${maxItems} most recent`}
-          </Button>
-        </div>
-
-        {horizontalAtMobile && (
-          <div className={styles.gradient}>
-            <Gradient />
+        {verticalMobileLayout && (
+          <div className={styles.button}>
+            <Button
+              type="regular"
+              styles={{ buttonInner: styles.buttonInner }}
+              onClick={toggleExpandedState}
+            >
+              {expanded ? "Show fewer" : `Show ${maxItems} most recent`}
+            </Button>
+          </div>
+        )}
+        {!isMobile && (
+          <div className={styles.buttons}>
+            <ArrowButton
+              onClick={() => setPageIndex((d) => d + 1)}
+              disabled={pageIndex >= numberOfPages - 2}
+            />
+            <ArrowButton
+              direction="left"
+              onClick={() => setPageIndex((d) => d - 1)}
+              disabled={pageIndex <= 0}
+            />
           </div>
         )}
       </div>
