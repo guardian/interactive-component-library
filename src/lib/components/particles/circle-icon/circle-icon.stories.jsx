@@ -18,3 +18,11 @@ export const Pulse = {
     pulse: true,
   },
 }
+
+export const Split = {
+  args: {
+    diameter: 20,
+    color: "var(--news-core-03)",
+    splitColor: "var(--news-core-02)",
+  },
+}
