@@ -23,7 +23,7 @@ export const CircleIcon = ({
 
   return (
     <svg
-      style={styles.svg}
+      className={styles.svg}
       fill="none"
       height={diameter + padding}
       viewBox={`0 0 ${diameter + padding} ${diameter + padding}`}
