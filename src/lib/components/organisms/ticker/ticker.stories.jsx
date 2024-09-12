@@ -85,7 +85,7 @@ export const SixResults = {
 
 export const TwelveResults = {
   args: {
-    maxItems: 12,
+    maxItems: 9,
     verticalAtMobile: true,
     items: [...items, ...items, ...items, ...items],
   },

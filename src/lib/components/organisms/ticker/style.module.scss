@@ -5,7 +5,7 @@
   --ticker-item-width: 100%;
 
   @include mq($from: mobileLandscape) {
-    --ticker-item-width: 200px;
+    --ticker-item-width: auto;
     padding: 0;
   }
 }

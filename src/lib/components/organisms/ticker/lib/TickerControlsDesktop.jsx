@@ -9,6 +9,12 @@ const TickerControlsDesktop = ({
   pageIndex,
   numberOfPages,
 }) => {
+  const getDisabled = (indx, numPages) => {
+    if (indx === 0 && numPages > 1) {
+      return false
+    }
+    return indx >= Math.floor(numPages) - 1
+  }
   return (
     <div
       ref={controlsRef}
@@ -21,7 +27,7 @@ const TickerControlsDesktop = ({
       <div className={styles.buttons}>
         <ArrowButton
           onClick={() => setPageIndex((d) => d + 1)}
-          disabled={pageIndex >= numberOfPages - 1}
+          disabled={getDisabled(pageIndex, numberOfPages)}
         />
         <ArrowButton
           direction="left"

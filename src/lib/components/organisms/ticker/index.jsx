@@ -10,6 +10,7 @@ import {
 import { useContainerSize } from "$shared/hooks/useContainerSize"
 import { TickerControlsDesktop } from "./lib/TickerControlsDesktop"
 import { TickerControlsMobileVertical } from "./lib/TickerControlsMobileVertical"
+import { getOffsetDistance } from "./lib/helpers/tickerHelper"
 import styles from "./style.module.scss"
 
 export function Ticker({
@@ -19,12 +20,8 @@ export function Ticker({
   children,
 }) {
   const [pageIndex, setPageIndex] = useState(0)
-  const [pageWidth, setPageWidth] = useState(0)
+  const [scrollElWidth, setScrollElWidth] = useState(0)
   const [numberOfPages, setNumberOfPages] = useState(0)
-
-  const offsetWidth = useMemo(() => {
-    return -pageIndex * (pageWidth || 0)
-  }, [pageIndex, pageWidth])
 
   const tickerRef = useRef()
   const tickerItemsRef = useRef()
@@ -41,16 +38,28 @@ export function Ticker({
   const containerWidth = containerSize ? containerSize.width : 600
   const isMobile = containerWidth < mobLandscapeW
 
+  const pageWidthModifier = 0.75
+
   useLayoutEffect(() => {
     const tickerItemsContainer = tickerItemsRef.current
-    const pageWidth = tickerItemsContainer.clientWidth * 0.75
-    setPageWidth(pageWidth)
+    const containerWidth = tickerItemsContainer.clientWidth * pageWidthModifier // don't scroll entire set of items offscreen, keep quarter of them
+    const tickerScrollEl = tickerScrollRef.current
+    setScrollElWidth(tickerScrollEl.scrollWidth)
 
-    const numberOfPages = Math.ceil(
-      tickerScrollRef.current.scrollWidth / pageWidth,
-    )
+    const numberOfPages = tickerScrollEl.scrollWidth / containerWidth
+
     setNumberOfPages(numberOfPages)
   }, [childArray])
+
+  const offsetWidth = useMemo(() => {
+    let res = getOffsetDistance(
+      pageIndex,
+      numberOfPages,
+      scrollElWidth,
+      pageWidthModifier,
+    )
+    return res
+  }, [pageIndex, numberOfPages, scrollElWidth])
 
   useEffect(() => {
     const hideButtons = childArray.length < 4
