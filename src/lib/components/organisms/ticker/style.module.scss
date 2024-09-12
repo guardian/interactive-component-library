@@ -45,10 +45,10 @@
   scrollbar-width: none;
   overflow-x: scroll;
   column-gap: var(--space-2);
-  max-height: 100px;
   transform: translateX(var(--ticker-offset));
   transition: transform 0.5s ease-in-out;
   width: auto;
+  padding-right: 50px;
 
   &:-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
@@ -98,8 +98,8 @@
   background: linear-gradient(
     to right,
     transparent 0%,
-    var(--primary-bg-color) 80%,
-    var(--primary-bg-color)
+    var(--tertiary-bg-color) 80%,
+    var(--tertiary-bg-color)
   );
   @include mq($from: mobileLandscape) {
     width: auto;
