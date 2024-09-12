@@ -123,53 +123,13 @@ export const VerticalAtMobile = {
     maxItems: 12,
     items: [...items, ...items, ...items, ...items],
   },
-  render: ({ items, ...args }) => {
-    return (
-      <Ticker
-        {...args}
-        onStateChange={({ expanded }) => {
-          if (!expanded) {
-            tickerSection?.scrollIntoView({ behavior: "instant" })
-          }
-        }}
-      >
-        {items.map((d, index) => (
-          <ResultSummary
-            {...d}
-            timestamp={now - minuteInMilliseconds * index}
-            key={index}
-          />
-        ))}
-      </Ticker>
-    )
-  },
 }
 
 export const HorizontalAtMobile = {
   args: {
     verticalAtMobile: false,
-    maxItems: 11,
+    maxItems: 12,
     items: [...items, ...items, ...items, ...items],
-  },
-  render: ({ items, ...args }) => {
-    return (
-      <Ticker
-        {...args}
-        onStateChange={({ expanded }) => {
-          if (!expanded) {
-            tickerSection?.scrollIntoView({ behavior: "instant" })
-          }
-        }}
-      >
-        {items.map((d, index) => (
-          <ResultSummary
-            {...d}
-            timestamp={now - minuteInMilliseconds * index}
-            key={index}
-          />
-        ))}
-      </Ticker>
-    )
   },
 }
 
