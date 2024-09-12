@@ -52,6 +52,8 @@ export function Ticker({
     setNumberOfPages(numberOfPages)
   }, [childArray])
 
+  // debugger;
+
   useEffect(() => {
     const hideButtons = childArray.length < 4
     setHideButtons(hideButtons)
@@ -68,8 +70,6 @@ export function Ticker({
     })
   }, [expanded, onStateChange])
 
-  // console.log("expanded", expanded)
-
   return (
     <div
       ref={tickerRef}
@@ -81,7 +81,7 @@ export function Ticker({
         <div
           ref={tickerScrollRef}
           className={
-            verticalAtMobile ? styles.tickerVertical : styles.tickerScroll
+            verticalAtMobile ? styles.tickerScrollVertical : styles.tickerScroll
           }
         >
           {childArray.map((child, index) => (
@@ -104,6 +104,7 @@ export function Ticker({
           buttonText={expanded ? "Show fewer" : `Show ${maxItems} most recent`}
         />
       )}
+
       {!isMobile && (
         <TickerControlsDesktop
           hideButtons={hideButtons}

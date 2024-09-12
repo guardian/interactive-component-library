@@ -21,7 +21,7 @@ const TickerControlsDesktop = ({
       <div className={styles.buttons}>
         <ArrowButton
           onClick={() => setPageIndex((d) => d + 1)}
-          disabled={pageIndex >= numberOfPages - 2}
+          disabled={pageIndex >= numberOfPages - 1}
         />
         <ArrowButton
           direction="left"
