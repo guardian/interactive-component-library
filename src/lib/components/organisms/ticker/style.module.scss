@@ -90,14 +90,15 @@
   }
 }
 .gradientHorizontal {
-  width: 50px;
+  width: 60px;
   height: 100%;
   right: 0;
   top: 0;
   position: absolute;
   background: linear-gradient(
     to right,
-    transparent 10%,
+    transparent 0%,
+    var(--primary-bg-color) 80%,
     var(--primary-bg-color)
   );
   @include mq($from: mobileLandscape) {

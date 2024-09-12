@@ -52,8 +52,6 @@ export function Ticker({
     setNumberOfPages(numberOfPages)
   }, [childArray])
 
-  // debugger;
-
   useEffect(() => {
     const hideButtons = childArray.length < 4
     setHideButtons(hideButtons)
