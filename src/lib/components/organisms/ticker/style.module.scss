@@ -1,13 +1,19 @@
-.ticker {
+.tickerVertical {
   position: relative;
   padding-bottom: 44px;
 
   --ticker-item-width: 100%;
 
   @include mq($from: mobileLandscape) {
-    --ticker-item-width: 200px;
+    --ticker-item-width: auto;
     padding: 0;
   }
+}
+
+.ticker {
+  position: relative;
+  --ticker-item-width: 200px;
+  padding: 0;
 }
 
 .tickerItems {
@@ -15,7 +21,7 @@
   overflow: clip;
 }
 
-.tickerScroll {
+.tickerScrollVertical {
   display: flex;
   flex-direction: column;
   row-gap: var(--space-2);
@@ -29,6 +35,27 @@
 
     transform: translateX(var(--ticker-offset));
     transition: transform 0.5s ease-in-out;
+  }
+}
+
+.tickerScroll {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+  overflow-x: scroll;
+  column-gap: var(--space-2);
+  transform: translateX(var(--ticker-offset));
+  transition: transform 0.5s ease-in-out;
+  width: auto;
+  padding-right: 50px;
+
+  &:-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
+
+  @include mq(mobileLandscape) {
+    width: fit-content;
   }
 }
 
@@ -60,6 +87,22 @@
     width: auto;
     height: 100%;
     right: 0;
+  }
+}
+.gradientHorizontal {
+  width: 60px;
+  height: 100%;
+  right: 0;
+  top: 0;
+  position: absolute;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--tertiary-bg-color) 80%,
+    var(--tertiary-bg-color)
+  );
+  @include mq($from: mobileLandscape) {
+    width: auto;
   }
 }
 
@@ -94,21 +137,21 @@
 
 // Expanded state
 
-.ticker[data-expanded="true"] {
+.tickerVertical[data-expanded="true"] {
   padding-bottom: 0;
 }
 
-.ticker[data-expanded="true"] .tickerScroll {
+.tickerVertical[data-expanded="true"] .tickerScrollVertical {
   max-height: fit-content;
   margin-bottom: -40px;
 }
 
-.ticker[data-expanded="true"] .controls {
+.tickerVertical[data-expanded="true"] .controls {
   position: sticky;
   margin-top: -40px;
 }
 
-.ticker[data-expanded="true"] .button {
+.tickerVertical[data-expanded="true"] .button {
   position: absolute;
   width: 100%;
   left: 0;

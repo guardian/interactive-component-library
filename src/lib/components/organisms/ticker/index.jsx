@@ -1,17 +1,27 @@
 import { toChildArray } from "preact"
-import { useState, useRef, useLayoutEffect, useMemo } from "preact/hooks"
-import { Gradient } from "./gradient"
-import { ArrowButton, Button } from "$particles"
+import {
+  useState,
+  useRef,
+  useLayoutEffect,
+  useMemo,
+  useEffect,
+  useCallback,
+} from "preact/hooks"
+import { useContainerSize } from "$shared/hooks/useContainerSize"
+import { TickerControlsDesktop } from "./lib/TickerControlsDesktop"
+import { TickerControlsMobileVertical } from "./lib/TickerControlsMobileVertical"
+import { getOffsetDistance } from "./lib/helpers/tickerHelper"
 import styles from "./style.module.scss"
 
-export function Ticker({ maxItems = 20, onStateChange, children }) {
+export function Ticker({
+  maxItems = 20,
+  onStateChange,
+  verticalAtMobile = false,
+  children,
+}) {
   const [pageIndex, setPageIndex] = useState(0)
-  const [pageWidth, setPageWidth] = useState(0)
+  const [scrollElWidth, setScrollElWidth] = useState(0)
   const [numberOfPages, setNumberOfPages] = useState(0)
-
-  const offsetWidth = useMemo(() => {
-    return -pageIndex * (pageWidth || 0)
-  }, [pageIndex, pageWidth])
 
   const tickerRef = useRef()
   const tickerItemsRef = useRef()
@@ -19,29 +29,44 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
   const controlsRef = useRef()
 
   const [hideButtons, setHideButtons] = useState(false)
-
   const [expanded, setExpanded] = useState(false)
 
   const childArray = toChildArray(children)
 
+  const containerSize = useContainerSize(tickerRef)
+  const mobLandscapeW = 480
+  const containerWidth = containerSize ? containerSize.width : 600
+  const isMobile = containerWidth < mobLandscapeW
+
+  const pageWidthModifier = 0.75
+
   useLayoutEffect(() => {
     const tickerItemsContainer = tickerItemsRef.current
-    const pageWidth = tickerItemsContainer.clientWidth * 0.75
-    setPageWidth(pageWidth)
+    const containerWidth = tickerItemsContainer.clientWidth * pageWidthModifier // don't scroll entire set of items offscreen, keep quarter of them
+    const tickerScrollEl = tickerScrollRef.current
+    setScrollElWidth(tickerScrollEl.scrollWidth)
 
-    const numberOfPages = Math.ceil(
-      tickerScrollRef.current.scrollWidth / pageWidth,
-    )
+    const numberOfPages = tickerScrollEl.scrollWidth / containerWidth
+
     setNumberOfPages(numberOfPages)
   }, [childArray])
 
-  useLayoutEffect(() => {
-    const hideButtons = childArray.length < 4
+  const offsetWidth = useMemo(() => {
+    let res = getOffsetDistance(
+      pageIndex,
+      numberOfPages,
+      scrollElWidth,
+      pageWidthModifier,
+    )
+    return res
+  }, [pageIndex, numberOfPages, scrollElWidth])
 
+  useEffect(() => {
+    const hideButtons = childArray.length < 4
     setHideButtons(hideButtons)
   }, [childArray])
 
-  function toggleExpandedState() {
+  const toggleExpandedState = useCallback(() => {
     if (expanded) {
       tickerRef.current.scrollIntoView({ behavior: "smooth", alignToTop: true }) //scroll user up to top of ticker when closing at mobile
     }
@@ -50,17 +75,22 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
       if (onStateChange) onStateChange({ expanded: newState })
       return newState
     })
-  }
+  }, [expanded, onStateChange])
 
   return (
     <div
       ref={tickerRef}
-      className={styles.ticker}
+      className={verticalAtMobile ? styles.tickerVertical : styles.ticker}
       style={`--ticker-offset: ${offsetWidth}px;`}
       data-expanded={expanded}
     >
       <div ref={tickerItemsRef} className={styles.tickerItems}>
-        <div ref={tickerScrollRef} className={styles.tickerScroll}>
+        <div
+          ref={tickerScrollRef}
+          className={
+            verticalAtMobile ? styles.tickerScrollVertical : styles.tickerScroll
+          }
+        >
           {childArray.map((child, index) => (
             <div className={styles.tickerItem} key={child?.props?.id ?? index}>
               {child}
@@ -68,35 +98,29 @@ export function Ticker({ maxItems = 20, onStateChange, children }) {
           ))}
         </div>
       </div>
-      <div
-        ref={controlsRef}
-        className={styles.controls}
-        style={hideButtons && { display: "none" }}
-      >
-        <div className={styles.gradient}>
-          <Gradient />
-        </div>
-        <div className={styles.buttons}>
-          <ArrowButton
-            onClick={() => setPageIndex((d) => d + 1)}
-            disabled={pageIndex >= numberOfPages - 2}
-          />
-          <ArrowButton
-            direction="left"
-            onClick={() => setPageIndex((d) => d - 1)}
-            disabled={pageIndex <= 0}
-          />
-        </div>
-        <div className={styles.button}>
-          <Button
-            type="regular"
-            styles={{ buttonInner: styles.buttonInner }}
-            onClick={toggleExpandedState}
-          >
-            {expanded ? "Show fewer" : `Show ${maxItems} most recent`}
-          </Button>
-        </div>
-      </div>
+
+      {isMobile && !verticalAtMobile && (
+        <div className={styles.gradientHorizontal}></div>
+      )}
+
+      {isMobile && verticalAtMobile && (
+        <TickerControlsMobileVertical
+          hideButtons={hideButtons}
+          controlsRef={controlsRef}
+          toggleExpandedState={toggleExpandedState}
+          buttonText={expanded ? "Show fewer" : `Show ${maxItems} most recent`}
+        />
+      )}
+
+      {!isMobile && (
+        <TickerControlsDesktop
+          hideButtons={hideButtons}
+          controlsRef={controlsRef}
+          setPageIndex={setPageIndex}
+          pageIndex={pageIndex}
+          numberOfPages={numberOfPages}
+        />
+      )}
     </div>
   )
 }

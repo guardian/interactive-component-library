@@ -78,13 +78,15 @@ export const ThreeResults = {
 
 export const SixResults = {
   args: {
+    verticalAtMobile: true,
     items: [...items, ...items],
   },
 }
 
 export const TwelveResults = {
   args: {
-    maxItems: 12,
+    maxItems: 9,
+    verticalAtMobile: true,
     items: [...items, ...items, ...items, ...items],
   },
 }
@@ -112,6 +114,22 @@ export const LongTitleAndText = {
       },
       ...items,
     ],
+  },
+}
+
+export const VerticalAtMobile = {
+  args: {
+    verticalAtMobile: true,
+    maxItems: 12,
+    items: [...items, ...items, ...items, ...items],
+  },
+}
+
+export const HorizontalAtMobile = {
+  args: {
+    verticalAtMobile: false,
+    maxItems: 12,
+    items: [...items, ...items, ...items, ...items],
   },
 }
 
