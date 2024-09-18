@@ -66,12 +66,15 @@ export class TextLayerRenderer {
         x: relativeX * viewPortSize[0],
         y: relativeY * viewPortSize[1],
       })
-      if (declutterTree.collides(bbox)) {
-        continue
-      }
 
-      // add element to declutter tree to prevent collisions
-      declutterTree.insert(bbox)
+      if (declutterTree) {
+        if (declutterTree.collides(bbox)) {
+          continue
+        }
+
+        // add element to declutter tree to prevent collisions
+        declutterTree.insert(bbox)
+      }
 
       if (this.layer.drawCollisionBoxes) {
         const collisionBoxDebugElement = this.getCollisionBoxElement(bbox)

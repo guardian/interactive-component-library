@@ -49,18 +49,14 @@ export class MapRenderer {
       viewState.projection = projection
     }
 
-    const baseLayers = visibleLayers.filter((layer) => !layer.declutter)
-    for (const layer of baseLayers) {
-      renderLayer(layer)
-    }
-
     const declutterTree = new RBush()
 
-    const layersToDeclutter = [...visibleLayers]
-      .filter((layer) => !!layer.declutter)
-      .reverse()
-    for (const layer of layersToDeclutter) {
-      renderLayer(layer, declutterTree)
+    for (const layer of visibleLayers) {
+      if (layer.declutter) {
+        renderLayer(layer, declutterTree)
+      } else {
+        renderLayer(layer)
+      }
     }
 
     replaceChildren(this._element, mapElements)
