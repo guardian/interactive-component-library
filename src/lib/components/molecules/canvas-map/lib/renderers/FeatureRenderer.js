@@ -24,9 +24,11 @@ export class FeatureRenderer {
     const feature = this.feature
 
     const { projection, transform, pixelRatio } = frameState.viewState
-    const { stroke, fill } = this.style
+
+    const { stroke, fill, pointRadius } = this.style
 
     const geometries = feature.getProjectedGeometries(projection)
+
     if (frameState.debug) {
       try {
         validateGeometries(geometries)
@@ -37,6 +39,13 @@ export class FeatureRenderer {
         )
       }
     }
+
+    if (pointRadius) {
+      this.drawingFunction.pointRadius(
+        (projection.scale() * pointRadius) / transform.k,
+      )
+    }
+
     this.drawPath(geometries, context)
 
     if (fill) {
@@ -58,6 +67,7 @@ export class FeatureRenderer {
     this.drawingFunction.context(context)
 
     context.beginPath()
+
     for (const geometry of geometries) {
       this.drawingFunction(geometry)
     }
