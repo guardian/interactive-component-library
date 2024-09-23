@@ -58,6 +58,8 @@ export class VectorSource {
       })
     }
 
+    debugger
+
     this._features = features
     this.dispatcher.dispatch(MapEvent.CHANGE)
   }

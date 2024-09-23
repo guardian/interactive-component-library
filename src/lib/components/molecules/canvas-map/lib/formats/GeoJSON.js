@@ -1,5 +1,5 @@
 import { Feature } from "../Feature"
-import { Polygon, LineString, Point } from "../geometry"
+import { Polygon, LineString, Point, Circle } from "../geometry"
 import { extentForCoordinates } from "../util/extent"
 
 /**
@@ -87,7 +87,10 @@ export class GeoJSON {
    * @returns {Feature | null}
    */
   readFeatureFromObject(geoJSONObject) {
-    const geometries = this.readGeometriesFromObject(geoJSONObject["geometry"])
+    const geometries = this.readGeometriesFromObject(
+      geoJSONObject["geometry"],
+      geoJSONObject["properties"],
+    )
     if (geometries.length > 0) {
       return new Feature({
         id: geoJSONObject["id"],
@@ -99,7 +102,7 @@ export class GeoJSON {
     return null
   }
 
-  readGeometriesFromObject(geometry) {
+  readGeometriesFromObject(geometry, properties) {
     const geometries = []
     if (geometry.type === "Polygon") {
       const polygon = this.readPolygonForCoordinates(geometry.coordinates)
@@ -120,8 +123,16 @@ export class GeoJSON {
         geometries.push(lineString)
       }
     } else if (geometry.type === "Point") {
-      const point = this.readPointForCoordinates(geometry.coordinates)
-      geometries.push(point)
+      if ("radius" in properties && typeof properties?.radius === "number") {
+        const circle = this.readCircleForCoordinates(
+          geometry.coordinates,
+          properties.radius,
+        )
+        geometries.push(circle)
+      } else {
+        const point = this.readPointForCoordinates(geometry.coordinates)
+        geometries.push(point)
+      }
     }
 
     return geometries
@@ -141,5 +152,9 @@ export class GeoJSON {
 
   readPointForCoordinates(coordinates) {
     return new Point({ coordinates })
+  }
+
+  readCircleForCoordinates(coordinates, radius) {
+    return new Point({ coordinates, radius })
   }
 }

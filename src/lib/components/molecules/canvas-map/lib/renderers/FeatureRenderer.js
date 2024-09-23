@@ -24,9 +24,13 @@ export class FeatureRenderer {
     const feature = this.feature
 
     const { projection, transform, pixelRatio } = frameState.viewState
-    const { stroke, fill } = this.style
+
+    // TODO: "point" should probably have its own Renderer and/or Layer, for now we just assume any
+    // geometries with a single "Point" should be drawn as circles
+    const { stroke, fill, pointRadius } = this.style
 
     const geometries = feature.getProjectedGeometries(projection)
+
     if (frameState.debug) {
       try {
         validateGeometries(geometries)
@@ -37,6 +41,11 @@ export class FeatureRenderer {
         )
       }
     }
+
+    if (pointRadius) {
+      this.drawingFunction.pointRadius(pointRadius)
+    }
+
     this.drawPath(geometries, context)
 
     if (fill) {
@@ -58,6 +67,7 @@ export class FeatureRenderer {
     this.drawingFunction.context(context)
 
     context.beginPath()
+
     for (const geometry of geometries) {
       this.drawingFunction(geometry)
     }

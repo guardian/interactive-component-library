@@ -340,24 +340,7 @@ export const USElectoralCartogram = {
 
     return (
       <Map.Component {...args}>
-        <VectorLayer.Component
-          features={cartogramFeatures}
-          style={strokeStyle}
-        />
-        <TextLayer.Component
-          features={labelFeatures}
-          drawCollisionBoxes={false}
-          style={(feature) => {
-            return new Style({
-              text: new Text({
-                content: feature.properties.text,
-                anchor: feature.properties.anchor,
-                fontSize: "16px",
-                radialOffset: 0.25,
-              }),
-            })
-          }}
-        />
+        <VectorLayer.Component features={labelFeatures} style={strokeStyle} />
       </Map.Component>
     )
   },
@@ -582,6 +565,57 @@ export const USGovernorsCartogram = {
           />
         </Map.Component>
       </div>
+    )
+  },
+}
+
+export const USBubbleMap = {
+  args: {
+    config: {
+      view: {
+        extent: [
+          [0, 0],
+          [975, 610],
+        ],
+        padding: { top: 20, right: 20, bottom: 20, left: 20 },
+      },
+    },
+  },
+  render: (args) => {
+    const strokeStyle = new Style({
+      stroke: new Stroke({
+        color: "#999",
+        width: 1,
+      }),
+    })
+
+    const bubbleStyle = new Style({
+      fill: new Fill({ color: "#FF0000" }),
+      pointRadius: 20,
+    })
+
+    const states = feature(
+      // @ts-ignore
+      statesAlbers10mTopo,
+      statesAlbers10mTopo.objects["states"],
+    )
+
+    const labelFeatures = FeatureCollection.fromGeoJSON(
+      // @ts-ignore
+      statesHouseCartogram.features.filter((d) => d.geometry.type === "Point"),
+    )
+
+    // @ts-ignore
+    const featureCollection = FeatureCollection.fromGeoJSON(states)
+
+    return (
+      <Map.Component {...args}>
+        {/* <VectorLayer.Component */}
+        {/*   features={featureCollection} */}
+        {/*   style={strokeStyle} */}
+        {/* /> */}
+        <VectorLayer.Component features={labelFeatures} style={bubbleStyle} />
+      </Map.Component>
     )
   },
 }

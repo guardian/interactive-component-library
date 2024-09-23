@@ -54,6 +54,7 @@ export class Feature {
       if (!combinedExtent) return geometry.extent
       return combineExtents(geometry.extent, combinedExtent)
     }, null)
+
     this._extent = extent
     return extent
   }
