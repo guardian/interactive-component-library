@@ -30,7 +30,10 @@ export function MapProvider({ map, children }) {
     if (!layers.includes(layer)) {
       const position = getCompTreePosition(comp, children)
 
-      if (position === null) return
+      if (position === null) {
+        console.warn(`failed to find target component in component tree`, comp)
+        return
+      }
 
       setLayers((prevLayers) => {
         // Insert the new layer at the correct position in the layers list
@@ -63,36 +66,72 @@ export function MapProvider({ map, children }) {
  * Given a React component's children, find the in-order position of the target component in the
  * component tree.
  *
+ * Eg., for the following component tree, getCompTreePosition(C, A.children) will return 4:
+ *
+ *      A
+ *     / \
+ *    B   C
+ *   / \
+ *  D   E
+ *
  * @param {import('preact/compat').ReactNode} targetComponent
  * @param {import('preact').ComponentChildren} children
  */
-function getCompTreePosition(targetComponent, children) {
+function getCompTreePosition(targetComponent, children, debug = false) {
   let index = 0
+
+  let debugComponentPath = []
 
   function traverse(nodes) {
     for (const node of nodes) {
-      // Preact mangles property names, read as: node.component.vnode.children
-      const childNodes = node?.__c?.__v?.__k
+      if (!node) continue
 
-      if (childNodes && childNodes.length > 1 && childNodes[0] !== null) {
+      // Preact mangles property names, read as: node.component.vnode.children
+      const childNodes = node.__c?.__v?.__k
+
+      // If debug, keep track of the current search path
+      if (debug) {
+        let name =
+          node.__c?.constructor.displayName || node.__c?.constructor.name
+
+        if (name === "m") {
+          // "m" means Fragment, so store as "", so it'll be printed as </>
+          name = ""
+        }
+
+        debugComponentPath.push(name)
+      }
+
+      if (childNodes && childNodes.length > 0) {
         // If node has children, traverse them. Nodes with no children have a .__k property of "[null]".
         const result = traverse(childNodes)
 
         if (result !== null) {
           return result
         }
-      } else {
-        // This __c property of a ReactNode returns the instance that's given by "this" in the component constructor
-        if (node?.__c === targetComponent) {
-          return index
-        }
-
-        index++
       }
+
+      // This __c property of a ReactNode returns the instance that's given by "this" in the component constructor
+      if (node?.__c === targetComponent) {
+        return index
+      }
+
+      if (debug) {
+        debugComponentPath.pop()
+      }
+
+      index++
     }
 
     return null
   }
 
-  return traverse(Array.isArray(children) ? children : [children])
+  const result = traverse(Array.isArray(children) ? children : [children])
+
+  if (debug && result) {
+    // eslint-disable-next-line no-console
+    console.log(`<${debugComponentPath.join("/> → <")}/>`)
+  }
+
+  return result
 }

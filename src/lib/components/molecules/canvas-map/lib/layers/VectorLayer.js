@@ -166,3 +166,6 @@ export class VectorLayer {
     return this.renderer.renderFrame(frameState, targetElement)
   }
 }
+
+// Set displayName so we don't just see "Component" in React DevTools
+VectorLayer.Component.displayName = "VectorLayer"

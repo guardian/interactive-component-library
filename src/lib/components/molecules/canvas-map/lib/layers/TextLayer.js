@@ -144,3 +144,6 @@ export class TextLayer {
     return this.renderer.renderFrame(frameState, targetElement)
   }
 }
+
+// Set displayName so we don't just see "Component" in React DevTools
+TextLayer.Component.displayName = "TextLayer"
