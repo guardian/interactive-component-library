@@ -1,0 +1,115 @@
+import { Meta, Source, DocsContainer } from '@storybook/blocks'
+import * as PrerenderedStories from '../layers/prerendered.stories.jsx'
+import styles from '../stories.module.css'
+
+<Meta title="Molecules/SVGMap/Creating prerendered maps" parameters={{
+    docs: {
+      container: ({ children, context }) => (
+        <DocsContainer context={context}>
+          <div style={{ border: '5px solid red' }}>{children}</div>
+        </DocsContainer>
+      ),
+    },
+  }} />
+
+# SVGMap
+
+## When to prerender an SVG map
+
+Pre-rendering maps can be a good solution when you have lots of identical maps in a page and want to reduce the rendering 
+work your page is doing, ie avoiding re-rendering the same topojson file several times over. An example use case is locator maps: eg locating different states on the same underlying map of the US 12 times over. 
+
+If you just need one or two maps on a page the performance gain you'll get from pre-rendering is less significant. 
+
+## Getting started
+
+1. First create a simple Polygon map of the correct area, with the right bounds and projections. If you do this in the `polygon.stories.jsx` file, 
+you can use the interface in the components library that allows you to download an SVG. But this can also be done in a client repo. 
+
+See Getting Started for how to create a simple Polygon Map. You will need to load some geography from a [TopoJSON](https://github.com/topojson/topojson) file. And add configuration 
+
+** QUESTION: when should you use geoIdentity() vs a standard projection eg Albers? 
+
+
+2. Check the resulting SVG looks how you want. If so, you can use the Download SVG button in the component library, or else inspect and download the 
+resulting SVG from the repo where you have created it. You could just use a pre-created SVG, but it is helpful to do this step so
+the underlying map will be compatible with other layers from the component library. 
+
+
+3. Upload the SVG file to the assets directory of the project where you want to use the map. 
+Use the Prerendered Layer and point its url attribute to the SVG map you have just created. `<MapLayers.Prerendered url={usAsset} />` 
+The layer should be a child of the `<SVGMap>` component.
+See below:
+
+
+<Source dark={true} code={`
+// LocatorMap.jsx
+import { SVGMap, MapLayers } from "@guardian/interactive-component-library"
+import { geoAlbersUsa } from "d3-geo"
+
+export const LocatorMap = ({ state, centroid = "test" }) => {
+
+  let mapArgs = {
+    name: "US locator",
+    id: "map",
+    config: { 
+      projection: geoAlbersUsa().scale(1300).translate([487.5, 305]), 
+      drawCompositionBorders: false,
+      bounds: [
+        [-57.66491068874468, 12.97635452036684],
+        [957.5235629133763, 606.5694262668667]
+      ]
+    },
+    padding: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    drawToCanvas: false,
+    width: 100,
+    height: 61,
+  }
+
+  const usAsset = "__assetsPath__/geo/us-states.svg"
+
+  return (
+    <SVGMap {...mapArgs}>
+      <MapLayers.Prerendered url={usAsset} />
+    </SVGMap>
+  )
+}
+
+`} />
+
+NB: in the mapArgs, the [projection](https://github.com/topojson/us-atlas?tab=readme-ov-file#us-atlas-topojson) is specified by the maker of the topojson.
+The bounds come from the bbox property in the original topojson.
+
+
+4. Adding a point layer. To pinpoint eg a state on this pre-rendered map, get the co-ordinates of the point you wish to highlight. 
+Bear in mind that location coordinates are conventionally given as lat-lons, but in d3, coordinates are written as lon-lats, 
+so you will need switch the numbers around. 
+NB: the property given to features must be an array. 
+
+
+<Source dark={true} code={`
+
+ const pointFeature = {
+    type: "Feature",
+    properties: {},
+    geometry: {
+      coordinates: [-83.441162, 33.247875],
+      type: "Point",
+    },
+  }
+
+  const usAsset = "__assetsPath__/geo/us-states.svg"
+
+  return (
+    <SVGMap {...mapArgs}>
+      <MapLayers.Prerendered url={usAsset} styles={styles} />
+      <MapLayers.Point features={[pointFeature]} fill={'red'} stroke-width={2} radius={10}/>
+    </SVGMap>
+  )
+
+  `} />

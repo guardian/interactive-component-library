@@ -21,7 +21,7 @@ export class TextLayer {
     declutter,
     drawCollisionBoxes,
   }) {
-    const { registerLayer } = useContext(MapContext)
+    const { registerLayer, unregisterLayer } = useContext(MapContext)
 
     // We recreate layer whenever these properties change, which cannot be changed on the fly
     // and require recreation
@@ -44,8 +44,14 @@ export class TextLayer {
       [featureCollection, minZoom, opacity, declutter, drawCollisionBoxes],
     )
 
-    // Register layer with map context. If `layer` is not present in map, it will be added.
-    registerLayer(layer)
+    useEffect(() => {
+      registerLayer(layer, this)
+
+      return () => {
+        unregisterLayer(layer)
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [layer])
 
     useEffect(() => {
       // If the style prop changes, just update the layer, style can be changed without creating a
@@ -54,7 +60,7 @@ export class TextLayer {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [style])
 
-    return null
+    return false
   }
 
   /**
@@ -138,3 +144,6 @@ export class TextLayer {
     return this.renderer.renderFrame(frameState, targetElement)
   }
 }
+
+// Set displayName so we don't just see "Component" in React DevTools
+TextLayer.Component.displayName = "TextLayer"

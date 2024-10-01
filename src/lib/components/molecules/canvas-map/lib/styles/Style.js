@@ -11,12 +11,14 @@
  * @property {Object} properties.stroke - The stroke color of the style
  * @property {Fill} properties.fill - The fill color of the style
  * @property {Object} properties.text - The text color of the style
+ * @property {number} properties.pointRadius - Radius of drawn "Point"-type geometries, if present
  */
 export class Style {
   constructor(properties) {
     this.stroke = properties?.stroke
     this.fill = properties?.fill
     this.text = properties?.text
+    this.pointRadius = properties?.pointRadius
   }
 
   clone() {
@@ -24,6 +26,7 @@ export class Style {
       stroke: this.stroke,
       fill: this.fill,
       text: this.text,
+      pointRadius: this.pointRadius,
     })
   }
 }
