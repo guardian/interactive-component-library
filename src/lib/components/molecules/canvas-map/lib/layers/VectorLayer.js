@@ -57,7 +57,7 @@ export class VectorLayer {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [style])
 
-    return false
+    return null
   }
 
   /**
