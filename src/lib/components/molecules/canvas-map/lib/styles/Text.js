@@ -28,6 +28,45 @@ const TextAnchor = {
 }
 
 /**
+ * TODO: add leader 'style' option, e.g. kink, direct, manhattan, etc.
+ *
+ * @typedef CalloutOptions
+ * @property {{ x: number, y: number }} offsetBy { x, y } offset in pixels, relative to the text position.
+ *
+ * E.g. { x: 10, y: 20 } will move the callout 10 pixels to the right and 20 pixels down.
+ * @property {number} [leaderGap=5] Distance in pixels between the leader line and the text
+ * @property {string} [leaderColor="#121212"] Hex colour of the leader line
+ * @property {number} [leaderWidth=1] Stroke width of the leader line
+ */
+
+/**
+ * @typedef IconOptions
+ *
+ * @property {"circle"} [shape="circle"]
+ * Shape of the icon.
+ *
+ * TODO: add more shapes?
+ * @property {"left" | "right" | "center" } [position="left"] Position of the icon relative to the text.
+ *
+ * If "center", the icon is placed exactly on the text's coordinates. Use the `anchor` and
+ * `radialOffset` properties of `Text` to place the text relative to the icon.
+ * place the text relative to the icon.
+ * Position of the icon relative to the text
+ * @property {number} [size=10]
+ * Size of the icon in pixels
+ * @property {number} [padding]
+ * Distance in pixels between the icon and the text
+ * @property {string} [color]
+ * Hex colour of the icon, e.g. "#ff0000"
+ *
+ * For more advanced styling, use the `style` property.
+ * @property {import('../styles/Style').Style} [style]
+ * Style of the icon.
+ *
+ * Note that `stroke.position: "inside"` is not currently supported.
+ */
+
+/**
  * @typedef TextStyle
  * @property {string} content - The text to render
  * @property {string} [id] - The id of the text element
@@ -39,18 +78,24 @@ const TextAnchor = {
  * @property {string} [fontSize="17px"] - The font size of the text
  * @property {string} [fontWeight="400"] - The font weight of the text
  * @property {number} [radialOffset=0] - The radial offset of the text in ems
+ * @property {CalloutOptions} [callout] Options for offsetting the text and drawing a leader line.
+ *
+ * If not provided, no leader line is drawn.
+ * @property {IconOptions} [icon] Options for a simple icon displayed next to the text.
+ *
+ * If not provided, no icon is drawn.
  */
 
 /**
  * Class that represents a text style
- * @type Text
+ * @class
  * @implements {TextStyle}
  */
 export class Text {
   /**
    * Create a text element style
    * @constructor
-   * @param {TextStyle} [options] - Style options
+   * @param {TextStyle} [options] Style options
    */
   constructor(options) {
     this.content = options?.content
@@ -61,9 +106,26 @@ export class Text {
     this.lineHeight = options?.lineHeight || 1.3
     this.color = options?.color || "#121212"
     this.textShadow =
-      options?.textShadow ||
+      options?.textShadow ??
       "1px 1px 0px #f6f6f6, -1px -1px 0px #f6f6f6, -1px 1px 0px #f6f6f6, 1px -1px #f6f6f6"
     this.radialOffset = options?.radialOffset || 0
+
+    // TODO: offer simple "length" + "angle" instead?
+    if (options.callout) {
+      this.callout = options.callout
+      this.callout.offsetBy ??= { x: 0, y: 0 }
+      this.callout.leaderGap ??= 5
+      this.callout.leaderColor ??= "#121212"
+      this.callout.leaderWidth ??= 1
+    }
+
+    if (options.icon) {
+      this.icon = options.icon
+      this.icon.shape ??= "circle"
+      this.icon.position ??= "left"
+      this.icon.size ??= 10
+      this.icon.padding ??= 5
+    }
   }
 
   /**
@@ -108,7 +170,7 @@ export class Text {
     let y = (translate.y / 100) * elementHeight
 
     const radialOffsetInPixels =
-      this.radialOffset * this.fontSize.replace("px", "")
+      this.radialOffset * parseInt(this.fontSize.replace("px", ""))
 
     switch (this.anchor) {
       case TextAnchor.TOP:

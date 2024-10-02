@@ -84,16 +84,46 @@ export class VectorLayer {
     opacity = 1,
     hitDetectionEnabled = true,
   }) {
-    this.dispatcher = new Dispatcher(this)
-    this.renderer = new VectorLayerRenderer(this)
+    // NOTE: unfortunately JSDoc isn't smart enough to infer class property types, so we have to
+    // declare the types like so
+    /**
+     * @type {VectorSource}
+     * @public
+     */
     this.source = source
-    this._style = style
+    /**
+     * @type {Dispatcher}
+     * @public
+     */
+    this.dispatcher = new Dispatcher(this)
+    /**
+     * @type {VectorLayerRenderer}
+     * @public
+     */
+    this.renderer = new VectorLayerRenderer(this)
+    /**
+     * @type {number}
+     * @public
+     */
     this.minZoom = minZoom
+    /**
+     * @type {number}
+     * @public
+     */
     this.opacity = opacity
+    /**
+     * @type {boolean}
+     * @public
+     */
     this.hitDetectionEnabled = hitDetectionEnabled
+    /**
+     * @type {Style|import("../styles").StyleFunction}
+     */
+    this._style = style
   }
 
   get source() {
+    // TODO: should this be this.source, as per constructor?
     return this._source
   }
 
@@ -132,6 +162,9 @@ export class VectorLayer {
     this.dispatcher.dispatch(MapEvent.CHANGE)
   }
 
+  /**
+   * @returns {import("../styles/Style").StyleFunction}
+   */
   getStyleFunction() {
     const style = this.style
     if (typeof style === "function") return style
