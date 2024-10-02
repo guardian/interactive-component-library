@@ -31,6 +31,7 @@ export class MapRenderer {
 
     const renderLayer = (layer, declutterTree) => {
       const viewState = frameState.viewState
+
       // set layer projection if applicable
       if (layer.projection) {
         viewState.projection = layer.projection
@@ -40,6 +41,7 @@ export class MapRenderer {
         { ...frameState, viewState, declutterTree },
         previousElement,
       )
+
       if (element !== previousElement) {
         mapElements.push(element)
         previousElement = element

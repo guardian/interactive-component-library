@@ -1,7 +1,14 @@
 import { FeatureRenderer } from "./FeatureRenderer"
 
 export class VectorLayerRenderer {
+  /**
+   * @constructor
+   * @param {import('../layers').VectorLayer} layer
+   */
   constructor(layer) {
+    /**
+     * @type {import('../layers').VectorLayer}
+     */
     this.layer = layer
     this.featureRenderer = new FeatureRenderer()
   }
@@ -27,13 +34,17 @@ export class VectorLayerRenderer {
     // set opacity
     context.globalAlpha = this.layer.opacity
 
+    // TODO: why isn't this typed?
     const source = this.layer.source
     const features = source.getFeaturesInExtent(visibleExtent)
 
     for (const feature of features) {
+      /** @type {import("../styles").StyleFunction} */
       const styleFunction =
         feature.getStyleFunction() || this.layer.getStyleFunction()
-      const featureStyle = styleFunction(feature)
+
+      const featureStyle = styleFunction(feature, transform.k)
+
       if (featureStyle?.stroke || featureStyle?.fill) {
         context.save()
         this.featureRenderer.setStyle(featureStyle)

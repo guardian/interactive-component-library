@@ -90,13 +90,46 @@ export class TextLayer {
     declutter = true,
     drawCollisionBoxes = false,
   }) {
+    // NOTE: unfortunately JSDoc isn't smart enough to infer class property types, so we have to
+    // declare the types like so
+    /**
+     * @type {VectorSource}
+     * @public
+     */
     this.source = source
+    /**
+     * @type {Style|import("../styles").StyleFunction}
+     */
     this._style = style
+    /**
+     * @type {number}
+     * @public
+     */
     this.minZoom = minZoom
+    /**
+     * @type {number}
+     * @public
+     */
     this.opacity = opacity
+    /**
+     * @type {boolean}
+     * @public
+     */
     this.declutter = declutter
+    /**
+     * @type {boolean}
+     * @public
+     */
     this.drawCollisionBoxes = drawCollisionBoxes
+    /**
+     * @type {TextLayerRenderer}
+     * @public
+     */
     this.renderer = new TextLayerRenderer(this)
+    /**
+     * @type {Dispatcher}
+     * @public
+     */
     this.dispatcher = new Dispatcher(this)
   }
 
@@ -132,6 +165,9 @@ export class TextLayer {
     return extent
   }
 
+  /**
+   * @returns {import("../styles/Style").StyleFunction}
+   */
   getStyleFunction() {
     const style = this.style
     if (typeof style === "function") return style

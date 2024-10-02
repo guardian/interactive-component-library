@@ -62,6 +62,9 @@ export class Feature {
     return this._getProjectedGeometries(projection, projection.revision)
   }
 
+  /**
+   * @returns {import("./styles/Style").StyleFunction}
+   */
   getStyleFunction() {
     const style = this.style
     if (!style) return null
