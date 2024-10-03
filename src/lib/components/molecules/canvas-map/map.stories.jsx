@@ -86,6 +86,7 @@ export default meta
 
 export const USMap = {
   args: {
+    allowZoomPan: false,
     config: {
       debug: true,
       view: {
