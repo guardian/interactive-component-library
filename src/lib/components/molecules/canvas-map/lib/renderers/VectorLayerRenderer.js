@@ -13,14 +13,15 @@ export class VectorLayerRenderer {
     this.featureRenderer = new FeatureRenderer()
   }
 
-  renderFrame(frameState, targetElement) {
-    if (this.layer.opacity === 0) return targetElement
+  /**
+   * @param {import("./MapRenderer").CanvasSingleton} canvasSingleton
+   */
+  renderFrame(frameState, canvasSingleton) {
+    if (this.layer.opacity === 0) return null
 
-    const { projection, sizeInPixels, visibleExtent, transform } =
-      frameState.viewState
+    const { projection, visibleExtent, transform } = frameState.viewState
 
-    const container = this.getOrCreateContainer(targetElement, sizeInPixels)
-    const context = container.firstElementChild.getContext("2d")
+    const context = canvasSingleton.getContext2d()
 
     context.save()
 
@@ -65,53 +66,5 @@ export class VectorLayerRenderer {
     }
 
     context.restore()
-
-    return container
-  }
-
-  getOrCreateContainer(targetElement, sizeInPixels) {
-    let container = null
-    let containerReused = false
-    let canvas = targetElement && targetElement.firstElementChild
-    if (canvas instanceof HTMLCanvasElement) {
-      // use container from previously rendered layer
-      container = targetElement
-      containerReused = true
-    } else if (this._container) {
-      // reuse existing container for this layer
-      container = this._container
-    } else {
-      // Create new container
-      container = this.createContainer()
-    }
-
-    if (!containerReused) {
-      // setting the size of the canvas also clears it
-      const canvas = container.firstElementChild
-      canvas.width = sizeInPixels[0]
-      canvas.height = sizeInPixels[1]
-    }
-
-    this._container = container
-    return container
-  }
-
-  createContainer() {
-    const container = document.createElement("div")
-    container.className = "gv-map-layer"
-
-    let style = container.style
-    style.position = "absolute"
-    style.width = "100%"
-    style.height = "100%"
-
-    const canvas = document.createElement("canvas")
-    style = canvas.style
-    style.position = "absolute"
-    style.width = "100%"
-    style.height = "100%"
-    container.appendChild(canvas)
-
-    return container
   }
 }
