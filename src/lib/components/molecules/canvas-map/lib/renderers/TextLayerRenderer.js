@@ -22,8 +22,11 @@ export class TextLayerRenderer {
     style.overflow = "hidden"
   }
 
-  renderFrame(frameState, targetElement) {
-    if (this.layer.opacity === 0) return targetElement
+  /**
+   * @param {import("./MapRenderer").CanvasSingleton} canvasSingleton
+   */
+  renderFrame(frameState, canvasSingleton) {
+    if (this.layer.opacity === 0) return null
 
     const { declutterTree } = frameState
     const { projection, viewPortSize, sizeInPixels, visibleExtent, transform } =
@@ -96,10 +99,7 @@ export class TextLayerRenderer {
       const icon = featureStyle?.text?.icon
 
       if (callout || icon) {
-        canvasCtx ??= this.getOrCreateContainer(
-          targetElement,
-          sizeInPixels,
-        ).firstElementChild.getContext("2d")
+        canvasCtx ??= canvasSingleton.getContext2d()
       }
 
       if (callout) {
@@ -329,52 +329,6 @@ export class TextLayerRenderer {
     style.border = "1px solid red"
 
     return element
-  }
-
-  // NOTE: these are just copied over from VectorLayerRenderer - is there a nicer way of doing this?
-  getOrCreateContainer(targetElement, sizeInPixels) {
-    let container = null
-    let containerReused = false
-    let canvas = targetElement && targetElement.firstElementChild
-    if (canvas instanceof HTMLCanvasElement) {
-      // use container from previously rendered layer
-      container = targetElement
-      containerReused = true
-    } else if (this._container) {
-      // reuse existing container for this layer
-      container = this._container
-    } else {
-      // Create new container
-      container = this.createContainer()
-    }
-
-    if (!containerReused) {
-      // setting the size of the canvas also clears it
-      const canvas = container.firstElementChild
-      canvas.width = sizeInPixels[0]
-      canvas.height = sizeInPixels[1]
-    }
-
-    this._container = container
-    return container
-  }
-  createContainer() {
-    const container = document.createElement("div")
-    container.className = "gv-map-layer"
-
-    let style = container.style
-    style.position = "absolute"
-    style.width = "100%"
-    style.height = "100%"
-
-    const canvas = document.createElement("canvas")
-    style = canvas.style
-    style.position = "absolute"
-    style.width = "100%"
-    style.height = "100%"
-    container.appendChild(canvas)
-
-    return container
   }
 
   /**
