@@ -11,14 +11,18 @@ import { useContainerSize } from "$shared/hooks/useContainerSize"
 import { TickerControlsDesktop } from "./lib/TickerControlsDesktop"
 import { TickerControlsMobileVertical } from "./lib/TickerControlsMobileVertical"
 import { getOffsetDistance } from "./lib/helpers/tickerHelper"
-import styles from "./style.module.scss"
+import { mergeStyles } from "$styles/helpers/mergeStyles"
+import defaultStyles from "./style.module.scss"
 
 export function Ticker({
   maxItems = 20,
   onStateChange,
   verticalAtMobile = false,
+  styles,
   children,
 }) {
+  styles = mergeStyles({ ...defaultStyles }, styles)
+
   const [pageIndex, setPageIndex] = useState(0)
   const [scrollElWidth, setScrollElWidth] = useState(0)
   const [numberOfPages, setNumberOfPages] = useState(0)
