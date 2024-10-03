@@ -19,7 +19,7 @@ export class Map {
    * @param {Object} config - The configuration for the map.
    * @param {Object} config.view - The view configuration for the map.
    * @param {boolean} config.debug - Whether to enable debug mode or not.
-   * @param {boolean} config.allowZoomPan - Whether to enable zooma and pan mode or not.
+   * @param {boolean} config.allowZoomPan - Whether to enable zoom and pan functionality or not.
    * @param {HTMLElement} config.target - The target element to render the map into.
    */
   constructor(config) {
