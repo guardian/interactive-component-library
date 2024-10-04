@@ -29,3 +29,13 @@ export const Default = {
     timestamp,
   },
 }
+
+export const Slim = {
+  args: {
+    previous: "gop",
+    next: "dem",
+    title: "Harris flips Arizona, a key swing state",
+    timestamp,
+    isSlim: true,
+  },
+}

@@ -9,6 +9,25 @@
   height: 100%;
 }
 
+.containerSlim {
+  min-width: 260px;
+  display: inline-block;
+}
+
+.titleSlim {
+  display: inline;
+  color: var(--primary-text-color) !important;
+  font-family: var(--text-sans) !important;
+  font-size: var(--sans-small) !important;
+  line-height: var(--sans-line-height) !important;
+  font-weight: 700 !important;
+  margin-left: var(--space-1) !important;
+}
+
+.dateStampLinePosition {
+  display: block;
+}
+
 .paragraph {
   font-family: var(--text-sans);
   font-size: var(--sans-xsmall);

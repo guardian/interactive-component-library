@@ -1,5 +1,5 @@
 import { ControlChange } from "$molecules"
-import { RelativeTimeSentence } from "$particles"
+import { RelativeTimeSentence, GradientIcon, CircleIcon } from "$particles"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 import defaultStyles from "./style.module.css"
 
@@ -9,15 +9,39 @@ export function ResultSummary({
   title,
   text,
   timestamp,
+  isSlim = false,
   styles,
 }) {
   styles = mergeStyles({ ...defaultStyles }, styles)
 
-  return (
-    <div className={styles.container}>
-      <ControlChange previous={previous} next={next} text={title} />
-      <p className={styles.paragraph}>{text}</p>
-      <RelativeTimeSentence timeStamp={timestamp} />
-    </div>
-  )
+  if (isSlim) {
+    let hasChanged = next !== previous
+
+    return (
+      <div className={`${styles.container} ${styles.containerSlim}`}>
+        {hasChanged ? (
+          <GradientIcon
+            previous={previous}
+            next={next}
+            styles={{
+              previous: styles.previous,
+              next: styles.next,
+            }}
+          />
+        ) : (
+          <CircleIcon styles={{ circle: `fill-color--${next}` }} />
+        )}
+        <p className={styles.titleSlim}>{title} </p>
+        <RelativeTimeSentence timeStamp={timestamp} />
+      </div>
+    )
+  } else {
+    return (
+      <div className={styles.container}>
+        <ControlChange previous={previous} next={next} text={title} />
+        <p className={styles.paragraph}>{text}</p>
+        <RelativeTimeSentence timeStamp={timestamp} />
+      </div>
+    )
+  }
 }
