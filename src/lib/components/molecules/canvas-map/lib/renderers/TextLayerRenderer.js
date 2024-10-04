@@ -76,11 +76,6 @@ export class TextLayerRenderer {
       const textElement = this.getTextElementWithID(feature.uid)
       textElement.innerText = featureStyle.text.content
 
-      if (this._mouseInteractionsEnabled) {
-        textElement.style.pointerEvents = "auto"
-        textElement.style.cursor = "pointer"
-      }
-
       const [canvasX, canvasY] = transform.apply(point.coordinates)
       const [relativeX, relativeY] = [
         canvasX / sizeInPixels[0],
@@ -197,6 +192,11 @@ export class TextLayerRenderer {
       textElement.dataset.featureId = id
     }
 
+    if (this._mouseInteractionsEnabled) {
+      textElement.style.pointerEvents = "auto"
+      textElement.style.cursor = "pointer"
+    }
+
     return textElement
   }
 
@@ -221,7 +221,26 @@ export class TextLayerRenderer {
     style.color = textStyle.color
     style.textShadow = textStyle.textShadow
 
-    const { width, height } = this.getElementSize(element)
+    let { width, height } = this.getElementSize(element)
+
+    if (textStyle.icon) {
+      const iconSize = textStyle.icon.size
+
+      // Add padding to text element where icon will appear, mainly so clicks on the icon will be
+      // captured on the text element
+      if (textStyle.icon.position === "left") {
+        style.paddingLeft = `${iconSize + textStyle.icon.padding * 2}px`
+      } else if (textStyle.icon.position === "right") {
+        style.paddingRight = `${iconSize + textStyle.icon.padding * 2}px`
+      }
+
+      const iconSizeHeightDiff = iconSize - height
+
+      if (iconSizeHeightDiff > 0) {
+        style.paddingTop = `${iconSizeHeightDiff / 2}px`
+        style.paddingBottom = `${iconSizeHeightDiff / 2}px`
+      }
+    }
 
     style.transform = textStyle.getTransform(width, height)
 
@@ -275,22 +294,6 @@ export class TextLayerRenderer {
       maxY += textStyle.callout.offsetBy.y
     }
 
-    if (textStyle.icon) {
-      if (
-        textStyle.icon.position === "left" ||
-        textStyle.icon.position === "right"
-      ) {
-        maxX += textStyle.icon.size + textStyle.icon.padding
-      }
-
-      const iconSizeHeightDiff = textStyle.icon.size - dimens.height
-
-      if (iconSizeHeightDiff > 0) {
-        minY -= iconSizeHeightDiff / 2
-        maxY += iconSizeHeightDiff / 2
-      }
-    }
-
     minX = Math.floor(minX)
     minY = Math.floor(minY)
     maxX = Math.ceil(maxX)
@@ -310,34 +313,9 @@ export class TextLayerRenderer {
    */
   getElementPosition(textStyle, position) {
     if (textStyle.callout) {
-      if (textStyle.icon.position === "left") {
-        return {
-          left: `calc(${position.x * 100}% + ${textStyle.callout.offsetBy.x + (textStyle.icon.size + textStyle.icon.padding * 2)}px)`,
-          top: `calc(${position.y * 100}% + ${textStyle.callout.offsetBy.y}px)`,
-        }
-      }
-
-      if (textStyle.icon.position === "right") {
-        return {
-          left: `calc(${position.x * 100}% + ${textStyle.callout.offsetBy.x}px)`,
-          top: `calc(${position.y * 100}% + ${textStyle.callout.offsetBy.y}px)`,
-        }
-      }
-
       return {
         left: `calc(${position.x * 100}% + ${textStyle.callout.offsetBy.x}px)`,
         top: `calc(${position.y * 100}% + ${textStyle.callout.offsetBy.y}px)`,
-      }
-    }
-
-    if (
-      textStyle.icon &&
-      (textStyle.icon.position === "left" ||
-        textStyle.icon.position === "right")
-    ) {
-      return {
-        left: `calc(${position.x * 100}% + ${textStyle.icon.size + textStyle.icon.padding * 2}px)`,
-        top: `${position.y * 100}%`,
       }
     }
 
@@ -443,6 +421,7 @@ export class TextLayerRenderer {
         if (!hoveredFeature) return
 
         this._hoveredFeature = hoveredFeature
+        // TODO: do we need to redraw the whole map here?
         this.layer.dispatcher.dispatch(MapEvent.CHANGE)
 
         this._element.addEventListener(
