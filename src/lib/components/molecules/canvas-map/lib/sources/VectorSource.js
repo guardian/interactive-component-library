@@ -3,10 +3,12 @@ import knn from "rbush-knn"
 import { Dispatcher, MapEvent } from "../events"
 
 export class VectorSource {
+  /**
+   * @param {Object} props
+   * @param {import("../Feature").Feature[]} props.features
+   */
   constructor({ features }) {
     this.dispatcher = new Dispatcher(this)
-
-    // create spatial index
     this._featuresRtree = new RBush()
     this.setFeatures(features)
   }
@@ -15,10 +17,17 @@ export class VectorSource {
     this.dispatcher = null
   }
 
+  /**
+   * @returns {import("../Feature").Feature[]}
+   */
   getFeatures() {
     return this._features
   }
 
+  /**
+   * @param {[number, number]} coordinate
+   * @returns {import("../Feature").Feature[]}
+   */
   getFeaturesAtCoordinate(coordinate) {
     const [x, y] = coordinate
     const items = knn(this._featuresRtree, x, y, 10, (d) => {
@@ -34,6 +43,10 @@ export class VectorSource {
     return items.map((d) => d.feature)
   }
 
+  /**
+   * @param {[number, number, number, number]} extent TODO: should this be an `Extent`?
+   * @returns {import("../Feature").Feature[]}
+   */
   getFeaturesInExtent(extent) {
     const [minX, minY, maxX, maxY] = extent
 
@@ -44,6 +57,9 @@ export class VectorSource {
     return features
   }
 
+  /**
+   * @param {import("../Feature").Feature[]} features
+   */
   setFeatures(features) {
     this._featuresRtree.clear()
 
