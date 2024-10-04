@@ -6,6 +6,8 @@
  * @callback StyleFunction
  * @param {import("../Feature").Feature} feature The feature to style.
  * @param {number} zoom The current map zoom level
+ * @param {boolean} [isHovering] If the layer has `restyleOnHover` enabled, this will be true if the
+ * feature is currently being hovered over.
  * @returns {Style}
  */
 
