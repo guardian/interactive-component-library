@@ -19,6 +19,7 @@ export class Map {
    * @param {Object} config - The configuration for the map.
    * @param {Object} config.view - The view configuration for the map.
    * @param {boolean} config.debug - Whether to enable debug mode or not.
+   * @param {boolean} config.allowZoomPan - Whether to enable zoom and pan functionality or not.
    * @param {HTMLElement} config.target - The target element to render the map into.
    */
   constructor(config) {
@@ -26,6 +27,8 @@ export class Map {
       // eslint-disable-next-line no-console
       console.log("Map config", config)
     }
+
+    this.allowZoomPan = config.allowZoomPan
 
     this.options = config
     this.view = new View(config.view, config.debug)
@@ -335,6 +338,9 @@ export class Map {
         return (!event.ctrlKey || event.type === "wheel") && !event.button
       })
       .on("zoom", (event) => {
+        if (!this.allowZoomPan) {
+          return
+        }
         this.view.transform = event.transform
         this._requestRender()
 
