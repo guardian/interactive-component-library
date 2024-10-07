@@ -117,11 +117,34 @@ export const LongTitleAndText = {
   },
 }
 
+const itemsSlim = [
+  {
+    previous: "dem",
+    next: "gop",
+    title: "Trump flips Arizona, a key swing state",
+    text: "",
+    isSlim: true,
+  },
+  {
+    previous: "gop",
+    next: "gop",
+    title: "Trump holds Florida",
+    isSlim: true,
+  },
+  {
+    previous: "dem",
+    next: "dem",
+    title: "Harris holds California",
+    isSlim: true,
+  },
+]
+
 export const VerticalAtMobile = {
   args: {
     verticalAtMobile: true,
     maxItems: 12,
-    items: [...items, ...items, ...items, ...items],
+    itemWidth: "100%",
+    items: [...itemsSlim, ...itemsSlim, ...itemsSlim, ...itemsSlim],
   },
 }
 
@@ -129,7 +152,8 @@ export const HorizontalAtMobile = {
   args: {
     verticalAtMobile: false,
     maxItems: 12,
-    items: [...items, ...items, ...items, ...items],
+    itemWidth: "260px",
+    items: [...itemsSlim, ...itemsSlim, ...itemsSlim, ...itemsSlim],
   },
 }
 
