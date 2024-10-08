@@ -9,6 +9,7 @@ export function ResultSummary({
   title,
   text,
   timestamp,
+  onClick,
   isSlim = false,
   styles,
 }) {
@@ -18,7 +19,10 @@ export function ResultSummary({
     let hasChanged = next !== previous
 
     return (
-      <div className={`${styles.container} ${styles.containerSlim}`}>
+      <div
+        className={`${styles.container} ${styles.containerSlim}`}
+        onClick={onClick}
+      >
         {hasChanged ? (
           <GradientIcon
             previous={previous}
