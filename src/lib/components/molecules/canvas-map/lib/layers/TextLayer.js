@@ -20,6 +20,9 @@ export class TextLayer {
     opacity,
     declutter,
     drawCollisionBoxes,
+    onClick,
+    onHover,
+    restyleOnHover,
   }) {
     const { registerLayer, unregisterLayer } = useContext(MapContext)
 
@@ -38,6 +41,9 @@ export class TextLayer {
           opacity,
           declutter,
           drawCollisionBoxes,
+          onClick,
+          onHover,
+          restyleOnHover,
         })
       },
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,6 +87,15 @@ export class TextLayer {
    * @param {number} [params.opacity=1]
    * @param {boolean} [params.declutter=true]
    * @param {boolean} [params.drawCollisionBoxes=false]
+   * @param {(feature: import('../Feature').Feature, event: MouseEvent) => void} [params.onClick]
+   * @param {(feature: import('../Feature').Feature, event: MouseEvent) => (() => void) | void} [params.onHover]
+   * A callback that's called when the mouse hovers over a feature in this layer. The callback is
+   * called with the hovered feature, and the mouse event.
+   *
+   * The callback can optionally return a cleanup function that will be called when the mouse leaves this feature.
+   * @param {boolean} [params.restyleOnHover] If true, the layer will re-render when the mouse hovers over a feature.
+   *
+   * The provided style function will be called with the `isHovering` parameter set to `true` for the hovered feature.
    */
   constructor({
     source,
@@ -89,6 +104,9 @@ export class TextLayer {
     opacity = 1,
     declutter = true,
     drawCollisionBoxes = false,
+    onClick,
+    onHover,
+    restyleOnHover,
   }) {
     // NOTE: unfortunately JSDoc isn't smart enough to infer class property types, so we have to
     // declare the types like so
@@ -121,6 +139,13 @@ export class TextLayer {
      * @public
      */
     this.drawCollisionBoxes = drawCollisionBoxes
+
+    this.onClick = onClick
+
+    this.onHover = onHover
+
+    this.restyleOnHover = restyleOnHover
+
     /**
      * @type {TextLayerRenderer}
      * @public

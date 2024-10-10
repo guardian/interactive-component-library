@@ -1,5 +1,6 @@
 import { FeatureRenderer } from "./FeatureRenderer"
 import { replaceChildren } from "../util/dom"
+import { MapEvent } from "../events"
 
 export class TextLayerRenderer {
   /**
@@ -18,8 +19,17 @@ export class TextLayerRenderer {
     style.position = "absolute"
     style.width = "100%"
     style.height = "100%"
-    style.pointerEvents = "none"
     style.overflow = "hidden"
+
+    // Pointer events are disabled even when we have listeners attached, click/hover events will fire but
+    // only for child elements, not the whole text layer. This means the most foreground text layer
+    // container won't block other layers from receiving click events.
+    style.pointerEvents = "none"
+
+    this._mouseInteractionsEnabled =
+      this.layer.onClick || this.layer.onHover || this.layer.restyleOnHover
+
+    this.attachClickAndHoverListeners()
   }
 
   /**
@@ -56,7 +66,11 @@ export class TextLayerRenderer {
       const styleFunction =
         feature.getStyleFunction() || this.layer.getStyleFunction()
 
-      const featureStyle = styleFunction(feature, transform.k)
+      const featureStyle = styleFunction(
+        feature,
+        transform.k,
+        this._hoveredFeature === feature,
+      )
 
       // get text element
       const textElement = this.getTextElementWithID(feature.uid)
@@ -123,6 +137,8 @@ export class TextLayerRenderer {
         canvasCtx.closePath()
       }
 
+      // TODO: should we draw icons with SVG? add them into the textlayer? it'd make a lot of the
+      // maths easier!
       if (icon) {
         canvasCtx.beginPath()
         canvasCtx.save()
@@ -168,13 +184,27 @@ export class TextLayerRenderer {
   getTextElementWithID(id) {
     const elementId = `text-feature-${id}`
     let textElement = this._element.querySelector(`#${elementId}`)
+
     if (!textElement) {
       textElement = document.createElement("div")
       textElement.id = elementId
+      // @ts-ignore
+      textElement.dataset.featureId = id
     }
+
+    if (this._mouseInteractionsEnabled) {
+      textElement.style.pointerEvents = "auto"
+      textElement.style.cursor = "pointer"
+    }
+
     return textElement
   }
 
+  /**
+   * @param {HTMLDivElement} element
+   * @param {import("../styles/Text").Text} textStyle
+   * @param {{left: string, top: string}} position
+   */
   styleTextElement(element, textStyle, position) {
     const style = element.style
 
@@ -191,7 +221,26 @@ export class TextLayerRenderer {
     style.color = textStyle.color
     style.textShadow = textStyle.textShadow
 
-    const { width, height } = this.getElementSize(element)
+    let { width, height } = this.getElementSize(element)
+
+    if (textStyle.icon) {
+      const iconSize = textStyle.icon.size
+
+      // Add padding to text element where icon will appear, mainly so clicks on the icon will be
+      // captured on the text element
+      if (textStyle.icon.position === "left") {
+        style.paddingLeft = `${iconSize + textStyle.icon.padding * 2}px`
+      } else if (textStyle.icon.position === "right") {
+        style.paddingRight = `${iconSize + textStyle.icon.padding * 2}px`
+      }
+
+      const iconSizeHeightDiff = iconSize - height
+
+      if (iconSizeHeightDiff > 0) {
+        style.paddingTop = `${iconSizeHeightDiff / 2}px`
+        style.paddingBottom = `${iconSizeHeightDiff / 2}px`
+      }
+    }
 
     style.transform = textStyle.getTransform(width, height)
 
@@ -245,22 +294,6 @@ export class TextLayerRenderer {
       maxY += textStyle.callout.offsetBy.y
     }
 
-    if (textStyle.icon) {
-      if (
-        textStyle.icon.position === "left" ||
-        textStyle.icon.position === "right"
-      ) {
-        maxX += textStyle.icon.size + textStyle.icon.padding
-      }
-
-      const iconSizeHeightDiff = textStyle.icon.size - dimens.height
-
-      if (iconSizeHeightDiff > 0) {
-        minY -= iconSizeHeightDiff / 2
-        maxY += iconSizeHeightDiff / 2
-      }
-    }
-
     minX = Math.floor(minX)
     minY = Math.floor(minY)
     maxX = Math.ceil(maxX)
@@ -280,34 +313,9 @@ export class TextLayerRenderer {
    */
   getElementPosition(textStyle, position) {
     if (textStyle.callout) {
-      if (textStyle.icon.position === "left") {
-        return {
-          left: `calc(${position.x * 100}% + ${textStyle.callout.offsetBy.x + (textStyle.icon.size + textStyle.icon.padding * 2)}px)`,
-          top: `calc(${position.y * 100}% + ${textStyle.callout.offsetBy.y}px)`,
-        }
-      }
-
-      if (textStyle.icon.position === "right") {
-        return {
-          left: `calc(${position.x * 100}% + ${textStyle.callout.offsetBy.x}px)`,
-          top: `calc(${position.y * 100}% + ${textStyle.callout.offsetBy.y}px)`,
-        }
-      }
-
       return {
         left: `calc(${position.x * 100}% + ${textStyle.callout.offsetBy.x}px)`,
         top: `calc(${position.y * 100}% + ${textStyle.callout.offsetBy.y}px)`,
-      }
-    }
-
-    if (
-      textStyle.icon &&
-      (textStyle.icon.position === "left" ||
-        textStyle.icon.position === "right")
-    ) {
-      return {
-        left: `calc(${position.x * 100}% + ${textStyle.icon.size + textStyle.icon.padding * 2}px)`,
-        top: `${position.y * 100}%`,
       }
     }
 
@@ -364,6 +372,67 @@ export class TextLayerRenderer {
         context.fillStyle = icon.color
         context.fill()
       }
+    }
+  }
+
+  attachClickAndHoverListeners() {
+    if (this.layer.onClick) {
+      this._element.addEventListener("click", (event) => {
+        if (!event.target) return
+
+        const clickedFeature = this.layer.source
+          .getFeatures()
+          .find((feature) => event.target.dataset?.featureId === feature.uid)
+
+        if (!clickedFeature) return
+
+        this.layer.onClick(clickedFeature, event)
+      })
+    }
+
+    if (this.layer.onHover) {
+      this._element.addEventListener("mouseover", (event) => {
+        if (!event.target) return
+
+        const hoveredFeature = this.layer.source
+          .getFeatures()
+          .find((feature) => event.target.dataset?.featureId === feature.uid)
+
+        if (!hoveredFeature) return
+
+        const onHoverLeave = this.layer.onHover(hoveredFeature, event)
+
+        if (onHoverLeave) {
+          this._element.addEventListener("mouseout", onHoverLeave, {
+            once: true,
+          })
+        }
+      })
+    }
+
+    if (this.layer.restyleOnHover) {
+      this._element.addEventListener("mouseover", (event) => {
+        if (!event.target) return
+
+        const hoveredFeature = this.layer.source
+          .getFeatures()
+          .find((feature) => event.target.dataset?.featureId === feature.uid)
+
+        if (!hoveredFeature) return
+
+        this._hoveredFeature = hoveredFeature
+        // TODO: do we need to redraw the whole map here?
+        this.layer.dispatcher.dispatch(MapEvent.CHANGE)
+
+        this._element.addEventListener(
+          "mouseout",
+          () => {
+            this._hoveredFeature = undefined
+            this.layer.dispatcher.dispatch(MapEvent.CHANGE)
+          },
+          { once: true },
+        )
+      })
     }
   }
 }

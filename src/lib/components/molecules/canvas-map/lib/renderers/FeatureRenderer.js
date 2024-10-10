@@ -76,8 +76,6 @@ export class FeatureRenderer {
 
     if (clipPath) {
       context.clip()
-    } else {
-      context.closePath()
     }
   }
 
