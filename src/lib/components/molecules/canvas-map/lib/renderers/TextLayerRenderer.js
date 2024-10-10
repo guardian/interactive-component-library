@@ -76,16 +76,24 @@ export class TextLayerRenderer {
       const textElement = this.getTextElementWithID(feature.uid)
       textElement.innerText = featureStyle.text.content
 
-      const [canvasX, canvasY] = transform.apply(point.coordinates)
+      const [canvasX, canvasY] = featureStyle.text.callout
+        ? transform.apply(
+            projection([
+              featureStyle.text.callout.offsetTo.x,
+              featureStyle.text.callout.offsetTo.y,
+            ]),
+          )
+        : transform.apply(point.coordinates)
+
       const [relativeX, relativeY] = [
         canvasX / sizeInPixels[0],
         canvasY / sizeInPixels[1],
       ]
 
-      const position = this.getElementPosition(featureStyle.text, {
-        x: relativeX,
-        y: relativeY,
-      })
+      const position = {
+        left: `${relativeX * 100}%`,
+        top: `${relativeY * 100}%`,
+      }
 
       // Apply style to text element, and receive measured size from DOM
       const elementDimens = this.styleTextElement(
@@ -117,18 +125,17 @@ export class TextLayerRenderer {
       }
 
       if (callout) {
-        // Offsets are given in pixels, which we must scale to match canvas resolution
-        const canvasOffsetX =
-          (callout.offsetBy.x - callout.leaderGap) * window.devicePixelRatio
+        const [originalX, originalY] = transform.apply(point.coordinates)
 
-        const canvasOffsetY = callout.offsetBy.y * window.devicePixelRatio
+        const offsetDiffX = canvasX - originalX
+        const offsetDiffY = canvasY - originalY
 
         canvasCtx.beginPath()
 
-        canvasCtx.moveTo(canvasX, canvasY)
-        canvasCtx.lineTo(canvasX + canvasOffsetX / 2, canvasY + canvasOffsetY)
-        canvasCtx.moveTo(canvasX + canvasOffsetX / 2, canvasY + canvasOffsetY)
-        canvasCtx.lineTo(canvasX + canvasOffsetX, canvasY + canvasOffsetY)
+        canvasCtx.moveTo(originalX, originalY)
+        canvasCtx.lineTo(originalX + offsetDiffX / 2, originalY + offsetDiffY)
+        canvasCtx.moveTo(originalX + offsetDiffX / 2, canvasY)
+        canvasCtx.lineTo(canvasX, canvasY)
 
         canvasCtx.strokeStyle = callout.leaderColor
         canvasCtx.lineWidth = callout.leaderWidth
@@ -145,11 +152,6 @@ export class TextLayerRenderer {
 
         let iconPosX = relativeX * viewPortSize[0]
         let iconPosY = relativeY * viewPortSize[1]
-
-        if (callout) {
-          iconPosX += callout.offsetBy.x
-          iconPosY += callout.offsetBy.y
-        }
 
         if (icon.position === "right") {
           iconPosX += elementDimens.width
@@ -287,13 +289,6 @@ export class TextLayerRenderer {
     let maxY =
       minY + dimens.height + collisionPadding.top + collisionPadding.bottom
 
-    if (textStyle.callout) {
-      minX += textStyle.callout.offsetBy.x
-      minY += textStyle.callout.offsetBy.y
-      maxX += textStyle.callout.offsetBy.x
-      maxY += textStyle.callout.offsetBy.y
-    }
-
     minX = Math.floor(minX)
     minY = Math.floor(minY)
     maxX = Math.ceil(maxX)
@@ -304,24 +299,6 @@ export class TextLayerRenderer {
       minY,
       maxX,
       maxY,
-    }
-  }
-
-  /**
-   * @param {import("../styles/Text").Text} textStyle
-   * @param {{x: number, y: number}} position
-   */
-  getElementPosition(textStyle, position) {
-    if (textStyle.callout) {
-      return {
-        left: `calc(${position.x * 100}% + ${textStyle.callout.offsetBy.x}px)`,
-        top: `calc(${position.y * 100}% + ${textStyle.callout.offsetBy.y}px)`,
-      }
-    }
-
-    return {
-      left: `${position.x * 100}%`,
-      top: `${position.y * 100}%`,
     }
   }
 
