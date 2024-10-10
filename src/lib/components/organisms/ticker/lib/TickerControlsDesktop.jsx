@@ -26,6 +26,7 @@ const TickerControlsDesktop = ({
       </div>
       <div className={styles.buttons}>
         <ArrowButton
+          // onClick={() => tickerScrollRef.current.scrollTo({ left: tickerScrollRef.current.scrollLeft + 500, behaviour: "smooth" })}
           onClick={() => setPageIndex((d) => d + 1)}
           disabled={getDisabled(pageIndex, numberOfPages)}
         />
