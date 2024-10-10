@@ -63,6 +63,7 @@ export class TextLayerRenderer {
       textElement.innerText = featureStyle.text.content
 
       const [canvasX, canvasY] = transform.apply(point.coordinates)
+
       const [relativeX, relativeY] = [
         canvasX / sizeInPixels[0],
         canvasY / sizeInPixels[1],
@@ -80,10 +81,15 @@ export class TextLayerRenderer {
         position,
       )
 
-      const bbox = this.getElementBBox(elementDimens, featureStyle.text, {
-        x: relativeX * viewPortSize[0],
-        y: relativeY * viewPortSize[1],
-      })
+      const bbox = this.getElementBBox(
+        elementDimens,
+        sizeInPixels,
+        featureStyle.text,
+        {
+          x: relativeX * viewPortSize[0],
+          y: relativeY * viewPortSize[1],
+        },
+      )
 
       // skip item if it collides with existing elements
       if (declutterTree) {
@@ -103,11 +109,9 @@ export class TextLayerRenderer {
       }
 
       if (callout) {
-        // Offsets are given in pixels, which we must scale to match canvas resolution
         const canvasOffsetX =
-          (callout.offsetBy.x - callout.leaderGap) * window.devicePixelRatio
-
-        const canvasOffsetY = callout.offsetBy.y * window.devicePixelRatio
+          callout._offsetByFrac.x * sizeInPixels[0] - callout.leaderGap
+        const canvasOffsetY = callout._offsetByFrac.y * sizeInPixels[1]
 
         canvasCtx.beginPath()
 
@@ -131,8 +135,12 @@ export class TextLayerRenderer {
         let iconPosY = relativeY * viewPortSize[1]
 
         if (callout) {
-          iconPosX += callout.offsetBy.x
-          iconPosY += callout.offsetBy.y
+          iconPosX +=
+            (callout._offsetByFrac.x * sizeInPixels[0]) /
+            window.devicePixelRatio
+          iconPosY +=
+            (callout._offsetByFrac.y * sizeInPixels[1]) /
+            window.devicePixelRatio
         }
 
         if (icon.position === "right") {
@@ -214,10 +222,11 @@ export class TextLayerRenderer {
 
   /**
    * @param {{ height: number, width: number }} dimens
+   * @param {[number, number]} canvasDimens
    * @param {import("../styles/Text").Text} textStyle
    * @param {{x: number, y: number}} position
    */
-  getElementBBox(dimens, textStyle, position) {
+  getElementBBox(dimens, canvasDimens, textStyle, position) {
     const collisionPadding = {
       top: 2,
       right: 2,
@@ -239,10 +248,10 @@ export class TextLayerRenderer {
       minY + dimens.height + collisionPadding.top + collisionPadding.bottom
 
     if (textStyle.callout) {
-      minX += textStyle.callout.offsetBy.x
-      minY += textStyle.callout.offsetBy.y
-      maxX += textStyle.callout.offsetBy.x
-      maxY += textStyle.callout.offsetBy.y
+      minX += textStyle.callout._offsetByFrac.x * canvasDimens[0]
+      minY += textStyle.callout._offsetByFrac.y * canvasDimens[1]
+      maxX += textStyle.callout._offsetByFrac.x * canvasDimens[0]
+      maxY += textStyle.callout._offsetByFrac.y * canvasDimens[1]
     }
 
     if (textStyle.icon) {
@@ -280,30 +289,29 @@ export class TextLayerRenderer {
    */
   getElementPosition(textStyle, position) {
     if (textStyle.callout) {
-      if (textStyle.icon.position === "left") {
+      if (textStyle.icon?.position === "left") {
         return {
-          left: `calc(${position.x * 100}% + ${textStyle.callout.offsetBy.x + (textStyle.icon.size + textStyle.icon.padding * 2)}px)`,
-          top: `calc(${position.y * 100}% + ${textStyle.callout.offsetBy.y}px)`,
+          left: `calc(${(position.x + textStyle.callout._offsetByFrac.x) * 100}% + ${textStyle.icon.size + textStyle.icon.padding * 2}px)`,
+          top: `${(position.y + textStyle.callout._offsetByFrac.y) * 100}%`,
         }
       }
 
-      if (textStyle.icon.position === "right") {
+      if (textStyle.icon?.position === "right") {
         return {
-          left: `calc(${position.x * 100}% + ${textStyle.callout.offsetBy.x}px)`,
-          top: `calc(${position.y * 100}% + ${textStyle.callout.offsetBy.y}px)`,
+          left: `${(position.x + textStyle.callout._offsetByFrac.x) * 100}%`,
+          top: `${(position.y + textStyle.callout._offsetByFrac.y) * 100}%`,
         }
       }
 
       return {
-        left: `calc(${position.x * 100}% + ${textStyle.callout.offsetBy.x}px)`,
-        top: `calc(${position.y * 100}% + ${textStyle.callout.offsetBy.y}px)`,
+        left: `${(position.x + textStyle.callout._offsetByFrac.x) * 100}%`,
+        top: `${(position.y + textStyle.callout._offsetByFrac.y) * 100}%`,
       }
     }
 
     if (
-      textStyle.icon &&
-      (textStyle.icon.position === "left" ||
-        textStyle.icon.position === "right")
+      textStyle.icon?.position === "left" ||
+      textStyle.icon?.position === "right"
     ) {
       return {
         left: `calc(${position.x * 100}% + ${textStyle.icon.size + textStyle.icon.padding * 2}px)`,

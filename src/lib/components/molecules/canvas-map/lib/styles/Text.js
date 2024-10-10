@@ -30,13 +30,18 @@ const TextAnchor = {
 /**
  * TODO: add leader 'style' option, e.g. kink, direct, manhattan, etc.
  *
- * @typedef CalloutOptions
- * @property {{ x: number, y: number }} offsetBy { x, y } offset in pixels, relative to the text position.
+ * @typedef _CalloutOptions Internal callout options, with resolved private properties.
+ * @property {{ x: number, y: number }} offsetByPct { x, y } offset in percentage of canvas width and height.
  *
- * E.g. { x: 10, y: 20 } will move the callout 10 pixels to the right and 20 pixels down.
+ * E.g. { x: 10, y: 20 } will move the callout 10% of the canvas width to the right and 20% of the canvas height down.
+ * @property {{ x: number, y: number }} _offsetByFrac { x, y } offset in fraction of canvas width and height, resolved from `offsetByPct` during construction.
  * @property {number} [leaderGap=5] Distance in pixels between the leader line and the text
  * @property {string} [leaderColor="#121212"] Hex colour of the leader line
  * @property {number} [leaderWidth=1] Stroke width of the leader line
+ */
+
+/**
+ * @typedef {Omit<_CalloutOptions, '_offsetByFrac'>} CalloutOptions
  */
 
 /**
@@ -110,13 +115,20 @@ export class Text {
       "1px 1px 0px #f6f6f6, -1px -1px 0px #f6f6f6, -1px 1px 0px #f6f6f6, 1px -1px #f6f6f6"
     this.radialOffset = options?.radialOffset || 0
 
-    // TODO: offer simple "length" + "angle" instead?
     if (options.callout) {
-      this.callout = options.callout
-      this.callout.offsetBy ??= { x: 0, y: 0 }
-      this.callout.leaderGap ??= 5
-      this.callout.leaderColor ??= "#121212"
-      this.callout.leaderWidth ??= 1
+      /** @type {Partial<_CalloutOptions>} */
+      const resolvedCalloutOpts = { ...options.callout }
+
+      resolvedCalloutOpts.offsetByPct ??= { x: 0, y: 0 }
+      resolvedCalloutOpts._offsetByFrac = {
+        x: resolvedCalloutOpts.offsetByPct.x / 100,
+        y: resolvedCalloutOpts.offsetByPct.y / 100,
+      }
+      resolvedCalloutOpts.leaderGap ??= 5
+      resolvedCalloutOpts.leaderColor ??= "#121212"
+      resolvedCalloutOpts.leaderWidth ??= 1
+
+      this.callout = /** @type {_CalloutOptions} */ (resolvedCalloutOpts)
     }
 
     if (options.icon) {

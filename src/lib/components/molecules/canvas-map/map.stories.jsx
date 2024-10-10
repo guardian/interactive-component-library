@@ -636,7 +636,7 @@ export const UKMap = {
           content: "Dundee",
           anchor: "left",
           callout: currentZoom < 4 && {
-            offsetBy: { x: 70, y: 20 },
+            offsetByPct: { x: 10, y: 10 },
             leaderGap: 2,
           },
           icon: {
@@ -662,6 +662,7 @@ export const UKMap = {
         />
         <TextLayer.Component
           features={citiesFeatures}
+          declutter={false}
           style={(feature, currentZoom) => {
             if (feature.properties.name === "Dundee") {
               return dundeeStyle(currentZoom)
