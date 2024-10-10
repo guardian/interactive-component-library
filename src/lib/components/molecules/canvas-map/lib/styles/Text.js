@@ -31,9 +31,9 @@ const TextAnchor = {
  * TODO: add leader 'style' option, e.g. kink, direct, manhattan, etc.
  *
  * @typedef CalloutOptions
- * @property {{ x: number, y: number }} offsetBy { x, y } offset in pixels, relative to the text position.
+ * @property {{ x: number, y: number }} offsetTo { x, y } map coordinates to offset the text to.
  *
- * E.g. { x: 10, y: 20 } will move the callout 10 pixels to the right and 20 pixels down.
+ * E.g. { x: 200, y: 300 } will place the callout at map coordinates (200, 300).
  * @property {number} [leaderGap=5] Distance in pixels between the leader line and the text
  * @property {string} [leaderColor="#121212"] Hex colour of the leader line
  * @property {number} [leaderWidth=1] Stroke width of the leader line
@@ -110,10 +110,8 @@ export class Text {
       "1px 1px 0px #f6f6f6, -1px -1px 0px #f6f6f6, -1px 1px 0px #f6f6f6, 1px -1px #f6f6f6"
     this.radialOffset = options?.radialOffset || 0
 
-    // TODO: offer simple "length" + "angle" instead?
     if (options.callout) {
       this.callout = options.callout
-      this.callout.offsetBy ??= { x: 0, y: 0 }
       this.callout.leaderGap ??= 5
       this.callout.leaderColor ??= "#121212"
       this.callout.leaderWidth ??= 1
