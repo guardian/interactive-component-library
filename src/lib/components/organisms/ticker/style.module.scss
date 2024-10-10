@@ -63,7 +63,30 @@
 .tickerItem {
   width: var(--ticker-item-width);
   flex-shrink: 0;
+  // transform: translateX(0);
+  // transition: transform 900ms ease-out;
 }
+
+// TRANSITION CLASSES FOR ANIMATING CARDS IN AND OUT
+// a translateX(-250px) position is instead set in onEnter property on CSSTransition
+
+// .appearActive {
+//   transform: translateX(-260px);
+//   transition: transform 900ms ease-out;
+// }
+
+// .appearDone {
+//   transform: translateX(0);
+// }
+
+/* TODO: this *should* work, but doesn't seem to :( */
+// .appear~.appearDone {
+// 	transform: translateX(-200px);
+// }
+
+// .appear-active~.appearDone {
+// 	transform: translateX(0px);
+// }
 
 .controls {
   position: absolute;

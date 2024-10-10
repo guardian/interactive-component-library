@@ -7,6 +7,7 @@ import {
   useEffect,
   useCallback,
 } from "preact/hooks"
+import { CSSTransition, TransitionGroup } from "preact-transitioning"
 import { useContainerSize } from "$shared/hooks/useContainerSize"
 import { TickerControlsDesktop } from "./lib/TickerControlsDesktop"
 import { TickerControlsMobileVertical } from "./lib/TickerControlsMobileVertical"
@@ -95,11 +96,27 @@ export function Ticker({
             verticalAtMobile ? styles.tickerScrollVertical : styles.tickerScroll
           }
         >
-          {childArray.map((child, index) => (
-            <div className={styles.tickerItem} key={child?.props?.id ?? index}>
-              {child}
-            </div>
-          ))}
+          {Array.isArray(childArray) && childArray.length > 0 && (
+            <TransitionGroup>
+              {childArray.map((child, index) => (
+                <CSSTransition
+                  key={child?.props?.id ?? index}
+                  duration={600}
+                  onEnter={(node) => {
+                    let width = node.getBoundingClientRect().width
+                    node.style = `transform: translateX(-${width}px);`
+                  }}
+                  onEntered={(node) => {
+                    node.style =
+                      "transform: translateX(0px); transition: transform 600ms ease-out;"
+                  }}
+                  classNames={styles}
+                >
+                  <div className={styles.tickerItem}>{child}</div>
+                </CSSTransition>
+              ))}
+            </TransitionGroup>
+          )}
         </div>
       </div>
 
@@ -123,6 +140,7 @@ export function Ticker({
           setPageIndex={setPageIndex}
           pageIndex={pageIndex}
           numberOfPages={numberOfPages}
+          tickerScrollRef={tickerScrollRef}
         />
       )}
     </div>
