@@ -52,7 +52,8 @@
   padding-right: 50px;
 
   &:-webkit-scrollbar {
-    display: none; /* for Chrome, Safari, and Opera */
+    display: none;
+    /* for Chrome, Safari, and Opera */
   }
 
   @include mq(mobileLandscape) {
@@ -63,30 +64,31 @@
 .tickerItem {
   width: var(--ticker-item-width);
   flex-shrink: 0;
-  // transform: translateX(0);
-  // transition: transform 900ms ease-out;
+  transition: transform 300ms ease-out;
 }
 
 // TRANSITION CLASSES FOR ANIMATING CARDS IN AND OUT
 // a translateX(-250px) position is instead set in onEnter property on CSSTransition
 
-// .appearActive {
-//   transform: translateX(-260px);
-//   transition: transform 900ms ease-out;
-// }
+.appear {
+  transform: translateX(-100%);
+}
 
-// .appearDone {
-//   transform: translateX(0);
-// }
+.appearActive {
+  transform: translateX(0);
+}
 
-/* TODO: this *should* work, but doesn't seem to :( */
-// .appear~.appearDone {
-// 	transform: translateX(-200px);
-// }
+.appear ~ .appearDone {
+  transform: translateX(-100%);
+  /* Disable transition so following items are immediately moved left, to be animated to the right
+    with the rule below */
+  transition: unset;
+}
 
-// .appear-active~.appearDone {
-// 	transform: translateX(0px);
-// }
+.appearActive ~ .appearDone {
+  transform: translateX(0);
+  transition: transform 300ms ease-out;
+}
 
 .controls {
   position: absolute;
@@ -113,6 +115,7 @@
     right: 0;
   }
 }
+
 .gradientHorizontal {
   pointer-events: none;
   width: 60px;
@@ -126,6 +129,7 @@
     var(--tertiary-bg-color) 80%,
     var(--tertiary-bg-color)
   );
+
   @include mq($from: mobileLandscape) {
     width: auto;
   }

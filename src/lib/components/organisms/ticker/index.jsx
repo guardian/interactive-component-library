@@ -102,14 +102,6 @@ export function Ticker({
                 <CSSTransition
                   key={child?.props?.id ?? index}
                   duration={600}
-                  onEnter={(node) => {
-                    let width = node.getBoundingClientRect().width
-                    node.style = `transform: translateX(-${width}px);`
-                  }}
-                  onEntered={(node) => {
-                    node.style =
-                      "transform: translateX(0px); transition: transform 600ms ease-out;"
-                  }}
                   classNames={styles}
                 >
                   <div className={styles.tickerItem}>{child}</div>
