@@ -1,7 +1,14 @@
 /**
- * A function that takes a {@link import("../Feature").Feature} and returns a {@link Style}
+ * @import { Text } from "./Text";
+ * @import { Stroke } from "./Stroke"
+ * @import { Fill } from "./Fill"
  *
- * @typedef {function(import("../Feature").Feature):(Style)} StyleFunction
+ * @callback StyleFunction
+ * @param {import("../Feature").Feature} feature The feature to style.
+ * @param {number} zoom The current map zoom level
+ * @param {boolean} [isHovering] If the layer has `restyleOnHover` enabled, this will be true if the
+ * feature is currently being hovered over.
+ * @returns {Style}
  */
 
 /**
@@ -14,9 +21,28 @@
  * @property {number} properties.pointRadius - Radius of drawn "Point"-type geometries, if present
  */
 export class Style {
+  /**
+   * @param {Object} [properties]
+   * @param {Stroke} [properties.stroke]
+   * @param {Fill} [properties.fill]
+   * @param {Text} [properties.text]
+   * @param {number} [properties.pointRadius]
+   */
   constructor(properties) {
+    /**
+     * @type {Stroke}
+     * @public
+     */
     this.stroke = properties?.stroke
+    /**
+     * @type {Fill}
+     * @public
+     */
     this.fill = properties?.fill
+    /**
+     * @type {Text}
+     * @public
+     */
     this.text = properties?.text
     this.pointRadius = properties?.pointRadius
   }

@@ -619,14 +619,35 @@ export const UKMap = {
     const constituenciesFeatures = new GeoJSON().readFeaturesFromObject(
       constituencies,
     )
+
     const citiesFeatures = new GeoJSON().readFeaturesFromObject(ukCitiesGeo)
 
     const fillStyle = new Style({
       fill: new Fill({ color: "#f1f1f1" }),
     })
+
     const strokeStyle = new Style({
       stroke: new Stroke({ color: "#999", width: 1 }),
     })
+
+    const dundeeStyle = (currentZoom) =>
+      new Style({
+        text: new Text({
+          content: "Dundee",
+          anchor: "left",
+          callout: currentZoom < 4 && {
+            offsetTo: { x: -2, y: 56.7 },
+            leaderGap: 2,
+          },
+          icon: {
+            size: 10,
+            padding: 2,
+            style: new Style({
+              fill: new Fill({ color: "#FF22E0" }),
+            }),
+          },
+        }),
+      })
 
     return (
       <Map.Component {...args}>
@@ -641,11 +662,20 @@ export const UKMap = {
         />
         <TextLayer.Component
           features={citiesFeatures}
-          style={(feature) =>
-            new Style({
-              text: new Text({ content: feature.properties.name }),
-            })
-          }
+          declutter={false}
+          style={(feature, currentZoom) => {
+            if (feature.properties.name === "Dundee") {
+              return dundeeStyle(currentZoom)
+            } else {
+              return new Style({
+                text: new Text({
+                  content: feature.properties.name,
+                  radialOffset: 0,
+                  anchor: "left",
+                }),
+              })
+            }
+          }}
         />
       </Map.Component>
     )

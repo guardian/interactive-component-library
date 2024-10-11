@@ -54,11 +54,13 @@ export class FeatureRenderer {
 
     if (stroke) {
       context.save()
+
       this.drawStroke(frameState, context, {
         style: stroke.getRgba(),
         width: (stroke.width / transform.k) * pixelRatio,
         position: stroke.position,
       })
+
       context.restore()
     }
   }
@@ -74,8 +76,6 @@ export class FeatureRenderer {
 
     if (clipPath) {
       context.clip()
-    } else {
-      context.closePath()
     }
   }
 

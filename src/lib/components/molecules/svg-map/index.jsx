@@ -16,6 +16,7 @@ import { useContainerSize } from "$shared/hooks/useContainerSize"
 
 import styles from "./style.module.css"
 export * as MapLayers from "./layers"
+export { saveSVG } from "./helpers/saveSVG"
 
 export const _Projection = {
   geoAlbersUKComposite: geoAlbersUk(),
