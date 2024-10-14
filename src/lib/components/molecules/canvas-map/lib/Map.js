@@ -315,7 +315,7 @@ export class Map {
       .scaleExtent(this.view.scaleExtent)
       .filter((event) => {
         const filterEvent = (filter) => {
-          this._filterEventCallback(filter)
+          this._filterEventCallback?.(filter)
           return !filter
         }
 
