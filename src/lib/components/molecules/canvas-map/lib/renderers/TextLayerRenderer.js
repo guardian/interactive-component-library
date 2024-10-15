@@ -373,7 +373,7 @@ export class TextLayerRenderer {
     }
 
     if (this.layer.onHover) {
-      this._element.addEventListener("mouseover", (event) => {
+      this._element.addEventListener("pointerover", (event) => {
         if (!event.target) return
 
         const hoveredFeature = this.layer.source
@@ -385,7 +385,7 @@ export class TextLayerRenderer {
         const onHoverLeave = this.layer.onHover(hoveredFeature, event)
 
         if (onHoverLeave) {
-          this._element.addEventListener("mouseout", onHoverLeave, {
+          this._element.addEventListener("pointerout", onHoverLeave, {
             once: true,
           })
         }
@@ -393,7 +393,7 @@ export class TextLayerRenderer {
     }
 
     if (this.layer.restyleOnHover) {
-      this._element.addEventListener("mouseover", (event) => {
+      this._element.addEventListener("pointerover", (event) => {
         if (!event.target) return
 
         const hoveredFeature = this.layer.source
@@ -407,7 +407,7 @@ export class TextLayerRenderer {
         this.layer.dispatcher.dispatch(MapEvent.CHANGE)
 
         this._element.addEventListener(
-          "mouseout",
+          "pointerout",
           () => {
             this._hoveredFeature = undefined
             this.layer.dispatcher.dispatch(MapEvent.CHANGE)
