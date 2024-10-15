@@ -106,6 +106,9 @@ export class TextLayer {
    * called with the hovered feature, and the mouse event.
    *
    * The callback can optionally return a cleanup function that will be called when the mouse leaves this feature.
+   *
+   * Note that this callback is attached to the "pointerover" and "pointerout" events, so touch
+   * events will not trigger it.
    * @param {boolean} [params.restyleOnHover] If true, the layer will re-render when the mouse hovers over a feature.
    *
    * The provided style function will be called with the `isHovering` parameter set to `true` for the hovered feature.
