@@ -1,7 +1,7 @@
 @mixin default-party-colors-us {
   --dem: #093ca3;
   --gop: #c70000;
-  --oth: #707070;
+  --oth: #4d4d4d;
   --ind-dem: #7378d8;
   --lib: #c6b716;
   --grn: #0da498;
@@ -9,7 +9,7 @@
 
   --dem-2: #dad7f5;
   --gop-2: #ffdbd4;
-  --oth-2: #e7e7e7;
+  --oth-2: #cccccc;
   --ind-dem-2: #dad7f5;
   --lib-2: #f4eac2;
   --grn-2: #cfedea;
@@ -21,7 +21,7 @@
 @mixin dark-mode-party-colors-us {
   --dem: #3261db;
   --gop: #c70000;
-  --oth: #707070;
+  --oth: #cccccc;
   --ind-dem: #7389d8;
   --lib: #c6b716;
   --grn: #23b4a9;
@@ -29,7 +29,7 @@
 
   --dem-2: #20366d;
   --gop-2: #5a0b0b;
-  --oth-2: #333333;
+  --oth-2: #4d4d4d;
   --ind-dem-2: #394261;
   --lib-2: #524d13;
   --grn-2: #19524e;
