@@ -102,10 +102,15 @@ export class TextLayerRenderer {
         position,
       )
 
-      const bbox = this.getElementBBox(elementDimens, featureStyle.text, {
-        x: relativeX * viewPortSize[0],
-        y: relativeY * viewPortSize[1],
-      })
+      const bbox = this.getElementBBox(
+        elementDimens,
+        featureStyle.text,
+        {
+          x: relativeX * viewPortSize[0],
+          y: relativeY * viewPortSize[1],
+        },
+        this.layer.declutterBoundingBoxPadding,
+      )
 
       // skip item if it collides with existing elements
       if (declutterTree) {
@@ -268,12 +273,12 @@ export class TextLayerRenderer {
    * @param {import("../styles/Text").Text} textStyle
    * @param {{x: number, y: number}} position
    */
-  getElementBBox(dimens, textStyle, position) {
+  getElementBBox(dimens, textStyle, position, padding) {
     const collisionPadding = {
-      top: 2,
-      right: 2,
-      bottom: 2,
-      left: 2,
+      top: padding,
+      right: padding,
+      bottom: padding,
+      left: padding,
     }
 
     const { x: translateX, y: translateY } = textStyle.getTranslation(

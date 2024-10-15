@@ -19,6 +19,7 @@ export class TextLayer {
     minZoom,
     opacity,
     declutter,
+    declutterBoundingBoxPadding,
     drawCollisionBoxes,
     onClick,
     onHover,
@@ -40,6 +41,7 @@ export class TextLayer {
           minZoom,
           opacity,
           declutter,
+          declutterBoundingBoxPadding,
           drawCollisionBoxes,
           onClick,
           onHover,
@@ -47,7 +49,17 @@ export class TextLayer {
         })
       },
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      [featureCollection, minZoom, opacity, declutter, drawCollisionBoxes],
+      [
+        featureCollection,
+        minZoom,
+        opacity,
+        declutter,
+        declutterBoundingBoxPadding,
+        drawCollisionBoxes,
+        onClick,
+        onHover,
+        restyleOnHover,
+      ],
     )
 
     useEffect(() => {
@@ -86,6 +98,7 @@ export class TextLayer {
    * @param {number} [params.minZoom=0]
    * @param {number} [params.opacity=1]
    * @param {boolean} [params.declutter=true]
+   * @param {number} [params.declutterBoundingBoxPadding=2] Padding added to the bounding box around the TextLayer, that's used to detect collisions for decluttering.
    * @param {boolean} [params.drawCollisionBoxes=false]
    * @param {(feature: import('../Feature').Feature, event: MouseEvent) => void} [params.onClick]
    * @param {(feature: import('../Feature').Feature, event: MouseEvent) => (() => void) | void} [params.onHover]
@@ -103,6 +116,7 @@ export class TextLayer {
     minZoom = 0,
     opacity = 1,
     declutter = true,
+    declutterBoundingBoxPadding = 2,
     drawCollisionBoxes = false,
     onClick,
     onHover,
@@ -139,6 +153,12 @@ export class TextLayer {
      * @public
      */
     this.drawCollisionBoxes = drawCollisionBoxes
+
+    /**
+     * @type {number}
+     * @public
+     */
+    this.declutterBoundingBoxPadding = declutterBoundingBoxPadding
 
     this.onClick = onClick
 
