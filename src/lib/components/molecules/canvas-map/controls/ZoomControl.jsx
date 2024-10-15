@@ -1,7 +1,21 @@
 import { IconPlus, IconMinus, IconReset } from "./icons"
 import styles from "./style.module.css"
 
-export function ZoomControl({ resetEnabled, onZoomIn, onZoomOut, onReset }) {
+/**
+ * @param {Object} props
+ * @param {boolean} props.resetEnabled
+ * @param {boolean} props.resetVisible
+ * @param {(event: MouseEvent) => {}} props.onZoomIn
+ * @param {(event: MouseEvent) => {}} props.onZoomOut
+ * @param {(event: MouseEvent) => {}} props.onReset
+ */
+export function ZoomControl({
+  resetEnabled,
+  resetVisible,
+  onZoomIn,
+  onZoomOut,
+  onReset,
+}) {
   const _onZoomIn = (event) => {
     event.stopPropagation()
     onZoomIn(event)
@@ -27,6 +41,7 @@ export function ZoomControl({ resetEnabled, onZoomIn, onZoomOut, onReset }) {
       </button>
       <button
         className={styles.button}
+        style={{ display: resetVisible ? "block" : "none" }}
         onClick={_onReset}
         disabled={!resetEnabled}
       >
