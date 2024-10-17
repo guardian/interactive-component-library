@@ -48,7 +48,8 @@ export class View {
     this._transform = zoomIdentity
     this._padding = padding
     this._viewPortSize = [0, 0]
-    this.pixelRatio = window.devicePixelRatio
+    this.pixelRatio =
+      typeof window !== "undefined" ? window.devicePixelRatio : 1
   }
 
   set viewPortSize(size) {

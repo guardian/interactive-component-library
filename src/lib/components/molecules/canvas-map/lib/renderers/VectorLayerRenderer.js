@@ -14,14 +14,14 @@ export class VectorLayerRenderer {
   }
 
   /**
-   * @param {import("./MapRenderer").CanvasSingleton} canvasSingleton
+   * @param {HTMLCanvasElement} canvas
    */
-  renderFrame(frameState, canvasSingleton) {
-    if (this.layer.opacity === 0) return null
+  renderFrame(frameState, canvas) {
+    if (this.layer.opacity === 0) return canvas
 
     const { projection, visibleExtent, transform } = frameState.viewState
 
-    const context = canvasSingleton.getContext2d()
+    const context = canvas.getContext("2d")
 
     context.save()
 

@@ -195,8 +195,8 @@ export class VectorLayer {
     return this.source.getFeaturesAtCoordinate(coordinate)
   }
 
-  renderFrame(frameState, targetElement) {
-    return this.renderer.renderFrame(frameState, targetElement)
+  renderFrame(frameState, canvas) {
+    return this.renderer.renderFrame(frameState, canvas)
   }
 }
 
