@@ -18,9 +18,9 @@ export class Map {
    * @constructor
    * @param {Object} config - The configuration for the map.
    * @param {Object} config.view - The view configuration for the map.
-   * @param {boolean} config.debug - Whether to enable debug mode or not.
+   * @param {boolean} [config.debug] - Whether to enable debug mode or not.
    * @param {boolean} config.allowZoomPan - Whether to enable zoom and pan functionality or not.
-   * @param {HTMLElement} config.target - The target element to render the map into.
+   * @param {HTMLElement} [config.target] - The target element to render the map into.
    */
   constructor(config) {
     if (config.debug) {
@@ -39,39 +39,43 @@ export class Map {
     // Create event dispatcher
     this.dispatcher = new Dispatcher(this)
 
+    const createViewport = () => {
+      this._viewport = document.createElement("div")
+      this._viewport.className = "gv-map"
+      this._viewport.style.position = "relative"
+      this._viewport.style.overflow = "hidden"
+      this._viewport.style.width = "100%"
+      this._viewport.style.height = "100%"
+      this.target.appendChild(this._viewport)
+
+      // Show help text when single touch moved
+      this._viewport.addEventListener("touchmove", (event) => {
+        if (
+          event.targetTouches.length < 2 &&
+          this._collaborativeGesturesEnabled
+        ) {
+          this._filterEventCallback(true)
+        }
+      })
+
+      // Create resize observer
+      this._resizeObserver = new ResizeObserver(() => {
+        this._updateSize()
+      })
+      // Trigger fires when observer is first added, ensuring _updateSize() is called
+      this._resizeObserver.observe(this.target)
+    }
+
     // Create container div and add to viewport
-    this._viewport = document.createElement("div")
-    this._viewport.className = "gv-map"
-    this._viewport.style.position = "relative"
-    this._viewport.style.overflow = "hidden"
-    this._viewport.style.width = "100%"
-    this._viewport.style.height = "100%"
-    this.target.appendChild(this._viewport)
+    if (this.target) createViewport()
 
     // Create renderer
     this._renderer = new MapRenderer(this)
-
-    // Create resize observer
-    this._resizeObserver = new ResizeObserver(() => {
-      this._updateSize()
-    })
-    // Trigger fires when observer is first added, ensuring _updateSize() is called
-    this._resizeObserver.observe(this.target)
-
-    // Show help text when single touch moved
-    this._viewport.addEventListener("touchmove", (event) => {
-      if (
-        event.targetTouches.length < 2 &&
-        this._collaborativeGesturesEnabled
-      ) {
-        this._filterEventCallback(true)
-      }
-    })
   }
 
   destroy() {
     this._resizeObserver.disconnect()
-    this._viewport.remove()
+    this._viewport?.remove()
   }
 
   /** PUBLIC GETTERS */
@@ -357,7 +361,8 @@ export class Map {
     if (
       !this._renderer ||
       !!this._animationFrameRequestID ||
-      this._isTransitioning
+      this._isTransitioning ||
+      typeof window === "undefined"
     )
       return
     this._animationFrameRequestID = requestAnimationFrame(
@@ -365,15 +370,20 @@ export class Map {
     )
   }
 
-  _renderFrame() {
+  _renderFrame(_, canvas) {
     const frameState = {
       size: this.size,
       viewState: this.view.getState(),
       debug: this.options.debug || false,
     }
 
-    this._renderer.renderFrame(frameState)
+    this._renderer.renderFrame(frameState, canvas)
     this._animationFrameRequestID = null
+  }
+
+  renderToCanvas(canvas) {
+    this.view.viewPortSize = [canvas.width, canvas.height]
+    this._renderFrame(null, canvas)
   }
 }
 
