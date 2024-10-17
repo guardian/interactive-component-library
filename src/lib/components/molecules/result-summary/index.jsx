@@ -36,7 +36,7 @@ export function ResultSummary({
           <CircleIcon styles={{ circle: `fill-color--${next}` }} />
         )}
         <p className={styles.titleSlim}>{title} </p>
-        <RelativeTimeSentence timeStamp={timestamp} />
+        <RelativeTimeSentence timeStamp={timestamp} styles={styles} />
       </div>
     )
   } else {
