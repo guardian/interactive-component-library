@@ -42,7 +42,11 @@ export const ToplineResult = forwardRef(
           </span>
           {showInfoButton && (
             <span className={styles.infoButton}>
-              <InfoButton onClick={onInfoPress} ref={infoButtonRef} />
+              <InfoButton
+                onClick={onInfoPress}
+                ref={infoButtonRef}
+                styles={styles}
+              />
             </span>
           )}
         </div>
