@@ -33,9 +33,9 @@ export class TextLayerRenderer {
   }
 
   /**
-   * @param {import("./MapRenderer").CanvasSingleton} canvasSingleton
+   * @param {HTMLCanvasElement} canvas
    */
-  renderFrame(frameState, canvasSingleton) {
+  renderFrame(frameState, canvas) {
     if (this.layer.opacity === 0) return null
 
     const { declutterTree } = frameState
@@ -126,7 +126,7 @@ export class TextLayerRenderer {
       const icon = featureStyle?.text?.icon
 
       if (callout || icon) {
-        canvasCtx ??= canvasSingleton.getContext2d()
+        canvasCtx ??= canvas.getContext("2d")
       }
 
       if (callout) {
@@ -188,6 +188,12 @@ export class TextLayerRenderer {
     return this._element
   }
 
+  /**
+   * Function that gets or creates a text element.
+   *
+   * @param {String} id
+   * @returns {HTMLDivElement}
+   */
   getTextElementWithID(id) {
     const elementId = `text-feature-${id}`
     let textElement = this._element.querySelector(`#${elementId}`)
@@ -200,10 +206,13 @@ export class TextLayerRenderer {
     }
 
     if (this._mouseInteractionsEnabled) {
+      // @ts-ignore
       textElement.style.pointerEvents = "auto"
+      // @ts-ignore
       textElement.style.cursor = "pointer"
     }
 
+    // @ts-ignore
     return textElement
   }
 
