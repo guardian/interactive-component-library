@@ -5,11 +5,18 @@ import defaultStyles from "./style.module.css"
 /** @typedef { ("vertical" | "horizontal") } OptionLayoutDirection */
 
 /**
+ * @typedef { Object } Option
+ * @prop { String } title
+ * @prop { String } [description]
+ * @prop { String | import("preact").JSX.Element } icon
+ */
+
+/**
  * OptionPicker component
  *
  * @param {Object} props
  * @param {string} props.title
- * @param {Array<{ title: string, description: string, icon: string | JSX.Element }>} props.options
+ * @param {Option[]} props.options
  * @param {OptionLayoutDirection} [props.layoutDirection="horizontal"]
  * @param {number} [props.initialSelectedIndex=0]
  * @param {(index: number, option: Object) => void} [props.onSelect]
