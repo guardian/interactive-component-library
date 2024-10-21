@@ -27,6 +27,7 @@ export const Default = {
     title: "Con gain from Lab",
     text: "Camberwell and Peckham",
     timestamp,
+    lineClamp: false,
   },
 }
 
@@ -37,5 +38,17 @@ export const Slim = {
     title: "Harris flips Arizona, a key swing state",
     timestamp,
     isSlim: true,
+  },
+}
+
+export const SlimPlusLineClamping = {
+  args: {
+    previous: "gop",
+    next: "dem",
+    title:
+      "Harris flips Arizona, a key swing state and lots of long text which should be cut off after 2 lines",
+    timestamp,
+    isSlim: true,
+    lineClamp: true,
   },
 }

@@ -24,6 +24,19 @@
   margin-left: var(--space-1) !important;
 }
 
+.lineClamp {
+  /* restrict lines of text to 2, or else add ellipses */
+  display: -webkit-inline-box !important;
+  display: -moz-inline-box !important;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -moz-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .dateStampLinePosition {
   display: block;
 }
