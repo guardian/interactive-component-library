@@ -27,6 +27,10 @@ export class FeatureRenderer {
 
     const { stroke, fill, pointRadius } = this.style
 
+    if (typeof pointRadius === "number" && pointRadius <= 0) {
+      return
+    }
+
     const geometries = feature.getProjectedGeometries(projection)
 
     if (frameState.debug) {
