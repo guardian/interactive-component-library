@@ -262,8 +262,8 @@ export class Map {
     this._requestRender()
   }
 
-  async transition(options = { duration: 500 }, callback) {
-    const ease = options.ease || ((t) => t)
+  async transition(options = { duration: 500, ease: (t) => t }, callback) {
+    const ease = options.ease
     return new Promise((resolve) => {
       this._isTransitioning = true
       this.dispatcher.dispatch(MapEvent.TRANSITION_START)
