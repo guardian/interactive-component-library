@@ -17,7 +17,7 @@ export class VectorLayerRenderer {
    * @param {HTMLCanvasElement} canvas
    */
   renderFrame(frameState, canvas) {
-    if (this.layer.opacity === 0) return canvas
+    if (this.layer.opacity === 0) return null
 
     const { projection, visibleExtent, transform } = frameState.viewState
 
