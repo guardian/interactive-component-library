@@ -33,5 +33,5 @@ export function toRgba(color, opacity = 1) {
     return `rgba(${r}, ${g}, ${b}, ${a})`
   }
 
-  throw new Error("Unsupported color format")
+  throw new Error(`Unsupported color format: ${color}`)
 }
