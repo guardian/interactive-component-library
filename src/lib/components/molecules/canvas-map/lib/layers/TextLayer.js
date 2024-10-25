@@ -94,7 +94,7 @@ export class TextLayer {
    * @constructor
    * @param {Object} params
    * @param {VectorSource} params.source
-   * @param {Style | (() => Style)} [params.style=undefined]
+   * @param {Style | ((feature: import('../Feature').Feature, zoom: number, isHovering: boolean) => Style)} [params.style=undefined]
    * @param {number} [params.minZoom=0]
    * @param {number} [params.opacity=1]
    * @param {boolean} [params.declutter=true]
