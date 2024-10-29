@@ -15,6 +15,7 @@ export class MapRenderer {
     this.map = map
 
     const container = map.viewPort
+
     if (container) {
       this._element = document.createElement("div")
       this._element.className = "gv-layer-container"
@@ -34,7 +35,21 @@ export class MapRenderer {
     const layers = this.map.layers
 
     const mapElements = []
-    const canvasElement = canvas || createCanvas(sizeInPixels)
+
+    let canvasElement
+
+    if (canvas) {
+      canvasElement = canvas
+    } else if (this._canvas) {
+      canvasElement = this._canvas
+
+      // Setting the height and width of the canvas also clears it
+      canvasElement.width = sizeInPixels[0]
+      canvasElement.height = sizeInPixels[1]
+    } else {
+      canvasElement = createCanvas(sizeInPixels)
+      this._canvas = canvasElement
+    }
 
     const visibleLayers = layers.filter((layer) => {
       return zoomLevel > (layer.minZoom || 0)
