@@ -57,6 +57,13 @@ export class HashPattern {
   _createPattern(ctx, scale) {
     const size = this.tileSize * scale
 
+    if (size <= 0) {
+      console.error(
+        `HashPattern: size (${size}) is too small to draw a pattern. Pattern width and height must be > 0`,
+      )
+      return
+    }
+
     // Create an off-screen canvas
     this.offscreenCanvas.width = size
     this.offscreenCanvas.height = size

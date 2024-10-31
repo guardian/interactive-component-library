@@ -1,7 +1,7 @@
 import { sizeMinusPadding, scaleSize, scalePadding } from "./util/size"
 import { ZoomTransform, zoomIdentity } from "d3-zoom"
 import { zoomLevelToZoomScale, zoomLevelForResolution } from "./util/zoomLevel"
-import { Extent, GeoBounds, resolutionForExtent, bboxFeature } from "./util"
+import { Extent, GeoBounds, resolutionForBounds, bboxFeature } from "./util"
 import { Projection } from "./projection"
 import { generateDebugUrl } from "./util/debug"
 
@@ -40,13 +40,15 @@ export class View {
     // @ts-ignore
     projection.revision = 0
     this.projection = projection
+    this.bounds = bounds && GeoBounds.convert(bounds)
     // extent in projection coordinates
-    this.bounds = this.extent =
-      Extent.convert(extent) || GeoBounds.convert(bounds).toExtent()
+    this.extent = Extent.convert(extent) || GeoBounds.convert(bounds).toExtent()
     this.minZoom = minZoom
     this.maxZoom = maxZoom
     this._transform = zoomIdentity
     this._padding = padding
+
+    /** @type { [number, number] } */
     this._viewPortSize = [0, 0]
     this.pixelRatio =
       typeof window !== "undefined" ? window.devicePixelRatio : 1
@@ -64,6 +66,10 @@ export class View {
     }
   }
 
+  /**
+   * @returns {[number, number]} - The size of the viewport in pixels
+   * @readonly
+   */
   get viewPortSize() {
     return this._viewPortSize
   }
@@ -96,8 +102,9 @@ export class View {
   }
 
   get baseResolution() {
-    const baseExtent = this.getVisibleBounds(zoomIdentity, this.projection)
-    const baseResolution = resolutionForExtent(baseExtent, this.viewPortSize)
+    const bounds =
+      this.bounds ?? this.getVisibleBounds(zoomIdentity, this.projection)
+    const baseResolution = resolutionForBounds(bounds, this.viewPortSize)
     return baseResolution
   }
 
@@ -195,7 +202,7 @@ export class View {
 
   // map resolution (meters per pixel)
   getResolution() {
-    return resolutionForExtent(
+    return resolutionForBounds(
       this.getVisibleBounds(this.transform, this.projection),
       this.viewPortSize,
     )
@@ -232,21 +239,13 @@ export class View {
    * @function getBounds
    * @param {ZoomTransform} transform
    * @param {*} projection
-   * @returns {import("./util").GeoBoundsLike}
+   * @returns {import("./util").GeoBounds}
    */
   getVisibleBounds(transform, projection) {
     const [width, height] = this.mapSize
     const southWest = projection.invert(transform.invert([0, height]))
     const northEast = projection.invert(transform.invert([width, 0]))
-
-    const southWestLatitude = southWest[1]
-    const northEastLatitude = northEast[1]
-    const flippedY = southWestLatitude < northEastLatitude
-    if (flippedY) {
-      return [southWest[0], southWest[1], northEast[0], northEast[1]]
-    } else {
-      return [southWest[0], northEast[1], northEast[0], southWest[1]]
-    }
+    return GeoBounds.convert({ sw: southWest, ne: northEast })
   }
 
   getState() {
@@ -261,7 +260,7 @@ export class View {
       padding: this.padding,
       viewPortSize: this.viewPortSize,
       sizeInPixels: scaleSize(this.viewPortSize, this.pixelRatio),
-      visibleExtent: this.getVisibleBounds(transform, projection),
+      visibleExtent: this.getVisibleBounds(transform, projection).toExtent(),
     }
   }
 }
