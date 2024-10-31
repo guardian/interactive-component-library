@@ -245,6 +245,7 @@ export class Map {
     for (const layer of this.layers) {
       const layerExtent = layer.getExtent()
       if (
+        layerExtent &&
         layer.hitDetectionEnabled &&
         containsCoordinate(layerExtent, mapCoordinate)
       ) {
