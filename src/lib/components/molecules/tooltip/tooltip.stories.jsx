@@ -59,7 +59,7 @@ function TooltipForButton() {
           flexDirection: "row",
         }}
       >
-        <p>
+        <p style={{ pointerEvents: "none" }}>
           Tooltip shows when gray area receives touch or mouseover event, but is
           anchored to info button.
         </p>
