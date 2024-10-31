@@ -37,12 +37,24 @@ export class GeoBounds {
   }
 
   toExtent() {
-    return new Extent(
-      this.southWest.lng,
-      this.southWest.lat,
-      this.northEast.lng,
-      this.northEast.lat,
-    )
+    const southWestLatitude = this.southWest.lat
+    const northEastLatitude = this.northEast.lat
+    const flippedY = southWestLatitude < northEastLatitude
+    if (flippedY) {
+      return new Extent(
+        this.southWest.lng,
+        this.southWest.lat,
+        this.northEast.lng,
+        this.northEast.lat,
+      )
+    } else {
+      return new Extent(
+        this.southWest.lng,
+        this.northEast.lat,
+        this.northEast.lng,
+        this.southWest.lat,
+      )
+    }
   }
 
   /**

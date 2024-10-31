@@ -44,11 +44,11 @@ export class VectorSource {
   }
 
   /**
-   * @param {[number, number, number, number]} extent TODO: should this be an `Extent`?
+   * @param {import("../util/extent").Extent} extent
    * @returns {import("../Feature").Feature[]}
    */
   getFeaturesInExtent(extent) {
-    const [minX, minY, maxX, maxY] = extent
+    const { minX, minY, maxX, maxY } = extent
 
     const features = this._featuresRtree
       .search({ minX, minY, maxX, maxY })
