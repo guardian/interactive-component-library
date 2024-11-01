@@ -104,18 +104,16 @@ export function useTouchOrHover() {
     }
 
     const pageScroll = () => {
-      const elementFromPoint = document.elementFromPoint(
+      const elementsFromPoint = document.elementsFromPoint(
         cursorPosition.x,
         cursorPosition.y,
       )
-      if (elementFromPoint !== element) {
+      if (!elementsFromPoint.includes(element)) {
         setIsActive(false)
       } else {
         setIsActive(true)
       }
     }
-
-    const scrollEnded = () => {}
 
     element.addEventListener("touchstart", touchStarted)
     element.addEventListener("touchmove", touchMoved)
@@ -127,7 +125,6 @@ export function useTouchOrHover() {
     element.addEventListener("mouseout", mouseOut)
 
     window.addEventListener("scroll", pageScroll)
-    window.addEventListener("scrollend", scrollEnded)
 
     return () => {
       element.removeEventListener("touchstart", touchStarted)
@@ -140,7 +137,6 @@ export function useTouchOrHover() {
       element.removeEventListener("mouseout", mouseOut)
 
       window.removeEventListener("scroll", pageScroll)
-      window.removeEventListener("scrollend", scrollEnded)
     }
   }, [cursorPosition])
 
