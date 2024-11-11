@@ -30,14 +30,6 @@ const config = {
     },
     "@storybook/addon-interactions",
     "storybook-dark-mode",
-    {
-      name: "@storybook/addon-storysource",
-      options: {
-        sourceLoaderOptions: {
-          injectStoryParameters: false,
-        },
-      },
-    },
   ],
   framework: {
     name: "@storybook/preact-vite",
