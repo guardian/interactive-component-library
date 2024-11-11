@@ -1,3 +1,6 @@
+# Currently disabled, we'll need this to build the project and upload the result as an 'artifact',
+# which we can link to via GitHub's REST API
+
 name: NPM install PR comment
 
 on:
