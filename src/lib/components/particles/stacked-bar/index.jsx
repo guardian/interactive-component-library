@@ -24,6 +24,7 @@ export function StackedBar({
   labelOverlapConfig = LabelOverlapConfig,
   border = false,
   styles,
+  svgId,
 }) {
   const rectElements = useRef([])
   const textElements = useRef([])
@@ -138,6 +139,7 @@ export function StackedBar({
         height={svgHeight}
         viewBox={`0 0 ${width} ${svgHeight}`}
         xmlns="http://www.w3.org/2000/svg"
+        id={svgId}
       >
         {showBackgroundRect && backgroundRect}
         <g>
