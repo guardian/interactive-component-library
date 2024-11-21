@@ -8,6 +8,7 @@ export function useTouchOrHover() {
   const [position, setPosition] = useState()
   const [isActive, setIsActive] = useState(false)
   const [touchRect, setTouchRect] = useState()
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
     const element = ref.current
@@ -93,12 +94,25 @@ export function useTouchOrHover() {
 
       setActiveEvent(event)
       setPosition({ x, y })
+      setCursorPosition({ x: clientX, y: clientY })
     }
 
     const mouseOut = () => {
       setPosition(null)
       setActiveEvent(null)
       setIsActive(false)
+    }
+
+    const pageScroll = () => {
+      const elementsFromPoint = document.elementsFromPoint(
+        cursorPosition.x,
+        cursorPosition.y,
+      )
+      if (!elementsFromPoint.includes(element)) {
+        setIsActive(false)
+      } else {
+        setIsActive(true)
+      }
     }
 
     element.addEventListener("touchstart", touchStarted)
@@ -110,6 +124,8 @@ export function useTouchOrHover() {
     element.addEventListener("mousemove", mouseMoved)
     element.addEventListener("mouseout", mouseOut)
 
+    window.addEventListener("scroll", pageScroll)
+
     return () => {
       element.removeEventListener("touchstart", touchStarted)
       element.removeEventListener("touchmove", touchMoved)
@@ -119,8 +135,10 @@ export function useTouchOrHover() {
       element.removeEventListener("mouseover", touchStarted)
       element.removeEventListener("mousemove", mouseMoved)
       element.removeEventListener("mouseout", mouseOut)
+
+      window.removeEventListener("scroll", pageScroll)
     }
-  }, [])
+  }, [cursorPosition])
 
   return {
     touchOrHoverRef: ref,
