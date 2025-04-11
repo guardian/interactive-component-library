@@ -34,17 +34,15 @@ export const ToplineResult = forwardRef(
         onMouseOut={onMouseOut}
         ref={ref}
       >
-        <div className={styles.topRow}>
-          <span
-            className={`${styles.primaryname} before-color--${abbreviation}`}
-          >
+        <div className={`${styles.topRow} before-color--${abbreviation}`}>
+          <span className={styles.primaryname}>
             {name}
+            {showInfoButton && (
+              <span className={styles.infoButton}>
+                <InfoButton onClick={onInfoPress} ref={infoButtonRef} />
+              </span>
+            )}
           </span>
-          {showInfoButton && (
-            <span className={styles.infoButton}>
-              <InfoButton onClick={onInfoPress} ref={infoButtonRef} />
-            </span>
-          )}
         </div>
         {secondaryName && (
           <div className={styles.subhead}>
