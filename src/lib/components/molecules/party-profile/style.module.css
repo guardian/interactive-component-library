@@ -3,11 +3,13 @@
 }
 
 .img {
-  height: 140px;
-  width: 140px;
+  height: 130px;
+  width: 130px;
   border-radius: 50%;
   float: right;
+  margin-top: var(--space-1);
   margin-left: var(--space-2);
+  margin-right: var(--space-1);
 }
 
 .title {
