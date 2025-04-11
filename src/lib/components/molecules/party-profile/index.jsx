@@ -20,13 +20,15 @@ export const PartyProfile = ({
 
   return (
     <div className={styles.container}>
-      <img src={imgSrc} className={styles.img} alt={imgAltText} />
-      <h3 className={styles.title}>{title}</h3>
-      <div className={[styles.subtitle, styles[subtitleStyle]].join(" ")}>
-        {subtitle}
+      <div className={styles.copyColumn}>
+        <h3 className={styles.title}>{title}</h3>
+        <div className={[styles.subtitle, styles[subtitleStyle]].join(" ")}>
+          {subtitle}
+        </div>
+        <div className={styles.blurb}>{blurb}</div>
+        <div className={styles.footnote}>{footnote}</div>
       </div>
-      <div className={styles.blurb}>{blurb}</div>
-      <div className={styles.footnote}>{footnote}</div>
+      <img src={imgSrc} className={styles.img} alt={imgAltText} />
     </div>
   )
 }
