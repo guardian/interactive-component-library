@@ -15,15 +15,27 @@ export const ColumnChart = ({
   styles = mergeStyles(defaultStyles, styles)
 
   const yScale = scaleLinear([maxValue, minValue], [0, chartHeight])
+
   const totalColumnWidth =
     Number(columnWidth) +
     Number(columnPadding.left) +
     Number(columnPadding.right)
+
   let marginBottom = minValue < 0 ? 0 : 40
 
   return (
     <svg width={chartWidth} height={chartHeight + marginBottom}>
       {columns.map((column, index) => {
+        let columnLabel
+
+        if (typeof column.label === "string") {
+          columnLabel = column.label
+        } else if (typeof column.label === "function") {
+          columnLabel = column.label()
+        } else {
+          throw new Error("Invalid column label type")
+        }
+
         const getHeight = (input) => {
           return yScale(0) - yScale(input)
         }
@@ -44,7 +56,7 @@ export const ColumnChart = ({
               x={index * totalColumnWidth + 2}
               y={column.value < 0 ? yScale(0) - 6 : yScale(0) + 20}
             >
-              {column.label}
+              {columnLabel}
             </text>
           </g>
         )
