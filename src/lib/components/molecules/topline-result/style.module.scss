@@ -12,13 +12,13 @@
   font-weight: 500;
   font-style: italic;
 
-  &:before {
-    content: "";
-    height: 4px;
-    width: 2.2em;
-    border-radius: 50px;
-    display: block;
-  }
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.infoButton {
+  padding-top: var(--space-1);
 }
 
 .secondaryname {
@@ -92,8 +92,6 @@
   width: fit-content;
   padding-bottom: 1px;
 
-  display: flex;
-  flex-direction: row;
   column-gap: var(--space-1);
   align-items: flex-end;
 
@@ -101,7 +99,12 @@
     border-bottom: none;
   }
 
-  > * {
+  &:before {
+    content: "";
+    height: 4px;
+    width: 2.2em;
+    border-radius: 50px;
     display: block;
+    margin-bottom: 2px;
   }
 }
