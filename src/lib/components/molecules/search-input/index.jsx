@@ -154,6 +154,7 @@ function SuggestionList({
             className={[
               styles.suggestion,
               index === selectedIndex && styles.selected,
+              d.className,
               d.disabled && styles.disabled,
             ].join(" ")}
             onMouseDown={(e) => e.preventDefault()}
