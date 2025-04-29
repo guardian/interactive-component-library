@@ -17,7 +17,7 @@ export function ResultSummary({
   styles = mergeStyles({ ...defaultStyles }, styles)
 
   if (isSlim) {
-    let hasChanged = next !== previous
+    let hasChanged = previous && next !== previous
 
     return (
       <div

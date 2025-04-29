@@ -5,7 +5,7 @@ import { mergeStyles } from "$styles/helpers/mergeStyles"
 export const ControlChange = ({ previous, next, text, styles }) => {
   styles = mergeStyles({ ...defaultStyles }, styles)
 
-  let hasChanged = next !== previous
+  let hasChanged = previous && next !== previous
 
   return (
     <div className={styles.container}>
