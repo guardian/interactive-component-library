@@ -172,6 +172,10 @@
   }
 }
 
+:not(.header) + .content {
+  padding-top: var(--space-2);
+}
+
 .content.fullWidth {
   padding-top: 0;
 }
