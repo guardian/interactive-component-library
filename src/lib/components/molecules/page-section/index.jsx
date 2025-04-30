@@ -27,7 +27,10 @@ export const PageSection = forwardRef(
 
     useLayoutEffect(() => {
       const headerElement = headerRef.current
-      setMinHeight(headerElement.offsetHeight)
+
+      if (headerElement) {
+        setMinHeight(headerElement.offsetHeight)
+      }
     }, [children])
 
     return (
@@ -38,12 +41,14 @@ export const PageSection = forwardRef(
         style={{ "--background-color": backgroundColor, minHeight }}
       >
         {borderTop && <div className={styles.borderTop} />}
-        <div
-          className={[styles.header, styles[layout]].join(" ")}
-          ref={headerRef}
-        >
-          {children.header}
-        </div>
+        {children.header && (
+          <div
+            className={[styles.header, styles[layout]].join(" ")}
+            ref={headerRef}
+          >
+            {children.header}
+          </div>
+        )}
         <div className={[styles.content, styles[layout]].join(" ")}>
           {children.content}
         </div>
