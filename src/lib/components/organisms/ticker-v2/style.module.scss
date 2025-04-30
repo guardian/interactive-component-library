@@ -1,0 +1,85 @@
+.ticker {
+  width: 100%;
+  position: relative;
+}
+
+.scrollContainer {
+  position: relative;
+  padding: 0;
+  cursor: default;
+
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-2);
+
+  overflow-x: scroll;
+
+  @include mq($until: mobileLandscape) {
+    /* Make room for bottom scroll bar */
+    padding-bottom: 8px;
+  }
+
+  @include mq($from: mobileLandscape) {
+    /* Make room for the scrub controls */
+    padding-right: 36px;
+
+    &::-webkit-scrollbar {
+      display: none; /* for Chrome, Safari, and Opera */
+    }
+  }
+}
+
+.tickerItem {
+  flex-shrink: 0;
+}
+
+.scrubControls {
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  height: 100%;
+
+  flex-direction: column;
+  justify-content: center;
+
+  display: none;
+}
+
+.scrubControls.showControls {
+  display: flex;
+
+  @include mq($until: mobileLandscape) {
+    display: none;
+  }
+}
+
+.arrowButton {
+  z-index: 1;
+}
+
+.gradient {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  width: 40px;
+}
+
+.gradient[data-position="left"] {
+  left: 0;
+}
+
+.gradient[data-position="right"] {
+  right: 0;
+}
+
+.firstStop {
+  stop-color: var(--tertiary-bg-color);
+  stop-opacity: 0;
+}
+
+.lastStop {
+  stop-color: var(--tertiary-bg-color);
+  stop-opacity: 1;
+}
