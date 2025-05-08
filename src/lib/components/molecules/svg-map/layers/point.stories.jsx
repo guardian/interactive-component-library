@@ -55,5 +55,6 @@ export const Point = {
     stroke: "#FF0000",
     strokeWidth: 1,
     radius: 5,
+    labeltextproperty: "LAD23CD",
   },
 }
