@@ -1,185 +1,93 @@
-.borderTop {
-  border-top: 1px solid var(--border-divider-color);
-
-  transform: translate(-10px);
-  width: calc(100% + 20px);
-
-  @include mq($from: mobileLandscape) {
-    transform: translate(-20px);
-    width: calc(100% + 40px);
-  }
-
-  @include mq($from: tablet) {
-    width: calc(100% + 40px);
-  }
-
-  @include mq($from: leftCol) {
-    transform: translate(-180px);
-    width: calc(100% + 197px);
-    background-color: transparent;
-  }
-
-  @include mq($from: wide) {
-    transform: translate(-260px);
-    width: calc(100% + 279px);
-  }
-}
-
-.section.fullWidth .borderTop {
-  transform: none;
-  width: calc(100% - 1px);
-}
-
 .section {
-  position: relative;
-  z-index: 0;
-  padding-bottom: var(--space-8);
+  background-color: var(--background-color);
+
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+
+  grid-template-areas:
+    "header"
+    "content";
+
+  --padding: 10px; // internal padding matching parent container
+  --bleed: 10px; // how far to extend beyond parent edges
+
+  width: calc(100% + var(--bleed) * 2);
+  padding-left: var(--padding);
+  padding-right: var(--padding);
+  margin-left: calc(var(--bleed) * -1);
+  margin-right: calc(var(--bleed) * -1);
+
+  @media (min-width: map.get($mq-breakpoints, mobileLandscape)) {
+    --padding: 20px;
+    --bleed: 20px;
+  }
+
+  @media (min-width: map.get($mq-breakpoints, tablet)) and (max-width: map.get($mq-breakpoints, leftCol)) {
+    // Between tablet and leftCol, immersive content already touches the
+    // edges of the container, so we don't need any negative margins
+    --bleed: 0px;
+  }
+
+  @media (min-width: map.get($mq-breakpoints, desktop)) {
+    // From this breakpoint we move to defined "body" widths (eg. 620px), and not 100%.
+    // These absolute widths don't account for the 2 x 1px border width on
+    // the grid, so do that here.
+    width: calc(100% + var(--bleed) * 2 - 2px);
+
+    grid-template-columns: 620px;
+  }
+
+  @media (min-width: map.get($mq-breakpoints, leftCol)) and (max-width: map.get($mq-breakpoints, wide)) {
+    // Account for a mystery 1px of whitespace to the left
+    margin-left: calc(var(--bleed) * -1 - 1px);
+  }
+
+  @media (min-width: map.get($mq-breakpoints, leftCol)) {
+    grid-template-columns: 140px 1px 620px 1fr;
+    grid-template-areas: "header border content .";
+  }
+
+  @media (min-width: map.get($mq-breakpoints, wide)) {
+    grid-template-columns: 219px 1px 620px;
+  }
 }
 
 .section.fullWidth {
-  transform: translate(-10px);
-  width: calc(100% + 20px);
-  margin: 0;
-  padding: 0;
-
-  @include mq($from: mobileLandscape) {
-    transform: translate(-20px);
-    width: calc(100% + 40px);
+  @media (min-width: map.get($mq-breakpoints, desktop)) {
+    grid-template-columns: 1fr;
   }
 
-  @include mq($from: tablet) {
-    transform: translate(-20px);
-    width: calc(100% + 40px);
+  @media (min-width: map.get($mq-breakpoints, leftCol)) {
+    grid-template-columns: 140px 1px 1fr;
+    grid-template-areas: "header border content";
   }
 
-  @include mq($from: leftCol) {
-    transform: translate(-180px);
-    width: calc(100% + 197px);
-  }
-
-  @include mq($from: wide) {
-    transform: translate(-260px);
-    width: calc(100% + 280px);
+  @media (min-width: map.get($mq-breakpoints, wide)) {
+    grid-template-columns: 219px 1px 1fr;
   }
 }
 
-.section::before {
-  display: block;
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translate(-10px);
-  width: calc(100% + 20px);
-  height: 100%;
-  z-index: -1;
-  background-color: var(--background-color);
-
-  @include mq($from: mobileLandscape) {
-    transform: translate(-20px);
-    width: calc(100% + 40px);
-  }
-
-  @include mq($from: tablet) {
-    width: calc(100% + 40px);
-  }
-
-  @include mq($from: leftCol) {
-    transform: translateX(-9px);
-    width: calc(100% + 26px);
-  }
-
-  @include mq($from: wide) {
-    width: calc(100% + 27px);
-  }
-}
-
-.section.fullWidth::before {
-  transform: none;
-  width: calc(100% - 3px);
-  height: 100%;
-  left: 1px;
-  background-color: var(--background-color);
-
-  transform: translate(-10px);
-  width: calc(100% + 20px);
-
-  @include mq($from: mobileLandscape) {
-    transform: translate(-20px);
-    width: calc(100% + 40px);
-  }
-
-  @include mq($from: tablet) {
-    width: 100%;
-    transform: translateX(-1px);
-  }
-
-  @include mq($from: leftCol) {
-    transform: translateX(-1px);
-    width: 100%;
-  }
-
-  @include mq($from: wide) {
-    transform: none;
-    width: calc(100% - 3px);
+.section.borderLeftCol {
+  @media (min-width: map.get($mq-breakpoints, leftCol)) {
+    &:before {
+      content: "";
+      grid-area: border;
+      border-left: 1px solid var(--border-divider-color);
+    }
   }
 }
 
 .header {
-  color: var(--primary-text-color);
-  padding-top: var(--space-2);
-  margin-bottom: var(--space-5);
-}
-
-:global(body:not(.ios, .android)) .header {
-  @include mq($from: leftCol) {
-    position: absolute;
-    max-width: 160px;
-    transform: translateX(-170px);
-    margin-bottom: 0;
-  }
-
-  @include mq($from: wide) {
-    max-width: 220px;
-    transform: translateX(-250px);
-  }
-}
-
-// this :global(body) scope exists to match the specifity of the previous selector
-:global(body) .header.fullWidth {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  transform: none;
-  padding-top: 0;
-  margin-bottom: var(--space-2);
-  max-width: 100%;
-
-  @include mq($from: leftCol) {
-    margin-bottom: 0;
-  }
+  padding-top: 10px;
+  grid-area: header;
 }
 
 .content {
-  position: relative;
-  padding-top: 0;
-  z-index: 0;
-  color: var(--primary-text-color);
-
-  @include mq($from: leftCol) {
-    padding-top: var(--space-2);
-  }
+  padding-top: 10px;
+  grid-area: content;
 }
 
-:not(.header) + .content {
-  padding-top: var(--space-2);
-}
-
-.content.fullWidth {
-  padding-top: 0;
-}
-
-.content.fullWidth::before {
-  display: none;
+.borderTop {
+  border-top: 1px solid var(--border-divider-color);
 }

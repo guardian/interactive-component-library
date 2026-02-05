@@ -6,7 +6,7 @@ const meta = {
   title: "Molecules/PageSection",
   component: PageSection,
   parameters: {
-    layout: "fullscreen",
+    layout: "fullWidth",
     viewport: {
       defaultViewport: "reset",
     },
@@ -24,7 +24,7 @@ const meta = {
   decorators: [
     (Story) => (
       <Container
-        sideBorders={true}
+        sideBorders={false}
         styles={{ pageContainer: styles.pageContainer }}
       >
         <div className={styles.grid}>
@@ -65,7 +65,7 @@ export const TwoSections = {
 
 export const BackgroundColor = {
   args: {
-    backgroundColor: "var(--tertiary-bg-color)",
+    backgroundColor: "lightgrey",
     borderTop: true,
   },
 }
