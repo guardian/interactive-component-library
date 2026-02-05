@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
+      id-token: write
     steps:
       # Checkout branch that was created in previous job
       - name: Checkout
@@ -54,11 +54,11 @@ jobs:
           ref: "auto-version-${{ env.TAG_NAME }}"
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
 
       # Setup .npmrc file to publish to npm
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
@@ -72,5 +72,3 @@ jobs:
 
       - name: Publish to NPM
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
