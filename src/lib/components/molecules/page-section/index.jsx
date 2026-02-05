@@ -16,6 +16,7 @@ export const PageSection = forwardRef(
       layout = SectionLayout.default,
       styles,
       borderTop = false,
+      borderLeftCol = true,
       backgroundColor = "transparent",
     },
     ref,
@@ -33,14 +34,23 @@ export const PageSection = forwardRef(
       }
     }, [children])
 
+    const classes = [styles.section, styles[layout]]
+
+    if (borderTop) {
+      classes.push(styles.borderTop)
+    }
+
+    if (borderLeftCol) {
+      classes.push(styles.borderLeftCol)
+    }
+
     return (
       <section
         id={id}
         ref={ref}
-        className={[styles.section, styles[layout]].join(" ")}
+        className={classes.join(" ")}
         style={{ "--background-color": backgroundColor, minHeight }}
       >
-        {borderTop && <div className={styles.borderTop} />}
         {children.header && (
           <div
             className={[styles.header, styles[layout]].join(" ")}
