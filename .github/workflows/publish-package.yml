@@ -60,15 +60,22 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
-          node-version: "18.x"
+          node-version: "22.x"
           registry-url: "https://registry.npmjs.org"
           cache: "pnpm"
+
+      # Ensure npm 11.5.1 or later is installed so we can publish
+      - name: Update npm
+        run: pnpm install -g npm@latest
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Build
         run: pnpm build:lib
+
+      - name: Print npm version
+        run: npm --version
 
       - name: Publish to NPM
         run: npm publish --access public
