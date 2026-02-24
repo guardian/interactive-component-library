@@ -167,11 +167,16 @@ export class View {
    * @param {Extent} extent
    * @returns {Extent} - The extent relative to the current viewport
    */
-
   projectExtent(extent) {
-    const [minX, minY] = this.projection([extent.minX, extent.minY])
-    const [maxX, maxY] = this.projection([extent.maxX, extent.maxY])
-    return new Extent(minX, minY, maxX, maxY).scale(1 / this.pixelRatio)
+    const [x1, y1] = this.projection([extent.minX, extent.minY])
+    const [x2, y2] = this.projection([extent.maxX, extent.maxY])
+
+    return new Extent(
+      Math.min(x1, x2),
+      Math.min(y1, y2),
+      Math.max(x1, x2),
+      Math.max(y1, y2),
+    ).scale(1 / this.pixelRatio)
   }
 
   invert(point) {
