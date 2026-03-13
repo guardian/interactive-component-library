@@ -17,7 +17,20 @@ export function ResultSummary({
   styles = mergeStyles({ ...defaultStyles }, styles)
 
   if (isSlim) {
-    let hasChanged = previous && next !== previous
+    let changeIcon
+
+    // TODO: we're duplicating code between here and ControlChange, do we need this?
+    if (previous && next && next !== previous) {
+      changeIcon = (
+        <GradientIcon
+          previous={previous}
+          next={next}
+          styles={{ previous: styles.previous, next: styles.next }}
+        />
+      )
+    } else if (next && !previous) {
+      changeIcon = <CircleIcon styles={{ circle: `fill-color--${next}` }} />
+    }
 
     return (
       <div
@@ -25,18 +38,7 @@ export function ResultSummary({
         onClick={onClick}
       >
         <p className={`${styles.titleSlim} ${lineClamp && styles.lineClamp}`}>
-          {hasChanged ? (
-            <GradientIcon
-              previous={previous}
-              next={next}
-              styles={{
-                previous: styles.previous,
-                next: styles.next,
-              }}
-            />
-          ) : (
-            <CircleIcon styles={{ circle: `fill-color--${next}` }} />
-          )}{" "}
+          {changeIcon && <>{changeIcon} </>}
           {title} <RelativeTimeSentence timeStamp={timestamp} />
         </p>
       </div>
