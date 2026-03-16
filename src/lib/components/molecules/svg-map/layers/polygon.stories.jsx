@@ -10,6 +10,10 @@ const ukCountries = feature(
   ukCountriesTopo.objects["countries"],
 )
 
+let scotland = ukCountries.features.filter((feature) => {
+  return feature.properties.CTRY23NM == "Scotland"
+})
+
 /** @type {import('@storybook/preact').Meta} */
 const meta = {
   title: "Molecules/SVGMap/Layers",
@@ -35,7 +39,7 @@ const meta = {
     ),
   ],
   render: (args) => (
-    <SVGMap id="map" config={MapConfiguration.UKComposite}>
+    <SVGMap id="map" config={MapConfiguration.Scotland}>
       <Layer {...args} />
     </SVGMap>
   ),
@@ -45,7 +49,7 @@ export default meta
 
 export const Polygon = {
   args: {
-    features: ukCountries.features,
+    features: scotland,
     fill: "#dcdcdc",
     stroke: "#707070",
     strokeWidth: 1,

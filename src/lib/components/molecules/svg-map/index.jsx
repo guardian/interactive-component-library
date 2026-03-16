@@ -55,6 +55,15 @@ export const MapConfiguration = {
     drawCompositionBorders: false,
     drawToCanvas: false,
   },
+  Scotland: {
+    projection: _Projection.geoAlbersUKComposite,
+    bounds: [
+      [-7.5, 53.8],
+      [2, 61],
+    ],
+    drawCompositionBorders: false,
+    drawToCanvas: false,
+  },
 }
 
 const ZERO_PADDING = { top: 0, right: 0, bottom: 0, left: 0 }
@@ -67,7 +76,8 @@ export const SVGMap = forwardRef(
       height,
       config,
       children,
-      padding = { top: 20, right: 20, bottom: 20, left: 20 },
+      padding = ZERO_PADDING,
+
       selectedFeature,
     },
     ref,
