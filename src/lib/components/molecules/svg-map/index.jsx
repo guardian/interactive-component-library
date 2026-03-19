@@ -58,8 +58,8 @@ export const MapConfiguration = {
   Scotland: {
     projection: _Projection.geoAlbersUKComposite,
     bounds: [
-      [-7.5, 53.8],
-      [2, 61],
+      [-7.5, 54.6],
+      [-0.4, 60],
     ],
     drawCompositionBorders: false,
     drawToCanvas: false,
