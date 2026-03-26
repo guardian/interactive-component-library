@@ -5,6 +5,7 @@
 
 .copyColumn {
   display: block;
+  flex-shrink: 0;
 }
 
 .img {
@@ -15,6 +16,7 @@
   margin-top: var(--space-1);
   margin-left: var(--space-2);
   margin-right: var(--space-1);
+  flex-shrink: 0;
 }
 
 .title {
