@@ -39,7 +39,7 @@ export class View {
     this.debug = debug
     // @ts-ignore
     projection.revision = 0
-    this.projection = projection.copy ? projection.copy() : { ...projection }
+    this.projection = projection
     this.bounds = bounds && GeoBounds.convert(bounds)
     // extent in projection coordinates
     this.extent = Extent.convert(extent) || GeoBounds.convert(bounds).toExtent()
