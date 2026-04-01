@@ -41,6 +41,14 @@ export const SlopeChart = ({
   const chart = (
     <svg className={styles.svg} width={width} height={height} id={svgId}>
       <g transform={`translate(${padding.left} ${padding.top})`}>
+        {/* background */}
+        <g>
+          <rect
+            width={contentWidth}
+            height={contentHeight}
+            className={styles.background}
+          />
+        </g>
         {/* draw axis */}
         <g transform={`translate(0 ${contentHeight})`}>
           <line
