@@ -42,3 +42,7 @@
 .axisLabel {
   transform: translateY(var(--space-1));
 }
+
+.background {
+  fill: var(--secondary-bg-color);
+}
