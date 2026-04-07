@@ -10,7 +10,7 @@
     "content";
 
   --padding: 10px; // internal padding matching parent container
-  --bleed: 10px; // how far to extend beyond parent edges
+  --bleed: 0px; // how far to break out of the parent container to the left and right
 
   width: calc(100% + var(--bleed) * 2);
   padding-left: var(--padding);
@@ -20,13 +20,6 @@
 
   @media (min-width: map.get($mq-breakpoints, mobileLandscape)) {
     --padding: 20px;
-    --bleed: 20px;
-  }
-
-  @media (min-width: map.get($mq-breakpoints, tablet)) and (max-width: map.get($mq-breakpoints, leftCol)) {
-    // Between tablet and leftCol, immersive content already touches the
-    // edges of the container, so we don't need any negative margins
-    --bleed: 0px;
   }
 
   @media (min-width: map.get($mq-breakpoints, desktop)) {
@@ -36,6 +29,10 @@
     width: calc(100% + var(--bleed) * 2 - 2px);
 
     grid-template-columns: 620px;
+  }
+
+  @media (min-width: map.get($mq-breakpoints, leftCol)) {
+    --bleed: 20px;
   }
 
   @media (min-width: map.get($mq-breakpoints, leftCol)) and (max-width: map.get($mq-breakpoints, wide)) {
