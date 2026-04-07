@@ -60,7 +60,8 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
-          node-version: "22.x"
+          # Install specific version to work around https://github.com/nodejs/node/issues/62425
+          node-version: "22.22.1"
           registry-url: "https://registry.npmjs.org"
           cache: "pnpm"
 
