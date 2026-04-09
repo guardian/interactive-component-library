@@ -45,7 +45,7 @@ export function ResultSummary({
     )
   } else {
     return (
-      <div className={styles.container}>
+      <div className={styles.container} onClick={onClick}>
         <ControlChange previous={previous} next={next} text={title} />
         <p className={`${styles.paragraph} ${lineClamp && styles.lineClamp}`}>
           {text}
