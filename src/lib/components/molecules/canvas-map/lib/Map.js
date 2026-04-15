@@ -307,6 +307,8 @@ export class Map {
   }
 
   _createZoomBehaviour(viewPortSize) {
+    if (!this.allowZoomPan) return
+
     if (this._zoomBehaviour) {
       this._zoomBehaviour.on("zoom", null)
     }
@@ -314,6 +316,7 @@ export class Map {
     // Create d3-zoom object to allow panning and zooming
     this._zoomBypassKey =
       navigator.userAgent.indexOf("Mac") !== -1 ? "metaKey" : "ctrlKey"
+
     this._zoomBehaviour = zoom()
       .extent([[0, 0], viewPortSize])
       .translateExtent([[0, 0], viewPortSize])
@@ -343,9 +346,6 @@ export class Map {
         return (!event.ctrlKey || event.type === "wheel") && !event.button
       })
       .on("zoom", (event) => {
-        if (!this.allowZoomPan) {
-          return
-        }
         this.view.transform = event.transform
         this._requestRender()
 
@@ -366,6 +366,7 @@ export class Map {
       typeof window === "undefined"
     )
       return
+
     this._animationFrameRequestID = requestAnimationFrame(
       this._renderFrame.bind(this),
     )
