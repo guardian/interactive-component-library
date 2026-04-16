@@ -6,6 +6,10 @@
   bottom: 0;
   transition: all 300ms ease-in-out;
   z-index: 9999;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 .blur {
@@ -20,28 +24,46 @@
   bottom: 0;
   transition: all 300ms ease-in-out;
   pointer-events: all;
-}
 
-.enter,
-.exitDone {
-  .blur {
-    background-color: transparent;
-    backdrop-filter: none;
-  }
-
-  .modalBox {
-    transform: translateY(100%);
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 }
 
-.enterActive,
-.exit {
-  .blur {
-    background-color: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(4px);
-  }
+/* Transition state classes — applied by CSSTransition to transitionContainer */
 
-  .modalBox {
-    transform: translateY(0);
-  }
+.enter.blur {
+  background-color: transparent;
+  backdrop-filter: none;
+}
+
+.enter .modalBox {
+  transform: translateY(100%);
+}
+
+.enterActive.blur {
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+.enterActive .modalBox {
+  transform: translateY(0);
+}
+
+.exitActive.blur {
+  background-color: transparent;
+  backdrop-filter: none;
+}
+
+.exitActive .modalBox {
+  transform: translateY(100%);
+}
+
+.exitDone.blur {
+  background-color: transparent;
+  backdrop-filter: none;
+}
+
+.exitDone .modalBox {
+  transform: translateY(100%);
 }

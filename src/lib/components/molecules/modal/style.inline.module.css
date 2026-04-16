@@ -1,0 +1,36 @@
+.transitionContainer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.modalBox {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: all;
+  opacity: 1;
+  transition: opacity 100ms ease-in-out;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.enter .modalBox {
+  opacity: 0;
+}
+
+.enterActive .modalBox {
+  opacity: 1;
+}
+
+.exitActive .modalBox,
+.exitDone .modalBox {
+  opacity: 0;
+}
