@@ -45,15 +45,22 @@ export function Modal({
       classNames={styles}
       alwaysMounted={alwaysMounted}
     >
+      {/* Must use `class` not `className` — preact-transitioning v1.5+ clones
+          this element with `class`, and Preact gives `className` priority when
+          both are present, which silently drops the transition state classes. */}
       <div
-        className={[
+        // eslint-disable-next-line react/no-unknown-property
+        class={[
           styles.transitionContainer,
           blurBackground && styles.blur,
           visible && styles.visible,
-        ].join(" ")}
+        ]
+          .filter(Boolean)
+          .join(" ")}
         onClick={!inline ? onClick : undefined}
       >
-        <div ref={modalBoxRef} className={styles.modalBox}>
+        {/* eslint-disable-next-line react/no-unknown-property */}
+        <div ref={modalBoxRef} class={styles.modalBox}>
           {children}
         </div>
       </div>
