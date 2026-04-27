@@ -33,10 +33,18 @@ export function ZoomControl({
 
   return (
     <div className={styles.zoomControl}>
-      <button className={styles.button} onClick={_onZoomIn}>
+      <button
+        className={styles.button}
+        onClick={_onZoomIn}
+        aria-label="zoom in"
+      >
         <IconPlus />
       </button>
-      <button className={styles.button} onClick={_onZoomOut}>
+      <button
+        className={styles.button}
+        onClick={_onZoomOut}
+        aria-label="zoom out"
+      >
         <IconMinus />
       </button>
       <button
@@ -44,6 +52,7 @@ export function ZoomControl({
         style={{ display: resetVisible ? "block" : "none" }}
         onClick={_onReset}
         disabled={!resetEnabled}
+        aria-label="reset zoom"
       >
         <IconReset
           fill={
