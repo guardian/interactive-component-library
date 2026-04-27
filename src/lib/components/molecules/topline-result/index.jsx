@@ -20,6 +20,9 @@ export const ToplineResult = forwardRef(
       onInfoPress,
       showInfoButton = false,
       infoButtonRef,
+      infoButtonLabel,
+      infoButtonExpanded,
+      infoButtonDescribedBy,
     },
     ref,
   ) => {
@@ -39,7 +42,13 @@ export const ToplineResult = forwardRef(
             {name}
             {showInfoButton && (
               <span className={styles.infoButton}>
-                <InfoButton onClick={onInfoPress} ref={infoButtonRef} />
+                <InfoButton
+                  onClick={onInfoPress}
+                  ref={infoButtonRef}
+                  label={infoButtonLabel}
+                  expanded={infoButtonExpanded}
+                  describedBy={infoButtonDescribedBy}
+                />
               </span>
             )}
           </span>
