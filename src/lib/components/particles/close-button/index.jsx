@@ -1,14 +1,21 @@
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 import defaultStyles from "./style.module.css"
 
-export function CloseButton({ border = true, onClick, styles }) {
+export function CloseButton({
+  border = true,
+  onClick,
+  styles,
+  label = "Close",
+}) {
   styles = mergeStyles(defaultStyles, styles)
   return (
     <button
       className={[styles.button, border && styles.buttonBorder].join(" ")}
       onClick={onClick}
+      aria-label={label}
     >
       <svg
+        aria-hidden="true"
         className={styles.svg}
         viewBox="0 0 17 17"
         fill="none"
