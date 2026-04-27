@@ -6,11 +6,17 @@ export function ArrowButton({
   disabled = false,
   styles,
   onClick,
+  label,
 }) {
   styles = mergeStyles(defaultStyles, styles)
 
   return (
-    <button className={styles.button} disabled={disabled} onClick={onClick}>
+    <button
+      className={styles.button}
+      disabled={disabled}
+      onClick={onClick}
+      aria-label={label}
+    >
       <svg
         className={[styles.icon, direction].join(" ")}
         viewBox="0 0 28 28"
