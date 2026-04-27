@@ -39,6 +39,7 @@ export function Tooltip({
   touchRect,
   positionInTarget,
   show = true,
+  id,
   styles,
   children,
 }) {
@@ -94,7 +95,13 @@ export function Tooltip({
   }
 
   const tooltip = (
-    <div ref={tooltipRef} className={styles.tooltip} style={fixedStyle}>
+    <div
+      ref={tooltipRef}
+      id={id}
+      role="tooltip"
+      className={styles.tooltip}
+      style={fixedStyle}
+    >
       {children}
     </div>
   )
