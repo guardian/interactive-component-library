@@ -87,7 +87,11 @@ export function Ticker({ buttonScrollDistance = 250, styles, children }) {
 
   return (
     <div className={styles.ticker}>
-      <div ref={scrollContainerRef} className={styles.scrollContainer}>
+      <div
+        ref={scrollContainerRef}
+        className={styles.scrollContainer}
+        tabIndex={0}
+      >
         {childArray.map((child, index) => (
           <div className={styles.tickerItem} key={child.props?.id ?? index}>
             {child}
@@ -103,12 +107,14 @@ export function Ticker({ buttonScrollDistance = 250, styles, children }) {
           styles={{ button: styles.arrowButton }}
           onClick={scrubRight}
           disabled={isScrolledToEnd}
+          label="scroll ticker right"
         />
         <ArrowButton
           styles={{ button: styles.arrowButton }}
           direction="left"
           onClick={scrubLeft}
           disabled={isScrolledToStart}
+          label="scroll ticker left"
         />
       </div>
     </div>

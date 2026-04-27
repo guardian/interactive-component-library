@@ -16,6 +16,9 @@ export function ResultSummary({
 }) {
   styles = mergeStyles({ ...defaultStyles }, styles)
 
+  // If an onClick is provided, render as buttons for proper semantics
+  const Tag = onClick ? "button" : "div"
+
   if (isSlim) {
     let changeIcon
 
@@ -33,7 +36,7 @@ export function ResultSummary({
     }
 
     return (
-      <div
+      <Tag
         className={`${styles.container} ${styles.containerSlim}`}
         onClick={onClick}
       >
@@ -41,17 +44,17 @@ export function ResultSummary({
           {changeIcon && <>{changeIcon} </>}
           {title} <RelativeTimeSentence timeStamp={timestamp} />
         </p>
-      </div>
+      </Tag>
     )
   } else {
     return (
-      <div className={styles.container} onClick={onClick}>
+      <Tag className={styles.container} onClick={onClick}>
         <ControlChange previous={previous} next={next} text={title} />
         <p className={`${styles.paragraph} ${lineClamp && styles.lineClamp}`}>
           {text}
         </p>
         <RelativeTimeSentence timeStamp={timestamp} />
-      </div>
+      </Tag>
     )
   }
 }
