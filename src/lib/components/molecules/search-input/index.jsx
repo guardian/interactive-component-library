@@ -84,7 +84,14 @@ export function SearchInput({
         placeholder={placeholder}
         ref={inputRef}
         type="text"
-        aria-label="Search input"
+        role="combobox"
+        aria-label={placeholder ?? "Search input"}
+        aria-expanded={!!(showSuggestions && suggestions?.length > 0)}
+        aria-autocomplete="list"
+        aria-controls="search-suggestions"
+        aria-activedescendant={
+          selectedIndex >= 0 ? `suggestion-${selectedIndex}` : undefined
+        }
         autoComplete="off"
         value={inputValue}
         onKeyDown={onKeyDown}
@@ -144,13 +151,21 @@ function SuggestionList({
 }) {
   if (!suggestions || suggestions.length === 0) return
   return (
-    <ul className={styles.suggestions} aria-label="Search suggestions">
+    <ul
+      id="search-suggestions"
+      role="listbox"
+      className={styles.suggestions}
+      aria-label="Search suggestions"
+    >
       {suggestions.map((d, index) => {
         const shouldHighlight = !d.disabled
         return (
           <li
             key={index}
-            aria-label={d.text}
+            id={`suggestion-${index}`}
+            role="option"
+            aria-selected={index === selectedIndex}
+            aria-disabled={d.disabled || undefined}
             className={[
               styles.suggestion,
               index === selectedIndex && styles.selected,
