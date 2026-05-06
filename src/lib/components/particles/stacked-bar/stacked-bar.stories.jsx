@@ -141,3 +141,31 @@ export const WithBackgroundRect = {
   },
   render: (args) => <StackedBar {...args} />,
 }
+
+export const ConditionalLabels = {
+  args: {
+    stack: [
+      { label: "Show", fraction: 0.4, abbreviation: "lab" },
+      { label: "Hide", fraction: 0.3, abbreviation: "con" },
+      { label: "Show", fraction: 0.3, abbreviation: "ld" },
+    ],
+    width: 358,
+    height: 32,
+    hideLabels: (label) => label === "Hide",
+  },
+  render: (args) => <StackedBar {...args} />,
+}
+
+export const HideAllLabels = {
+  args: {
+    stack: [
+      { label: "120", fraction: 0.6, abbreviation: "lab" },
+      { label: "40", fraction: 0.2, abbreviation: "con" },
+      { label: "40", fraction: 0.2, abbreviation: "undeclared" },
+    ],
+    width: 358,
+    height: 32,
+    hideLabels: true,
+  },
+  render: (args) => <StackedBar {...args} />,
+}

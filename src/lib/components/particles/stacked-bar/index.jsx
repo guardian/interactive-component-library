@@ -1,4 +1,4 @@
-import { useRef, useMemo } from "preact/hooks"
+import { useRef, useMemo, useCallback } from "preact/hooks"
 import defaultStyles from "./style.module.css"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 import { preventOverlap } from "$shared/helpers/labelsUtil"
@@ -28,9 +28,26 @@ export function StackedBar({
   const rectElements = useRef([])
   const textElements = useRef([])
 
+  const isLabelHidden = useCallback(
+    (label) => {
+      if (typeof hideLabels === "function") {
+        return hideLabels(label)
+      }
+      return !!hideLabels
+    },
+    [hideLabels],
+  )
+
+  const allLabelsHidden = useMemo(() => {
+    if (typeof hideLabels === "function") {
+      return stack.every((d) => hideLabels(d.label))
+    }
+    return !!hideLabels
+  }, [stack, hideLabels])
+
   styles = mergeStyles({ ...defaultStyles }, styles)
   const svgHeight =
-    labelType === LabelType.hanging && !hideLabels ? height + 20 : height
+    labelType === LabelType.hanging && !allLabelsHidden ? height + 20 : height
 
   // no secondary colors used for borders, so eg: 'lab-2' should be converted to 'lab'
   const cleanBorderAbbr = (abbrText) => abbrText.split("-")[0]
@@ -78,7 +95,7 @@ export function StackedBar({
           shapeRendering="crispEdges"
         />
         {labelType === LabelType.inline &&
-          !hideLabels &&
+          !isLabelHidden(d.label) &&
           renderLabel(labelConfig, index)}
       </g>
     )
@@ -89,19 +106,22 @@ export function StackedBar({
 
   const hangingLabelConfig = useMemo(() => {
     let totalW = 0
-    let labels = stack.map((d) => {
+    const labels = []
+
+    stack.forEach((d) => {
       const itemWidth = d.fraction * width
 
-      const labelConfig = {
-        x: itemWidth + totalW,
-        y: height + 4,
-        value: d.label,
-        textAnchor: "end",
-        dominantBaseline: "hanging",
+      if (!isLabelHidden(d.label)) {
+        labels.push({
+          x: itemWidth + totalW,
+          y: height + 4,
+          value: d.label,
+          textAnchor: "end",
+          dominantBaseline: "hanging",
+        })
       }
 
       totalW += itemWidth
-      return labelConfig
     })
 
     return preventOverlap(
@@ -111,7 +131,7 @@ export function StackedBar({
       "x",
       labelOverlapConfig.moveBothLabels,
     )
-  }, [stack, height, width, labelOverlapConfig])
+  }, [stack, height, width, labelOverlapConfig, isLabelHidden])
 
   const strokedHangingLabelConfig = useMemo(
     () => [...hangingLabelConfig].map((l) => ({ ...l, hasStroke: true })),
@@ -143,12 +163,12 @@ export function StackedBar({
         <g>
           {content}
           {labelType === LabelType.hanging &&
-            !hideLabels &&
+            !allLabelsHidden &&
             strokedHangingLabelConfig.map((config, i) =>
               renderLabel(config, i),
             )}
           {labelType === LabelType.hanging &&
-            !hideLabels &&
+            !allLabelsHidden &&
             hangingLabelConfig.map((config, i) => renderLabel(config, i))}
         </g>
       </svg>
@@ -159,7 +179,7 @@ export function StackedBar({
     <g>
       {content}
       {labelType === LabelType.hanging &&
-        !hideLabels &&
+        !allLabelsHidden &&
         hangingLabelConfig.map((config, i) => renderLabel(config, i))}
     </g>
   )
