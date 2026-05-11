@@ -28,10 +28,10 @@ export function Modal({
       previousFocusRef.current = document.activeElement
       const focusable = modalBoxRef.current?.querySelector(focusableSelectors)
       focusable?.focus()
-    } else {
+    } else if (!inline) {
       previousFocusRef.current?.focus()
     }
-  }, [visible])
+  }, [visible, inline])
 
   useEffect(() => {
     // Handle basic keyboard navigation and focus management for modals.
