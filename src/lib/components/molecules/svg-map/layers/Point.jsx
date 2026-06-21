@@ -11,6 +11,7 @@ export function Point({
   strokeWidth = 1,
   zIndex = 0,
   styles,
+  labeltextproperty,
 }) {
   const context = useContext(MapContext)
 
@@ -48,18 +49,24 @@ export function Point({
     <>
       {features.map((d, index) => {
         const [cx, cy] = context.projection(d.geometry.coordinates)
+        const labeltext = d.properties[labeltextproperty]
         return (
-          <circle
-            id={dynamicPropValue(id, d, index)}
-            cx={cx}
-            cy={cy}
-            r={dynamicPropValue(radius, d, index)}
-            key={index}
-            className={dynamicPropValue(styles, d, index)}
-            fill={dynamicPropValue(fill, d, index)}
-            stroke={dynamicPropValue(stroke, d, index)}
-            strokeWidth={dynamicPropValue(strokeWidth, d, index)}
-          />
+          <>
+            <circle
+              id={dynamicPropValue(id, d, index)}
+              cx={cx}
+              cy={cy}
+              r={dynamicPropValue(radius, d, index)}
+              key={index}
+              className={dynamicPropValue(styles, d, index)}
+              fill={dynamicPropValue(fill, d, index)}
+              stroke={dynamicPropValue(stroke, d, index)}
+              strokeWidth={dynamicPropValue(strokeWidth, d, index)}
+            />
+            <text x={cx} y={cy} key={index}>
+              {labeltext}
+            </text>
+          </>
         )
       })}
     </>
