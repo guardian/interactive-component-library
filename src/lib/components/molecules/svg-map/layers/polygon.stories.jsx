@@ -29,7 +29,7 @@ const meta = {
   decorators: [
     (Story) => (
       <>
-        <div style={{ width: "100%", height: "500px" }}>
+        <div style={{ width: "70px", height: "80px" }}>
           <Story />
         </div>
         <button className={styles.button} onClick={() => saveSVG("map")}>
