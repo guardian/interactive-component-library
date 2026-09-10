@@ -116,12 +116,12 @@ const Component = (
           style={{ opacity: showHelpText ? 1 : 0 }}
           aria-hidden
         >
-          <p className={[styles.helpText, styles.desktopHelpText].join(" ")}>
+          <div className={[styles.helpText, styles.desktopHelpText].join(" ")}>
             {zoomHelpText}
-          </p>
-          <p className={[styles.helpText, styles.mobileHelpText].join(" ")}>
+          </div>
+          <div className={[styles.helpText, styles.mobileHelpText].join(" ")}>
             {mobileHelpText}
-          </p>
+          </div>
         </div>
       )}
       <MapProvider map={map}>{children}</MapProvider>
