@@ -1,3 +1,4 @@
+import { useEffect } from "preact/hooks"
 import { mergeStyles } from "$styles/helpers/mergeStyles"
 import defaultStyles from "./style.module.css"
 /**
@@ -40,6 +41,13 @@ export function AdSlot({ name, sizeMapping, styles }) {
   const desktopSizes = sizeMapping.desktop
     ?.map((size) => size.join(","))
     .join("|")
+
+  // Tell the commercial bundle to fill the ad slot
+  useEffect(() => {
+    document.dispatchEvent(
+      new CustomEvent("gu.commercial.slot.fill", { detail: { slotId } }),
+    )
+  }, [slotId])
 
   return (
     <div className={["ad-slot-container", styles.container].join(" ")}>
