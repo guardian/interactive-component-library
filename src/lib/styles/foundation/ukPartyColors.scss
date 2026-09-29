@@ -13,6 +13,7 @@
   --pc: #135e58;
   --sf: #22874d;
   --reform: #3dbbe2;
+  --restore: #1b365e;
   --ind: #333333;
   --other: #848484;
   --speaker: #848484;
@@ -35,6 +36,7 @@
   --pc-2: #bacecb;
   --sf-2: #c1d7bf;
   --reform-2: #c3e5f4;
+  --restore-2: #c6cdd7;
   --ind-2: #e7e7e7;
   --other-2: #c8c8c8;
   --speaker-2: #c8c8c8;
@@ -58,6 +60,7 @@
   --pc: #37716b;
   --sf: #22874d;
   --reform: #3dbbe2;
+  --restore: #5f80af;
   --ind: #a1a1a1;
   --noc: #333333;
   --other: #707070;
@@ -80,6 +83,7 @@
   --pc-2: #4e7c79;
   --sf-2: #32593d;
   --reform-2: #3e6877;
+  --restore-2: #364f77;
   --ind-2: #666666;
   --other-2: #505050;
   --speaker-2: #333333;
@@ -144,6 +148,10 @@
 
 .bg-color--reform {
   background-color: var(--reform) !important;
+}
+
+.bg-color--restore {
+  background-color: var(--restore) !important;
 }
 
 .bg-color--ind {
@@ -228,6 +236,10 @@
   background-color: var(--reform-2) !important;
 }
 
+.bg-color--restore-2 {
+  background-color: var(--restore-2) !important;
+}
+
 .bg-color--ind-2 {
   background-color: var(--ind-2) !important;
 }
@@ -304,6 +316,10 @@
 
 .fill-color--reform {
   fill: var(--reform) !important;
+}
+
+.fill-color--restore {
+  fill: var(--restore) !important;
 }
 
 .fill-color--ind {
@@ -388,6 +404,10 @@
   fill: var(--reform-2) !important;
 }
 
+.fill-color--restore-2 {
+  fill: var(--restore-2) !important;
+}
+
 .fill-color--ind-2 {
   fill: var(--ind-2) !important;
 }
@@ -464,6 +484,10 @@
 
 .stop-color--reform {
   stop-color: var(--reform) !important;
+}
+
+.stop-color--restore {
+  stop-color: var(--restore) !important;
 }
 
 .stop-color--ind {
@@ -548,6 +572,10 @@
   stroke: var(--reform) !important;
 }
 
+.stroke-color--restore {
+  stroke: var(--restore) !important;
+}
+
 .stroke-color--ind {
   stroke: var(--ind) !important;
 }
@@ -630,6 +658,10 @@
   color: var(--reform) !important;
 }
 
+.color--restore {
+  color: var(--restore) !important;
+}
+
 .color--ind {
   color: var(--ind) !important;
 }
@@ -706,6 +738,10 @@
 
 .border-color--reform {
   border-color: var(--reform) !important;
+}
+
+.border-color--restore {
+  border-color: var(--restore) !important;
 }
 
 .border-color--ind {
@@ -817,6 +853,12 @@
 .before-color--reform {
   &:before {
     background-color: var(--reform) !important;
+  }
+}
+
+.before-color--restore {
+  &:before {
+    background-color: var(--restore) !important;
   }
 }
 
