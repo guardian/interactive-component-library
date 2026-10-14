@@ -65,6 +65,17 @@
   }
 }
 
+// NOTE: the new interactive layout fixes a lot of the issues that necessitates all of the
+// complexity above – here we undo some of that complexity if we're in the new layout
+:global(main[data-layout="StandardLayout"]) .section {
+  @media (min-width: map.get($mq-breakpoints, leftCol)) and (max-width: map.get($mq-breakpoints, wide)) {
+    margin-left: 20px;
+  }
+  @media (min-width: map.get($mq-breakpoints, wide)) {
+    margin-left: 19px;
+  }
+}
+
 .section.borderLeftCol {
   @media (min-width: map.get($mq-breakpoints, leftCol)) {
     &:before {
