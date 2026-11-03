@@ -20,7 +20,8 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-color-scheme="light"]) body {
+  :root[data-rendering-target="apps"] body,
+  body.in-app {
     @include dark-mode-colors;
     @include dark-mode-party-colors-uk;
     @include dark-mode-party-colors-eu;
